@@ -5,7 +5,6 @@ package Text::NewsML_G2::Writer_2_9;
 use Moose;
 use namespace::autoclean;
 
-our ($VERSION) = ' $Id$ ' =~ /\s(\d+)\s/;
 
 extends 'Text::NewsML_G2::Writer';
 

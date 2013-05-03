@@ -5,7 +5,6 @@ package Text::NewsML_G2::Product;
 use Moose;
 use namespace::autoclean;
 
-our ($VERSION) = ' $Id$ ' =~ /\s(\d+)\s/;
 
 has 'name', isa => 'Str', is => 'ro', lazy_build => 1;
 has 'isbn', isa => 'Str', is => 'rw';

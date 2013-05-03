@@ -5,7 +5,6 @@ package Text::NewsML_G2::Scheme_Manager;
 use Moose;
 use namespace::autoclean;
 
-our ($VERSION) = ' $Id$ ' =~ /\s(\d+)\s/;
 
 foreach (qw(desk hltype svc)) {
     has $_, isa => 'Text::NewsML_G2::Scheme', is => 'ro', required => 1;

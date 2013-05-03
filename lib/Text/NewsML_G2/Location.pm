@@ -5,7 +5,6 @@ package Text::NewsML_G2::Location;
 use Moose;
 use namespace::autoclean;
 
-our ($VERSION) = ' $Id$ ' =~ /\s(\d+)\s/;
 
 has 'name', isa => 'Str', is => 'ro', required => 1;
 has 'qcode', isa => 'Str', is => 'ro', required => 1;

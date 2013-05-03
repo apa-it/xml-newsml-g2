@@ -7,7 +7,6 @@ use CRS::Time qw(time2xml);
 use Moose;
 use namespace::autoclean;
 
-our ($VERSION) = ' $Id$ ' =~ /\s(\d+)\s/;
 
 has 'news_item', isa => 'Text::NewsML_G2::News_Item', is => 'ro', required => 1;
 

@@ -8,7 +8,6 @@ use Text::NewsML_G2::Desk;
 use Moose;
 use namespace::autoclean;
 
-our ($VERSION) = ' $Id$ ' =~ /\s(\d+)\s/;
 
 has 'language', isa => 'Str', is => 'ro', default => 'de';
 
