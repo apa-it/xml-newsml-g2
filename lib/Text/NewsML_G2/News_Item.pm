@@ -19,9 +19,9 @@ has 'doc_status', isa => 'Str', is => 'ro', default => 'usable';
 has 'title', isa => 'Str', is => 'ro', required => 1;
 has 'subtitle', isa => 'Str', is => 'rw';
 has 'paragraphs', isa => 'XML::LibXML::Node', is => 'rw';
-has 'content_created', isa => 'Int', is => 'ro', required => 1;
-has 'content_modified', isa => 'Int', is => 'ro';
-has 'embargo', isa => 'Int', is => 'rw';
+has 'content_created', isa => 'DateTime', is => 'ro', required => 1;
+has 'content_modified', isa => 'DateTime', is => 'ro';
+has 'embargo', isa => 'DateTime', is => 'rw';
 has 'embargo_text', isa => 'Str', is => 'rw';
 
 has 'priority', isa => 'Int', is => 'ro', default => 5;

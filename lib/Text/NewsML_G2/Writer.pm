@@ -2,11 +2,10 @@ package Text::NewsML_G2::Writer;
 
 # $Id$
 
-use CRS::Time qw(time2xml);
-
 use Moose;
+use DateTime;
+use DateTime::Format::XSD;
 use namespace::autoclean;
-
 
 has 'news_item', isa => 'Text::NewsML_G2::News_Item', is => 'ro', required => 1;
 
@@ -15,6 +14,7 @@ has 'generator', isa => 'Str', is => 'ro', default => __PACKAGE__;
 
 has 'scheme_manager', isa => 'Text::NewsML_G2::Scheme_Manager', is => 'ro', required => 1;
 has 'doc', isa => 'XML::LibXML::Document', is => 'ro', lazy_build => 1;
+has 'formatter', is => 'ro', default => sub {DateTime::Format::XSD->new()};
 
 has 'g2_ns', isa => 'Str', is => 'ro', default => 'http://iptc.org/std/nar/2006-10-01/';
 has 'xhtml_ns', isa => 'Str', is => 'ro', default => 'http://www.w3.org/1999/xhtml';
@@ -80,10 +80,10 @@ sub _create_item_meta {
     $im->appendChild($self->create_element('itemClass', qcode => 'ninat:text'));
     $im->appendChild(my $p = $self->create_element('provider', qcode => 'nprov:' . $self->news_item->provider->qcode));
     $p->appendChild($self->create_element('name', _text => $self->news_item->provider->name));
-    $im->appendChild($self->create_element('versionCreated', _text => time2xml(time)));
+    $im->appendChild($self->create_element('versionCreated', _text => $self->formatter->format_datetime(DateTime->now(time_zone => 'local'))));
 
     if ($self->news_item->embargo) {
-        my $e = time2xml($self->news_item->embargo);
+        my $e = $self->formatter->format_datetime($self->news_item->embargo);
         $im->appendChild($self->create_element('embargoed', _text => $e));
     }
 
@@ -277,10 +277,12 @@ sub _create_content_meta {
     $cm->appendChild($self->create_element('urgency', _text => $self->news_item->priority));
 
     if ($self->news_item->content_created) {
-        $cm->appendChild($self->create_element('contentCreated', _text => time2xml($self->news_item->content_created)));
+        my $t = $self->formatter->format_datetime($self->news_item->content_created);
+        $cm->appendChild($self->create_element('contentCreated', _text => $t));
     }
     if ($self->news_item->content_modified and $self->news_item->content_created != $self->news_item->content_modified) {
-        $cm->appendChild($self->create_element('contentModified', _text => time2xml($self->news_item->content_modified)));
+        my $t = $self->formatter->format_datetime($self->news_item->content_modified);
+        $cm->appendChild($self->create_element('contentModified', _text => $t));
     }
 
     foreach (@{$self->news_item->cities}) {

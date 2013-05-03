@@ -19,6 +19,11 @@ lib/Text/NewsML_G2/Writer_2_9.pm
 MANIFEST			This list of files
 README
 t/00.load.t
+t/01.News_Item.t
+t/02.Product.t
 t/perlcritic.t
 t/pod-coverage.t
 t/pod.t
+t/xsds/NewsML-G2_2.11-spec-All-Power.xsd
+t/xsds/NewsML-G2_2.9-spec-All-Power.xsd
+t/xsds/xml.xsd
