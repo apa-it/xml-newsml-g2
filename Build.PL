@@ -22,7 +22,6 @@ my $builder = Module::Build->new
    test_requires =>
    { 'Test::More'         => 0,
      'Test::Exception'    => 0,
-     'Test::Perl::Critic' => 0,
    },
    add_to_cleanup =>
    [ 'Text-NewsML_G2-*',
