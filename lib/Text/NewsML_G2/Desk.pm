@@ -3,7 +3,6 @@ package Text::NewsML_G2::Desk;
 # $Id$
 
 use Moose;
-use utf8;
 use namespace::autoclean;
 
 

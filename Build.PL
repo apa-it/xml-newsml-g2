@@ -11,7 +11,10 @@ my $builder = Module::Build->new
    dist_abstract       => 'generate NewsML G2 news items',
    dist_version_from   => 'lib/Text/NewsML_G2.pm',
    requires =>
-   { 'version' => 0.77,
+   { 'version'              => 0.77,
+     'Moose'                => 0.64,
+     'namespace::autoclean' => 0.05,
+     'XML::LibXML'          => 0,
    },
    configure_requires =>
    { 'Module::Build' => 0.40,

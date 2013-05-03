@@ -3,7 +3,6 @@ package Text::NewsML_G2::News_Item;
 # $Id$
 
 use XML::LibXML qw();
-use Text::NewsML_G2::Desk;
 
 use Moose;
 use namespace::autoclean;
