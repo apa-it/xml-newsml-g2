@@ -1,0 +1,24 @@
+Build.PL
+Changes
+lib/Text/NewsML_G2.pm
+lib/Text/NewsML_G2/Desk.pm
+lib/Text/NewsML_G2/Genre.pm
+lib/Text/NewsML_G2/Location.pm
+lib/Text/NewsML_G2/Media_Topic.pm
+lib/Text/NewsML_G2/News_Item.pm
+lib/Text/NewsML_G2/Organisation.pm
+lib/Text/NewsML_G2/Product.pm
+lib/Text/NewsML_G2/Provider.pm
+lib/Text/NewsML_G2/Scheme.pm
+lib/Text/NewsML_G2/Scheme_Manager.pm
+lib/Text/NewsML_G2/Service.pm
+lib/Text/NewsML_G2/Topic.pm
+lib/Text/NewsML_G2/Writer.pm
+lib/Text/NewsML_G2/Writer_2_11.pm
+lib/Text/NewsML_G2/Writer_2_9.pm
+MANIFEST			This list of files
+README
+t/00.load.t
+t/perlcritic.t
+t/pod-coverage.t
+t/pod.t
