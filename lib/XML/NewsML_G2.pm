@@ -1,22 +1,22 @@
-package Text::NewsML_G2;
+package XML::NewsML_G2;
 
 # $Id$
 
-use Text::NewsML_G2::News_Item;
-use Text::NewsML_G2::Provider;
-use Text::NewsML_G2::Service;
-use Text::NewsML_G2::Genre;
-use Text::NewsML_G2::Desk;
-use Text::NewsML_G2::Media_Topic;
-use Text::NewsML_G2::Location;
-use Text::NewsML_G2::Organisation;
-use Text::NewsML_G2::Topic;
-use Text::NewsML_G2::Product;
-use Text::NewsML_G2::Scheme_Manager;
-use Text::NewsML_G2::Scheme;
-use Text::NewsML_G2::Writer;
-use Text::NewsML_G2::Writer_2_9;
-use Text::NewsML_G2::Writer_2_11;
+use XML::NewsML_G2::News_Item;
+use XML::NewsML_G2::Provider;
+use XML::NewsML_G2::Service;
+use XML::NewsML_G2::Genre;
+use XML::NewsML_G2::Desk;
+use XML::NewsML_G2::Media_Topic;
+use XML::NewsML_G2::Location;
+use XML::NewsML_G2::Organisation;
+use XML::NewsML_G2::Topic;
+use XML::NewsML_G2::Product;
+use XML::NewsML_G2::Scheme_Manager;
+use XML::NewsML_G2::Scheme;
+use XML::NewsML_G2::Writer;
+use XML::NewsML_G2::Writer_2_9;
+use XML::NewsML_G2::Writer_2_11;
 
 use List::Util qw(max);
 
@@ -34,17 +34,17 @@ __END__
 
 =head1 NAME
 
-Text::NewsML_G2 - [One line description of module's purpose here]
+XML::NewsML_G2 - [One line description of module's purpose here]
 
 
 =head1 VERSION
 
-This document describes Text::NewsML_G2 version 0.0.1
+This document describes XML::NewsML_G2 version 0.0.1
 
 
 =head1 SYNOPSIS
 
-    use Text::NewsML_G2;
+    use XML::NewsML_G2;
 
 =for author to fill in:
     Brief code example(s) here showing commonest usage(s).
@@ -100,7 +100,7 @@ This document describes Text::NewsML_G2 version 0.0.1
     that can be set. These descriptions must also include details of any
     configuration language used.
   
-Text::NewsML_G2 requires no configuration files or environment variables.
+XML::NewsML_G2 requires no configuration files or environment variables.
 
 
 =head1 DEPENDENCIES

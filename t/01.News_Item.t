@@ -13,7 +13,7 @@ use XML::LibXML;
 use warnings;
 use strict;
 
-use Text::NewsML_G2;
+use XML::NewsML_G2;
 
 my $base_dir = dirname $0 || '.';
 
@@ -55,17 +55,17 @@ my $time2 = '2012-03-15T10:10:00+01:00';
 my $embargo = '2012-03-15T12:00:00+01:00';
 my $embargo_text = 'frei für Dienstagsausgaben';
 
-ok(my $genre1 = Text::NewsML_G2::Genre->new
+ok(my $genre1 = XML::NewsML_G2::Genre->new
    (name => 'Berichterstattung',
     qcode => 'Current'
    ), 'create Genre instance 1');
 
-ok(my $genre2 = Text::NewsML_G2::Genre->new
+ok(my $genre2 = XML::NewsML_G2::Genre->new
    (name => 'Extra',
     qcode => 'Extra'
    ), 'create Genre instance 2');
 
-ok(my $org = Text::NewsML_G2::Organisation->new
+ok(my $org = XML::NewsML_G2::Organisation->new
    (name => 'Ottakringer Brauerei',
     qcode => '161616',
     isins => ['AT0000758032'],
@@ -73,19 +73,19 @@ ok(my $org = Text::NewsML_G2::Organisation->new
     markets => ['Wien', 'Prag']
    ), 'create Organisation instance');
 
-ok(my $prov_apa = Text::NewsML_G2::Provider->new
+ok(my $prov_apa = XML::NewsML_G2::Provider->new
   (qcode => 'apa', name => 'APA - Austria Presse Agentur'
   ), 'create Provider instance');
 
-ok(my $svc_apa_bd = Text::NewsML_G2::Service->new
+ok(my $svc_apa_bd = XML::NewsML_G2::Service->new
   (qcode => 'bd', name => 'Basisdienst'
   ), 'create Service instance');
 
-ok(my $desk_ci = Text::NewsML_G2::Desk->new
+ok(my $desk_ci = XML::NewsML_G2::Desk->new
    (qcode => 'CI', name => 'Chronik Inland'
    ), 'create Desk instance');
 
-ok(my $ni = Text::NewsML_G2::News_Item->new
+ok(my $ni = XML::NewsML_G2::News_Item->new
    (guid => $guid,
     see_also => $see_also_guid,
     provider => $prov_apa,
@@ -118,17 +118,17 @@ $ni->add_indicator('VIDEO');
 
 ok($ni->add_organisation($org), 'adding organisation');
 
-ok(my $mt10000000 = Text::NewsML_G2::Media_Topic->new
+ok(my $mt10000000 = XML::NewsML_G2::Media_Topic->new
    (name => 'Freizeit, Modernes Leben', qcode => 10000000),
    'create media topic 1');
 ok($mt10000000->add_translation('en', 'lifestyle and leisure'), 'add translation');
 
-my $mt20000538 = Text::NewsML_G2::Media_Topic->new
+my $mt20000538 = XML::NewsML_G2::Media_Topic->new
   (name => 'Freizeit', qcode => 20000538);
 $mt20000538->add_translation('en', 'leisure');
 ok($mt20000538->parent($mt10000000), 'set parent');
 
-my $mt20000553 = Text::NewsML_G2::Media_Topic->new
+my $mt20000553 = XML::NewsML_G2::Media_Topic->new
   (name => 'Veranstaltungsort', qcode => 20000553, direct => 1);
 $mt20000553->add_translation('en', 'leisure venue');
 $mt20000553->parent($mt20000538);
@@ -141,15 +141,15 @@ ok(exists $ni->media_topics->{20000538}, 'parent in news item');
 ok(exists $ni->media_topics->{10000000}, 'grandparent in news item');
 
 
-ok(my $wien = Text::NewsML_G2::Location->new
+ok(my $wien = XML::NewsML_G2::Location->new
    (name => 'Wien', qcode => '1111', relevance => 100, direct => 1),
    'create Location Wien');
 
-my $aut = Text::NewsML_G2::Location->new(name => 'Österreich', iso_code => 'AT', qcode => '2222', relevance => 40);
+my $aut = XML::NewsML_G2::Location->new(name => 'Österreich', iso_code => 'AT', qcode => '2222', relevance => 40);
 
 ok($wien->parent($aut), 'set parent');
 
-my $europe = Text::NewsML_G2::Location->new(name => 'Europe', qcode => '3333', relevance => 30);
+my $europe = XML::NewsML_G2::Location->new(name => 'Europe', qcode => '3333', relevance => 30);
 $aut->parent($europe);
 
 ok($ni->add_location($wien), 'adding location');
@@ -158,20 +158,20 @@ ok(exists $ni->locations->{1111}, 'Wien in locations');
 ok(exists $ni->locations->{2222}, 'Österreich in locations');
 ok(exists $ni->locations->{3333}, 'Europe in locations');
 
-ok(my $t = Text::NewsML_G2::Topic->new(name => 'Budget 2012', qcode => 'bbbb'), 'create Topic');
+ok(my $t = XML::NewsML_G2::Topic->new(name => 'Budget 2012', qcode => 'bbbb'), 'create Topic');
 ok($ni->add_topic($t), 'adding Topic');
 
-ok(my $p = Text::NewsML_G2::Product->new(isbn => 3442162637), 'create Product');
+ok(my $p = XML::NewsML_G2::Product->new(isbn => 3442162637), 'create Product');
 ok($ni->add_product($p), 'adding product');
 
 my %schemes;
 foreach (qw(crel desk geo svc role ind org topic hltype)) {
-    $schemes{$_} = Text::NewsML_G2::Scheme->new(alias => "apa$_", uri => "http://cv.apa.at/$_/");
+    $schemes{$_} = XML::NewsML_G2::Scheme->new(alias => "apa$_", uri => "http://cv.apa.at/$_/");
 }
 
-ok(my $sm = Text::NewsML_G2::Scheme_Manager->new(%schemes), 'create Scheme Manager');
+ok(my $sm = XML::NewsML_G2::Scheme_Manager->new(%schemes), 'create Scheme Manager');
 
-my $writer = Text::NewsML_G2::Writer_2_9->new(news_item => $ni, scheme_manager => $sm);
+my $writer = XML::NewsML_G2::Writer_2_9->new(news_item => $ni, scheme_manager => $sm);
 
 my $paragraphs = $writer->create_element('paragraphs');
 for my $t ($text_1, $text_2) {
@@ -223,7 +223,7 @@ ok(my $xmlschema = XML::LibXML::Schema->new(location => $xsd), 'parsing XSD');
 lives_ok(sub {$xmlschema->validate($dom)}, 'generated XML validates against NewsML G2 schema');
 
 # 2.11
-ok($writer = Text::NewsML_G2::Writer_2_11->new(news_item => $ni, scheme_manager => $sm), 'creating 2.11 writer');
+ok($writer = XML::NewsML_G2::Writer_2_11->new(news_item => $ni, scheme_manager => $sm), 'creating 2.11 writer');
 ok($dom = $writer->create_dom(), '2.11 writer creates DOM');
 $xsd = catfile($base_dir, 'xsds/NewsML-G2_2.11-spec-All-Power.xsd');
 ok($xmlschema = XML::LibXML::Schema->new(location => $xsd), 'parsing 2.11 XSD');

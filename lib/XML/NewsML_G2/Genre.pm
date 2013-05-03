@@ -1,4 +1,4 @@
-package Text::NewsML_G2::Service;
+package XML::NewsML_G2::Genre;
 
 # $Id$
 

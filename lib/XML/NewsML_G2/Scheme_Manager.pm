@@ -1,4 +1,4 @@
-package Text::NewsML_G2::Scheme_Manager;
+package XML::NewsML_G2::Scheme_Manager;
 
 # $Id$
 
@@ -7,12 +7,12 @@ use namespace::autoclean;
 
 
 foreach (qw(desk hltype svc)) {
-    has $_, isa => 'Text::NewsML_G2::Scheme', is => 'ro', required => 1;
+    has $_, isa => 'XML::NewsML_G2::Scheme', is => 'ro', required => 1;
 
 }
 
 foreach (qw(role ind geo org topic crel)) {
-    has $_, isa => 'Text::NewsML_G2::Scheme', is => 'ro';
+    has $_, isa => 'XML::NewsML_G2::Scheme', is => 'ro';
 
 }
 

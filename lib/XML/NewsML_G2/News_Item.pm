@@ -1,4 +1,4 @@
-package Text::NewsML_G2::News_Item;
+package XML::NewsML_G2::News_Item;
 
 # $Id$
 
@@ -13,8 +13,8 @@ has 'language', isa => 'Str', is => 'ro', default => 'de';
 # document properties
 has 'guid', isa => 'Str', is => 'ro', required => 1;
 has 'doc_version', isa => 'Int', is => 'ro', default => '1';
-has 'provider', isa => 'Text::NewsML_G2::Provider', is => 'ro', required => 1;
-has 'service', isa => 'Text::NewsML_G2::Service', is => 'ro', required => 1;
+has 'provider', isa => 'XML::NewsML_G2::Provider', is => 'ro', required => 1;
+has 'service', isa => 'XML::NewsML_G2::Service', is => 'ro', required => 1;
 has 'doc_status', isa => 'Str', is => 'ro', default => 'usable';
 has 'title', isa => 'Str', is => 'ro', required => 1;
 has 'subtitle', isa => 'Str', is => 'rw';
@@ -41,19 +41,19 @@ has 'indicators', isa => 'ArrayRef[Str]', is => 'rw', default => sub { [] },
 has 'cities', isa => 'ArrayRef[Str]', is => 'rw', default => sub { [] },
   traits => ['Array'], handles => {add_city => 'push'};
 
-has 'genres', isa => 'ArrayRef[Text::NewsML_G2::Genre]', is => 'rw', default => sub { [] },
+has 'genres', isa => 'ArrayRef[XML::NewsML_G2::Genre]', is => 'rw', default => sub { [] },
   traits => ['Array'], handles => {add_genre => 'push'};
-has 'organisations', isa => 'ArrayRef[Text::NewsML_G2::Organisation]', is => 'rw', default => sub { [] },
+has 'organisations', isa => 'ArrayRef[XML::NewsML_G2::Organisation]', is => 'rw', default => sub { [] },
   traits => ['Array'], handles => {add_organisation => 'push', has_organisations => 'count'};
-has 'topics', isa => 'ArrayRef[Text::NewsML_G2::Topic]', is => 'rw', default => sub { [] },
+has 'topics', isa => 'ArrayRef[XML::NewsML_G2::Topic]', is => 'rw', default => sub { [] },
   traits => ['Array'], handles => {add_topic => 'push', has_topics => 'count'};
-has 'products', isa => 'ArrayRef[Text::NewsML_G2::Product]', is => 'rw', default => sub { [] },
+has 'products', isa => 'ArrayRef[XML::NewsML_G2::Product]', is => 'rw', default => sub { [] },
   traits => ['Array'], handles => {add_product => 'push', has_products => 'count'};
-has 'desks', isa => 'ArrayRef[Text::NewsML_G2::Desk]', is => 'rw',  default => sub { [] },
+has 'desks', isa => 'ArrayRef[XML::NewsML_G2::Desk]', is => 'rw',  default => sub { [] },
   traits => ['Array'], handles => {add_desk => 'push', has_desks => 'count'};
-has 'media_topics', isa => 'HashRef[Text::NewsML_G2::Media_Topic]', is => 'rw', default => sub { {} },
+has 'media_topics', isa => 'HashRef[XML::NewsML_G2::Media_Topic]', is => 'rw', default => sub { {} },
   traits => ['Hash'], handles => {has_media_topics => 'count'};
-has 'locations', isa => 'HashRef[Text::NewsML_G2::Location]', is => 'rw', default => sub { {} },
+has 'locations', isa => 'HashRef[XML::NewsML_G2::Location]', is => 'rw', default => sub { {} },
   traits => ['Hash'], handles => {has_locations => 'count'};
 
 

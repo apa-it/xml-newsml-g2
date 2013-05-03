@@ -1,4 +1,4 @@
-package Text::NewsML_G2::Writer;
+package XML::NewsML_G2::Writer;
 
 # $Id$
 
@@ -7,12 +7,12 @@ use DateTime;
 use DateTime::Format::XSD;
 use namespace::autoclean;
 
-has 'news_item', isa => 'Text::NewsML_G2::News_Item', is => 'ro', required => 1;
+has 'news_item', isa => 'XML::NewsML_G2::News_Item', is => 'ro', required => 1;
 
 has 'encoding', isa => 'Str', is => 'ro', default => 'utf-8';
 has 'generator', isa => 'Str', is => 'ro', default => __PACKAGE__;
 
-has 'scheme_manager', isa => 'Text::NewsML_G2::Scheme_Manager', is => 'ro', required => 1;
+has 'scheme_manager', isa => 'XML::NewsML_G2::Scheme_Manager', is => 'ro', required => 1;
 has 'doc', isa => 'XML::LibXML::Document', is => 'ro', lazy_build => 1;
 has 'formatter', is => 'ro', default => sub {DateTime::Format::XSD->new()};
 
@@ -88,7 +88,7 @@ sub _create_item_meta {
     }
 
     $im->appendChild($self->create_element('pubStatus', qcode => 'stat:' . $self->news_item->doc_status));
-    $im->appendChild($self->create_element('generator', versioninfo => Text::NewsML_G2->VERSION, _text => $self->generator));
+    $im->appendChild($self->create_element('generator', versioninfo => XML::NewsML_G2->VERSION, _text => $self->generator));
     $im->appendChild(my $svc = $self->create_element('service', qcode => $self->scheme_manager->svc->alias . ':' . $self->news_item->service->qcode));
     $svc->appendChild($self->create_element('name', _text => $self->news_item->service->name));
 

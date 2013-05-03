@@ -3,14 +3,14 @@
 # $Id$
 
 use Test::More;
-use Text::NewsML_G2;
+use XML::NewsML_G2;
 
 use warnings;
 use strict;
 
-ok(my $p1 = Text::NewsML_G2::Product->new(isbn => 123), 'create product 1');
-ok(my $p2 = Text::NewsML_G2::Product->new(name => 'some book', isbn => 456), 'create product 2');
-ok(my $p3 = Text::NewsML_G2::Product->new(isbn => 789), 'create product 3');
+ok(my $p1 = XML::NewsML_G2::Product->new(isbn => 123), 'create product 1');
+ok(my $p2 = XML::NewsML_G2::Product->new(name => 'some book', isbn => 456), 'create product 2');
+ok(my $p3 = XML::NewsML_G2::Product->new(isbn => 789), 'create product 3');
 
 like($p1->name, qr/1/, 'first product gets 1');
 is($p2->name, 'some book', 'name unmodified when set');
