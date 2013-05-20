@@ -19,12 +19,15 @@ my $builder = Module::Build->new
      'DateTime'              => 0,
      'DateTime::Format::XSD' => 0,
    },
+   configure_requires =>
+   { 'Module::Build' => 0.40
+   },
    test_requires =>
-   { 'Test::More'         => 0,
-     'Test::Exception'    => 0,
+   { 'Test::More'      => 0,
+     'Test::Exception' => 0,
    },
    add_to_cleanup =>
-   [ 'Text-NewsML_G2-*',
+   [ 'XML-NewsML_G2-*',
    ],
   );
 

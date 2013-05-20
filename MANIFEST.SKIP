@@ -2,3 +2,4 @@
 ^MYMETA\.yml$
 ^MYMETA\.json$
 ~$
+^.shipit

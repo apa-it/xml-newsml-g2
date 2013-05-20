@@ -1,0 +1,7 @@
+steps = FindVersion, ChangeVersion, CheckChangeLog, DistTest, MakeDist
+# steps = FindVersion, ChangeVersion, CheckChangeLog, DistTest, Commit, Tag, MakeDist, UploadCPAN
+
+svn.tagpattern = NewsML-G2-%v
+# svn.tagpattern = http://code.example.com/svn/tags/MyProj-%v
+
+CheckChangeLog.files = Changes
