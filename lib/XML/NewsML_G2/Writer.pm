@@ -50,12 +50,22 @@ sub _create_root_element {
 
 sub _create_catalogs {
     my ($self, $root) = @_;
-    $root->appendChild($self->create_element('catalogRef', href => $self->g2_catalog));
+
+    my %catalogs = ($self->g2_catalog => 1);
 
     $root->appendChild(my $cat = $self->create_element('catalog'));
     foreach my $scheme ($self->scheme_manager->get_all_schemes()) {
-        $cat->appendChild($self->create_element('scheme', alias => $scheme->alias, uri => $scheme->uri));
+        if (my $catalog = $scheme->catalog) {
+            $catalogs{$catalog} = 1;
+        } else {
+            $cat->appendChild($self->create_element('scheme', alias => $scheme->alias, uri => $scheme->uri));
+        }
     }
+
+    foreach my $url (sort keys %catalogs) {
+        $root->appendChild($self->create_element('catalogRef', href => $url));
+    }
+
     return;
 }
 
