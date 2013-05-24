@@ -53,11 +53,12 @@ sub _create_catalogs {
 
     my %catalogs = ($self->g2_catalog => 1);
 
-    $root->appendChild(my $cat = $self->create_element('catalog'));
+    my $cat;
     foreach my $scheme ($self->scheme_manager->get_all_schemes()) {
         if (my $catalog = $scheme->catalog) {
             $catalogs{$catalog} = 1;
         } else {
+            $root->appendChild(my $cat = $self->create_element('catalog')) unless $cat;
             $cat->appendChild($self->create_element('scheme', alias => $scheme->alias, uri => $scheme->uri));
         }
     }
