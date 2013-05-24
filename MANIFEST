@@ -14,8 +14,8 @@ lib/XML/NewsML_G2/Scheme_Manager.pm
 lib/XML/NewsML_G2/Service.pm
 lib/XML/NewsML_G2/Topic.pm
 lib/XML/NewsML_G2/Writer.pm
-lib/XML/NewsML_G2/Writer_2_11.pm
 lib/XML/NewsML_G2/Writer_2_9.pm
+lib/XML/NewsML_G2/Writer_2_12.pm
 MANIFEST			This list of files
 MANIFEST.SKIP
 README
@@ -25,6 +25,6 @@ t/02.Product.t
 t/perlcritic.t
 t/pod-coverage.t
 t/pod.t
-t/xsds/NewsML-G2_2.11-spec-All-Power.xsd
 t/xsds/NewsML-G2_2.9-spec-All-Power.xsd
+t/xsds/NewsML-G2_2.12-spec-All-Power.xsd
 t/xsds/xml.xsd

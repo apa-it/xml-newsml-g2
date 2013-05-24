@@ -223,12 +223,12 @@ ok(my $xmlschema = XML::LibXML::Schema->new(location => $xsd), 'parsing XSD');
 
 lives_ok(sub {$xmlschema->validate($dom)}, 'generated XML validates against NewsML G2 schema');
 
-# 2.11
-ok($writer = XML::NewsML_G2::Writer_2_11->new(news_item => $ni, scheme_manager => $sm), 'creating 2.11 writer');
-ok($dom = $writer->create_dom(), '2.11 writer creates DOM');
-$xsd = catfile($base_dir, 'xsds/NewsML-G2_2.11-spec-All-Power.xsd');
-ok($xmlschema = XML::LibXML::Schema->new(location => $xsd), 'parsing 2.11 XSD');
-lives_ok(sub {$xmlschema->validate($dom)}, '2.11 XML validates');
+# 2.12
+ok($writer = XML::NewsML_G2::Writer_2_12->new(news_item => $ni, scheme_manager => $sm), 'creating 2.12 writer');
+ok($dom = $writer->create_dom(), '2.12 writer creates DOM');
+$xsd = catfile($base_dir, 'xsds/NewsML-G2_2.12-spec-All-Power.xsd');
+ok($xmlschema = XML::LibXML::Schema->new(location => $xsd), 'parsing 2.12 XSD');
+lives_ok(sub {$xmlschema->validate($dom)}, '2.12 XML validates');
 
 done_testing;
 

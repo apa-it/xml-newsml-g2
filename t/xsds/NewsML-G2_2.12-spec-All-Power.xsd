@@ -8,7 +8,7 @@ This document is published under the Creative Commons Attribution 3.0 license - 
 By obtaining, using and/or copying this document, you (the licensee) agree that you have read, understood, and will comply with the terms and conditions of the license.
 
 -->
-<xs:schema targetNamespace="http://iptc.org/std/nar/2006-10-01/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.11" xml:lang="en" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://iptc.org/std/nar/2006-10-01/" xmlns:iptc-x="http://iptc.org/std/nar/schemaextensions/" xmlns:iptc-ms="http://iptc.org/std/mergeschemas/">
+<xs:schema targetNamespace="http://iptc.org/std/nar/2006-10-01/" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.12" xml:lang="en" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://iptc.org/std/nar/2006-10-01/" xmlns:iptc-x="http://iptc.org/std/nar/schemaextensions/" xmlns:iptc-ms="http://iptc.org/std/mergeschemas/">
 	<xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd" />
 	
 	<!-- 
@@ -32,6 +32,7 @@ By obtaining, using and/or copying this document, you (the licensee) agree that 
 						</xs:element>
 						<xs:element ref="assert" minOccurs="0" maxOccurs="unbounded" />
 						<xs:element ref="inlineRef" minOccurs="0" maxOccurs="unbounded" />
+						<xs:element ref="derivedFrom" minOccurs="0" maxOccurs="unbounded" />
 						<xs:element ref="concept" minOccurs="0" />
 					</xs:sequence>
 				</xs:extension>
@@ -60,6 +61,7 @@ By obtaining, using and/or copying this document, you (the licensee) agree that 
 						<xs:element ref="partMeta" minOccurs="0" maxOccurs="unbounded" />
 						<xs:element ref="assert" minOccurs="0" maxOccurs="unbounded" />
 						<xs:element ref="inlineRef" minOccurs="0" maxOccurs="unbounded" />
+						<xs:element ref="derivedFrom" minOccurs="0" maxOccurs="unbounded" />
 						<xs:element ref="conceptSet" minOccurs="0" />
 					</xs:sequence>
 				</xs:extension>
@@ -103,6 +105,7 @@ By obtaining, using and/or copying this document, you (the licensee) agree that 
 						<xs:element ref="partMeta" minOccurs="0" maxOccurs="unbounded" />
 						<xs:element ref="assert" minOccurs="0" maxOccurs="unbounded" />
 						<xs:element ref="inlineRef" minOccurs="0" maxOccurs="unbounded" />
+						<xs:element ref="derivedFrom" minOccurs="0" maxOccurs="unbounded" />
 						<xs:element ref="contentSet" minOccurs="0" />
 					</xs:sequence>
 				</xs:extension>
@@ -458,6 +461,7 @@ By obtaining, using and/or copying this document, you (the licensee) agree that 
 						<xs:element ref="partMeta" minOccurs="0" maxOccurs="unbounded" />
 						<xs:element ref="assert" minOccurs="0" maxOccurs="unbounded" />
 						<xs:element ref="inlineRef" minOccurs="0" maxOccurs="unbounded" />
+						<xs:element ref="derivedFrom" minOccurs="0" maxOccurs="unbounded" />
 						<xs:element ref="groupSet" minOccurs="0" />
 					</xs:sequence>
 				</xs:extension>
@@ -560,6 +564,7 @@ By obtaining, using and/or copying this document, you (the licensee) agree that 
 						</xs:element>
 						<xs:element ref="assert" minOccurs="0" maxOccurs="unbounded" />
 						<xs:element ref="inlineRef" minOccurs="0" maxOccurs="unbounded" />
+						<xs:element ref="derivedFrom" minOccurs="0" maxOccurs="unbounded" />
 						<xs:element ref="newsCoverageSet" minOccurs="0" />
 					</xs:sequence>
 				</xs:extension>
@@ -766,10 +771,10 @@ was sent</xs:documentation>
 		#####################################################################################################
 -->
 	<xs:annotation>
-		<xs:documentation>NewsML-G2 2.11 News Architecture (NAR) for IPTC G2-Standards - Framework XML Schema, document version 1</xs:documentation>
-		<xs:documentation>Date of creation of this XML Schema version: 2012-03-21</xs:documentation>
+		<xs:documentation>NewsML-G2 2.12 News Architecture (NAR) for IPTC G2-Standards - Framework XML Schema, document version 2</xs:documentation>
+		<xs:documentation>Date of creation of this XML Schema version: 2012-06-13</xs:documentation>
 		<xs:documentation>Any changes applied to this version of the XML Schema can be found at http://dev.iptc.org/G2-Approved-Changes</xs:documentation>
-		<xs:documentation>Date of creation of this XML Schema document version: 2012-03-26</xs:documentation>
+		<xs:documentation>Date of creation of this XML Schema document version: 2012-12-06</xs:documentation>
 		<xs:documentation>Schema created for the IPTC by Jay Cousins, RivCom Ltd (jay.cousins@rivcom.com),  Ulf Wingstedt, CNet Svenska AB (ulf.wingstedt@cnet.se)</xs:documentation>
 		<xs:documentation>Schema maintained for the IPTC by Michael Steidl (IPTC), previously by Laurent Le Meur (AFP) </xs:documentation>
 	</xs:annotation>
@@ -853,8 +858,12 @@ was sent</xs:documentation>
 									<xs:documentation>A URI which identifies another scheme with concepts that use the same codes and are semantically equivalent to the concepts of this scheme</xs:documentation>
 								</xs:annotation>
 								<xs:complexType>
-									<xs:attributeGroup ref="commonPowerAttributes" />
-									<xs:anyAttribute namespace="##other" />
+									<xs:simpleContent>
+										<xs:extension base="IRIType">
+											<xs:attributeGroup ref="commonPowerAttributes" />
+											<xs:anyAttribute namespace="##other" />
+										</xs:extension>
+									</xs:simpleContent>
 								</xs:complexType>
 							</xs:element>
 							<xs:element ref="name">
@@ -952,6 +961,9 @@ was sent</xs:documentation>
 			<xs:documentation>Expression of rights to be applied to content</xs:documentation>
 		</xs:annotation>
 	</xs:element>
+	<xs:annotation>
+		<xs:documentation>NewsML-G2 2.12: link property added to RightsInfoType</xs:documentation>
+	</xs:annotation>
 	<xs:complexType name="RightsInfoType">
 		<xs:annotation>
 			<xs:documentation>The type for a set of properties representing the rights associated with the Item (Type defined in this XML Schema only)</xs:documentation>
@@ -962,6 +974,11 @@ was sent</xs:documentation>
 			<xs:choice minOccurs="0" maxOccurs="unbounded">
 				<xs:element ref="copyrightNotice" />
 				<xs:element ref="usageTerms" />
+				<xs:element ref="link">
+					<xs:annotation>
+						<xs:documentation>A link from the current Item to Web resource with rights related information</xs:documentation>
+					</xs:annotation>
+				</xs:element>
 			</xs:choice>
 			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
@@ -1980,7 +1997,24 @@ was sent</xs:documentation>
 			</xs:complexContent>
 		</xs:complexType>
 	</xs:element>
-	<!-- ==================== Shared elements  ==================== -->
+	<!--==================== derived from ========= (NewsML-G2 2.12: added)-->
+	<xs:element name="derivedFrom">
+		<xs:annotation>
+			<xs:documentation>Represents a concept which was used for deriving the value of a property in this G2 item</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="Flex1PropType">
+					<xs:attribute name="idrefs" type="xs:IDREFS">
+						<xs:annotation>
+							<xs:documentation>Refers to the ids of elements which values have been derived from the concept represented by this property</xs:documentation>
+						</xs:annotation>
+					</xs:attribute>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- ==================== more shared elements  ==================== -->
 	<xs:element name="title" type="Label1Type">
 		<xs:annotation>
 			<xs:documentation>A short, natural-language name</xs:documentation>
@@ -2397,6 +2431,9 @@ was sent</xs:documentation>
 			<xs:anyAttribute namespace="##other" processContents="lax" />
 		</xs:complexType>
 	</xs:element>
+	<xs:annotation>
+		<xs:documentation>NewsML-G2 2.12: element hasInstrument added to organisationDetails</xs:documentation>
+	</xs:annotation>
 	<xs:element name="organisationDetails">
 		<xs:annotation>
 			<xs:documentation>A group of properties specific to an organisation</xs:documentation>
@@ -2424,6 +2461,44 @@ was sent</xs:documentation>
 							<xs:documentation>Information how to contact the organisation.</xs:documentation>
 						</xs:annotation>
 					</xs:element>
+					<xs:element name="hasInstrument">
+						<xs:annotation>
+							<xs:documentation>Defines a financial instrument which is related to a company</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:attributeGroup ref="commonPowerAttributes" />
+							<xs:attribute name="symbol" type="xs:string" use="required">
+								<xs:annotation>
+									<xs:documentation>A symbol for the financial instrument</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute name="symbolsrc" type="QCodeType">
+								<xs:annotation>
+									<xs:documentation>The  source of the financial instrument symbol</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute name="market" type="QCodeType">
+								<xs:annotation>
+									<xs:documentation>A venue in which this financial instrument is traded</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute name="marketlabel" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>The label used for the market</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute name="marketlabelsrc" type="QCodeType">
+								<xs:annotation>
+									<xs:documentation>The source of the market label</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute name="type" type="QCodeListType">
+								<xs:annotation>
+									<xs:documentation>The type(s) of the financial instrument</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+						</xs:complexType>
+					</xs:element>
 				</xs:choice>
 				<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded">
 					<xs:annotation>
@@ -2435,17 +2510,16 @@ was sent</xs:documentation>
 			<xs:anyAttribute namespace="##other" processContents="lax" />
 		</xs:complexType>
 	</xs:element>
+	<xs:annotation>
+		<xs:documentation>NewsML-G2 2.12: elements line, circle, polygon added to geoAreaDetails</xs:documentation>
+	</xs:annotation>
 	<xs:element name="geoAreaDetails">
 		<xs:annotation>
 			<xs:documentation>A group of properties specific to a geopolitical area</xs:documentation>
 		</xs:annotation>
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element name="position" type="GeoCoordinatesType" minOccurs="0">
-					<xs:annotation>
-						<xs:documentation>The coordinates of the location</xs:documentation>
-					</xs:annotation>
-				</xs:element>
+				<xs:element ref="position" minOccurs="0" />
 				<xs:element name="founded" type="TruncatedDateTimePropType" minOccurs="0">
 					<xs:annotation>
 						<xs:documentation>The date the geopolitical area was founded/established.</xs:documentation>
@@ -2456,6 +2530,51 @@ was sent</xs:documentation>
 						<xs:documentation>The date the geopolitical area was dissolved.</xs:documentation>
 					</xs:annotation>
 				</xs:element>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="line">
+						<xs:annotation>
+							<xs:documentation>A line as a geographic area</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element ref="position" maxOccurs="unbounded" />
+							</xs:sequence>
+							<xs:attributeGroup ref="commonPowerAttributes" />
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="circle">
+						<xs:annotation>
+							<xs:documentation>A circle as a geographic area</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element ref="position" />
+							</xs:sequence>
+							<xs:attributeGroup ref="commonPowerAttributes" />
+							<xs:attribute name="radius" type="xs:double" use="required">
+								<xs:annotation>
+									<xs:documentation>The radius of the circle</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+							<xs:attribute name="radunit" type="QCodeType" use="required">
+								<xs:annotation>
+									<xs:documentation>The dimension unit of the radius</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="polygon">
+						<xs:annotation>
+							<xs:documentation>A polygon as a geographic area</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element ref="position" maxOccurs="unbounded" />
+							</xs:sequence>
+							<xs:attributeGroup ref="commonPowerAttributes" />
+						</xs:complexType>
+					</xs:element>
+				</xs:choice>
 				<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded">
 					<xs:annotation>
 						<xs:documentation>Extension point for provider-defined properties from other namespaces</xs:documentation>
@@ -2465,6 +2584,11 @@ was sent</xs:documentation>
 			<xs:attributeGroup ref="commonPowerAttributes" />
 			<xs:anyAttribute namespace="##other" processContents="lax" />
 		</xs:complexType>
+	</xs:element>
+	<xs:element name="position" type="GeoCoordinatesType">
+		<xs:annotation>
+			<xs:documentation>The coordinates of the location</xs:documentation>
+		</xs:annotation>
 	</xs:element>
 	<xs:element name="POIDetails">
 		<xs:annotation>
@@ -2914,19 +3038,33 @@ so on. May also hold accreditation information</xs:documentation>
 	<xs:annotation>
 		<xs:documentation>NewsML-G2 2.11: AddressType created from contactInfoType.address for generic use</xs:documentation>
 	</xs:annotation>
+	<xs:annotation>
+		<xs:documentation>NewsML-G2 2.12: line, locality, area: @role added / locality, area: cardinality opened to "unbounded"</xs:documentation>
+	</xs:annotation>
 	<xs:complexType name="AddressType">
 		<xs:sequence>
-			<xs:element name="line" type="IntlStringType" minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="line" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation>A line of address information, in the format expected by a recipient postal service. City, country area, country and postal code are expressed separately.</xs:documentation>
 				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="IntlStringType">
+							<xs:attribute name="role" type="QCodeType">
+								<xs:annotation>
+									<xs:documentation>Refines the semantics of line</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
 			</xs:element>
-			<xs:element name="locality" minOccurs="0" type="Flex1PropType">
+			<xs:element name="locality" minOccurs="0" maxOccurs="unbounded" type="Flex1RolePropType">
 				<xs:annotation>
 					<xs:documentation>A city/town/village etc. part of the address.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="area" minOccurs="0" type="Flex1PropType">
+			<xs:element name="area" minOccurs="0" maxOccurs="unbounded" type="Flex1RolePropType">
 				<xs:annotation>
 					<xs:documentation>A subdivision of a country part of the address.</xs:documentation>
 				</xs:annotation>
@@ -3060,7 +3198,36 @@ This information is aimed at the editorial staff of the receiver</xs:documentati
 					</xs:annotation>
 				</xs:any>
 			</xs:sequence>
-			<xs:attributeGroup ref="commonPowerAttributes" />
+			<xs:attribute name="id" type="xs:ID" use="optional">
+				<xs:annotation>
+					<xs:documentation>The local identifier of the element which MUST be persistent for all versions of the item, i.e. for its entire lifecycle.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="creator" type="QCodeType" use="optional">
+				<xs:annotation>
+					<xs:documentation>If the attribute is empty, specifies which entity (person, organisation or system) will edit the property. If the attribute is non-empty, specifies which entity (person, organisation or system) has edited the property.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="modified" type="DateOptTimeType" use="optional">
+				<xs:annotation>
+					<xs:documentation>The date (and, optionally, the time) when the property was last modified. The initial value is the date (and, optionally, the time) of creation of the property.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="custom" type="xs:boolean" use="optional">
+				<xs:annotation>
+					<xs:documentation>If set to true the corresponding property was added to the G2 Item for a specific customer or group of customers only. The default value of this property is false which applies when this attribute is not used with the property.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="how" type="QCodeType" use="optional">
+				<xs:annotation>
+					<xs:documentation>Indicates by which means the value was extracted from the content. </xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="why" type="QCodeType" use="optional">
+				<xs:annotation>
+					<xs:documentation>Why the metadata has been included.</xs:documentation>
+				</xs:annotation>
+			</xs:attribute>
 			<xs:anyAttribute namespace="##other" />
 		</xs:complexType>
 	</xs:element>
@@ -3206,7 +3373,7 @@ This information is aimed at the editorial staff of the receiver</xs:documentati
 		</xs:attribute>
 	</xs:attributeGroup>
 	<xs:annotation>
-		<xs:documentation>NewsML-G2 2.10: quantifyAttributes extended by @derivedfrom</xs:documentation>
+		<xs:documentation>NewsML-G2 2.10: quantifyAttributes extended by @derivedfrom, v 2.12: use of @derivedfrom DEPRECATED, use element derivedFrom</xs:documentation>
 	</xs:annotation>
 	<xs:attributeGroup name="quantifyAttributes">
 		<xs:annotation>
@@ -3224,7 +3391,7 @@ This information is aimed at the editorial staff of the receiver</xs:documentati
 		</xs:attribute>
 		<xs:attribute name="derivedfrom" type="QCodeListType" use="optional">
 			<xs:annotation>
-				<xs:documentation>A reference to the concept from which the concept identified by qcode was derived/inferred</xs:documentation>
+				<xs:documentation>A reference to the concept from which the concept identified by qcode was derived/inferred - use DEPRECATED in NewsML-G2 2.12 and higher, use the derivedFrom element</xs:documentation>
 			</xs:annotation>
 		</xs:attribute>
 	</xs:attributeGroup>
@@ -3764,6 +3931,32 @@ values as defined by the Cascading Style Sheets (CSS) specification.</xs:documen
 		<xs:attributeGroup ref="commonPowerAttributes" />
 		<xs:attributeGroup ref="flexAttributes" />
 		<xs:attributeGroup ref="i18nAttributes" />
+		<xs:anyAttribute namespace="##other" processContents="lax" />
+	</xs:complexType>
+	<xs:annotation>
+		<xs:documentation>NewsML-G2 2.12: Flex1RolePropType added</xs:documentation>
+	</xs:annotation>
+	<xs:complexType name="Flex1RolePropType">
+		<xs:annotation>
+			<xs:documentation>Flexible generic PCL-type for both controlled and uncontrolled values</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:group ref="ConceptDefinitionGroup" minOccurs="0" />
+			<xs:group ref="ConceptRelationshipsGroup" minOccurs="0" />
+			<xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Extension point for provider-defined properties from other namespaces</xs:documentation>
+				</xs:annotation>
+			</xs:any>
+		</xs:sequence>
+		<xs:attributeGroup ref="commonPowerAttributes" />
+		<xs:attributeGroup ref="flexAttributes" />
+		<xs:attributeGroup ref="i18nAttributes" />
+		<xs:attribute name="role">
+			<xs:annotation>
+				<xs:documentation>Refines the semantics of the property</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
 		<xs:anyAttribute namespace="##other" processContents="lax" />
 	</xs:complexType>
 	<xs:annotation>

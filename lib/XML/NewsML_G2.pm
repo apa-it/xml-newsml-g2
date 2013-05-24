@@ -16,7 +16,7 @@ use XML::NewsML_G2::Scheme_Manager;
 use XML::NewsML_G2::Scheme;
 use XML::NewsML_G2::Writer;
 use XML::NewsML_G2::Writer_2_9;
-use XML::NewsML_G2::Writer_2_11;
+use XML::NewsML_G2::Writer_2_12;
 
 use warnings;
 use strict;
