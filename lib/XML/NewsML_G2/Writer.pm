@@ -299,7 +299,10 @@ sub _create_content_meta {
         $cm->appendChild($self->create_element('creator', literal => $_));
     }
 
-    $cm->appendChild($self->create_element('altId', _text => $self->news_item->message_id));
+    if ($self->news_item->message_id) {
+        $cm->appendChild($self->create_element('altId', _text => $self->news_item->message_id));
+    }
+
     $cm->appendChild($self->create_element('language', tag => $self->news_item->language));
 
     foreach (@{$self->news_item->genres}) {

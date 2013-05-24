@@ -96,6 +96,7 @@ ok(my $ni = XML::NewsML_G2::News_Item->new
     slugline => $slugline,
     embargo => DateTime::Format::XSD->parse_datetime($embargo),
     embargo_text => $embargo_text,
+    language => 'de',
     note => 'Bilder zum Schweizerhaus sind im AOM, z.B. ABD0019 vom 23. März 2006, abrufbar',
     closing => 'Schluss',
     content_created => DateTime::Format::XSD->parse_datetime($time1),
