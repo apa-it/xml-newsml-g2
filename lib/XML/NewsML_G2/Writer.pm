@@ -58,7 +58,7 @@ sub _create_catalogs {
         if (my $catalog = $scheme->catalog) {
             $catalogs{$catalog} = 1;
         } else {
-            $root->appendChild(my $cat = $self->create_element('catalog')) unless $cat;
+            $root->appendChild($cat = $self->create_element('catalog')) unless $cat;
             $cat->appendChild($self->create_element('scheme', alias => $scheme->alias, uri => $scheme->uri));
         }
     }
