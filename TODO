@@ -1,1 +1,1 @@
-* when 2.9 is removed, make Scheme->uri optional
+* when 2.9 is removed, make Scheme->uri optional, remove _create_hierarchy

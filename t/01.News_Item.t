@@ -231,7 +231,3 @@ ok($xmlschema = XML::LibXML::Schema->new(location => $xsd), 'parsing 2.12 XSD');
 lives_ok(sub {$xmlschema->validate($dom)}, '2.12 XML validates');
 
 done_testing;
-
-open my $fh, '>', '/tmp/newsitem.xml';
-print $fh $xml_string;
-close $fh;

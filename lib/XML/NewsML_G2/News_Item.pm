@@ -75,6 +75,19 @@ sub add_location {
     return 1;
 }
 
+sub add_paragraph {
+    my ($self, $text) = @_;
+    my $paras = $self->paragraphs;
+    unless ($paras) {
+        $self->paragraphs($paras = XML::LibXML->createDocument()->createElement('paragraphs'));
+    }
+    my $doc = $paras->getOwnerDocument;
+    my $p = $doc->createElementNS('http://www.w3.org/1999/xhtml', 'p');
+    $p->appendChild($doc->createTextNode($text));
+    $paras->appendChild($p);
+    return 1;
+}
+
 __PACKAGE__->meta->make_immutable;
 
 1;
@@ -97,12 +110,7 @@ XML::NewsML_G2::News_Item - a news item (story)
         );
     $ni->add_genre($genre1, $genre2);
     $ni->add_source('APA');
-
-    my $writer = XML::NewsML_G2::Writer_2_9->new(news_item => $ni);
-    my $paragraphs = $writer->create_element('paragraphs');
-    $paragraphs->appendChild
-        ($writer->create_element('p', _ns => $writer->xhtml_ns, _text => "Paragraph 1"));
-    $ni->paragraphs($paragraphs);
+    $ni->add_paragraph('blah blah blah');
 
 
 =head1 ATTRIBUTES
@@ -188,9 +196,10 @@ List of L<XML::NewsML_G2::Organisation> instances
 
 =item paragraphs
 
-A L<XML::LibXML::Node> instance containing the content (quite likely 'p'
-elements, hence the name) of the story - to be put into the XHTML
-body.
+An L<XML::LibXML::Node> instance containing the content (quite likely
+C<p> elements, hence the name) of the story - to be put into the XHTML
+body. Use the C<add_paragraph> method to add text unless you want more
+control of the output.
 
 =item priority
 
@@ -274,6 +283,13 @@ Add a new L<XML::NewsML_G2::MediaTopic> instance
 
 Add a new L<XML::NewsML_G2::Organisation> instance
 
+=item add_paragraph
+
+Takes a string to be added to the C<paragraphs> Node instance as a
+C<p> element. To have more control over the created XHTML output,
+directly set the C<paragraphs> attribute with a Node instance you
+created by yourself.
+
 =item add_product
 
 Add a new L<XML::NewsML_G2::Product> instance
@@ -292,6 +308,8 @@ Add a new L<XML::NewsML_G2::Topic> instance
 
 Philipp Gortan  C<< <philipp.gortan@apa.at> >>
 
-=head1 COPYRIGHT
+=head1 LICENCE AND COPYRIGHT
 
 Copyright (c) 2013, APA-IT. All rights reserved.
+
+See L<XML::NewsML_G2> for the license.

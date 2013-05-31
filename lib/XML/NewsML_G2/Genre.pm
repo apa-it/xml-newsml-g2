@@ -36,6 +36,8 @@ XML::NewsML_G2::Genre - the journalistic genre of the news item
 
 Philipp Gortan  C<< <philipp.gortan@apa.at> >>
 
-=head1 COPYRIGHT
+=head1 LICENCE AND COPYRIGHT
 
 Copyright (c) 2013, APA-IT. All rights reserved.
+
+See L<XML::NewsML_G2> for the license.

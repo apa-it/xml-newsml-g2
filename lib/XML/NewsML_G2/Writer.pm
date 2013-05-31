@@ -14,7 +14,7 @@ has 'generator', isa => 'Str', is => 'ro', default => __PACKAGE__;
 
 has 'scheme_manager', isa => 'XML::NewsML_G2::Scheme_Manager', is => 'ro', required => 1;
 has 'doc', isa => 'XML::LibXML::Document', is => 'ro', lazy_build => 1;
-has 'formatter', is => 'ro', default => sub {DateTime::Format::XSD->new()};
+has '_formatter', is => 'ro', default => sub {DateTime::Format::XSD->new()};
 
 has 'g2_ns', isa => 'Str', is => 'ro', default => 'http://iptc.org/std/nar/2006-10-01/';
 has 'xhtml_ns', isa => 'Str', is => 'ro', default => 'http://www.w3.org/1999/xhtml';
@@ -91,10 +91,10 @@ sub _create_item_meta {
     $im->appendChild($self->create_element('itemClass', qcode => 'ninat:text'));
     $im->appendChild(my $p = $self->create_element('provider', qcode => 'nprov:' . $self->news_item->provider->qcode));
     $p->appendChild($self->create_element('name', _text => $self->news_item->provider->name));
-    $im->appendChild($self->create_element('versionCreated', _text => $self->formatter->format_datetime(DateTime->now(time_zone => 'local'))));
+    $im->appendChild($self->create_element('versionCreated', _text => $self->_formatter->format_datetime(DateTime->now(time_zone => 'local'))));
 
     if ($self->news_item->embargo) {
-        my $e = $self->formatter->format_datetime($self->news_item->embargo);
+        my $e = $self->_formatter->format_datetime($self->news_item->embargo);
         $im->appendChild($self->create_element('embargoed', _text => $e));
     }
 
@@ -123,13 +123,8 @@ sub _create_item_meta {
 
 sub _create_hierarchy {
     my ($self, $node, $schema) = @_;
-    my @res;
-
-    do {
-        unshift @res, "$schema:" . $node->qcode();
-    } while ($node = $node->parent());
-
-    return $self->create_element('hierarchyInfo', _text => join ' ', @res);
+    # code moved to Writer_2_9
+    return;
 }
 
 sub _create_subjects_desk {
@@ -161,7 +156,8 @@ sub _create_subjects_media_topic {
         }
         if ($mt->parent) {
             $s->appendChild(my $b = $self->create_element('broader', qcode => 'medtop:' . $mt->parent->qcode));
-            $b->appendChild($self->_create_hierarchy($mt, 'medtop'));
+            my $hierarchy = $self->_create_hierarchy($mt, 'medtop');
+            $b->appendChild($hierarchy) if $hierarchy;
         }
     }
     return @res;
@@ -181,7 +177,8 @@ sub _create_subjects_location {
         $s->appendChild($self->create_element('sameAs', qcode => 'iso3166-1a2:' . $l->iso_code)) if $l->iso_code;
         if ($l->parent) {
             $s->appendChild(my $b = $self->create_element('broader', qcode => "$geo_alias:" . $l->parent->qcode));
-            $b->appendChild($self->_create_hierarchy($l, 'apageo'));
+            my $hierarchy = $self->_create_hierarchy($l, 'apageo');
+            $b->appendChild($hierarchy) if $hierarchy;
         }
     }
     return @res;
@@ -288,11 +285,11 @@ sub _create_content_meta {
     $cm->appendChild($self->create_element('urgency', _text => $self->news_item->priority));
 
     if ($self->news_item->content_created) {
-        my $t = $self->formatter->format_datetime($self->news_item->content_created);
+        my $t = $self->_formatter->format_datetime($self->news_item->content_created);
         $cm->appendChild($self->create_element('contentCreated', _text => $t));
     }
     if ($self->news_item->content_modified and $self->news_item->content_created != $self->news_item->content_modified) {
-        my $t = $self->formatter->format_datetime($self->news_item->content_modified);
+        my $t = $self->_formatter->format_datetime($self->news_item->content_modified);
         $cm->appendChild($self->create_element('contentModified', _text => $t));
     }
 
@@ -391,3 +388,95 @@ sub create_dom {
 __PACKAGE__->meta->make_immutable;
 
 1;
+__END__
+
+=head1 NAME
+
+XML::NewsML_G2::Writer - base class for XML DOM tree creation
+conforming to NewsML G2
+
+=head1 SYNOPSIS
+
+    my $w = XML::NewsML_G2::Writer_2_12->new
+        (news_item => $ni, scheme_manager => $sm);
+
+    my $p = $w->create_element('p', class => 'main', _text => 'blah');
+
+    my $dom = $w->create_dom();
+
+=head1 DESCRIPTION
+
+This module acts as a NewsML-G2 version-independent base
+class. Instead of using this class, use the most current subclass,
+e.g. L<XML::LibXML::Writer_2_12>.
+
+=head1 ATTRIBUTES
+
+=over 4
+
+=item news_item
+
+L<XML::NewsML_G2::News_Item> instance used to create the output document
+
+=item encoding
+
+Encoding used to create the output document, defaults to utf-8
+
+=item generator
+
+String used in output as the generator program name
+
+=item scheme_manager
+
+L<XML::NewsML_G2::Scheme_Manager> instance used to create qcodes
+
+=item doc
+
+L<XML::LibXML::Document> instance used to create the output document
+
+=item g2_ns
+
+XML Namespace of NewsML G2
+
+=item xhtml_n2
+
+XML Namespace of XHTML
+
+=item g2_version
+
+Specified by subclass.
+
+=item schema_location
+
+Specified by subclass.
+
+=item g2_catalog
+
+Specified by subclass.
+
+=back
+
+=head1 METHODS
+
+=over 4
+
+=item create_element
+
+Helper method that creates XML elements, e.g. to be used in the
+C<paragraphs> element of the L<XML::NewsML_G2::News_Item>.
+
+=item create_dom
+
+Returns the L<XML::LibXML::Document> element containing the requested output.
+
+=back
+
+=head1 AUTHOR
+
+Philipp Gortan  C<< <philipp.gortan@apa.at> >>
+
+=head1 LICENCE AND COPYRIGHT
+
+Copyright (c) 2013, APA-IT. All rights reserved.
+
+See L<XML::NewsML_G2> for the license.
