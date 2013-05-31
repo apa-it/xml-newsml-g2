@@ -3,3 +3,5 @@
 ^MYMETA\.json$
 ~$
 ^.shipit
+^.prove
+^.svn

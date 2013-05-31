@@ -23,9 +23,12 @@ TODO
 t/00.load.t
 t/01.News_Item.t
 t/02.Product.t
+t/03.Paragraphs.t
 t/perlcritic.t
 t/pod-coverage.t
 t/pod.t
 t/xsds/NewsML-G2_2.9-spec-All-Power.xsd
 t/xsds/NewsML-G2_2.12-spec-All-Power.xsd
 t/xsds/xml.xsd
+META.yml
+META.json
