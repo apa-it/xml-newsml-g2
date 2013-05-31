@@ -17,7 +17,6 @@ lib/XML/NewsML_G2/Writer.pm
 lib/XML/NewsML_G2/Writer_2_9.pm
 lib/XML/NewsML_G2/Writer_2_12.pm
 MANIFEST			This list of files
-MANIFEST.SKIP
 README
 TODO
 t/00.load.t
