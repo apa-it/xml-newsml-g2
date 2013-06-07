@@ -23,6 +23,8 @@ t/00.load.t
 t/01.News_Item.t
 t/02.Product.t
 t/03.Paragraphs.t
+t/04.minimal.t
+t/05.no-catalog.t
 t/perlcritic.t
 t/pod-coverage.t
 t/pod.t

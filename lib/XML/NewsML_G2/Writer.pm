@@ -5,6 +5,7 @@ package XML::NewsML_G2::Writer;
 use Moose;
 use DateTime;
 use DateTime::Format::XSD;
+use XML::NewsML_G2::Scheme_Manager;
 use namespace::autoclean;
 
 has 'news_item', isa => 'XML::NewsML_G2::News_Item', is => 'ro', required => 1;
@@ -12,7 +13,7 @@ has 'news_item', isa => 'XML::NewsML_G2::News_Item', is => 'ro', required => 1;
 has 'encoding', isa => 'Str', is => 'ro', default => 'utf-8';
 has 'generator', isa => 'Str', is => 'ro', default => __PACKAGE__;
 
-has 'scheme_manager', isa => 'XML::NewsML_G2::Scheme_Manager', is => 'ro', required => 1;
+has 'scheme_manager', isa => 'XML::NewsML_G2::Scheme_Manager', is => 'ro', lazy_build => 1; 
 has 'doc', isa => 'XML::LibXML::Document', is => 'ro', lazy_build => 1;
 has '_formatter', is => 'ro', default => sub {DateTime::Format::XSD->new()};
 
@@ -21,13 +22,21 @@ has 'xhtml_ns', isa => 'Str', is => 'ro', default => 'http://www.w3.org/1999/xht
 
 has 'g2_version', isa => 'Str', is => 'ro';
 has 'schema_location', isa => 'Str', is => 'ro';
-has 'g2_catalog', isa => 'Str', is => 'ro';
+has 'g2_catalog_url', isa => 'Str', is => 'ro';
+has 'g2_catalog_schemes', isa => 'HashRef', is => 'ro', default => sub {
+    {isrol => undef, nprov => undef, ninat => undef, stat => undef, sig => undef,
+     genre => undef, isin => undef, medtop => undef, iso3166_1a2 => 'iso3166-1a2'} };
 
 # builders
 
 sub _build_doc {
     my $self = shift;
     return XML::LibXML->createDocument('1.0', $self->encoding);
+}
+
+sub _build_scheme_manager {
+    my $self = shift;
+    return XML::NewsML_G2::Scheme_Manager->new();
 }
 
 # DOM creating methods
@@ -51,13 +60,13 @@ sub _create_root_element {
 sub _create_catalogs {
     my ($self, $root) = @_;
 
-    my %catalogs = ($self->g2_catalog => 1);
+    my %catalogs = ($self->g2_catalog_url => 1);
 
     my $cat;
     foreach my $scheme ($self->scheme_manager->get_all_schemes()) {
         if (my $catalog = $scheme->catalog) {
             $catalogs{$catalog} = 1;
-        } else {
+        } elsif ($scheme) {
             $root->appendChild($cat = $self->create_element('catalog')) unless $cat;
             $cat->appendChild($self->create_element('scheme', alias => $scheme->alias, uri => $scheme->uri));
         }
@@ -74,7 +83,8 @@ sub _create_rights_info {
     my ($self, $root) = @_;
     my $ri = $self->create_element('rightsInfo');
 
-    $ri->appendChild (my $crh = $self->create_element('copyrightHolder', qcode => 'nprov:' . $self->news_item->provider->qcode));
+    $ri->appendChild (my $crh = $self->create_element('copyrightHolder'));
+    $self->scheme_manager->add_qcode_or_literal($crh, 'nprov', $self->news_item->provider->qcode);
     $crh->appendChild($self->create_element('name', _text => $self->news_item->provider->name));
 
     my $notice = $self->news_item->provider->notice;
@@ -88,8 +98,10 @@ sub _create_item_meta {
     my ($self, $root) = @_;
 
     my $im = $self->create_element('itemMeta');
-    $im->appendChild($self->create_element('itemClass', qcode => 'ninat:text'));
-    $im->appendChild(my $p = $self->create_element('provider', qcode => 'nprov:' . $self->news_item->provider->qcode));
+    $im->appendChild(my $ic = $self->create_element('itemClass'));
+    $self->scheme_manager->add_qcode($ic, 'ninat', 'text');
+    $im->appendChild(my $p = $self->create_element('provider'));
+    $self->scheme_manager->add_qcode_or_literal($p, 'nprov', $self->news_item->provider->qcode);
     $p->appendChild($self->create_element('name', _text => $self->news_item->provider->name));
     $im->appendChild($self->create_element('versionCreated', _text => $self->_formatter->format_datetime(DateTime->now(time_zone => 'local'))));
 
@@ -98,21 +110,37 @@ sub _create_item_meta {
         $im->appendChild($self->create_element('embargoed', _text => $e));
     }
 
-    $im->appendChild($self->create_element('pubStatus', qcode => 'stat:' . $self->news_item->doc_status));
+    $im->appendChild(my $ps = $self->create_element('pubStatus'));
+    $self->scheme_manager->add_qcode($ps, 'stat', $self->news_item->doc_status);
     $im->appendChild($self->create_element('generator', versioninfo => XML::NewsML_G2->VERSION, _text => $self->generator));
-    $im->appendChild(my $svc = $self->create_element('service', qcode => $self->scheme_manager->svc->alias . ':' . $self->news_item->service->qcode));
-    $svc->appendChild($self->create_element('name', _text => $self->news_item->service->name));
+    if ($self->news_item->has_service) {
+        $im->appendChild(my $svc = $self->create_element('service'));
+        $self->scheme_manager->add_qcode($svc, 'svc', $self->news_item->service->qcode);
 
-    my $role_alias = $self->scheme_manager->role->alias;
-    $im->appendChild($self->create_element('edNote', role => "$role_alias:embargotext", _text => $self->news_item->embargo_text)) if $self->news_item->embargo_text;
-    $im->appendChild($self->create_element('edNote', role => "$role_alias:closing", _text => $self->news_item->closing)) if $self->news_item->closing;
-    $im->appendChild($self->create_element('edNote', role => "$role_alias:note", _text => $self->news_item->note)) if $self->news_item->note;
+        $svc->appendChild($self->create_element('name', _text => $self->news_item->service->name));
+    }
 
-    $im->appendChild($self->create_element('signal', qcode => 'sig:correction')) if $self->news_item->doc_version > 1;
+    if ($self->news_item->embargo_text) {
+        $im->appendChild(my $e = $self->create_element('edNote', _text => $self->news_item->embargo_text));
+        $self->scheme_manager->add_role($e, 'role', 'embargotext');
+    }
+    if ($self->news_item->closing) {
+        $im->appendChild(my $e = $self->create_element('edNote', _text => $self->news_item->closing));
+        $self->scheme_manager->add_role($e, 'role', 'closing');
+    }
+    if ($self->news_item->note) {
+        $im->appendChild(my $e = $self->create_element('edNote', _text => $self->news_item->note));
+        $self->scheme_manager->add_role($e, 'role', 'note');
+    }
 
-    my $ind_alias = $self->scheme_manager->ind->alias;
+    if ($self->news_item->doc_version > 1) {
+        $im->appendChild(my $s = $self->create_element('signal'));
+        $self->scheme_manager->add_qcode($s, 'sig', 'correction');
+    }
+
     foreach (@{$self->news_item->indicators}) {
-        $im->appendChild($self->create_element('signal', qcode => "$ind_alias:" . lc));
+        $im->appendChild(my $s = $self->create_element('signal'));
+        $self->scheme_manager->add_qcode($s, 'ind', lc);
     }
 
     $im->appendChild($self->create_element('link', rel => 'irel:seeAlso', residref => $self->news_item->see_also)) if ($self->news_item->see_also);
@@ -132,10 +160,9 @@ sub _create_subjects_desk {
     my @res;
 
     push @res, $self->doc->createComment('desks') if $self->news_item->has_desks;
-    my $alias = $self->scheme_manager->desk->alias;
     foreach (@{$self->news_item->desks}) {
-        push @res, my $s = $self->create_element
-          ('subject', type => 'cpnat:abstract', qcode => "$alias:" . $_->qcode);
+        push @res, my $s = $self->create_element('subject', type => 'cpnat:abstract');
+        $self->scheme_manager->add_qcode_or_literal($s, 'desk', $_->qcode);
         $s->appendChild($self->create_element('name', _text => $_->name));
     }
     return @res;
@@ -149,13 +176,15 @@ sub _create_subjects_media_topic {
     foreach my $mt_qcode (sort keys %{$self->news_item->media_topics}) {
         my $mt = $self->news_item->media_topics->{$mt_qcode};
         my $why = $mt->direct ? 'why:direct' : 'why:ancestor';
-        push @res, my $s = $self->create_element('subject', type => 'cpnat:abstract', qcode => 'medtop:'.$mt->qcode, why => $why);
+        push @res, my $s = $self->create_element('subject', type => 'cpnat:abstract', why => $why);
+        $self->scheme_manager->add_qcode_or_literal($s, 'medtop', $mt->qcode); 
         $s->appendChild($self->create_element('name', _text => $mt->name));
         foreach my $lang (sort keys %{$mt->translations}) {
             $s->appendChild($self->create_element('name', 'xml:lang' => $lang, _text => $mt->translations->{$lang}));
         }
         if ($mt->parent) {
-            $s->appendChild(my $b = $self->create_element('broader', qcode => 'medtop:' . $mt->parent->qcode));
+            $s->appendChild(my $b = $self->create_element('broader'));
+            $self->scheme_manager->add_qcode_or_literal($b, 'medtop', $mt->parent->qcode);
             my $hierarchy = $self->_create_hierarchy($mt, 'medtop');
             $b->appendChild($hierarchy) if $hierarchy;
         }
@@ -169,14 +198,18 @@ sub _create_subjects_location {
 
     push @res, $self->doc->createComment('locations') if $self->news_item->has_locations;
 
-    my $geo_alias = $self->scheme_manager->geo->alias;
     foreach my $l (sort {$b->relevance <=> $a->relevance} values %{$self->news_item->locations}) {
         my $why = $l->direct ? 'why:direct' : 'why:ancestor';
-        push @res, my $s = $self->create_element('subject', type => 'cpnat:geoArea', qcode => "$geo_alias:" . $l->qcode, relevance => $l->relevance, why => $why);
+        push @res, my $s = $self->create_element('subject', type => 'cpnat:geoArea', relevance => $l->relevance, why => $why);
+        $self->scheme_manager->add_qcode_or_literal($s, 'geo', $l->qcode);
         $s->appendChild($self->create_element('name', _text => $l->name));
-        $s->appendChild($self->create_element('sameAs', qcode => 'iso3166-1a2:' . $l->iso_code)) if $l->iso_code;
+        if ($l->iso_code) {
+            $s->appendChild(my $sa = $self->create_element('sameAs'));
+            $self->scheme_manager->add_qcode_or_literal($sa, 'iso3166_1a2', $l->iso_code);
+        }
         if ($l->parent) {
-            $s->appendChild(my $b = $self->create_element('broader', qcode => "$geo_alias:" . $l->parent->qcode));
+            $s->appendChild(my $b = $self->create_element('broader'));
+            $self->scheme_manager->add_qcode_or_literal($b, 'geo', $l->parent->qcode);
             my $hierarchy = $self->_create_hierarchy($l, 'apageo');
             $b->appendChild($hierarchy) if $hierarchy;
         }
@@ -190,8 +223,8 @@ sub _create_subjects_organisation {
 
     push @res, $self->doc->createComment('organisations') if $self->news_item->has_organisations;
     foreach my $org (@{$self->news_item->organisations}) {
-        my $qcode = $self->scheme_manager->org->alias . ':' . $org->qcode;
-        push @res, my $o = $self->create_element('subject', type => 'cpnat:organisation', qcode => $qcode);
+        push @res, my $o = $self->create_element('subject', type => 'cpnat:organisation');
+        $self->scheme_manager->add_qcode_or_literal($o, 'org', $org->qcode);
         $o->appendChild($self->create_element('name', _text => $org->name));
     }
     return @res;
@@ -204,8 +237,8 @@ sub _create_subjects_topic {
     push @res, $self->doc->createComment('topics') if $self->news_item->has_topics;
 
     foreach my $topic (@{$self->news_item->topics}) {
-        my $qcode = $self->scheme_manager->topic->alias . ':' . $topic->qcode;
-        push @res, my $t = $self->create_element('subject', type => 'cpnat:abstract', qcode => $qcode);
+        push @res, my $t = $self->create_element('subject', type => 'cpnat:abstract');
+        $self->scheme_manager->add_qcode_or_literal($t, 'topic', $topic->qcode);
         $t->appendChild($self->create_element('name', _text => $topic->name));
     }
 
@@ -219,11 +252,13 @@ sub _create_subjects_product {
     push @res, $self->doc->createComment('products') if $self->news_item->has_products;
 
     foreach my $product (@{$self->news_item->products}) {
-        my $literal;
-        $literal   = 'isbn#' . $product->isbn if $product->isbn;
-        $literal ||= 'ean#' . $product->ean if $product->ean;
+        push @res, my $p = $self->create_element('subject', type => 'cpnat:object');
+        if ($product->isbn) {
+            $self->scheme_manager->add_qcode_or_literal($p, 'isbn', $product->isbn);
+        } elsif ($product->ean) {
+            $self->scheme_manager->add_qcode_or_literal($p, 'ean', $product->ean);
+        }
 
-        push @res, my $p = $self->create_element('subject', type => 'cpnat:object', literal => $literal);
         $p->appendChild($self->create_element('name', _text => $product->name));
     }
 
@@ -250,21 +285,26 @@ sub _create_asserts_organisation {
 
     my @res;
     push @res, $self->doc->createComment('organisations') if $self->news_item->has_organisations;
-    my $crel_alias = $self->scheme_manager->crel->alias;
 
     foreach my $org (@{$self->news_item->organisations}) {
-        my $qcode = $self->scheme_manager->org->alias . ':' . $org->qcode;
-        push @res, my $a = $self->create_element('assert', qcode => $qcode);
+        push @res, my $a = $self->create_element('assert');
+        $self->scheme_manager->add_qcode_or_literal($a, 'org', $org->qcode);
+
         $a->appendChild($self->create_element('name', _text => $org->name));
-        $a->appendChild($self->create_element('sameAs', qcode=> "isin:$_")) foreach @{$org->isins};
+        foreach (@{$org->isins}) {
+            $a->appendChild(my $sa = $self->create_element('sameAs'));
+            $self->scheme_manager->add_qcode_or_literal($sa, 'isin', $_);
+        }
         if ($org->has_websites) {
             $a->appendChild(my $od = $self->create_element('organisationDetails'));
             $od->appendChild(my $ci = $self->create_element('contactInfo'));
             $ci->appendChild($self->create_element('web', _text => $_)) foreach @{$org->websites};
         }
-        $a->appendChild($self->create_element('related', rel => "$crel_alias:index", literal => $_)) foreach (@{$org->indices});
-        $a->appendChild($self->create_element('related', rel => "$crel_alias:exchange", literal => $_)) foreach (@{$org->stock_exchanges});
-
+        if ($self->scheme_manager->crel) {
+            my $crel_alias = $self->scheme_manager->crel->alias;
+            $a->appendChild($self->create_element('related', rel => "$crel_alias:index", literal => $_)) foreach (@{$org->indices});
+            $a->appendChild($self->create_element('related', rel => "$crel_alias:exchange", literal => $_)) foreach (@{$org->stock_exchanges});
+        }
     }
     return @res;
 }
@@ -300,7 +340,8 @@ sub _create_content_meta {
 
     foreach (@{$self->news_item->sources}) {
         next if $_ eq uc $self->news_item->provider->qcode;
-        $cm->appendChild($self->create_element('infoSource', role => 'isrol:originfo', literal => $_));
+        $cm->appendChild(my $i = $self->create_element('infoSource', literal => $_));
+        $self->scheme_manager->add_role($i, 'isrol', 'originfo');
     }
 
     foreach (@{$self->news_item->authors}) {
@@ -314,7 +355,8 @@ sub _create_content_meta {
     $cm->appendChild($self->create_element('language', tag => $self->news_item->language));
 
     foreach (@{$self->news_item->genres}) {
-        $cm->appendChild(my $gn = $self->create_element('genre', qcode => 'genre:' . $_->qcode));
+        $cm->appendChild(my $gn = $self->create_element('genre'));
+        $self->scheme_manager->add_qcode_or_literal($gn, 'genre', $_->qcode);
         $gn->appendChild($self->create_element('name', _text => $_->name));
     }
 
@@ -323,9 +365,13 @@ sub _create_content_meta {
 
     $cm->appendChild($self->create_element('slugline', separator => $self->news_item->slugline_sep, _text => $self->news_item->slugline));
 
-    my $hltype_alias = $self->scheme_manager->hltype->alias;
-    $cm->appendChild($self->create_element('headline', role => "$hltype_alias:title", _text => $self->news_item->title));
-    $cm->appendChild($self->create_element('headline', role => "$hltype_alias:subtitle", _text => $self->news_item->subtitle)) if $self->news_item->subtitle;
+    $cm->appendChild(my $hl1 = $self->create_element('headline', _text => $self->news_item->title));
+    $self->scheme_manager->add_role($hl1, 'hltype', 'title');
+
+    if ($self->news_item->subtitle) {
+        $cm->appendChild(my $hl2 = $self->create_element('headline', _text => $self->news_item->subtitle));
+        $self->scheme_manager->add_role($hl2, 'hltype', 'subtitle');
+    }
 
     $root->appendChild($cm);
 
@@ -356,6 +402,18 @@ sub _create_content {
     return;
 }
 
+sub _import_iptc_catalog {
+    my $self = shift;
+
+    while (my ($attr, $alias) = each %{$self->g2_catalog_schemes}) {
+        $alias ||= $attr;
+        my $getter_setter = $self->scheme_manager->can($attr) or die "Unknown scheme '$attr'\n";
+        next if ($getter_setter->($self->scheme_manager)); # attribute ist already set by user
+        my $scheme = XML::NewsML_G2::Scheme->new(alias => $alias, catalog => $self->g2_catalog_url);
+        $getter_setter->($self->scheme_manager, $scheme);
+    }
+    return;
+}
 
 # public methods
 
@@ -374,6 +432,7 @@ sub create_element {
 sub create_dom {
     my $self = shift;
 
+    $self->_import_iptc_catalog();
     my $root = $self->_create_root_element();
     $self->_create_catalogs($root);
     $self->_create_rights_info($root);
@@ -450,9 +509,14 @@ Specified by subclass.
 
 Specified by subclass.
 
-=item g2_catalog
+=item g2_catalog_url
 
-Specified by subclass.
+URL of the G2 catalog, specified by subclass.
+
+=item g2_catalog_schemes
+
+Reference to a hash of schemes that are covered by the G2 catalog. If
+the value is undefined, it defaults to the name of the scheme.
 
 =back
 

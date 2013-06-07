@@ -10,15 +10,18 @@ extends 'XML::NewsML_G2::Writer';
 
 has '+g2_version', default => '2.9';
 has '+schema_location', default => 'http://iptc.org/std/nar/2006-10-01/ http://www.iptc.org/std/NewsML-G2/2.9/specification/NewsML-G2_2.9-spec-All-Power.xsd';
-has '+g2_catalog', default => 'http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_18.xml';
+has '+g2_catalog_url', default => 'http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_18.xml';
 
 override '_create_catalogs' => sub {
     my ($self, $root) = @_;
-    $root->appendChild($self->create_element('catalogRef', href => $self->g2_catalog));
+    $root->appendChild($self->create_element('catalogRef', href => $self->g2_catalog_url));
 
-    $root->appendChild(my $cat = $self->create_element('catalog'));
+    my $cat;
     foreach my $scheme ($self->scheme_manager->get_all_schemes()) {
-        $cat->appendChild($self->create_element('scheme', alias => $scheme->alias, uri => $scheme->uri));
+        if ($scheme->uri) {
+            $root->appendChild($cat = $self->create_element('catalog')) unless $cat;
+            $cat->appendChild($self->create_element('scheme', alias => $scheme->alias, uri => $scheme->uri));
+        }
     }
     return;
 };

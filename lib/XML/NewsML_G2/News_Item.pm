@@ -3,6 +3,7 @@ package XML::NewsML_G2::News_Item;
 # $Id$
 
 use XML::LibXML qw();
+use UUID::Tiny ':std';
 
 use Moose;
 use namespace::autoclean;
@@ -11,15 +12,15 @@ use namespace::autoclean;
 has 'language', isa => 'Str', is => 'ro', required => 1;
 
 # document properties
-has 'guid', isa => 'Str', is => 'ro', required => 1;
+has 'guid', isa => 'Str', is => 'ro', default => sub {create_uuid_as_string()};
 has 'doc_version', isa => 'Int', is => 'ro', default => '1';
 has 'provider', isa => 'XML::NewsML_G2::Provider', is => 'ro', required => 1;
-has 'service', isa => 'XML::NewsML_G2::Service', is => 'ro', required => 1;
+has 'service', isa => 'XML::NewsML_G2::Service', is => 'ro', predicate => 'has_service';
 has 'doc_status', isa => 'Str', is => 'ro', default => 'usable';
 has 'title', isa => 'Str', is => 'ro', required => 1;
 has 'subtitle', isa => 'Str', is => 'rw';
 has 'paragraphs', isa => 'XML::LibXML::Node', is => 'rw';
-has 'content_created', isa => 'DateTime', is => 'ro', required => 1;
+has 'content_created', isa => 'DateTime', is => 'ro', default => sub {DateTime->now()};
 has 'content_modified', isa => 'DateTime', is => 'ro';
 has 'embargo', isa => 'DateTime', is => 'rw';
 has 'embargo_text', isa => 'Str', is => 'rw';
@@ -106,7 +107,6 @@ XML::NewsML_G2::News_Item - a news item (story)
          language => 'de',
          provider => $provider_instance,
          service => $service_instance,
-         content_created => DateTime->now()
         );
     $ni->add_genre($genre1, $genre2);
     $ni->add_source('APA');
@@ -132,7 +132,7 @@ Final comment on planned updates of this story
 
 =item content_created
 
-DateTime instance, required
+DateTime instance, defaults to now
 
 =item content_modified
 
@@ -164,7 +164,8 @@ List of L<XML::NewsML_G2::Genre> instances
 
 =item guid
 
-Required string
+"identifier that is guaranteed to be globally unique for all time and
+independent of location". Defaults to a UUID
 
 =item indicators
 
@@ -219,7 +220,7 @@ Free-format string
 
 =item service
 
-List of L<XML::NewsML_G2::Service> instances
+L<XML::NewsML_G2::Service> instance
 
 =item slugline
 

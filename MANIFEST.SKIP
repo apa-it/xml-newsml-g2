@@ -6,3 +6,4 @@
 ^.shipit
 ^.prove
 ^.svn
+^run_.*\.sh$

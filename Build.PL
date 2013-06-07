@@ -18,6 +18,7 @@ my $builder = Module::Build->new
      'XML::LibXML'           => 0,
      'DateTime'              => 0,
      'DateTime::Format::XSD' => 0,
+     'UUID::Tiny'            => 1.02,
    },
    configure_requires =>
    { 'Module::Build' => 0.40

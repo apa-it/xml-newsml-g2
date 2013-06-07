@@ -7,7 +7,7 @@ use namespace::autoclean;
 
 
 has 'alias', isa => 'Str', is => 'ro', required => 1;
-has 'uri', isa => 'Str', is => 'ro', required => 1;
+has 'uri', isa => 'Str', is => 'ro';
 has 'catalog', isa => 'Str', is => 'ro';
 
 __PACKAGE__->meta->make_immutable;
@@ -22,7 +22,8 @@ XML::NewsML_G2::Scheme - a Scheme (controlled vocabulary)
 =head1 SYNOPSIS
 
     my $genre = XML::NewsML_G2::Scheme->new
-        (alias => "genre", uri => "http://cv.iptc.org/newscodes/genre/",
+        (alias => "genre",
+         uri => "http://cv.iptc.org/newscodes/genre/",
          catalog => "http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_22.xml");
 
 =head1 ATTRIBUTES
@@ -31,7 +32,7 @@ XML::NewsML_G2::Scheme - a Scheme (controlled vocabulary)
 
 =item alias
 
-The alias to be used for this scheme in the created output
+The alias to be used for this scheme in the created output, required.
 
 =item uri
 
