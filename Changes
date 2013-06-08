@@ -1,8 +1,10 @@
 Revision history for Text-NewsML_G2
 
+v0.0_3  Fri Jun  8 22:15:00 2013
+        Schema verification of libxml2 before 2.7 reports bogus errors.
+
 v0.0_2  Fri Jun  8 15:30:00 2013
-	Fix tests & documentation.
+        Fix tests & documentation.
 
 v0.0_1  Fri Jun  7 17:30:00 2013
         Initial release.
-
