@@ -4,11 +4,11 @@
 
 use utf8;
 use Test::More;
-use Test::Exception;
-use File::Basename;
-use File::Spec::Functions qw(catfile);
 use DateTime::Format::XSD;
 use XML::LibXML;
+
+use lib 't';
+use NewsML_G2_Test_Helpers qw(validate_g2);
 
 use warnings;
 use strict;
@@ -16,8 +16,6 @@ use strict;
 diag("libxml version " . XML::LibXML::LIBXML_RUNTIME_VERSION);
 
 use XML::NewsML_G2;
-
-my $base_dir = dirname $0 || '.';
 
 my $guid = 'urn:newsml:apa.at:20120315:APA0379';
 my $see_also_guid = 'urn:newsml:apa.at:20120315:APA0123';
@@ -164,8 +162,6 @@ ok(my $dom = $writer->create_dom(), '2.12 writer creates DOM');
 
 diag($dom->serialize(2));
 
-my $xsd = catfile($base_dir, 'xsds/NewsML-G2_2.12-spec-All-Power.xsd');
-ok(my $xmlschema = XML::LibXML::Schema->new(location => $xsd), 'parsing 2.12 XSD');
-lives_ok(sub {$xmlschema->validate($dom)}, '2.12 XML validates');
+validate_g2($dom, '2.12');
 
 done_testing;

@@ -4,11 +4,11 @@
 
 use utf8;
 use Test::More;
-use Test::Exception;
-use File::Basename;
-use File::Spec::Functions qw(catfile);
 use DateTime::Format::XSD;
 use XML::LibXML;
+
+use lib 't';
+use NewsML_G2_Test_Helpers qw(validate_g2);
 
 use warnings;
 use strict;
@@ -16,8 +16,6 @@ use strict;
 diag("libxml version " . XML::LibXML::LIBXML_RUNTIME_VERSION);
 
 use XML::NewsML_G2;
-
-my $base_dir = dirname $0 || '.';
 
 my $guid = 'urn:newsml:apa.at:20120315:APA0379';
 my $see_also_guid = 'urn:newsml:apa.at:20120315:APA0123';
@@ -222,16 +220,12 @@ is($xpc->findvalue('//xhtml:title'), $title, 'correct title in HTML head');
 ok(my $xml_string = $dom->serialize(2), 'serializes into string');
 unlike($xml_string, qr/(HASH|ARRAY|SCALAR)\(/, 'no perl references in XML');
 
-my $xsd = catfile($base_dir, 'xsds/NewsML-G2_2.9-spec-All-Power.xsd');
-ok(my $xmlschema = XML::LibXML::Schema->new(location => $xsd), 'parsing XSD');
-
-lives_ok(sub {$xmlschema->validate($dom)}, 'generated XML validates against NewsML G2 schema');
+validate_g2($dom, '2.9');
 
 # 2.12
 ok($writer = XML::NewsML_G2::Writer_2_12->new(news_item => $ni, scheme_manager => $sm), 'creating 2.12 writer');
 ok($dom = $writer->create_dom(), '2.12 writer creates DOM');
-$xsd = catfile($base_dir, 'xsds/NewsML-G2_2.12-spec-All-Power.xsd');
-ok($xmlschema = XML::LibXML::Schema->new(location => $xsd), 'parsing 2.12 XSD');
-lives_ok(sub {$xmlschema->validate($dom)}, '2.12 XML validates');
+
+validate_g2($dom, '2.12');
 
 done_testing;
