@@ -21,7 +21,7 @@ use XML::NewsML_G2::Writer_2_12;
 use warnings;
 use strict;
 
-use version; our $VERSION = qv('v0.0_1');
+use version; our $VERSION = qv('v0.0_2');
 
 1;
 

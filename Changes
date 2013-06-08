@@ -1,5 +1,8 @@
 Revision history for Text-NewsML_G2
 
+v0.0_2  Fri Jun  8 15:30:00 2013
+	Fix tests & documentation.
+
 v0.0_1  Fri Jun  7 17:30:00 2013
         Initial release.
 
