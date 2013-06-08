@@ -467,7 +467,7 @@ conforming to NewsML G2
 
 This module acts as a NewsML-G2 version-independent base
 class. Instead of using this class, use the most current subclass,
-e.g. L<XML::LibXML::Writer_2_12>.
+e.g. L<XML::NewsML_G2::Writer_2_12>.
 
 =head1 ATTRIBUTES
 

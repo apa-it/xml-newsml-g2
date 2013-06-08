@@ -88,6 +88,8 @@ documentation:
 
 =item L<XML::NewsML_G2::Writer_2_9>
 
+=item L<XML::NewsML_G2::Writer_2_12>
+
 =back
 
 =head1 BUGS AND LIMITATIONS
@@ -121,4 +123,4 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this module.  If not, see <http://www.gnu.org/licenses/>.
+along with this module.  If not, see L<http://www.gnu.org/licenses/>.

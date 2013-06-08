@@ -1,13 +1,21 @@
 #! /usr/bin/perl
 
+use File::Spec;
 use Test::More;
 
-if (!eval {require Test::Perl::Critic}) {
-    Test::More::plan(
-        skip_all => "Test::Perl::Critic required for testing PBP compliance"
-    );
+use warnings;
+use strict;
+
+if (not $ENV{TEST_AUTHOR}) {
+    my $msg = 'Author test.  Set $ENV{TEST_AUTHOR} to a true value to run.';
+    plan(skip_all => $msg);
 }
 
-Test::Perl::Critic->import(-severity => 3);
+eval {require Test::Perl::Critic; } or do {
+    my $msg = 'Test::Perl::Critic required to criticise code';
+    plan(skip_all => $msg);
+};
 
-Test::Perl::Critic::all_critic_ok();
+my $rcfile = File::Spec->catfile( 't', 'perlcriticrc' );
+Test::Perl::Critic->import( -profile => $rcfile );
+all_critic_ok();

@@ -13,6 +13,8 @@ use XML::NewsML_G2;
 use warnings;
 use strict;
 
+diag("libxml version " . XML::LibXML::LIBXML_RUNTIME_VERSION);
+
 my $base_dir = dirname $0 || '.';
 
 ok(my $prov_apa = XML::NewsML_G2::Provider->new

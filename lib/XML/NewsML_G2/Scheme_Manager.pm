@@ -120,13 +120,21 @@ Scheme for topics
 
 
 =item isrol
+
 =item nprov
+
 =item ninat
+
 =item stat
+
 =item sig
+
 =item iso3166_1a2
+
 =item genre
+
 =item isin
+
 =item medtop
 
 =back

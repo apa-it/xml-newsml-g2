@@ -13,6 +13,8 @@ use XML::LibXML;
 use warnings;
 use strict;
 
+diag("libxml version " . XML::LibXML::LIBXML_RUNTIME_VERSION);
+
 use XML::NewsML_G2;
 
 my $base_dir = dirname $0 || '.';
