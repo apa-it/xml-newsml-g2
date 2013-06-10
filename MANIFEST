@@ -35,3 +35,4 @@ t/xsds/NewsML-G2_2.12-spec-All-Power.xsd
 t/xsds/xml.xsd
 META.yml
 META.json
+Makefile.PL

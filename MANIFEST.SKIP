@@ -7,3 +7,5 @@
 ^.prove
 ^.svn
 ^run_.*\.sh$
+^Makefile$
+.old$

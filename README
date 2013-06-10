@@ -1,19 +1,12 @@
-Text-NewsML_G2 version 0.0.1
+XML::NewsML_G2
 
-[ REPLACE THIS...
+This module tries to implement the creation of XML files conforming to
+the NewsML G2 specification as published by the IPTC. It does not aim
+in implementing the complete standard, but in covering the most common
+use cases.
 
-  The README is used to introduce the module and provide instructions on
-  how to install the module, any machine dependencies it may have (for
-  example C compilers and installed libraries) and any other information
-  that should be understood before the module is installed.
-
-  A README file is required for CPAN modules since CPAN extracts the
-  README file from a module distribution so that people browsing the
-  archive can use it get an idea of the modules uses. It is usually a
-  good idea to provide version information here so that people can
-  decide whether fixes for the module are worth downloading.
-]
-
+For the full specification of the format, visit
+<http://www.iptc.org/site/News_Exchange_Formats/NewsML-G2/>
 
 INSTALLATION
 
@@ -27,7 +20,7 @@ To install this module, run the following commands:
 
 DEPENDENCIES
 
-None.
+Moose, XML::LibXML, DateTime, DateTime::Format::XSD, UUID::Tiny
 
 
 COPYRIGHT AND LICENCE
