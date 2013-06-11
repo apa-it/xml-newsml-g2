@@ -1,4 +1,7 @@
-Revision history for Text-NewsML_G2
+Revision history for XML::NewsML_G2
+
+v0.0_5  Tue Jun 11 10:30:00 2013
+        slugline is now optional
 
 v0.0_4  Mon Jun 10 10:00:00 2013
         renamed AUTHOR_TEST to RELEASE_TESTING
