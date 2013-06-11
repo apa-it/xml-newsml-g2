@@ -27,7 +27,7 @@ has 'embargo_text', isa => 'Str', is => 'rw';
 
 has 'priority', isa => 'Int', is => 'ro', default => 5;
 has 'message_id', isa => 'Str', is => 'ro';
-has 'slugline', isa => 'Str', is => 'ro', required => 1;
+has 'slugline', isa => 'Str', is => 'ro';
 has 'slugline_sep', isa => 'Str', is => 'ro', default => '/';
 has 'note', isa => 'Str', is => 'ro';
 has 'closing', isa => 'Str', is => 'rw';

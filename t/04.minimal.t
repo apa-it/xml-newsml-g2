@@ -21,7 +21,6 @@ ok(my $prov_apa = XML::NewsML_G2::Provider->new
 
 ok(my $ni = XML::NewsML_G2::News_Item->new
    (title => 'Saisonstart im Schweizerhaus: Run aufs Krügerl im Prater',
-    slugline => 'Buntes/Freizeit/Bauten/Eröffnung/Unterhaltung/Wien/Kommunales',
     language => 'de',
     provider => $prov_apa,
    ), 'create News Item instance');
