@@ -1,5 +1,8 @@
 Revision history for XML::NewsML_G2
 
+v0.1.0  Tue Jun 18 18:00:00 2013
+        release v0.0_5 as stable
+
 v0.0_5  Tue Jun 11 10:30:00 2013
         slugline is now optional
 
