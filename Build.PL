@@ -21,7 +21,7 @@ my $builder = Module::Build->new
      'UUID::Tiny'            => 1.02,
    },
    configure_requires =>
-   { 'Module::Build' => 0.40
+   { 'Module::Build' => 0.4004 # support for test_requires
    },
    test_requires =>
    { 'Test::More'      => 0,
@@ -31,6 +31,7 @@ my $builder = Module::Build->new
    [ 'XML-NewsML_G2-*',
    ],
    create_makefile_pl => 'traditional',
+   sign => 1,
   );
 
 $builder->create_build_script();

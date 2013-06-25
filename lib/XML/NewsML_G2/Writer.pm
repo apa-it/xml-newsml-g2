@@ -13,8 +13,8 @@ has 'news_item', isa => 'XML::NewsML_G2::News_Item', is => 'ro', required => 1;
 has 'encoding', isa => 'Str', is => 'ro', default => 'utf-8';
 has 'generator', isa => 'Str', is => 'ro', default => __PACKAGE__;
 
-has 'scheme_manager', isa => 'XML::NewsML_G2::Scheme_Manager', is => 'ro', lazy_build => 1; 
-has 'doc', isa => 'XML::LibXML::Document', is => 'ro', lazy_build => 1;
+has 'scheme_manager', isa => 'XML::NewsML_G2::Scheme_Manager', is => 'ro', lazy => 1, builder => '_build_scheme_manager'; 
+has 'doc', isa => 'XML::LibXML::Document', is => 'ro', lazy=> 1, builder => '_build_doc';
 has '_formatter', is => 'ro', default => sub {DateTime::Format::XSD->new()};
 
 has 'g2_ns', isa => 'Str', is => 'ro', default => 'http://iptc.org/std/nar/2006-10-01/';
@@ -533,7 +533,10 @@ C<paragraphs> element of the L<XML::NewsML_G2::News_Item>.
 
 =item create_dom
 
-Returns the L<XML::LibXML::Document> element containing the requested output.
+Returns the L<XML::LibXML::Document> element containing the requested
+output. Be careful I<not> to use C<< $dom->serialize(2) >> for formatting,
+as this creates invalid NewsML G2 files because it adds whitespace
+where none is allowed (e.g. in xs:dateTime elements).
 
 =back
 

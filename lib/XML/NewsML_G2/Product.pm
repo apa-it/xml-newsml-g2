@@ -6,7 +6,7 @@ use Moose;
 use namespace::autoclean;
 
 
-has 'name', isa => 'Str', is => 'ro', lazy_build => 1;
+has 'name', isa => 'Str', is => 'ro', lazy => 1, builder => '_build_name';
 has 'isbn', isa => 'Str', is => 'rw';
 has 'ean', isa => 'Str', is => 'rw';
 has 'name_template', isa => 'Str', is => 'ro', default => 'Product %d';

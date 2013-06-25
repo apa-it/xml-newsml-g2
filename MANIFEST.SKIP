@@ -8,3 +8,5 @@
 ^run_.*\.sh$
 ^Makefile$
 .old$
+^Build$
+^_build/

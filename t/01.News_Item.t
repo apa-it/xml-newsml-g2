@@ -183,7 +183,7 @@ ok($ni->paragraphs($paragraphs), 'set paragraphs');
 
 ok(my $dom = $writer->create_dom(), 'create DOM');
 
-diag($dom->serialize(2));
+diag($dom->serialize(1));
 
 ok(my $xpc = XML::LibXML::XPathContext->new($dom), 'create XPath context for DOM tree');
 $xpc->registerNs('nar', 'http://iptc.org/std/nar/2006-10-01/');
@@ -217,7 +217,7 @@ is($xpc->findvalue('//nar:headline[@role="apahltype:subtitle"]'), $subtitle, 'co
 is($xpc->findvalue('//nar:contentSet/nar:inlineXML/@contenttype'), 'application/xhtml+xml', 'correct contenttype in XML');
 is($xpc->findvalue('//xhtml:title'), $title, 'correct title in HTML head');
 
-ok(my $xml_string = $dom->serialize(2), 'serializes into string');
+ok(my $xml_string = $dom->serialize(1), 'serializes into string');
 unlike($xml_string, qr/(HASH|ARRAY|SCALAR)\(/, 'no perl references in XML');
 
 validate_g2($dom, '2.9');
