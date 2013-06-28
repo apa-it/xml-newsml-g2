@@ -55,8 +55,16 @@ use cases.
 For the full specification of the format, visit
 L<http://www.iptc.org/site/News_Exchange_Formats/NewsML-G2/>
 
-For further information on this software, please check the following
-documentation:
+=head1 CURRENT STATUS
+
+The implementation currently support text items only - no support for
+images, videos, graphics or multimedia packages yet.
+
+Version 2.9 of the standard is frozen, so the output should not change
+when you update this library. Version 2.12 however is not yet frozen,
+changes in the output are to be expected.
+
+=head1 API
 
 =over 4
 
