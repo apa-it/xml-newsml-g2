@@ -14,8 +14,6 @@ use NewsML_G2_Test_Helpers qw(validate_g2);
 use warnings;
 use strict;
 
-diag("libxml version " . XML::LibXML::LIBXML_RUNTIME_VERSION);
-
 ok(my $prov_apa = XML::NewsML_G2::Provider->new
   (qcode => 'apa', name => 'APA - Austria Presse Agentur'
   ), 'create Provider instance');

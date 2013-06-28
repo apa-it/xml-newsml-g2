@@ -454,7 +454,7 @@ __END__
 =head1 NAME
 
 XML::NewsML_G2::Writer - base class for XML DOM tree creation
-conforming to NewsML G2
+conforming to NewsML-G2
 
 =head1 SYNOPSIS
 
@@ -497,7 +497,7 @@ L<XML::LibXML::Document> instance used to create the output document
 
 =item g2_ns
 
-XML Namespace of NewsML G2
+XML Namespace of NewsML-G2
 
 =item xhtml_n2
 
@@ -535,7 +535,7 @@ C<paragraphs> element of the L<XML::NewsML_G2::News_Item>.
 
 Returns the L<XML::LibXML::Document> element containing the requested
 output. Be careful I<not> to use C<< $dom->serialize(2) >> for formatting,
-as this creates invalid NewsML G2 files because it adds whitespace
+as this creates invalid NewsML-G2 files because it adds whitespace
 where none is allowed (e.g. in xs:dateTime elements).
 
 =back

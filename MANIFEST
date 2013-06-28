@@ -27,7 +27,7 @@ t/03.Paragraphs.t
 t/04.minimal.t
 t/05.no-catalog.t
 t/06.add-schema-catalog.t
-t/07.signature.t
+t/signature.t
 t/perlcritic.t
 t/perlcriticrc
 t/pod-coverage.t

@@ -29,7 +29,7 @@ __END__
 
 =head1 NAME
 
-XML::NewsML_G2 - generate NewsML G2 news items
+XML::NewsML_G2 - generate NewsML-G2 news items
 
 
 =head1 VERSION
@@ -48,7 +48,7 @@ This document describes the package XML::NewsML_G2
 =head1 DESCRIPTION
 
 This module tries to implement the creation of XML files conforming to
-the NewsML G2 specification as published by the IPTC. It does not aim
+the NewsML-G2 specification as published by the IPTC. It does not aim
 in implementing the complete standard, but in covering the most common
 use cases.
 

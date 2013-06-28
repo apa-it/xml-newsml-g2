@@ -19,7 +19,7 @@ __END__
 
 =head1 NAME
 
-XML::NewsML_G2::Writer_2_12 - create XML DOM tree conforming to version 2.12 of the NewsML G2 specification
+XML::NewsML_G2::Writer_2_12 - create XML DOM tree conforming to version 2.12 of the NewsML-G2 specification
 
 Check the documentation of L<XML::NewsML_G2::Writer> for details.
 
