@@ -1,31 +1,89 @@
-XML::NewsML_G2
+NAME
+    XML::NewsML_G2 - generate NewsML-G2 news items
 
-This module tries to implement the creation of XML files conforming to
-the NewsML-G2 specification as published by the IPTC. It does not aim
-in implementing the complete standard, but in covering the most common
-use cases.
-
-For the full specification of the format, visit
-<http://www.iptc.org/site/News_Exchange_Formats/NewsML-G2/>
+VERSION
+    v0.1.2
 
 INSTALLATION
+    To install this module, run the following commands:
 
-To install this module, run the following commands:
+        perl Build.PL
+        ./Build
+        ./Build test
+        ./Build install
 
-	perl Build.PL
-	./Build
-	./Build test
-	./Build install
+SYNOPSIS
+        use XML::NewsML_G2;
+        my $ni = XML::NewsML_G2::News_Item->new(%args);
+        my $writer = XML::NewsML_G2::Writer_2_9(news_item => $ni);
+        my $dom = $writer->create_dom();
 
+DESCRIPTION
+    This module tries to implement the creation of XML files conforming to
+    the NewsML-G2 specification as published by the IPTC. It does not aim in
+    implementing the complete standard, but in covering the most common use
+    cases.
+
+    For the full specification of the format, visit
+    http://www.iptc.org/site/News_Exchange_Formats/NewsML-G2/
+
+CURRENT STATUS
+    The implementation currently support text items only - no support for
+    images, videos, graphics or multimedia packages yet.
+
+    Version 2.9 of the standard is frozen, so the output should not change
+    when you update this library. Version 2.12 however is not yet frozen,
+    changes in the output are to be expected.
+
+API
+    XML::NewsML_G2::News_Item
+    XML::NewsML_G2::Desk
+    XML::NewsML_G2::Genre
+    XML::NewsML_G2::Location
+    XML::NewsML_G2::Media_Topic
+    XML::NewsML_G2::Organisation
+    XML::NewsML_G2::Product
+    XML::NewsML_G2::Provider
+    XML::NewsML_G2::Service
+    XML::NewsML_G2::Topic
+    XML::NewsML_G2::Scheme
+    XML::NewsML_G2::Scheme_Manager
+    XML::NewsML_G2::Writer
+    XML::NewsML_G2::Writer_2_9
+    XML::NewsML_G2::Writer_2_12
 
 DEPENDENCIES
+    Moose, XML::LibXML, DateTime, DateTime::Format::XSD, UUID::Tiny
 
-Moose, XML::LibXML, DateTime, DateTime::Format::XSD, UUID::Tiny
+BUGS AND LIMITATIONS
+    No bugs have been reported.
 
+    Please report any bugs or feature requests to
+    `bug-xml-newsml_g2@rt.cpan.org', or through the web interface at
+    http://rt.cpan.org.
 
-COPYRIGHT AND LICENCE
+    Be aware that the API for this module *will* change with each upcoming
+    release.
 
-Copyright (C) 2013, Philipp Gortan
+SEE ALSO
+    XML::NewsML - Simple interface for creating NewsML documents
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+AUTHOR
+    Philipp Gortan `<philipp.gortan@apa.at>'
+
+LICENCE AND COPYRIGHT
+    Copyright (c) 2013, APA-IT. All rights reserved.
+
+    This module is free software; you can redistribute it and/or modify it
+    under the terms of the GNU General Public License as published by the
+    Free Software Foundation; either version 2 of the License, or (at your
+    option) any later version.
+
+    This module is distributed in the hope that it will be useful, but
+    WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+    Public License for more details.
+
+    You should have received a copy of the GNU General Public License along
+    with this module. If not, see http://www.gnu.org/licenses/.
+

@@ -1,4 +1,4 @@
-steps = FindVersion, ChangeVersion, Readme, CheckChangeLog, CheckVersionsMatch, DistTest, Commit, Tag, MakeDist, UploadCPAN
+steps = FindVersion, ChangeVersion, ChangePodVersion, Readme, CheckChangeLog, CheckVersionsMatch, DistTest, Commit, Tag, MakeDist, UploadCPAN
 
 svn.tagpattern = NewsML-G2-%v
 

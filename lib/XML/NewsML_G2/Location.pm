@@ -24,10 +24,10 @@ XML::NewsML_G2::Location - a location (city, region, country, ...)
 =head1 SYNOPSIS
 
     my $at = XML::NewsML_G2::Location->new
-        (name => 'Austria', qcode => 'at', relevance => 90, iso_code => 'AT')
+        (name => 'Austria', qcode => 'at', relevance => 90, iso_code => 'AT');
 
     my $vie = XML::NewsML_G2::Location->new
-        (name => 'Vienna', qcode => 'vie', relevance => 100, parent => $at)
+        (name => 'Vienna', qcode => 'vie', relevance => 100, parent => $at);
 
 =head1 ATTRIBUTES
 

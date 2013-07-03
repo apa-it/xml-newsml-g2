@@ -32,7 +32,7 @@ sub create_ni  {
         provider => $prov_apa,
        ), 'create News Item instance');
 
-    ok(my $sm = XML::NewsML_G2::Scheme_Manager->new(%args), 
+    ok(my $sm = XML::NewsML_G2::Scheme_Manager->new(%args),
        'creating Scheme_Manager instance works');
 
     ok($ni->add_paragraph('Die Saison im Wiener Prater hat am Donnerstagvormittag mit der Eröffnung des Schweizerhauses begonnen - diese findet traditionell jedes Jahr am 15. März statt.'), 'add_paragraph works');

@@ -21,7 +21,7 @@ use XML::NewsML_G2::Writer_2_12;
 use warnings;
 use strict;
 
-use version; our $VERSION = qv('v0.1.1');
+use version; our $VERSION = qv('v0.1.2');
 
 1;
 
@@ -34,13 +34,28 @@ XML::NewsML_G2 - generate NewsML-G2 news items
 
 =head1 VERSION
 
-This document describes the package XML::NewsML_G2
+v0.1.2
 
+=begin readme
+
+=head1 INSTALLATION
+
+To install this module, run the following commands:
+
+    perl Build.PL
+    ./Build
+    ./Build test
+    ./Build install
+
+=end readme
+
+=for test_synopsis
+    my %args;
 
 =head1 SYNOPSIS
 
     use XML::NewsML_G2;
-    my $ni = XML::NewsML_G2::News_Item->new(...);
+    my $ni = XML::NewsML_G2::News_Item->new(%args);
     my $writer = XML::NewsML_G2::Writer_2_9(news_item => $ni);
     my $dom = $writer->create_dom();
 
@@ -100,6 +115,10 @@ changes in the output are to be expected.
 
 =back
 
+=head1 DEPENDENCIES
+
+Moose, XML::LibXML, DateTime, DateTime::Format::XSD, UUID::Tiny
+
 =head1 BUGS AND LIMITATIONS
 
 No bugs have been reported.
@@ -110,6 +129,14 @@ L<http://rt.cpan.org>.
 
 Be aware that the API for this module I<will> change with each
 upcoming release.
+
+=head1 SEE ALSO
+
+=over 4
+
+=item L<XML::NewsML> - Simple interface for creating NewsML documents
+
+=back
 
 =head1 AUTHOR
 

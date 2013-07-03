@@ -13,7 +13,7 @@ has 'news_item', isa => 'XML::NewsML_G2::News_Item', is => 'ro', required => 1;
 has 'encoding', isa => 'Str', is => 'ro', default => 'utf-8';
 has 'generator', isa => 'Str', is => 'ro', default => __PACKAGE__;
 
-has 'scheme_manager', isa => 'XML::NewsML_G2::Scheme_Manager', is => 'ro', lazy => 1, builder => '_build_scheme_manager'; 
+has 'scheme_manager', isa => 'XML::NewsML_G2::Scheme_Manager', is => 'ro', lazy => 1, builder => '_build_scheme_manager';
 has 'doc', isa => 'XML::LibXML::Document', is => 'ro', lazy=> 1, builder => '_build_doc';
 has '_formatter', is => 'ro', default => sub {DateTime::Format::XSD->new()};
 
@@ -150,7 +150,7 @@ sub _create_item_meta {
 }
 
 sub _create_hierarchy {
-    my ($self, $node, $schema) = @_;
+    # my ($self, $node, $schema) = @_;
     # code moved to Writer_2_9
     return;
 }
@@ -177,7 +177,7 @@ sub _create_subjects_media_topic {
         my $mt = $self->news_item->media_topics->{$mt_qcode};
         my $why = $mt->direct ? 'why:direct' : 'why:ancestor';
         push @res, my $s = $self->create_element('subject', type => 'cpnat:abstract', why => $why);
-        $self->scheme_manager->add_qcode_or_literal($s, 'medtop', $mt->qcode); 
+        $self->scheme_manager->add_qcode_or_literal($s, 'medtop', $mt->qcode);
         $s->appendChild($self->create_element('name', _text => $mt->name));
         foreach my $lang (sort keys %{$mt->translations}) {
             $s->appendChild($self->create_element('name', 'xml:lang' => $lang, _text => $mt->translations->{$lang}));
@@ -455,6 +455,9 @@ __END__
 
 XML::NewsML_G2::Writer - base class for XML DOM tree creation
 conforming to NewsML-G2
+
+=for test_synopsis
+    my ($ni, $sm);
 
 =head1 SYNOPSIS
 

@@ -98,16 +98,20 @@ __END__
 
 XML::NewsML_G2::News_Item - a news item (story)
 
+=for test_synopsis
+    my ($provider, $service, $genre1, $genre2);
+
 =head1 SYNOPSIS
 
     my $ni = XML::NewsML_G2::News_Item->new
-        (guid => $guid,
+        (guid => "tag:example.com,2013:service:date:number",
          title => "Story title",
          slugline => "the/slugline",
          language => 'de',
-         provider => $provider_instance,
-         service => $service_instance,
+         provider => $provider,
+         service => $service,
         );
+
     $ni->add_genre($genre1, $genre2);
     $ni->add_source('APA');
     $ni->add_paragraph('blah blah blah');

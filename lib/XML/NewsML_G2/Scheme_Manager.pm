@@ -66,6 +66,10 @@ __END__
 
 XML::NewsML_G2::Scheme_Manager - hold all L<XML::NewsML_G2::Scheme> instances
 
+
+=for test_synopsis
+    my ($s1, $s2, $s3);
+
 =head1 SYNOPSIS
 
     my $sm = XML::NewsML_G2::Scheme_Manager->new(desk => $s1, hltype => $s2, svc => $s3);

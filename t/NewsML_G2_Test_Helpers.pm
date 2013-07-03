@@ -57,7 +57,7 @@ ok(our $svc_apa_bd = XML::NewsML_G2::Service->new
    (qcode => 'bd', name => 'Basisdienst'
    ), 'create Service instance');
 
-ok(our @genres = 
+ok(our @genres =
    (XML::NewsML_G2::Genre->new
     (name => 'Berichterstattung',
      qcode => 'Current'
@@ -105,6 +105,7 @@ sub validate_g2 {
 
   SKIP: {
         skip 'libxml2 before 2.8 reports bogus violation on children of "broader"', 2 if (20800 > XML::LibXML::LIBXML_RUNTIME_VERSION);
+        $version =~ tr/./_/;
         my $xsd = catfile('t', 'xsds', "NewsML-G2_$version-spec-All-Power.xsd");
         ok(my $xmlschema = XML::LibXML::Schema->new(location => $xsd), "parsing $version XSD");
 
