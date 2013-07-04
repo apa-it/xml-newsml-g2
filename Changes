@@ -1,7 +1,7 @@
 Revision history for XML::NewsML_G2
 
-v0.1.2  xxxxxxxxxxxxxxxxxxxxxxxx
-        readme updated
+v0.1.2  Thu Jul  4 18:30:00 2013
+        readme updated, documentation improved, tests added
 
 v0.1.1  Fri Jun 28 16:00:00 2013
         license file added, unittests extended and refactored, signing added
