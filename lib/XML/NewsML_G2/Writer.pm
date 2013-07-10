@@ -11,7 +11,6 @@ use namespace::autoclean;
 has 'news_item', isa => 'XML::NewsML_G2::News_Item', is => 'ro', required => 1;
 
 has 'encoding', isa => 'Str', is => 'ro', default => 'utf-8';
-has 'generator', isa => 'Str', is => 'ro', default => __PACKAGE__;
 
 has 'scheme_manager', isa => 'XML::NewsML_G2::Scheme_Manager', is => 'ro', lazy => 1, builder => '_build_scheme_manager';
 has 'doc', isa => 'XML::LibXML::Document', is => 'ro', lazy=> 1, builder => '_build_doc';
@@ -112,7 +111,7 @@ sub _create_item_meta {
 
     $im->appendChild(my $ps = $self->create_element('pubStatus'));
     $self->scheme_manager->add_qcode($ps, 'stat', $self->news_item->doc_status);
-    $im->appendChild($self->create_element('generator', versioninfo => XML::NewsML_G2->VERSION, _text => $self->generator));
+    $im->appendChild($self->create_element('generator', versioninfo => XML::NewsML_G2->VERSION, _text => 'XML::NewsML_G2'));
     if ($self->news_item->has_service) {
         $im->appendChild(my $svc = $self->create_element('service'));
         $self->scheme_manager->add_qcode($svc, 'svc', $self->news_item->service->qcode);
@@ -485,10 +484,6 @@ L<XML::NewsML_G2::News_Item> instance used to create the output document
 =item encoding
 
 Encoding used to create the output document, defaults to utf-8
-
-=item generator
-
-String used in output as the generator program name
 
 =item scheme_manager
 
