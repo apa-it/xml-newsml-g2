@@ -37,6 +37,33 @@ override '_create_hierarchy' => sub {
     return $self->create_element('hierarchyInfo', _text => join ' ', @res);
 };
 
+override '_create_infosources' => sub {
+    my ($self, $root) = @_;
+    foreach (@{$self->news_item->sources}) {
+        next if $_ eq uc $self->news_item->provider->qcode;
+        $root->appendChild(my $i = $self->create_element('infoSource', literal => $_));
+        $self->scheme_manager->add_role($i, 'isrol', 'originfo');
+    }
+    return;
+};
+
+override '_create_authors' => sub {
+    my ($self, $root) = @_;
+    foreach (@{$self->news_item->authors}) {
+        $root->appendChild($self->create_element('creator', literal => $_));
+    }
+    return;
+};
+
+override '_create_company_data' => sub {
+    my ($self, $org, $root) = @_;
+    return unless ($self->scheme_manager->crel);
+
+    my $crel_alias = $self->scheme_manager->crel->alias;
+    $root->appendChild($self->create_element('related', rel => "$crel_alias:index", literal => $_)) foreach (@{$org->indices});
+    $root->appendChild($self->create_element('related', rel => "$crel_alias:exchange", literal => $_)) foreach (@{$org->stock_exchanges});
+};
+
 
 __PACKAGE__->meta->make_immutable;
 
