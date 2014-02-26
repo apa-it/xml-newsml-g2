@@ -2,6 +2,8 @@
 
 set -e
 
+. /appl/sw/perl-default/env.rc
+
 # how $WORKSPACE is set
 # http://hudson.cs.apa.at/env-vars.html/?
 JENKINSPERLINC="$WORKSPACE/crs/src/perllib"
