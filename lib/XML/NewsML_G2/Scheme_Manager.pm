@@ -17,7 +17,7 @@ nprov ninat stat sig iso3166_1a2 genre isin medtop)) {
 sub get_all_schemes {
     my $self = shift;
 
-    return grep {defined} map {$self->can($_)->($self)} sort $self->meta->get_attribute_list();
+    return grep {defined} map {$self->$_()} sort $self->meta->get_attribute_list();
 }
 
 sub add_qcode_or_literal {
