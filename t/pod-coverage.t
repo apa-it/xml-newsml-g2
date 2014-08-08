@@ -1,4 +1,4 @@
-#! /usr/bin/perl
+#!/usr/bin/env perl
 
 use Test::More;
 eval "use Test::Pod::Coverage 1.04";
