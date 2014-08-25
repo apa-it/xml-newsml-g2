@@ -5,9 +5,7 @@ package XML::NewsML_G2::Service;
 use Moose;
 use namespace::autoclean;
 
-
-has 'name', isa => 'Str', is => 'ro', required => 1;
-has 'qcode', isa => 'Str', is => 'ro', required => 1;
+with 'XML::NewsML_G2::Roles::HasQCode';
 
 __PACKAGE__->meta->make_immutable;
 

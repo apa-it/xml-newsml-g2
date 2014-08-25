@@ -5,9 +5,8 @@ package XML::NewsML_G2::Media_Topic;
 use Moose;
 use namespace::autoclean;
 
+with 'XML::NewsML_G2::Roles::HasQCode';
 
-has 'name', isa => 'Str', is => 'ro', required => 1;
-has 'qcode', isa => 'Str', is => 'ro', required => 1;
 has 'translations', isa => 'HashRef', is => 'rw', default => sub { {} }, traits => ['Hash'],
   handles => {add_translation => 'set'};
 has 'parent', isa => __PACKAGE__, is => 'rw';
@@ -34,10 +33,6 @@ taken from a standardized controlled vocabulary
 =head1 ATTRIBUTES
 
 =over 4
-
-=item name
-
-=item qcode
 
 =item translations
 

@@ -5,8 +5,8 @@ package XML::NewsML_G2::Location;
 use Moose;
 use namespace::autoclean;
 
-has 'name', isa => 'Str', is => 'ro', required => 1;
-has 'qcode', isa => 'Str', is => 'ro', required => 1;
+with 'XML::NewsML_G2::Roles::HasQCode';
+
 has 'relevance', isa => 'Int', is => 'ro', required => 1;
 has 'parent', isa => __PACKAGE__, is => 'rw';
 has 'direct', isa => 'Bool', is => 'rw', default => '';
@@ -32,10 +32,6 @@ XML::NewsML_G2::Location - a location (city, region, country, ...)
 =head1 ATTRIBUTES
 
 =over 4
-
-=item name
-
-=item qcode
 
 =item relevance
 
