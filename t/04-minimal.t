@@ -25,7 +25,7 @@ ok(my $ni = XML::NewsML_G2::News_Item_Text->new
 
 ok($ni->add_paragraph('Die Saison im Wiener Prater hat am Donnerstagvormittag mit der Eröffnung des Schweizerhauses begonnen - diese findet traditionell jedes Jahr am 15. März statt.'), 'add_paragraph works');
 
-my $writer = XML::NewsML_G2::Writer_2_12->new(news_item => $ni);
+my $writer = XML::NewsML_G2::Writer->new(news_item => $ni);
 ok(my $dom = $writer->create_dom(), 'create DOM');
 
 #diag($dom->serialize(1));

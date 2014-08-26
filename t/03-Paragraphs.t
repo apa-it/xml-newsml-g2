@@ -27,7 +27,7 @@ foreach (qw(crel desk geo svc role ind org topic hltype)) {
 
 ok(my $sm = XML::NewsML_G2::Scheme_Manager->new(%schemes), 'create Scheme Manager');
 
-my $writer = XML::NewsML_G2::Writer_2_12->new(news_item => $ni, scheme_manager => $sm);
+my $writer = XML::NewsML_G2::Writer->new(news_item => $ni, scheme_manager => $sm);
 
 ok(my $dom = $writer->create_dom(), 'create DOM');
 

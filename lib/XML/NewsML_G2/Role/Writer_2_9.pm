@@ -1,16 +1,12 @@
-package XML::NewsML_G2::Writer_2_9;
+package XML::NewsML_G2::Role::Writer_2_9;
 
 # $Id$
 
-use Moose;
-use namespace::autoclean;
+use Moose::Role;
 
 
-extends 'XML::NewsML_G2::Writer';
-
-has '+g2_version', default => '2.9';
-has '+schema_location', default => 'http://iptc.org/std/nar/2006-10-01/ http://www.iptc.org/std/NewsML-G2/2.9/specification/NewsML-G2_2.9-spec-All-Power.xsd';
-has '+g2_catalog_url', default => 'http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_18.xml';
+has 'schema_location', isa => 'Str', is => 'ro', default => 'http://iptc.org/std/nar/2006-10-01/ http://www.iptc.org/std/NewsML-G2/2.9/specification/NewsML-G2_2.9-spec-All-Power.xsd';
+has 'g2_catalog_url', isa => 'Str', is => 'ro', default => 'http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_18.xml';
 
 override '_create_catalogs' => sub {
     my ($self, $root) = @_;
@@ -61,14 +57,12 @@ override '_create_creator' => sub {
     return $self->create_element('creator', literal => $name);
 };
 
-__PACKAGE__->meta->make_immutable;
-
 1;
 __END__
 
 =head1 NAME
 
-XML::NewsML_G2::Writer_2_9 - create XML DOM tree conforming to version
+XML::NewsML_G2::Role::Writer_2_9 - create XML DOM tree conforming to version
 2.9 of the NewsML-G2 specification
 
 Check the documentation of L<XML::NewsML_G2::Writer> for general

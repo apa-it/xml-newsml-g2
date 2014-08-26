@@ -46,9 +46,11 @@ $ni->description('A ricebag is about to fall over');
 
 my $pic = XML::NewsML_G2::Picture->new(mimetype => 'image/jpg', width => 1600, height => 1024, layout => 'vertical', rendition => 'highRes');
 my $thumb = XML::NewsML_G2::Picture->new(mimetype => 'image/jpg', width => 48, height => 32, rendition => 'thumb');
+
+
 ok($ni->add_remote('file://tmp/files/123.jpg', $pic), 'Adding remote picture works');
 ok($ni->add_remote('file://tmp/files/123.thumb.jpg', $thumb), 'Adding remote thumbnail works');
-my $writer = XML::NewsML_G2::Writer_2_9->new(news_item => $ni, scheme_manager => $sm);
+my $writer = XML::NewsML_G2::News_Item_Writer->new(news_item => $ni, scheme_manager => $sm, g2_version => 2.9);
 
 # 2.9 checks
 ok(my $dom = $writer->create_dom(), 'create DOM');
@@ -61,7 +63,7 @@ like($xpc->findvalue('//nar:creator/@literal'), qr/dw.*dk.*wh/, 'correct authors
 validate_g2($dom, '2.9');
 
 # 2.12 checks
-ok($writer = XML::NewsML_G2::Writer_2_12->new(news_item => $ni, scheme_manager => $sm), 'creating 2.12 writer');
+ok($writer = XML::NewsML_G2::Writer->new(news_item => $ni, scheme_manager => $sm, g2_version => 2.12), 'creating 2.12 writer');
 ok($dom = $writer->create_dom(), '2.12 writer creates DOM');
 ok($xpc = XML::LibXML::XPathContext->new($dom), 'create XPath context for DOM tree');
 $xpc->registerNs('nar', 'http://iptc.org/std/nar/2006-10-01/');

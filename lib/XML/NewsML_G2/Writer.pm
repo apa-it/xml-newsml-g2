@@ -23,7 +23,8 @@ has '_formatter', is => 'ro', default => sub {DateTime::Format::XSD->new()};
 has 'g2_ns', isa => 'Str', is => 'ro', default => 'http://iptc.org/std/nar/2006-10-01/';
 has 'xhtml_ns', isa => 'Str', is => 'ro', default => 'http://www.w3.org/1999/xhtml';
 
-has 'g2_version', isa => 'Str', is => 'ro';
+has 'g2_version', isa => 'Str', is => 'ro', default => '2.12';
+
 has 'schema_location', isa => 'Str', is => 'ro';
 has 'g2_catalog_url', isa => 'Str', is => 'ro';
 has 'g2_catalog_schemes', isa => 'HashRef', is => 'ro',
@@ -69,6 +70,12 @@ sub BUILD {
     croak $@ if ($@ && $@ !~ /^Can't locate'/);
 
     Moose::Util::apply_all_roles($self, $role_to_use) if $role_to_use;
+
+    my $g2_version = $self->g2_version;
+    $g2_version =~ s/\./_/;
+    my $version_role = 'XML::NewsML_G2::Role::Writer_' . $g2_version;
+
+    Moose::Util::apply_all_roles($self, $version_role);
 
     return;
 }
@@ -529,8 +536,8 @@ conforming to NewsML-G2
 
 =head1 SYNOPSIS
 
-    my $w = XML::NewsML_G2::Writer_2_12->new
-        (news_item => $ni, scheme_manager => $sm);
+    my $w = XML::NewsML_G2::Writer->new
+        (news_item => $ni, scheme_manager => $sm, g2_version => 2.12);
 
     my $p = $w->create_element('p', class => 'main', _text => 'blah');
 
@@ -539,8 +546,7 @@ conforming to NewsML-G2
 =head1 DESCRIPTION
 
 This module acts as a NewsML-G2 version-independent base
-class. Instead of using this class, use the most current subclass,
-e.g. L<XML::NewsML_G2::Writer_2_12>.
+class.
 
 =head1 ATTRIBUTES
 
