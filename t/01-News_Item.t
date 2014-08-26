@@ -21,6 +21,8 @@ sub basic_checks {
 
     is($xpc->findvalue('nar:newsItem/@guid'), $guid, 'correct guid in XML');
     like($xpc->findvalue('//nar:copyrightHolder/nar:name'), qr/APA/, 'correct copyright in XML');
+    like($xpc->findvalue('//nar:copyrightNotice'), qr/www.apa.at/, 'correct copyright notice in XML');
+    like($xpc->findvalue('//nar:usageTerms'), qr/full beer/, 'correct usage terms in XML');
     is($xpc->findvalue('//nar:provider/@qcode'), 'nprov:apa', 'correct provider in XML');
     is($xpc->findvalue('//nar:itemClass/@qcode'), "ninat:$ic", 'correct item class in XML');
     is($xpc->findvalue('//nar:embargoed'), $embargo, 'correct embargo in XML');

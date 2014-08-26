@@ -161,6 +161,15 @@ Scheme for topics
 
 Returns a list of all registered L<XML::NewsML_G2::Scheme> instances
 
+=item build_qcode
+
+Build a qcode of the given scheme
+
+    $scheme_manager->build_qcode('ninat', 'text');
+
+If the schema does not provide a catalog or URI, creating a qcode is
+not possible, and this method will return undef.
+
 =item add_qcode
 
 Add a qcode attribute of the given scheme to the XML element:

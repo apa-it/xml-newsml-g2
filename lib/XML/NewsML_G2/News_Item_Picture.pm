@@ -57,7 +57,7 @@ XML::NewsML_G2::News_Item_Picture - a picture news item
 
 A photographer string
 
-= back
+=back
 
 =head1 AUTHOR
 

@@ -46,8 +46,8 @@ $ni->description('A ricebag is about to fall over');
 
 my $pic = XML::NewsML_G2::Picture->new(mimetype => 'image/jpg', width => 1600, height => 1024, layout => 'vertical', rendition => 'highRes');
 my $thumb = XML::NewsML_G2::Picture->new(mimetype => 'image/jpg', width => 48, height => 32, rendition => 'thumb');
-$ni->add_remote('file://tmp/files/123.jpg', $pic);
-$ni->add_remote('file://tmp/files/123.thumb.jpg', $thumb);
+ok($ni->add_remote('file://tmp/files/123.jpg', $pic), 'Adding remote picture works');
+ok($ni->add_remote('file://tmp/files/123.thumb.jpg', $thumb), 'Adding remote thumbnail works');
 my $writer = XML::NewsML_G2::Writer_2_9->new(news_item => $ni, scheme_manager => $sm);
 
 # 2.9 checks

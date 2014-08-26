@@ -127,6 +127,7 @@ sub _create_rights_info {
 
     my $notice = $self->news_item->provider->notice;
     $ri->appendChild($self->create_element('copyrightNotice', _text => $notice)) if $notice;
+    $ri->appendChild($self->create_element('usageTerms', _text => $self->news_item->usage_terms)) if $self->news_item->usage_terms;
 
     $root->appendChild($ri);
     return;

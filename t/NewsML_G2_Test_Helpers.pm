@@ -51,7 +51,8 @@ $mt20000553->add_translation('en', 'leisure venue');
 $mt20000553->parent($mt20000538);
 
 ok(our $prov_apa = XML::NewsML_G2::Provider->new
-   (qcode => 'apa', name => 'APA - Austria Presse Agentur'
+   (qcode => 'apa', name => 'APA - Austria Presse Agentur',
+    notice => '(c) 2014 http://www.apa.at'
    ), 'create Provider instance');
 
 ok(our $svc_apa_bd = XML::NewsML_G2::Service->new
@@ -128,6 +129,7 @@ sub _create_ni {
        (guid             => $guid,
         see_also         => $see_also_guid,
         provider         => $prov_apa,
+        usage_terms      => 'view only with a full beer',
         message_id       => $apa_id,
         title            => $title,
         subtitle         => $subtitle,

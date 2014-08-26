@@ -31,7 +31,13 @@ a qcode (and a human readable name)
 
 =item name
 
+A string containing the name of the item
+
 =item qcode
+
+The right part of an IPTC complient QCode
+
+=back
 
 =head1 AUTHOR
 

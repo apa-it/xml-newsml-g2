@@ -16,6 +16,7 @@ has 'language', isa => 'Str', is => 'ro', required => 1;
 has 'guid', isa => 'Str', is => 'ro', default => sub {create_uuid_as_string()};
 has 'doc_version', isa => 'Int', is => 'ro', default => '1';
 has 'provider', isa => 'XML::NewsML_G2::Provider', is => 'ro', required => 1;
+has 'usage_terms', isa => 'Str', is => 'rw';
 has 'service', isa => 'XML::NewsML_G2::Service', is => 'ro', predicate => 'has_service';
 has 'doc_status', isa => 'Str', is => 'ro', default => 'usable';
 has 'title', isa => 'Str', is => 'ro', required => 1;
@@ -267,6 +268,10 @@ Title string
 
 List of L<XML::NewsML_G2::Topic> instances
 
+=item usage_terms
+
+String containing human readable usage terms
+
 =back
 
 =head1 METHODS
@@ -315,6 +320,10 @@ created by yourself.
 =item add_product
 
 Add a new L<XML::NewsML_G2::Product> instance
+
+=item add_remote
+
+Add a new remote instance (e.g. XML::NewsML_G2::Picture) with a given href
 
 =item add_source
 
