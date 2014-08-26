@@ -31,7 +31,7 @@ override '_create_hierarchy' => sub {
     my @res;
 
     do {
-        unshift @res, "$schema:" . $node->qcode();
+        unshift @res, $self->scheme_manager->build_qcode($schema, $node->qcode());
     } while ($node = $node->parent());
 
     return $self->create_element('hierarchyInfo', _text => join ' ', @res);

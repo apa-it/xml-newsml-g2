@@ -244,7 +244,7 @@ sub _create_subjects_location {
         if ($l->parent) {
             $s->appendChild(my $b = $self->create_element('broader'));
             $self->scheme_manager->add_qcode_or_literal($b, 'geo', $l->parent->qcode);
-            my $hierarchy = $self->_create_hierarchy($l, 'apageo');
+            my $hierarchy = $self->_create_hierarchy($l, 'geo');
             $b->appendChild($hierarchy) if $hierarchy;
         }
     }
