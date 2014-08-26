@@ -5,9 +5,8 @@ package XML::NewsML_G2::Provider;
 use Moose;
 use namespace::autoclean;
 
+with 'XML::NewsML_G2::Roles::HasQCode';
 
-has 'name', isa => 'Str', is => 'ro', required => 1;
-has 'qcode', isa => 'Str', is => 'ro', required => 1;
 has 'notice', isa => 'Str', is => 'ro';
 
 __PACKAGE__->meta->make_immutable;
@@ -26,10 +25,6 @@ XML::NewsML_G2::Provider - the news provider (news agency)
 =head1 ATTRIBUTES
 
 =over 4
-
-=item name
-
-=item qcode
 
 =item notice
 

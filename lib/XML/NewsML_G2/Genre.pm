@@ -5,9 +5,7 @@ package XML::NewsML_G2::Genre;
 use Moose;
 use namespace::autoclean;
 
-
-has 'name', isa => 'Str', is => 'ro', required => 1;
-has 'qcode', isa => 'Str', is => 'ro', required => 1;
+with 'XML::NewsML_G2::Roles::HasQCode';
 
 __PACKAGE__->meta->make_immutable;
 
@@ -21,16 +19,6 @@ XML::NewsML_G2::Genre - the journalistic genre of the news item
 =head1 SYNOPSIS
 
     my $genre = XML::NewsML_G2::Genre->new(name => 'Feature', qcode => 'Feature');
-
-=head1 ATTRIBUTES
-
-=over 4
-
-=item name
-
-=item qcode
-
-=back
 
 =head1 AUTHOR
 
