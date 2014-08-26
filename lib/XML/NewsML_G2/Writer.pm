@@ -4,6 +4,7 @@ package XML::NewsML_G2::Writer;
 
 use Module::Runtime 'use_module';
 
+use Carp;
 use Moose;
 use Moose::Util;
 use DateTime;
@@ -33,7 +34,7 @@ has 'g2_catalog_schemes', isa => 'HashRef', is => 'ro',
 sub _build_g2_catalog_schemes {
     {isrol => undef, nprov => undef, ninat => undef, stat => undef,
      sig => undef, genre => undef, isin => undef, medtop => undef,
-     crol => undef, iso3166_1a2 => 'iso3166-1a2'};
+     crol => undef, drol => undef, iso3166_1a2 => 'iso3166-1a2'};
 }
 
 sub _build_doc {
@@ -65,6 +66,7 @@ sub BUILD {
     eval {
         $role_to_use = $base_role if (!$role_to_use && use_module($base_role));
     };
+    croak $@ if ($@ && $@ !~ /^Can't locate'/);
 
     Moose::Util::apply_all_roles($self, $role_to_use) if $role_to_use;
 
@@ -72,6 +74,11 @@ sub BUILD {
 }
 
 # DOM creating methods
+
+sub _create_creator {
+    my ($self, $name) = @_;
+    return $self->create_element('creator', _name_text => $name);
+}
 
 sub _create_root_element {
     my ($self) = @_;
@@ -358,8 +365,7 @@ sub _create_infosources {
 sub _create_authors {
     my ($self, $root) = @_;
     foreach (@{$self->news_item->authors}) {
-        $root->appendChild(my $c = $self->create_element('creator', _name_text => $_));
-        $self->_set_author_role($c);
+        $root->appendChild($self->_create_creator($_));
     }
     return;
 }
@@ -410,6 +416,19 @@ sub _create_content_meta {
     if ($self->news_item->subtitle) {
         $cm->appendChild(my $hl2 = $self->create_element('headline', _text => $self->news_item->subtitle));
         $self->scheme_manager->add_role($hl2, 'hltype', 'subtitle');
+    }
+
+    if ($self->news_item->credit) {
+        $cm->appendChild($self->create_element('creditline', _text => $self->news_item->credit));
+    }
+
+    foreach (@{$self->news_item->keywords}) {
+        $cm->appendChild($self->create_element('keyword', _text => $_));
+    }
+
+    if ($self->news_item->description) {
+        $cm->appendChild(my $desc = $self->create_element('description', _text => $self->news_item->description));
+        $self->scheme_manager->add_role($desc, 'drol', 'caption');
     }
 
     $root->appendChild($cm);
