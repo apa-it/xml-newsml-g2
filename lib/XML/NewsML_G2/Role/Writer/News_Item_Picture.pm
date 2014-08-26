@@ -1,11 +1,11 @@
-package XML::NewsML_G2::Roles::Writer::News_Item_Picture;
+package XML::NewsML_G2::Role::Writer::News_Item_Picture;
 
 # $Id$
 
 use Moose::Role;
 use namespace::autoclean;
 
-with 'XML::NewsML_G2::Roles::Writer';
+with 'XML::NewsML_G2::Role::Writer';
 
 around '_build_g2_catalog_schemes' => sub {
     my ( $orig, $self, @args ) = @_;
@@ -58,7 +58,7 @@ __END__
 
 =head1 NAME
 
-XML::NewsML_G2::Roles::Writer::News_Item_Picture - Role for writing news items of type 'picture'
+XML::NewsML_G2::Role::Writer::News_Item_Picture - Role for writing news items of type 'picture'
 
 =head1 DESCRIPTION
 

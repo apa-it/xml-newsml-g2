@@ -5,7 +5,7 @@ package XML::NewsML_G2::Provider;
 use Moose;
 use namespace::autoclean;
 
-with 'XML::NewsML_G2::Roles::HasQCode';
+with 'XML::NewsML_G2::Role::HasQCode';
 
 has 'notice', isa => 'Str', is => 'ro';
 

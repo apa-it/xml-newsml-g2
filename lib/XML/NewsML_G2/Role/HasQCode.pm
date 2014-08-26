@@ -1,4 +1,4 @@
-package XML::NewsML_G2::Roles::HasQCode;
+package XML::NewsML_G2::Role::HasQCode;
 
 # $Id$
 
@@ -13,7 +13,7 @@ __END__
 
 =head1 NAME
 
-XML::NewsML_G2::Roles::HasQCode - Role for item types that have a QCode
+XML::NewsML_G2::Role::HasQCode - Role for item types that have a QCode
 
 =head1 SYNOPSIS
 

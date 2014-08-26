@@ -5,7 +5,7 @@ package XML::NewsML_G2::Location;
 use Moose;
 use namespace::autoclean;
 
-with 'XML::NewsML_G2::Roles::HasQCode';
+with 'XML::NewsML_G2::Role::HasQCode';
 
 has 'relevance', isa => 'Int', is => 'ro', required => 1;
 has 'parent', isa => __PACKAGE__, is => 'rw';

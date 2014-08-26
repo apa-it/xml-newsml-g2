@@ -5,7 +5,7 @@ package XML::NewsML_G2::Desk;
 use Moose;
 use namespace::autoclean;
 
-with 'XML::NewsML_G2::Roles::HasQCode';
+with 'XML::NewsML_G2::Role::HasQCode';
 
 __PACKAGE__->meta->make_immutable;
 

@@ -5,7 +5,7 @@ package XML::NewsML_G2::Media_Topic;
 use Moose;
 use namespace::autoclean;
 
-with 'XML::NewsML_G2::Roles::HasQCode';
+with 'XML::NewsML_G2::Role::HasQCode';
 
 has 'translations', isa => 'HashRef', is => 'rw', default => sub { {} }, traits => ['Hash'],
   handles => {add_translation => 'set'};

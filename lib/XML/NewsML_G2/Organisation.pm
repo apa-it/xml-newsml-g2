@@ -5,7 +5,7 @@ package XML::NewsML_G2::Organisation;
 use Moose;
 use namespace::autoclean;
 
-with 'XML::NewsML_G2::Roles::HasQCode';
+with 'XML::NewsML_G2::Role::HasQCode';
 
 has 'isins', isa => 'ArrayRef[Str]', is => 'rw', default => sub { [] },
   traits => ['Array'], handles => {add_isin => 'push'};

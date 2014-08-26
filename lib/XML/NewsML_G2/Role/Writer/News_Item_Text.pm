@@ -1,11 +1,11 @@
-package XML::NewsML_G2::Roles::Writer::News_Item_Text;
+package XML::NewsML_G2::Role::Writer::News_Item_Text;
 
 # $Id$
 
 use Moose::Role;
 use namespace::autoclean;
 
-with 'XML::NewsML_G2::Roles::Writer';
+with 'XML::NewsML_G2::Role::Writer';
 
 sub _set_item_class {
     my ($self, $ic) = @_;
@@ -18,7 +18,7 @@ __END__
 
 =head1 NAME
 
-XML::NewsML_G2::Roles::Writer::News_Item_Text - Role for writing news items of type 'text'
+XML::NewsML_G2::Role::Writer::News_Item_Text - Role for writing news items of type 'text'
 
 =head1 DESCRIPTION
 

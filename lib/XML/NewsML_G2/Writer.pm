@@ -54,9 +54,9 @@ sub BUILD {
     (my $my_cls) = reverse split ('::', $self->meta->name);
     (my $ni_cls) = reverse split ('::', $self->news_item->meta->name);
 
-    my $base_role     = sprintf('XML::NewsML_G2::Roles::Writer::%s', $ni_cls);
+    my $base_role     = sprintf('XML::NewsML_G2::Role::Writer::%s', $ni_cls);
     my $specific_role = sprintf(
-        'XML::NewsML_G2::Roles::%s::%s', $my_cls, $ni_cls
+        'XML::NewsML_G2::Role::%s::%s', $my_cls, $ni_cls
         );
 
     my $role_to_use;

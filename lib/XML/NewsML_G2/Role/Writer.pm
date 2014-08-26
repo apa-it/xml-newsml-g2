@@ -1,4 +1,4 @@
-package XML::NewsML_G2::Roles::Writer;
+package XML::NewsML_G2::Role::Writer;
 
 # $Id$
 
@@ -14,7 +14,7 @@ __END__
 
 =head1 NAME
 
-XML::NewsML_G2::Roles::Writer - Base role for NewsML-G2 writer classes
+XML::NewsML_G2::Role::Writer - Base role for NewsML-G2 writer classes
 
 =head1 DESCRIPTION
 
