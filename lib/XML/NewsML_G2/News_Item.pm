@@ -5,6 +5,7 @@ package XML::NewsML_G2::News_Item;
 use XML::LibXML qw();
 use UUID::Tiny ':std';
 
+use Carp;
 use Moose;
 use namespace::autoclean;
 
@@ -57,7 +58,6 @@ has 'media_topics', isa => 'HashRef[XML::NewsML_G2::Media_Topic]', is => 'rw', d
 has 'locations', isa => 'HashRef[XML::NewsML_G2::Location]', is => 'rw', default => sub { {} },
   traits => ['Hash'], handles => {has_locations => 'count'};
 
-
 # public methods
 
 sub add_media_topic {
@@ -101,21 +101,11 @@ XML::NewsML_G2::News_Item - a news item (story)
 =for test_synopsis
     my ($provider, $service, $genre1, $genre2);
 
-=head1 SYNOPSIS
+=head1 DESCRIPTION
 
-    my $ni = XML::NewsML_G2::News_Item->new
-        (guid => "tag:example.com,2013:service:date:number",
-         title => "Story title",
-         slugline => "the/slugline",
-         language => 'de',
-         provider => $provider,
-         service => $service,
-        );
-
-    $ni->add_genre($genre1, $genre2);
-    $ni->add_source('APA');
-    $ni->add_paragraph('blah blah blah');
-
+This module acts as a base class for NewsML-G2 news items.
+Instead of using this class, use the most appropriate subclass,
+e.g. L<XML::NewsML_G2::News_Item_Text>.
 
 =head1 ATTRIBUTES
 
@@ -315,6 +305,6 @@ Philipp Gortan  C<< <philipp.gortan@apa.at> >>
 
 =head1 LICENCE AND COPYRIGHT
 
-Copyright (c) 2013, APA-IT. All rights reserved.
+Copyright (c) 2013-2014, APA-IT. All rights reserved.
 
 See L<XML::NewsML_G2> for the license.

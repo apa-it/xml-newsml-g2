@@ -14,10 +14,12 @@ my $builder = Module::Build->new
    { 'perl'                  => '5.8.0',
      'version'               => '0.77',
      'Moose'                 => '0.64',
+     'Moose::Util'           => '0.64',
      'namespace::autoclean'  => '0.05',
      'XML::LibXML'           => 0,
      'DateTime'              => 0,
      'DateTime::Format::XSD' => 0,
+     'Module::Runtime'       => 0,
      'UUID::Tiny'            => '1.02',
    },
    configure_requires =>

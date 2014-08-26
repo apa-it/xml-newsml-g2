@@ -14,7 +14,7 @@ use strict;
 
 use XML::NewsML_G2;
 
-our @EXPORT_OK = qw(validate_g2 create_ni);
+our @EXPORT_OK = qw(validate_g2 create_ni_text create_ni_picture);
 
 our %EXPORT_TAGS = (vars => [qw($guid $see_also_guid $embargo $apa_id
     $title $subtitle $slugline $embargo_text $note $prov_apa
@@ -115,13 +115,14 @@ sub validate_g2 {
     return;
 }
 
-sub create_ni {
+sub _create_ni {
+    my $ni_cls = shift;
     my %opts = @_;
 
     my %hash;
     $hash{service} = $svc_apa_bd unless ($opts{no_required_scheme});
 
-    ok(my $ni = XML::NewsML_G2::News_Item->new
+    ok(my $ni = $ni_cls->new
        (guid             => $guid,
         see_also         => $see_also_guid,
         provider         => $prov_apa,
@@ -170,6 +171,14 @@ sub create_ni {
     }
 
     return $ni;
+}
+
+sub create_ni_text {
+    _create_ni('XML::NewsML_G2::News_Item_Text', @_);
+}
+
+sub create_ni_picture {
+    _create_ni('XML::NewsML_G2::News_Item_Picture', @_);
 }
 
 1;

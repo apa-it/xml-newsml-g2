@@ -13,9 +13,9 @@ use strict;
 use XML::NewsML_G2;
 
 use lib 't';
-use NewsML_G2_Test_Helpers qw(create_ni @text);
+use NewsML_G2_Test_Helpers qw(create_ni_text @text);
 
-my $ni = create_ni();
+my $ni = create_ni_text();
 
 ok($ni->add_paragraph($text[0]), 'add_paragraph returns OK');
 ok($ni->add_paragraph($text[1]), 'add_paragraph returns OK again');

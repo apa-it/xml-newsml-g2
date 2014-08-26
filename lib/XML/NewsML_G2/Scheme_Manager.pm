@@ -7,7 +7,7 @@ use Carp;
 use namespace::autoclean;
 
 
-foreach (qw(desk hltype role ind geo org topic crel svc isbn ean isrol
+foreach (qw(desk hltype role ind geo org topic crel crol svc isbn ean isrol
 nprov ninat stat sig iso3166_1a2 genre isin medtop)) {
     has $_, isa => 'XML::NewsML_G2::Scheme', is => 'rw';
 }
@@ -180,6 +180,6 @@ Philipp Gortan  C<< <philipp.gortan@apa.at> >>
 
 =head1 LICENCE AND COPYRIGHT
 
-Copyright (c) 2013, APA-IT. All rights reserved.
+Copyright (c) 2013-2014, APA-IT. All rights reserved.
 
 See L<XML::NewsML_G2> for the license.

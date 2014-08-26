@@ -3,6 +3,8 @@ package XML::NewsML_G2;
 # $Id$
 
 use XML::NewsML_G2::News_Item;
+use XML::NewsML_G2::News_Item_Text;
+use XML::NewsML_G2::News_Item_Picture;
 use XML::NewsML_G2::Provider;
 use XML::NewsML_G2::Service;
 use XML::NewsML_G2::Genre;
@@ -55,7 +57,7 @@ To install this module, run the following commands:
 =head1 SYNOPSIS
 
     use XML::NewsML_G2;
-    my $ni = XML::NewsML_G2::News_Item->new(%args);
+    my $ni = XML::NewsML_G2::News_Item_Text->new(%args);
     my $writer = XML::NewsML_G2::Writer_2_12(news_item => $ni);
     my $dom = $writer->create_dom();
 
@@ -206,7 +208,7 @@ Philipp Gortan  C<< <philipp.gortan@apa.at> >>
 
 =head1 LICENCE AND COPYRIGHT
 
-Copyright (c) 2013, APA-IT. All rights reserved.
+Copyright (c) 2013-2014, APA-IT. All rights reserved.
 
 This module is free software; you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the
