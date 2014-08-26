@@ -2,7 +2,10 @@ package XML::NewsML_G2::Writer;
 
 # $Id$
 
+use Module::Runtime 'use_module';
+
 use Moose;
+use Moose::Util;
 use DateTime;
 use DateTime::Format::XSD;
 use XML::NewsML_G2::Scheme_Manager;
@@ -23,8 +26,9 @@ has 'g2_version', isa => 'Str', is => 'ro';
 has 'schema_location', isa => 'Str', is => 'ro';
 has 'g2_catalog_url', isa => 'Str', is => 'ro';
 has 'g2_catalog_schemes', isa => 'HashRef', is => 'ro', default => sub {
-    {isrol => undef, nprov => undef, ninat => undef, stat => undef, sig => undef,
-     genre => undef, isin => undef, medtop => undef, iso3166_1a2 => 'iso3166-1a2'} };
+    {isrol => undef, nprov => undef, ninat => undef, stat => undef,
+     sig => undef, genre => undef, isin => undef, medtop => undef,
+     crol => undef, iso3166_1a2 => 'iso3166-1a2'} };
 
 # builders
 
@@ -36,6 +40,31 @@ sub _build_doc {
 sub _build_scheme_manager {
     my $self = shift;
     return XML::NewsML_G2::Scheme_Manager->new();
+}
+
+# Apply roles needed for writing
+sub BUILD {
+    my $self = shift;
+
+    (my $my_cls) = reverse split ('::', $self->meta->name);
+    (my $ni_cls) = reverse split ('::', $self->news_item->meta->name);
+
+    my $base_role     = sprintf('XML::NewsML_G2::Roles::Writer::%s', $ni_cls);
+    my $specific_role = sprintf(
+        'XML::NewsML_G2::Roles::%s::%s', $my_cls, $ni_cls
+        );
+
+    my $role_to_use;
+    eval {
+        $role_to_use = $specific_role if use_module($specific_role);
+    };
+    eval {
+        $role_to_use = $base_role if (!$role_to_use && use_module($base_role));
+    };
+
+    Moose::Util::apply_all_roles($self, $role_to_use) if $role_to_use;
+
+    return;
 }
 
 # DOM creating methods
@@ -97,7 +126,8 @@ sub _create_item_meta {
 
     my $im = $self->create_element('itemMeta');
     $im->appendChild(my $ic = $self->create_element('itemClass'));
-    $self->scheme_manager->add_qcode($ic, 'ninat', 'text');
+    $self->_set_item_class($ic);
+
     $im->appendChild(my $p = $self->create_element('provider', _name_text => $self->news_item->provider));
     $self->scheme_manager->add_qcode_or_literal($p, 'nprov', $self->news_item->provider->qcode);
     $im->appendChild($self->create_element('versionCreated', _text => $self->_formatter->format_datetime(DateTime->now(time_zone => 'local'))));
@@ -325,6 +355,7 @@ sub _create_authors {
     my ($self, $root) = @_;
     foreach (@{$self->news_item->authors}) {
         $root->appendChild(my $c = $self->create_element('creator', _name_text => $_));
+        $self->_set_author_role($c);
     }
     return;
 }
@@ -553,6 +584,6 @@ Philipp Gortan  C<< <philipp.gortan@apa.at> >>
 
 =head1 LICENCE AND COPYRIGHT
 
-Copyright (c) 2013, APA-IT. All rights reserved.
+Copyright (c) 2013-2014, APA-IT. All rights reserved.
 
 See L<XML::NewsML_G2> for the license.

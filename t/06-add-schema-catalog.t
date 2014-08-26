@@ -23,10 +23,10 @@ ok(my $org = XML::NewsML_G2::Organisation->new(name => 'Google', qcode => 'gogl'
 ok($org->add_website('http://www.google.com/'), 'add_website works');
 
 
-sub create_ni  {
+sub create_ni_text  {
     my (%args) = @_;
 
-    ok(my $ni = XML::NewsML_G2::News_Item->new
+    ok(my $ni = XML::NewsML_G2::News_Item_Text->new
        (title => 'Saisonstart im Schweizerhaus: Run aufs Krügerl im Prater',
         language => 'de',
         provider => $prov_apa,
@@ -43,16 +43,16 @@ sub create_ni  {
     my $writer = XML::NewsML_G2::Writer_2_12->new(news_item => $ni, scheme_manager => $sm);
 
     ok(my $dom = $writer->create_dom(), 'create DOM');
-    diag($dom->serialize(1));
+    #diag($dom->serialize(1));
     validate_g2($dom, '2.12');
     return;
 }
 
-create_ni();
+create_ni_text();
 
-create_ni(org => XML::NewsML_G2::Scheme->new(alias => 'xyzorg', uri => 'http://xyz.org/cv/org'));
+create_ni_text(org => XML::NewsML_G2::Scheme->new(alias => 'xyzorg', uri => 'http://xyz.org/cv/org'));
 
-create_ni(org => XML::NewsML_G2::Scheme->new(alias => 'xyzorg', catalog => 'http://xyz.org/catalog_1.xml'));
+create_ni_text(org => XML::NewsML_G2::Scheme->new(alias => 'xyzorg', catalog => 'http://xyz.org/catalog_1.xml'));
 
 throws_ok(sub {XML::NewsML_G2::Scheme->new(alias => 'xyzorg')}, qr/required/, 'creating Scheme without uri and catalog throws');
 
