@@ -12,7 +12,7 @@ use DateTime::Format::XSD;
 use XML::NewsML_G2::Scheme_Manager;
 use namespace::autoclean;
 
-has 'news_item', isa => 'XML::NewsML_G2::News_Item', is => 'ro', required => 1;
+has '_root_item', is => 'ro', lazy => 1, builder => '_build__root_item';
 
 has 'encoding', isa => 'Str', is => 'ro', default => 'utf-8';
 
@@ -31,6 +31,10 @@ has 'g2_catalog_schemes', isa => 'HashRef', is => 'ro',
     lazy => 1, builder => '_build_g2_catalog_schemes';
 
 # builders
+
+sub _build__root_item {
+    die "Override in subclass";
+}
 
 sub _build_g2_catalog_schemes {
     {isrol => undef, nprov => undef, ninat => undef, stat => undef,

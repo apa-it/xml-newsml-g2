@@ -69,7 +69,7 @@ foreach my $ni (create_ni_text(), create_ni_picture()) {
 
     (my $ic) = reverse split('_', $ni->meta->name);
 
-    my $writer = XML::NewsML_G2::Writer->new(news_item => $ni, scheme_manager => $sm, g2_version => 2.9);
+    my $writer = XML::NewsML_G2::Writer::News_Item->new(news_item => $ni, scheme_manager => $sm, g2_version => 2.9);
 
     my $paragraphs = $writer->create_element('paragraphs');
     for my $t (@text) {
@@ -89,7 +89,7 @@ foreach my $ni (create_ni_text(), create_ni_picture()) {
     validate_g2($dom, '2.9');
 
 # 2.12 checks
-    ok($writer = XML::NewsML_G2::Writer->new(news_item => $ni, scheme_manager => $sm, g2_version => 2.12), 'creating 2.12 writer');
+    ok($writer = XML::NewsML_G2::Writer::News_Item->new(news_item => $ni, scheme_manager => $sm, g2_version => 2.12), 'creating 2.12 writer');
     ok($dom = $writer->create_dom(), '2.12 writer creates DOM');
     ok($xpc = XML::LibXML::XPathContext->new($dom), 'create XPath context for DOM tree');
     $xpc->registerNs('nar', 'http://iptc.org/std/nar/2006-10-01/');

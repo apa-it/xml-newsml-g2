@@ -40,7 +40,7 @@ sub create_ni_text  {
 
     ok($ni->add_organisation($org), 'add_organisation works');
 
-    my $writer = XML::NewsML_G2::Writer->new(news_item => $ni, scheme_manager => $sm);
+    my $writer = XML::NewsML_G2::Writer::News_Item->new(news_item => $ni, scheme_manager => $sm);
 
     ok(my $dom = $writer->create_dom(), 'create DOM');
     #diag($dom->serialize(1));

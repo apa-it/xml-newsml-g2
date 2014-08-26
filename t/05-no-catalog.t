@@ -17,7 +17,7 @@ use XML::NewsML_G2;
 
 my $ni = create_ni_text(no_required_scheme => 1);
 
-ok(my $writer = XML::NewsML_G2::Writer->new(news_item => $ni), 'creating 2.12 writer');
+ok(my $writer = XML::NewsML_G2::Writer::News_Item->new(news_item => $ni), 'creating 2.12 writer');
 ok(my $dom = $writer->create_dom(), '2.12 writer creates DOM');
 
 ok(my $xpc = XML::LibXML::XPathContext->new($dom), 'create XPath context for DOM tree');
