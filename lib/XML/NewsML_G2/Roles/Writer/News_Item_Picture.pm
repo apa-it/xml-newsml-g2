@@ -42,9 +42,10 @@ sub _create_remote_content {
         $self->scheme_manager->build_qcode('colsp', $picture->colorspace);
     $root->setAttribute('colourspace', $colsp) if $colsp;
 
-    my $layout =
-        $self->scheme_manager->build_qcode('loutorient', $picture->layout);
-    $root->setAttribute('layoutorientation', $layout) if $layout;
+    # XXX supported in version >= 2.14
+    #my $layout =
+    #    $self->scheme_manager->build_qcode('loutorient', $picture->layout);
+    #$root->setAttribute('layoutorientation', $layout) if $layout;
 }
 
 1;

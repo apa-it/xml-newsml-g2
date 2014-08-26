@@ -22,6 +22,7 @@ sub get_all_schemes {
 
 sub build_qcode {
     my ($self, $name, $value) = @_;
+    return unless $value;
 
     my $getter = $self->can($name) or croak "No schema named '$name'!";
     my $scheme = $getter->($self);
