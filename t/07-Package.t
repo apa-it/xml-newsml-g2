@@ -26,5 +26,13 @@ $pi->add_to_root_group($text, $pic);
 
 cmp_ok(@{$pi->root_group->items}, '==', 2, 'root group has two items now');
 
+my %schemes;
+ok(my $sm = XML::NewsML_G2::Scheme_Manager->new(%schemes), 'create Scheme Manager');
+
+ok(my $writer = XML::NewsML_G2::Writer::Package->new(package_item => $pi, scheme_manager => $sm), 'create package writer');
+
+ok(my $dom = $writer->create_dom(), 'package writer creates DOM');
+
+diag($dom->serialize(1));
 
 done_testing;

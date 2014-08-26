@@ -20,6 +20,7 @@ use XML::NewsML_G2::Group;
 use XML::NewsML_G2::Scheme_Manager;
 use XML::NewsML_G2::Scheme;
 use XML::NewsML_G2::Writer::News_Item;
+use XML::NewsML_G2::Writer::Package;
 
 use warnings;
 use strict;
