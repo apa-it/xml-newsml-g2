@@ -15,6 +15,8 @@ use XML::NewsML_G2::Organisation;
 use XML::NewsML_G2::Picture;
 use XML::NewsML_G2::Topic;
 use XML::NewsML_G2::Product;
+use XML::NewsML_G2::Package;
+use XML::NewsML_G2::Group;
 use XML::NewsML_G2::Scheme_Manager;
 use XML::NewsML_G2::Scheme;
 use XML::NewsML_G2::Writer;

@@ -3,46 +3,32 @@ package XML::NewsML_G2::News_Item;
 # $Id$
 
 use XML::LibXML qw();
-use UUID::Tiny ':std';
 
 use Carp;
 use Moose;
 use namespace::autoclean;
 
 
-has 'language', isa => 'Str', is => 'ro', required => 1;
-
 # document properties
-has 'guid', isa => 'Str', is => 'ro', default => sub {create_uuid_as_string()};
-has 'doc_version', isa => 'Int', is => 'ro', default => '1';
-has 'provider', isa => 'XML::NewsML_G2::Provider', is => 'ro', required => 1;
-has 'usage_terms', isa => 'Str', is => 'rw';
-has 'service', isa => 'XML::NewsML_G2::Service', is => 'ro', predicate => 'has_service';
-has 'doc_status', isa => 'Str', is => 'ro', default => 'usable';
+extends 'XML::NewsML_G2::AnyItem';
+
 has 'title', isa => 'Str', is => 'ro', required => 1;
 has 'subtitle', isa => 'Str', is => 'rw';
 has 'description', isa => 'Str', is => 'rw';
 has 'paragraphs', isa => 'XML::LibXML::Node', is => 'rw';
-has 'content_created', isa => 'DateTime', is => 'ro', default => sub {DateTime->now()};
+has 'content_created', isa => 'DateTime', is => 'ro', lazy => 1, builder => '_build_content_created';
 has 'content_modified', isa => 'DateTime', is => 'ro';
-has 'embargo', isa => 'DateTime', is => 'rw';
-has 'embargo_text', isa => 'Str', is => 'rw';
 
 has 'credit', isa => 'Str', is => 'rw';
 has 'priority', isa => 'Int', is => 'ro', default => 5;
 has 'message_id', isa => 'Str', is => 'ro';
 has 'slugline', isa => 'Str', is => 'ro';
 has 'slugline_sep', isa => 'Str', is => 'ro', default => '/';
-has 'note', isa => 'Str', is => 'ro';
-has 'closing', isa => 'Str', is => 'rw';
-has 'see_also', isa => 'Str', is => 'rw';
 
 has 'sources', isa => 'ArrayRef[Str]', is => 'rw', default => sub { [] },
   traits => ['Array'], handles => {add_source => 'push'};
 has 'authors', isa => 'ArrayRef[Str]', is => 'rw', default => sub { [] },
   traits => ['Array'], handles => {add_author => 'push'};
-has 'indicators', isa => 'ArrayRef[Str]', is => 'rw', default => sub { [] },
-  traits => ['Array'], handles => {add_indicator => 'push'};
 has 'cities', isa => 'ArrayRef[Str]', is => 'rw', default => sub { [] },
   traits => ['Array'], handles => {add_city => 'push'};
 
@@ -65,6 +51,10 @@ has 'keywords', isa => 'ArrayRef[Str]', is => 'rw', default => sub { [] },
     handles => {add_keyword => 'push', has_keywords => 'count'};
 has 'remotes', isa => 'HashRef', is => 'rw', default => sub { {} },
     traits => ['Hash'], handles => {has_remotes => 'count'};
+
+sub _build_content_created {
+    return DateTime->now(time_zone => 'local');
+}
 
 # public methods
 
