@@ -57,6 +57,8 @@ has 'media_topics', isa => 'HashRef[XML::NewsML_G2::Media_Topic]', is => 'rw', d
   traits => ['Hash'], handles => {has_media_topics => 'count'};
 has 'locations', isa => 'HashRef[XML::NewsML_G2::Location]', is => 'rw', default => sub { {} },
   traits => ['Hash'], handles => {has_locations => 'count'};
+has 'remotes', isa => 'HashRef', is => 'rw', default => sub { {} },
+    traits => ['Hash'], handles => {has_remotes => 'count'};
 
 # public methods
 
@@ -86,6 +88,14 @@ sub add_paragraph {
     my $p = $doc->createElementNS('http://www.w3.org/1999/xhtml', 'p');
     $p->appendChild($doc->createTextNode($text));
     $paras->appendChild($p);
+    return 1;
+}
+
+sub add_remote {
+    my ($self, $uri, $remote) = @_;
+    return if exists $self->remotes->{$uri};
+    $self->remotes->{$uri} = $remote;
+
     return 1;
 }
 

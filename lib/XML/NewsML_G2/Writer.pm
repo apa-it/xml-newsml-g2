@@ -25,12 +25,16 @@ has 'xhtml_ns', isa => 'Str', is => 'ro', default => 'http://www.w3.org/1999/xht
 has 'g2_version', isa => 'Str', is => 'ro';
 has 'schema_location', isa => 'Str', is => 'ro';
 has 'g2_catalog_url', isa => 'Str', is => 'ro';
-has 'g2_catalog_schemes', isa => 'HashRef', is => 'ro', default => sub {
-    {isrol => undef, nprov => undef, ninat => undef, stat => undef,
-     sig => undef, genre => undef, isin => undef, medtop => undef,
-     crol => undef, iso3166_1a2 => 'iso3166-1a2'} };
+has 'g2_catalog_schemes', isa => 'HashRef', is => 'ro',
+    lazy => 1, builder => '_build_g2_catalog_schemes';
 
 # builders
+
+sub _build_g2_catalog_schemes {
+    {isrol => undef, nprov => undef, ninat => undef, stat => undef,
+     sig => undef, genre => undef, isin => undef, medtop => undef,
+     crol => undef, iso3166_1a2 => 'iso3166-1a2'};
+}
 
 sub _build_doc {
     my $self = shift;
@@ -434,6 +438,11 @@ sub _create_content {
     $body->appendChild($_) foreach (@paras);
 
     $cs->appendChild($inlinexml);
+    foreach (sort keys %{$self->news_item->remotes}) {
+        my $rc = $self->create_element('remoteContent', href => $_);
+        $self->_create_remote_content($rc, $self->news_item->remotes->{$_});
+        $cs->appendChild($rc);
+    }
     return;
 }
 
