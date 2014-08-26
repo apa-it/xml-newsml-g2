@@ -16,14 +16,19 @@ around '_build_g2_catalog_schemes' => sub {
     return $result;
 };
 
+before '_create_authors' => sub {
+    my ($self, $root) = @_;
+
+    my $c = $self->_create_creator($self->news_item->photographer);
+    $root->appendChild($c);
+    $self->scheme_manager->add_qcode($c, 'crol', 'photographer');
+
+    return;
+};
+
 sub _set_item_class {
     my ($self, $ic) = @_;
     $self->scheme_manager->add_qcode($ic, 'ninat', 'picture');
-}
-
-sub _set_author_role {
-    my ($self, $author) = @_;
-    $self->scheme_manager->add_qcode($author, 'crol', 'photographer');
 }
 
 sub _create_remote_content {

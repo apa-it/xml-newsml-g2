@@ -39,6 +39,11 @@ sub basic_checks {
     is($xpc->findvalue('//nar:genre[1]/@qcode'), 'genre:Current', 'correct genre 1 in XML');
     is($xpc->findvalue('//nar:genre[2]/@qcode'), 'genre:Extra', 'correct genre 2 in XML');
     like($xpc->findvalue('//nar:subject/@qcode'), qr/apadesk:CI/, 'desk in XML');
+    is($xpc->findvalue('//nar:creditline'), $creditline, 'correct creditline in XML');
+    foreach (@keywords) {
+        like($xpc->findvalue('//nar:keyword'), qr/$_/, 'correct keyword in XML');
+    }
+
     is($xpc->findvalue('//nar:slugline'), $slugline, 'correct slugline in XML');
     is($xpc->findvalue('//nar:headline[@role="apahltype:title"]'), $title, 'correct title in XML');
     is($xpc->findvalue('//nar:headline[@role="apahltype:subtitle"]'), $subtitle, 'correct subtitle in XML');

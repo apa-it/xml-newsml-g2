@@ -20,12 +20,14 @@ has 'service', isa => 'XML::NewsML_G2::Service', is => 'ro', predicate => 'has_s
 has 'doc_status', isa => 'Str', is => 'ro', default => 'usable';
 has 'title', isa => 'Str', is => 'ro', required => 1;
 has 'subtitle', isa => 'Str', is => 'rw';
+has 'description', isa => 'Str', is => 'rw';
 has 'paragraphs', isa => 'XML::LibXML::Node', is => 'rw';
 has 'content_created', isa => 'DateTime', is => 'ro', default => sub {DateTime->now()};
 has 'content_modified', isa => 'DateTime', is => 'ro';
 has 'embargo', isa => 'DateTime', is => 'rw';
 has 'embargo_text', isa => 'Str', is => 'rw';
 
+has 'credit', isa => 'Str', is => 'rw';
 has 'priority', isa => 'Int', is => 'ro', default => 5;
 has 'message_id', isa => 'Str', is => 'ro';
 has 'slugline', isa => 'Str', is => 'ro';
@@ -57,6 +59,9 @@ has 'media_topics', isa => 'HashRef[XML::NewsML_G2::Media_Topic]', is => 'rw', d
   traits => ['Hash'], handles => {has_media_topics => 'count'};
 has 'locations', isa => 'HashRef[XML::NewsML_G2::Location]', is => 'rw', default => sub { {} },
   traits => ['Hash'], handles => {has_locations => 'count'};
+has 'keywords', isa => 'ArrayRef[Str]', is => 'rw', default => sub { [] },
+    traits => ['Array'],
+    handles => {add_keyword => 'push', has_keywords => 'count'};
 has 'remotes', isa => 'HashRef', is => 'rw', default => sub { {} },
     traits => ['Hash'], handles => {has_remotes => 'count'};
 
@@ -142,6 +147,14 @@ DateTime instance, defaults to now
 
 DateTime instance
 
+=item credit
+
+Human readable credit line
+
+=item description
+
+Human readable content description string
+
 =item desks
 
 List of L<XML::NewsML_G2::Desk> instances
@@ -217,6 +230,10 @@ List of L<XML::NewsML_G2::Product> instances
 =item provider
 
 List of L<XML::NewsML_G2::Provider> instances
+
+=item remotes
+
+Hash mapping of hrefs to remote object (e.g. XML::NewsML_G2::Picture) instances
 
 =item see_also
 

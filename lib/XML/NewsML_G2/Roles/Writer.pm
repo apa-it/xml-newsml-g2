@@ -7,8 +7,6 @@ use namespace::autoclean;
 
 requires '_set_item_class';
 
-sub _set_author_role {}
-
 sub _create_remote_content {}
 
 1;

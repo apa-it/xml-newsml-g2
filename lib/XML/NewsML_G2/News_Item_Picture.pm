@@ -9,6 +9,8 @@ extends 'XML::NewsML_G2::News_Item';
 
 has '+remotes', isa => 'HashRef[XML::NewsML_G2::Picture]';
 
+has 'photographer', isa => 'Str', is => 'rw', required => 1;
+
 1;
 __END__
 
@@ -28,6 +30,7 @@ XML::NewsML_G2::News_Item_Picture - a picture news item
          language => 'de',
          provider => $provider,
          service => $service,
+         photographer => 'Homer Simpson'
         );
 
     my $pic = XML::NewsML_G2::Picture->new
@@ -45,6 +48,16 @@ XML::NewsML_G2::News_Item_Picture - a picture news item
         );
     $ni->add_remote('file://tmp/files/123.jpg', $pic);
     $ni->add_remote('file://tmp/files/123.thumb.jpg', $thumb);
+
+=head1 ATTRIBUTES
+
+=over 4
+
+=item photographer
+
+A photographer string
+
+= back
 
 =head1 AUTHOR
 
