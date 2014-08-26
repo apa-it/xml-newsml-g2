@@ -7,8 +7,8 @@ use Carp;
 use namespace::autoclean;
 
 
-foreach (qw(desk hltype role ind geo org topic crel crol drol svc isbn ean isrol
-nprov ninat stat sig iso3166_1a2 genre isin medtop rnd colsp loutorient)) {
+foreach (qw(desk hltype role ind geo org topic crel svc isbn ean isrol
+nprov ninat stat sig iso3166_1a2 genre isin medtop)) {
     has $_, isa => 'XML::NewsML_G2::Scheme', is => 'rw';
 }
 
@@ -18,17 +18,6 @@ sub get_all_schemes {
     my $self = shift;
 
     return grep {defined} map {$self->$_()} sort $self->meta->get_attribute_list();
-}
-
-sub build_qcode {
-    my ($self, $name, $value) = @_;
-    return unless $value;
-
-    my $getter = $self->can($name) or croak "No schema named '$name'!";
-    my $scheme = $getter->($self);
-    return unless ($scheme and ($scheme->uri or $scheme->catalog));
-
-    return $scheme->alias . ':' . $value;
 }
 
 sub add_qcode_or_literal {
@@ -45,11 +34,11 @@ sub add_qcode {
 
 sub add_role {
     my ($self, $elem, $name, $value) = @_;
+    my $getter = $self->can($name) or croak "No schema named '$name'!";
+    my $scheme = $getter->($self);
+    return unless $scheme;
 
-    my $role = $self->build_qcode($name, $value);
-    return unless $role;
-
-    $elem->setAttribute('role', $role);
+    $elem->setAttribute('role', $scheme->alias . ':' . $value);
     return 1;
 }
 
@@ -58,10 +47,11 @@ sub add_role {
 sub _add_qcode {
     my ($self, $elem, $name, $value) = @_;
 
-    my $qcode = $self->build_qcode($name, $value);
-    return unless $qcode;
+    my $getter = $self->can($name) or croak "No schema named '$name'!";
+    my $scheme = $getter->($self);
+    return unless ($scheme and ($scheme->uri or $scheme->catalog));
 
-    $elem->setAttribute('qcode', $qcode);
+    $elem->setAttribute('qcode', $scheme->alias . ':' . $value);
     return 1;
 }
 
@@ -190,6 +180,6 @@ Philipp Gortan  C<< <philipp.gortan@apa.at> >>
 
 =head1 LICENCE AND COPYRIGHT
 
-Copyright (c) 2013-2014, APA-IT. All rights reserved.
+Copyright (c) 2013, APA-IT. All rights reserved.
 
 See L<XML::NewsML_G2> for the license.

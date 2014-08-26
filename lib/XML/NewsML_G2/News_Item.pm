@@ -5,7 +5,6 @@ package XML::NewsML_G2::News_Item;
 use XML::LibXML qw();
 use UUID::Tiny ':std';
 
-use Carp;
 use Moose;
 use namespace::autoclean;
 
@@ -20,14 +19,12 @@ has 'service', isa => 'XML::NewsML_G2::Service', is => 'ro', predicate => 'has_s
 has 'doc_status', isa => 'Str', is => 'ro', default => 'usable';
 has 'title', isa => 'Str', is => 'ro', required => 1;
 has 'subtitle', isa => 'Str', is => 'rw';
-has 'description', isa => 'Str', is => 'rw';
 has 'paragraphs', isa => 'XML::LibXML::Node', is => 'rw';
 has 'content_created', isa => 'DateTime', is => 'ro', default => sub {DateTime->now()};
 has 'content_modified', isa => 'DateTime', is => 'ro';
 has 'embargo', isa => 'DateTime', is => 'rw';
 has 'embargo_text', isa => 'Str', is => 'rw';
 
-has 'credit', isa => 'Str', is => 'rw';
 has 'priority', isa => 'Int', is => 'ro', default => 5;
 has 'message_id', isa => 'Str', is => 'ro';
 has 'slugline', isa => 'Str', is => 'ro';
@@ -59,11 +56,7 @@ has 'media_topics', isa => 'HashRef[XML::NewsML_G2::Media_Topic]', is => 'rw', d
   traits => ['Hash'], handles => {has_media_topics => 'count'};
 has 'locations', isa => 'HashRef[XML::NewsML_G2::Location]', is => 'rw', default => sub { {} },
   traits => ['Hash'], handles => {has_locations => 'count'};
-has 'keywords', isa => 'ArrayRef[Str]', is => 'rw', default => sub { [] },
-    traits => ['Array'],
-    handles => {add_keyword => 'push', has_keywords => 'count'};
-has 'remotes', isa => 'HashRef', is => 'rw', default => sub { {} },
-    traits => ['Hash'], handles => {has_remotes => 'count'};
+
 
 # public methods
 
@@ -96,14 +89,6 @@ sub add_paragraph {
     return 1;
 }
 
-sub add_remote {
-    my ($self, $uri, $remote) = @_;
-    return if exists $self->remotes->{$uri};
-    $self->remotes->{$uri} = $remote;
-
-    return 1;
-}
-
 __PACKAGE__->meta->make_immutable;
 
 1;
@@ -116,11 +101,21 @@ XML::NewsML_G2::News_Item - a news item (story)
 =for test_synopsis
     my ($provider, $service, $genre1, $genre2);
 
-=head1 DESCRIPTION
+=head1 SYNOPSIS
 
-This module acts as a base class for NewsML-G2 news items.
-Instead of using this class, use the most appropriate subclass,
-e.g. L<XML::NewsML_G2::News_Item_Text>.
+    my $ni = XML::NewsML_G2::News_Item->new
+        (guid => "tag:example.com,2013:service:date:number",
+         title => "Story title",
+         slugline => "the/slugline",
+         language => 'de',
+         provider => $provider,
+         service => $service,
+        );
+
+    $ni->add_genre($genre1, $genre2);
+    $ni->add_source('APA');
+    $ni->add_paragraph('blah blah blah');
+
 
 =head1 ATTRIBUTES
 
@@ -146,14 +141,6 @@ DateTime instance, defaults to now
 =item content_modified
 
 DateTime instance
-
-=item credit
-
-Human readable credit line
-
-=item description
-
-Human readable content description string
 
 =item desks
 
@@ -230,10 +217,6 @@ List of L<XML::NewsML_G2::Product> instances
 =item provider
 
 List of L<XML::NewsML_G2::Provider> instances
-
-=item remotes
-
-Hash mapping of hrefs to remote object (e.g. XML::NewsML_G2::Picture) instances
 
 =item see_also
 
@@ -332,6 +315,6 @@ Philipp Gortan  C<< <philipp.gortan@apa.at> >>
 
 =head1 LICENCE AND COPYRIGHT
 
-Copyright (c) 2013-2014, APA-IT. All rights reserved.
+Copyright (c) 2013, APA-IT. All rights reserved.
 
 See L<XML::NewsML_G2> for the license.

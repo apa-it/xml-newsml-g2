@@ -47,6 +47,14 @@ override '_create_infosources' => sub {
     return;
 };
 
+override '_create_authors' => sub {
+    my ($self, $root) = @_;
+    foreach (@{$self->news_item->authors}) {
+        $root->appendChild($self->create_element('creator', literal => $_));
+    }
+    return;
+};
+
 override '_create_company_data' => sub {
     my ($self, $org, $root) = @_;
     return unless ($self->scheme_manager->crel);
@@ -56,10 +64,6 @@ override '_create_company_data' => sub {
     $root->appendChild($self->create_element('related', rel => "$crel_alias:exchange", literal => $_)) foreach (@{$org->stock_exchanges});
 };
 
-override '_create_creator' => sub {
-    my ($self, $name) = @_;
-    return $self->create_element('creator', literal => $name);
-};
 
 __PACKAGE__->meta->make_immutable;
 
@@ -80,6 +84,6 @@ Philipp Gortan  C<< <philipp.gortan@apa.at> >>
 
 =head1 LICENCE AND COPYRIGHT
 
-Copyright (c) 2013-2014, APA-IT. All rights reserved.
+Copyright (c) 2013, APA-IT. All rights reserved.
 
 See L<XML::NewsML_G2> for the license.

@@ -5,8 +5,9 @@ package XML::NewsML_G2::Provider;
 use Moose;
 use namespace::autoclean;
 
-with 'XML::NewsML_G2::Roles::HasQCode';
 
+has 'name', isa => 'Str', is => 'ro', required => 1;
+has 'qcode', isa => 'Str', is => 'ro', required => 1;
 has 'notice', isa => 'Str', is => 'ro';
 
 __PACKAGE__->meta->make_immutable;
@@ -26,6 +27,10 @@ XML::NewsML_G2::Provider - the news provider (news agency)
 
 =over 4
 
+=item name
+
+=item qcode
+
 =item notice
 
 for an optional copyright notice
@@ -38,6 +43,6 @@ Philipp Gortan  C<< <philipp.gortan@apa.at> >>
 
 =head1 LICENCE AND COPYRIGHT
 
-Copyright (c) 2013-2014, APA-IT. All rights reserved.
+Copyright (c) 2013, APA-IT. All rights reserved.
 
 See L<XML::NewsML_G2> for the license.

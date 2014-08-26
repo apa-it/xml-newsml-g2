@@ -5,8 +5,9 @@ package XML::NewsML_G2::Organisation;
 use Moose;
 use namespace::autoclean;
 
-with 'XML::NewsML_G2::Roles::HasQCode';
 
+has 'name', isa => 'Str', is => 'ro', required => 1;
+has 'qcode', isa => 'Str', is => 'ro', required => 1;
 has 'isins', isa => 'ArrayRef[Str]', is => 'rw', default => sub { [] },
   traits => ['Array'], handles => {add_isin => 'push'};
 has 'websites', isa => 'ArrayRef[Str]', is => 'rw', default => sub { [] },
@@ -33,6 +34,10 @@ XML::NewsML_G2::Oranisation - a company or organisation
 =head1 ATTRIBUTES
 
 =over 4
+
+=item name
+
+=item qcode
 
 =item isins
 
@@ -72,6 +77,6 @@ Philipp Gortan  C<< <philipp.gortan@apa.at> >>
 
 =head1 LICENCE AND COPYRIGHT
 
-Copyright (c) 2013-2014, APA-IT. All rights reserved.
+Copyright (c) 2013, APA-IT. All rights reserved.
 
 See L<XML::NewsML_G2> for the license.

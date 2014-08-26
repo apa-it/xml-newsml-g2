@@ -14,11 +14,11 @@ use strict;
 
 use XML::NewsML_G2;
 
-our @EXPORT_OK = qw(validate_g2 create_ni_text create_ni_picture);
+our @EXPORT_OK = qw(validate_g2 create_ni);
 
 our %EXPORT_TAGS = (vars => [qw($guid $see_also_guid $embargo $apa_id
-    $title $subtitle $slugline $creditline $embargo_text $note $prov_apa
-    $svc_apa_bd $time1 $time2 @text @genres $org $desk @keywords)]);
+    $title $subtitle $slugline $embargo_text $note $prov_apa
+    $svc_apa_bd $time1 $time2 @text @genres $org $desk)]);
 
 Exporter::export_ok_tags('vars');
 
@@ -28,7 +28,6 @@ our $apa_id = 'APA0379';
 our $title = 'Saisonstart im Schweizerhaus: Run aufs Krügerl im Prater';
 our $subtitle = 'Großer Andrang am Eröffnungstag - Auch der Rummelplatz startsete heute den Betrieb';
 our $slugline = 'Buntes/Freizeit/Bauten/Eröffnung/Unterhaltung/Wien/Kommunales';
-our $creditline = 'APA/John Doe';
 our $embargo = '2012-03-15T12:00:00+01:00';
 our $embargo_text = 'frei für Dienstagsausgaben';
 our $note = 'Bilder zum Schweizerhaus sind im AOM, z.B. ABD0019 vom 23. März 2006, abrufbar';
@@ -94,7 +93,6 @@ $aut->parent($europe);
 ok(my $topic = XML::NewsML_G2::Topic->new(name => 'Budget 2012', qcode => 'bbbb'), 'create Topic');
 ok(my $product = XML::NewsML_G2::Product->new(isbn => 3442162637), 'create Product');
 
-our @keywords = qw(beer vienna prater kolarik schweizerhaus);
 
 {
     local $/ = undef;
@@ -117,14 +115,13 @@ sub validate_g2 {
     return;
 }
 
-sub _create_ni {
-    my $ni_cls = shift;
-    my $hash  = shift;
+sub create_ni {
     my %opts = @_;
 
-    $hash->{service} = $svc_apa_bd unless ($opts{no_required_scheme});
+    my %hash;
+    $hash{service} = $svc_apa_bd unless ($opts{no_required_scheme});
 
-    ok(my $ni = $ni_cls->new
+    ok(my $ni = XML::NewsML_G2::News_Item->new
        (guid             => $guid,
         see_also         => $see_also_guid,
         provider         => $prov_apa,
@@ -137,10 +134,9 @@ sub _create_ni {
         language         => 'de',
         note             => $note,
         closing          => 'Schluss',
-        credit           => $creditline,
         content_created  => DateTime::Format::XSD->parse_datetime($time1),
         content_modified => DateTime::Format::XSD->parse_datetime($time2),
-        %$hash
+        %hash
        ), 'create News Item instance');
 
     ok($ni->add_genre(@genres), 'add_genre works');
@@ -151,8 +147,6 @@ sub _create_ni {
 
     $ni->add_author($_) foreach (qw(dw dk wh));
     ok($ni->authors, 'add_author works');
-
-    $ni->add_keyword($_) foreach (@keywords);
 
     ok($ni->add_media_topic($mt20000553), 'adding media topic');
     ok(!$ni->add_media_topic($mt20000553), 'adding media topic again fails');
@@ -176,17 +170,6 @@ sub _create_ni {
     }
 
     return $ni;
-}
-
-sub create_ni_text {
-    _create_ni('XML::NewsML_G2::News_Item_Text', {}, @_);
-}
-
-sub create_ni_picture {
-    _create_ni(
-        'XML::NewsML_G2::News_Item_Picture',
-        {photographer => 'Homer Simpson'}, @_
-        );
 }
 
 1;

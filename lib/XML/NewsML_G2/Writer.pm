@@ -2,11 +2,7 @@ package XML::NewsML_G2::Writer;
 
 # $Id$
 
-use Module::Runtime 'use_module';
-
-use Carp;
 use Moose;
-use Moose::Util;
 use DateTime;
 use DateTime::Format::XSD;
 use XML::NewsML_G2::Scheme_Manager;
@@ -26,16 +22,11 @@ has 'xhtml_ns', isa => 'Str', is => 'ro', default => 'http://www.w3.org/1999/xht
 has 'g2_version', isa => 'Str', is => 'ro';
 has 'schema_location', isa => 'Str', is => 'ro';
 has 'g2_catalog_url', isa => 'Str', is => 'ro';
-has 'g2_catalog_schemes', isa => 'HashRef', is => 'ro',
-    lazy => 1, builder => '_build_g2_catalog_schemes';
+has 'g2_catalog_schemes', isa => 'HashRef', is => 'ro', default => sub {
+    {isrol => undef, nprov => undef, ninat => undef, stat => undef, sig => undef,
+     genre => undef, isin => undef, medtop => undef, iso3166_1a2 => 'iso3166-1a2'} };
 
 # builders
-
-sub _build_g2_catalog_schemes {
-    {isrol => undef, nprov => undef, ninat => undef, stat => undef,
-     sig => undef, genre => undef, isin => undef, medtop => undef,
-     crol => undef, drol => undef, iso3166_1a2 => 'iso3166-1a2'};
-}
 
 sub _build_doc {
     my $self = shift;
@@ -47,38 +38,7 @@ sub _build_scheme_manager {
     return XML::NewsML_G2::Scheme_Manager->new();
 }
 
-# Apply roles needed for writing
-sub BUILD {
-    my $self = shift;
-
-    (my $my_cls) = reverse split ('::', $self->meta->name);
-    (my $ni_cls) = reverse split ('::', $self->news_item->meta->name);
-
-    my $base_role     = sprintf('XML::NewsML_G2::Roles::Writer::%s', $ni_cls);
-    my $specific_role = sprintf(
-        'XML::NewsML_G2::Roles::%s::%s', $my_cls, $ni_cls
-        );
-
-    my $role_to_use;
-    eval {
-        $role_to_use = $specific_role if use_module($specific_role);
-    };
-    eval {
-        $role_to_use = $base_role if (!$role_to_use && use_module($base_role));
-    };
-    croak $@ if ($@ && $@ !~ /^Can't locate'/);
-
-    Moose::Util::apply_all_roles($self, $role_to_use) if $role_to_use;
-
-    return;
-}
-
 # DOM creating methods
-
-sub _create_creator {
-    my ($self, $name) = @_;
-    return $self->create_element('creator', _name_text => $name);
-}
 
 sub _create_root_element {
     my ($self) = @_;
@@ -137,8 +97,7 @@ sub _create_item_meta {
 
     my $im = $self->create_element('itemMeta');
     $im->appendChild(my $ic = $self->create_element('itemClass'));
-    $self->_set_item_class($ic);
-
+    $self->scheme_manager->add_qcode($ic, 'ninat', 'text');
     $im->appendChild(my $p = $self->create_element('provider', _name_text => $self->news_item->provider));
     $self->scheme_manager->add_qcode_or_literal($p, 'nprov', $self->news_item->provider->qcode);
     $im->appendChild($self->create_element('versionCreated', _text => $self->_formatter->format_datetime(DateTime->now(time_zone => 'local'))));
@@ -365,7 +324,7 @@ sub _create_infosources {
 sub _create_authors {
     my ($self, $root) = @_;
     foreach (@{$self->news_item->authors}) {
-        $root->appendChild($self->_create_creator($_));
+        $root->appendChild(my $c = $self->create_element('creator', _name_text => $_));
     }
     return;
 }
@@ -418,19 +377,6 @@ sub _create_content_meta {
         $self->scheme_manager->add_role($hl2, 'hltype', 'subtitle');
     }
 
-    if ($self->news_item->credit) {
-        $cm->appendChild($self->create_element('creditline', _text => $self->news_item->credit));
-    }
-
-    foreach (@{$self->news_item->keywords}) {
-        $cm->appendChild($self->create_element('keyword', _text => $_));
-    }
-
-    if ($self->news_item->description) {
-        $cm->appendChild(my $desc = $self->create_element('description', _text => $self->news_item->description));
-        $self->scheme_manager->add_role($desc, 'drol', 'caption');
-    }
-
     $root->appendChild($cm);
 
     my @asserts = $self->_create_asserts();
@@ -457,11 +403,6 @@ sub _create_content {
     $body->appendChild($_) foreach (@paras);
 
     $cs->appendChild($inlinexml);
-    foreach (sort keys %{$self->news_item->remotes}) {
-        my $rc = $self->create_element('remoteContent', href => $_);
-        $self->_create_remote_content($rc, $self->news_item->remotes->{$_});
-        $cs->appendChild($rc);
-    }
     return;
 }
 
@@ -612,6 +553,6 @@ Philipp Gortan  C<< <philipp.gortan@apa.at> >>
 
 =head1 LICENCE AND COPYRIGHT
 
-Copyright (c) 2013-2014, APA-IT. All rights reserved.
+Copyright (c) 2013, APA-IT. All rights reserved.
 
 See L<XML::NewsML_G2> for the license.
