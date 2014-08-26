@@ -7,12 +7,14 @@ use namespace::autoclean;
 
 extends 'XML::NewsML_G2::News_Item';
 
+has '+remotes', isa => 'HashRef[XML::NewsML_G2::Picture]';
+
 1;
 __END__
 
 =head1 NAME
 
-XML::NewsML_G2::News_Item_Picture - a picture news item (story)
+XML::NewsML_G2::News_Item_Picture - a picture news item
 
 =for test_synopsis
     my ($provider, $service, $genre1, $genre2);
@@ -28,8 +30,21 @@ XML::NewsML_G2::News_Item_Picture - a picture news item (story)
          service => $service,
         );
 
-    $ni->add_genre($genre1, $genre2);
-    $ni->add_source('APA');
+    my $pic = XML::NewsML_G2::Picture->new
+        (mimetype => 'image/jpg',
+         rendition => 'highRes',
+         width => 1600,
+         height => 1024
+        );
+
+    my $thumb = XML::NewsML_G2::Picture->new
+        (mimetype => 'image/jpg',
+         rendition => 'thumb',
+         width => 48,
+         height => 32
+        );
+    $ni->add_remote('file://tmp/files/123.jpg', $pic);
+    $ni->add_remote('file://tmp/files/123.thumb.jpg', $thumb);
 
 =head1 AUTHOR
 

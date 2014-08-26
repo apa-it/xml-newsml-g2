@@ -8,7 +8,7 @@ use namespace::autoclean;
 
 
 foreach (qw(desk hltype role ind geo org topic crel crol svc isbn ean isrol
-nprov ninat stat sig iso3166_1a2 genre isin medtop)) {
+nprov ninat stat sig iso3166_1a2 genre isin medtop rnd colsp loutorient)) {
     has $_, isa => 'XML::NewsML_G2::Scheme', is => 'rw';
 }
 
@@ -18,6 +18,16 @@ sub get_all_schemes {
     my $self = shift;
 
     return grep {defined} map {$self->$_()} sort $self->meta->get_attribute_list();
+}
+
+sub build_qcode {
+    my ($self, $name, $value) = @_;
+
+    my $getter = $self->can($name) or croak "No schema named '$name'!";
+    my $scheme = $getter->($self);
+    return unless ($scheme and ($scheme->uri or $scheme->catalog));
+
+    return $scheme->alias . ':' . $value;
 }
 
 sub add_qcode_or_literal {
@@ -34,11 +44,11 @@ sub add_qcode {
 
 sub add_role {
     my ($self, $elem, $name, $value) = @_;
-    my $getter = $self->can($name) or croak "No schema named '$name'!";
-    my $scheme = $getter->($self);
-    return unless $scheme;
 
-    $elem->setAttribute('role', $scheme->alias . ':' . $value);
+    my $role = $self->build_qcode($name, $value);
+    return unless $role;
+
+    $elem->setAttribute('role', $role);
     return 1;
 }
 
@@ -47,11 +57,10 @@ sub add_role {
 sub _add_qcode {
     my ($self, $elem, $name, $value) = @_;
 
-    my $getter = $self->can($name) or croak "No schema named '$name'!";
-    my $scheme = $getter->($self);
-    return unless ($scheme and ($scheme->uri or $scheme->catalog));
+    my $qcode = $self->build_qcode($name, $value);
+    return unless $qcode;
 
-    $elem->setAttribute('qcode', $scheme->alias . ':' . $value);
+    $elem->setAttribute('qcode', $qcode);
     return 1;
 }
 
