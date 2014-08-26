@@ -10,3 +10,4 @@
 .old$
 ^Build$
 ^_build/
+^build.sh$
