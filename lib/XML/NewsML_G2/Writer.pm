@@ -61,27 +61,13 @@ sub BUILD {
     (my $my_cls) = reverse split ('::', $self->meta->name);
     (my $ni_cls) = reverse split ('::', $self->_root_item->meta->name);
 
-    my $base_role     = sprintf('XML::NewsML_G2::Role::Writer::%s', $ni_cls);
-    my $specific_role = sprintf(
-        'XML::NewsML_G2::Role::%s::%s', $my_cls, $ni_cls
-        );
-
-    my $role_to_use;
-    eval {
-        $role_to_use = $specific_role if use_module($specific_role);
-    };
-    eval {
-        $role_to_use = $base_role if (!$role_to_use && use_module($base_role));
-    };
-    croak $@ if ($@ && $@ !~ /^Can't locate'/);
-
-    Moose::Util::apply_all_roles($self, $role_to_use) if $role_to_use;
+    my $type_role = sprintf('XML::NewsML_G2::Role::Writer::%s', $ni_cls);
 
     my $g2_version = $self->g2_version;
     $g2_version =~ s/\./_/;
     my $version_role = 'XML::NewsML_G2::Role::Writer_' . $g2_version;
 
-    Moose::Util::apply_all_roles($self, $version_role);
+    Moose::Util::apply_all_roles($self, $type_role, $version_role);
 
     return;
 }
