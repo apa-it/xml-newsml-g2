@@ -8,6 +8,8 @@ use namespace::autoclean;
 extends 'XML::NewsML_G2::News_Item';
 
 has '+remotes', isa => 'HashRef[XML::NewsML_G2::Video]';
+has 'icon', isa => 'ArrayRef[XML::NewsML_G2::Icon]', is => 'rw', default => sub { [] },
+    traits => ['Array'], handles => {add_icon => 'push', has_icon => 'count'};
 
 1;
 __END__

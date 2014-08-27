@@ -40,39 +40,47 @@ XML::NewsML_G2::Video - a video specification
 
 =over 4
 
-=item mimetype
-
-The MIME type of the picture file (e.g. image/jpg)
-
 =item size
 
-The size in bytes of the picture file
+The size in bytes of the video file
 
-= item width
+=item width
 
-The width in pixel of the picture
+The width in pixel of the video 
 
-= item height
+=item height
 
-The height in pixel of the picture
+The height in pixel of the video
 
-= item orientation
+=item duration
 
-The picture orientation (1 is 'upright')
+The playtime of the video in seconds
 
-= item layout
+=item videoframerate
 
-The layout of the picture (horizontal, vertical, square, unaligned)
+The frames/second of the video
 
-= item colorspace
+=item videoavgbitrage
 
-The colorspace used by this picture (e.g. AdobeRGB)
+The bit rate of the video
+
+=item audiosamplerate
+
+The sample rate of the audio
+
+=item audiochannels
+
+The number of audio channels (stereo, mono)
+
+=item mimetype
+
+The MIME type of the video file (e.g. image/jpg)
 
 =back
 
 =head1 AUTHOR
 
-Philipp Gortan  C<< <philipp.gortan@apa.at> >>
+Stefan Hrdlicka  C<< <stefan.hrdlicka@apa.at> >>
 
 =head1 LICENCE AND COPYRIGHT
 

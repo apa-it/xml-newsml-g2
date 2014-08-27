@@ -15,6 +15,7 @@ use XML::NewsML_G2::Location;
 use XML::NewsML_G2::Organisation;
 use XML::NewsML_G2::Picture;
 use XML::NewsML_G2::Video;
+use XML::NewsML_G2::Icon;
 use XML::NewsML_G2::Topic;
 use XML::NewsML_G2::Product;
 use XML::NewsML_G2::Package_Item;

@@ -35,6 +35,11 @@ sub _create_hierarchy {
     return;
 }
 
+sub _create_icon {
+    #overwrite me
+    return;
+}
+
 sub _create_subjects_desk {
     my $self = shift;
     my @res;
@@ -217,6 +222,9 @@ sub _create_content_meta {
     my ($self, $root) = @_;
 
     my $cm = $self->create_element('contentMeta');
+
+    $self->_create_icon($cm);
+
     $cm->appendChild($self->create_element('urgency', _text => $self->news_item->priority));
 
     if ($self->news_item->content_created) {

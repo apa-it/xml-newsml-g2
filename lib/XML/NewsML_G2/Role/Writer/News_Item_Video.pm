@@ -11,10 +11,9 @@ around '_build_g2_catalog_schemes' => sub {
     my ( $orig, $self, @args ) = @_;
     my $result = $self->$orig(@args);
     $result->{rnd} = undef;
-    $result->{colsp} = undef;
-    $result->{loutorient} = undef;
     return $result;
 };
+
 
 sub _set_item_class {
     my ($self, $ic) = @_;
@@ -24,15 +23,33 @@ sub _set_item_class {
 
 
 sub _create_remote_content {
-    my ($self, $root, $picture) = @_;
+    my ($self, $root, $video) = @_;
 
     foreach (qw/size width height duration videoframerate videoavgbitrate audiosamplerate/) {
-        $root->setAttribute( $_, $picture->$_ ) if defined $picture->$_;
+        $root->setAttribute( $_, $video->$_ ) if defined $video->$_;
     }
-    $root->setAttribute('contenttype', $picture->mimetype) if $picture->mimetype;
+    $root->setAttribute('contenttype', $video->mimetype) if $video->mimetype;
     
-    my $audiochannels = $self->scheme_manager->build_qcode('adc', $picture->audiochannels);
+    my $audiochannels = $self->scheme_manager->build_qcode('adc', $video->audiochannels);
     $root->setAttribute('audiochannels', $audiochannels) if $audiochannels;
+}
+
+sub _create_icon {
+    my ($self, $root) = @_;
+
+    for my $icon (@{$self->news_item->icon}) {
+        my $rendition = $self->scheme_manager->build_qcode('rnd', $icon->rendition);
+        my $icon_element = $self->create_element(
+            'icon',
+            rendition => $rendition,
+        );
+
+        foreach (qw/href width height/) {
+            next unless $icon->$_;
+            $icon_element->setAttribute($_, $icon->$_);
+        }
+        $root->appendChild($icon_element);
+    }
 }
 
 1;
@@ -40,7 +57,7 @@ __END__
 
 =head1 NAME
 
-XML::NewsML_G2::Roles::Writer::News_Item_Picture - Role for writing news items of type 'picture'
+XML::NewsML_G2::Role::Writer::News_Item_Video - Role for writing news items of type 'video'
 
 =head1 DESCRIPTION
 
@@ -48,7 +65,7 @@ This module serves as a role for all NewsML-G2 writer classes and get automatica
 
 =head1 AUTHOR
 
-Christian Eder  C<< <christian.eder@apa.at> >>
+Stefan Hrdlicka  C<< <stefan.hrdlicka@apa.at> >>
 
 =head1 LICENCE AND COPYRIGHT
 
