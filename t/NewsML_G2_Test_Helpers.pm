@@ -14,7 +14,7 @@ use strict;
 
 use XML::NewsML_G2;
 
-our @EXPORT_OK = qw(validate_g2 create_ni_text create_ni_picture);
+our @EXPORT_OK = qw(validate_g2 create_ni_text create_ni_picture create_ni_video);
 
 our %EXPORT_TAGS = (vars => [qw($guid $see_also_guid $embargo $apa_id
     $title $subtitle $slugline $creditline $embargo_text $note $prov_apa
@@ -189,6 +189,10 @@ sub create_ni_picture {
         'XML::NewsML_G2::News_Item_Picture',
         {photographer => 'Homer Simpson'}, @_
         );
+}
+
+sub create_ni_video {
+    _create_ni('XML::NewsML_G2::News_Item_Video', @_);
 }
 
 1;
