@@ -1,4 +1,4 @@
-package XML::NewsML_G2::Package;
+package XML::NewsML_G2::Package_Item;
 
 # $Id$
 

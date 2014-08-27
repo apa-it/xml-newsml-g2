@@ -50,7 +50,7 @@ my $thumb = XML::NewsML_G2::Picture->new(mimetype => 'image/jpg', width => 48, h
 
 ok($ni->add_remote('file://tmp/files/123.jpg', $pic), 'Adding remote picture works');
 ok($ni->add_remote('file://tmp/files/123.thumb.jpg', $thumb), 'Adding remote thumbnail works');
-my $writer = XML::NewsML_G2::News_Item_Writer->new(news_item => $ni, scheme_manager => $sm, g2_version => 2.9);
+my $writer = XML::NewsML_G2::Writer::News_Item->new(news_item => $ni, scheme_manager => $sm, g2_version => 2.9);
 
 # 2.9 checks
 ok(my $dom = $writer->create_dom(), 'create DOM');

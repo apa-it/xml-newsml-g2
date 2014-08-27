@@ -1,4 +1,4 @@
-package XML::NewsML_G2::Role::Writer::Package;
+package XML::NewsML_G2::Role::Writer::Package_Item;
 
 # $Id$
 

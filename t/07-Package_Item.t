@@ -15,7 +15,7 @@ use XML::NewsML_G2;
 
 my %args = (language => 'de', provider => $prov_apa);
 
-ok(my $pi = XML::NewsML_G2::Package->new(%args), 'create Package');
+ok(my $pi = XML::NewsML_G2::Package_Item->new(%args), 'create Package_Item');
 isa_ok($pi->root_group, 'XML::NewsML_G2::Group', 'package\'s root group');
 is_deeply($pi->root_group->items, [], 'root group is empty');
 
@@ -29,7 +29,7 @@ cmp_ok(@{$pi->root_group->items}, '==', 2, 'root group has two items now');
 my %schemes;
 ok(my $sm = XML::NewsML_G2::Scheme_Manager->new(%schemes), 'create Scheme Manager');
 
-ok(my $writer = XML::NewsML_G2::Writer::Package->new(package_item => $pi, scheme_manager => $sm), 'create package writer');
+ok(my $writer = XML::NewsML_G2::Writer::Package_Item->new(package_item => $pi, scheme_manager => $sm), 'create package writer');
 
 ok(my $dom = $writer->create_dom(), 'package writer creates DOM');
 

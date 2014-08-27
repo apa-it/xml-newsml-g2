@@ -1,4 +1,4 @@
-package XML::NewsML_G2::Writer::Package;
+package XML::NewsML_G2::Writer::Package_Item;
 
 # $Id$
 
@@ -6,7 +6,7 @@ use Moose;
 
 extends 'XML::NewsML_G2::Writer';
 
-has 'package_item', isa => 'XML::NewsML_G2::Package', is => 'ro', required => 1;
+has 'package_item', isa => 'XML::NewsML_G2::Package_Item', is => 'ro', required => 1;
 has '+_root_node_name', default => 'packageItem';
 
 sub _build__root_item {

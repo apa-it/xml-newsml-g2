@@ -15,12 +15,12 @@ use XML::NewsML_G2::Organisation;
 use XML::NewsML_G2::Picture;
 use XML::NewsML_G2::Topic;
 use XML::NewsML_G2::Product;
-use XML::NewsML_G2::Package;
+use XML::NewsML_G2::Package_Item;
 use XML::NewsML_G2::Group;
 use XML::NewsML_G2::Scheme_Manager;
 use XML::NewsML_G2::Scheme;
 use XML::NewsML_G2::Writer::News_Item;
-use XML::NewsML_G2::Writer::Package;
+use XML::NewsML_G2::Writer::Package_Item;
 
 use warnings;
 use strict;
