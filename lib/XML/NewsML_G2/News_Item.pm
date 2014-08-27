@@ -14,7 +14,7 @@ extends 'XML::NewsML_G2::AnyItem';
 
 has 'title', isa => 'Str', is => 'ro', required => 1;
 has 'subtitle', isa => 'Str', is => 'rw';
-has 'description', isa => 'Str', is => 'rw';
+has 'caption', isa => 'Str', is => 'rw';
 has 'paragraphs', isa => 'XML::LibXML::Node', is => 'rw';
 has 'content_created', isa => 'DateTime', is => 'ro', lazy => 1, builder => '_build_content_created';
 has 'content_modified', isa => 'DateTime', is => 'ro';
@@ -142,7 +142,7 @@ DateTime instance
 
 Human readable credit line
 
-=item description
+=item caption
 
 Human readable content description string
 

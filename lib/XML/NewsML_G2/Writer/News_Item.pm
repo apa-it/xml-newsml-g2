@@ -269,8 +269,8 @@ sub _create_content_meta {
         $cm->appendChild($self->create_element('keyword', _text => $_));
     }
 
-    if ($self->news_item->description) {
-        $cm->appendChild(my $desc = $self->create_element('description', _text => $self->news_item->description));
+    if ($self->news_item->caption) {
+        $cm->appendChild(my $desc = $self->create_element('description', _text => $self->news_item->caption));
         $self->scheme_manager->add_role($desc, 'drol', 'caption');
     }
 

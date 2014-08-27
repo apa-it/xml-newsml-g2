@@ -9,7 +9,7 @@ extends 'XML::NewsML_G2::News_Item';
 
 has '+remotes', isa => 'HashRef[XML::NewsML_G2::Picture]';
 
-has 'photographer', isa => 'Str', is => 'rw', required => 1;
+has 'photographer', isa => 'Str', is => 'rw';
 
 1;
 __END__

@@ -19,10 +19,11 @@ around '_build_g2_catalog_schemes' => sub {
 before '_create_authors' => sub {
     my ($self, $root) = @_;
 
-    my $c = $self->_create_creator($self->news_item->photographer);
-    $root->appendChild($c);
-    $self->scheme_manager->add_qcode($c, 'crol', 'photographer');
-
+    if ($self->news_item->photographer) {
+        my $c = $self->_create_creator($self->news_item->photographer);
+        $root->appendChild($c);
+        $self->scheme_manager->add_qcode($c, 'crol', 'photographer');
+    }
     return;
 };
 

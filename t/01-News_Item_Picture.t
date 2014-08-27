@@ -42,7 +42,7 @@ foreach (qw(crel desk geo svc role ind org topic hltype)) {
 
 ok(my $sm = XML::NewsML_G2::Scheme_Manager->new(%schemes), 'create Scheme Manager');
 my $ni = create_ni_picture();
-$ni->description('A ricebag is about to fall over');
+$ni->caption('A ricebag is about to fall over');
 
 my $pic = XML::NewsML_G2::Picture->new(mimetype => 'image/jpg', width => 1600, height => 1024, layout => 'vertical', rendition => 'highRes');
 my $thumb = XML::NewsML_G2::Picture->new(mimetype => 'image/jpg', width => 48, height => 32, rendition => 'thumb');
