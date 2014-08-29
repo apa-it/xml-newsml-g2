@@ -7,10 +7,10 @@ use XML::NewsML_G2::Types;
 use Moose;
 use namespace::autoclean;
 
-has 'size', isa => 'Int', is => 'rw', required => 1;
-has 'width', isa => 'Int', is => 'rw', required => 1;
-has 'height', isa => 'Int', is => 'rw', required => 1;
-has 'duration', isa => 'Int', is => 'rw', required => 1;
+has 'size', isa => 'Int', is => 'rw';
+has 'width', isa => 'Int', is => 'rw';
+has 'height', isa => 'Int', is => 'rw';
+has 'duration', isa => 'Int', is => 'rw';
 has 'videoframerate', isa => 'Int', is => 'rw';
 has 'videoavgbitrate', isa => 'Int', is => 'rw';
 has 'mimetype', isa => 'Str', is => 'rw';
