@@ -35,3 +35,24 @@ sub _build_guid {
 __PACKAGE__->meta->make_immutable;
 
 1;
+__END__
+
+=head1 NAME
+
+XML::NewsML_G2::AnyItem - base class for news and package items
+
+=head1 DESCRIPTION
+
+This module acts as a base class for NewsML-G2 news items and package
+items. For a documentation of the attributes it provides, please see
+L<XML::NewsML_G2::News_Item>.
+
+=head1 AUTHOR
+
+Philipp Gortan  C<< <philipp.gortan@apa.at> >>
+
+=head1 LICENCE AND COPYRIGHT
+
+Copyright (c) 2014, APA-IT. All rights reserved.
+
+See L<XML::NewsML_G2> for the license.

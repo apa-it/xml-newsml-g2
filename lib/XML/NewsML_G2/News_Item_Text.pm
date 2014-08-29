@@ -34,6 +34,10 @@ XML::NewsML_G2::News_Item_Text - a text news item (story)
     $ni->add_source('APA');
     $ni->add_paragraph('blah blah blah');
 
+=head1 ATTRIBUTES
+
+For a list of attributes, please see L<XML::NewsML_G2::News_Item>.
+
 =head1 AUTHOR
 
 Philipp Gortan  C<< <philipp.gortan@apa.at> >>

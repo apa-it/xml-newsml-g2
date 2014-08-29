@@ -133,7 +133,7 @@ sub _create_ni {
         provider         => $prov_apa,
         usage_terms      => 'view only with a full beer',
         message_id       => $apa_id,
-        title            => $title,
+        title            => ($opts{id} ? "$title $opts{id}" : $title),
         subtitle         => $subtitle,
         slugline         => $slugline,
         embargo          => DateTime::Format::XSD->parse_datetime($embargo),
