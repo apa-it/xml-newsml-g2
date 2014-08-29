@@ -28,7 +28,7 @@ sub remotes_checks {
     like($xpc->findvalue('//nar:description'), qr|ricebag.*over|, 'correct description');
     like($xpc->findvalue('//nar:description'), qr|ricebag.*over|, 'correct description');
 
-    if (version->parse("v$version" >= version->parse('v2.14'))) {
+    if (version->parse("v$version") >= version->parse('v2.14')) {
         like($xpc->findvalue('//nar:contentSet/nar:remoteContent/@layoutorientation'), qr/loutorient:unaligned/, 'correct layout in XML');
     }
 
@@ -68,8 +68,8 @@ ok($dom = $writer->create_dom(), '2.12 writer creates DOM');
 ok($xpc = XML::LibXML::XPathContext->new($dom), 'create XPath context for DOM tree');
 $xpc->registerNs('nar', 'http://iptc.org/std/nar/2006-10-01/');
 $xpc->registerNs('xhtml', 'http://www.w3.org/1999/xhtml');
-remotes_checks($dom, $xpc, $writer->g2_version)
-;like($xpc->findvalue('//nar:creator/nar:name'), qr/dw.*dk.*wh/, 'correct authors in XML, 2.12-styoe');
+remotes_checks($dom, $xpc, $writer->g2_version);
+like($xpc->findvalue('//nar:creator/nar:name'), qr/dw.*dk.*wh/, 'correct authors in XML, 2.12-styoe');
 like($xpc->findvalue('//nar:creator/nar:name'), qr/Homer Simpson/, 'correct photographer in XML, 2.12-styoe');
 validate_g2($dom, '2.12');
 
