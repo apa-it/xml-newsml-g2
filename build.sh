@@ -12,4 +12,4 @@ JENKINSPERLINC="$WORKSPACE/crs/src/perllib"
 perl -I "$JENKINSPERLINC" Build.PL
 ./Build
 # ./Build install # don't
-prove -I "$JENKINSPERLINC"  -r --timer --formatter=TAP::Formatter::JUnit -b t > test_results.xml
+prove -I "$JENKINSPERLINC" -mr --timer --formatter=TAP::Formatter::JUnit -b t > test_results.xml
