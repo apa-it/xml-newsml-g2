@@ -47,10 +47,6 @@ height of the picture/video
 
 =back
 
-=head2 METHODS
-
-=back
-
 =head1 AUTHOR
 
 Stefan Hrdlicka  C<< <stefan.hrdlicka@apa.at> >>
