@@ -96,7 +96,7 @@ foreach my $ni (create_ni_text(), create_ni_picture()) {
     $xpc->registerNs('xhtml', 'http://www.w3.org/1999/xhtml');
     basic_checks($dom, $xpc, lc $ic);
     like($xpc->findvalue('//nar:infoSource/nar:name'), qr/DPA/, 'correct source in XML, 2.12-style');
-    like($xpc->findvalue('//nar:creator/nar:name'), qr/dw.*dk.*wh/, 'correct authors in XML, 2.12-styoe');
+    like($xpc->findvalue('//nar:creator/nar:name'), qr/dw.*dk.*wh/, 'correct authors in XML, 2.12-style');
     validate_g2($dom, '2.12');
 
     #diag($dom->serialize(1));
