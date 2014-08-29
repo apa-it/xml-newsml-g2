@@ -14,7 +14,7 @@ use strict;
 
 use XML::NewsML_G2;
 
-our @EXPORT_OK = qw(validate_g2 create_ni_text create_ni_picture create_ni_video);
+our @EXPORT_OK = qw(validate_g2 create_ni_text create_ni_picture create_ni_video create_ni_graphics test_ni_picture test_ni_versions);
 
 our %EXPORT_TAGS = (vars => [qw($guid_text $guid_picture
     $see_also_guid $embargo $apa_id $title $subtitle $slugline
@@ -193,8 +193,81 @@ sub create_ni_picture {
         );
 }
 
+sub create_ni_graphics {
+    _create_ni(
+        'XML::NewsML_G2::News_Item_Graphics',
+        {photographer => 'Homer Simpson'}, @_
+        );
+}
+
 sub create_ni_video {
     _create_ni('XML::NewsML_G2::News_Item_Video', @_);
+}
+
+sub picture_checks {
+    my ($dom, $xpc, $version) = @_;
+
+    like($xpc->findvalue('//nar:contentSet/nar:remoteContent/@rendition'), qr|rnd:highRes|, 'correct rendition in XML');
+    like($xpc->findvalue('//nar:contentSet/nar:remoteContent/@rendition'), qr|rnd:thumb|, 'correct rendition in XML');
+    like($xpc->findvalue('//nar:contentSet/nar:remoteContent/@href'), qr|file://tmp/files/123.*jpg|, 'correct href in XML');
+    like($xpc->findvalue('//nar:contentSet/nar:remoteContent/@contenttype'), qr|image/jpg|, 'correct mimetype in XML');
+    like($xpc->findvalue('//nar:description'), qr|ricebag.*over|, 'correct description');
+    like($xpc->findvalue('//nar:description'), qr|ricebag.*over|, 'correct description');
+
+    if (version->parse("v$version") >= version->parse('v2.14')) {
+        like($xpc->findvalue('//nar:contentSet/nar:remoteContent/@layoutorientation'), qr/loutorient:unaligned/, 'correct layout in XML');
+    }
+
+    return;
+}
+
+sub test_ni_versions {
+    my ($ni, $sm, %version_checks) = @_;
+
+    for my $version (qw/2.9 2.12/) {
+        ok(my $writer = XML::NewsML_G2::Writer::News_Item->new(news_item => $ni, scheme_manager => $sm, g2_version => $version), "creating $version writer");
+        ok(my $dom = $writer->create_dom(), 'create DOM');
+        ok(my $xpc = XML::LibXML::XPathContext->new($dom), 'create XPath context for DOM tree');
+        $xpc->registerNs('nar', 'http://iptc.org/std/nar/2006-10-01/');
+        $xpc->registerNs('xhtml', 'http://www.w3.org/1999/xhtml');
+        my $version_check=$version_checks{$version} || $version_checks{'*'};
+        $version_check->($dom, $writer, $xpc, $version);
+        validate_g2($dom, $version);
+        # diag($dom->serialize(1));
+    }
+}
+
+sub test_ni_picture {
+    my ($ni) = @_;
+
+    my %schemes;
+    foreach (qw(crel desk geo svc role ind org topic hltype)) {
+        $schemes{$_} = XML::NewsML_G2::Scheme->new(alias => "apa$_", uri => "http://cv.apa.at/$_/");
+    }
+
+    ok(my $sm = XML::NewsML_G2::Scheme_Manager->new(%schemes), 'create Scheme Manager');
+    $ni->caption('A ricebag is about to fall over');
+
+    my $pic = XML::NewsML_G2::Picture->new(mimetype => 'image/jpg', width => 1600, height => 1024, layout => 'vertical', rendition => 'highRes');
+    my $thumb = XML::NewsML_G2::Picture->new(mimetype => 'image/jpg', width => 48, height => 32, rendition => 'thumb');
+
+    ok($ni->add_remote('file://tmp/files/123.jpg', $pic), 'Adding remote picture works');
+    ok($ni->add_remote('file://tmp/files/123.thumb.jpg', $thumb), 'Adding remote thumbnail works');
+
+    test_ni_versions($ni,$sm, '2.9' => sub {
+        my ($dom, $writer, $xpc, $version) = @_;
+        picture_checks($dom, $xpc, $writer->g2_version);
+        like($xpc->findvalue('//nar:creator/@literal'), qr/Homer Simpson/, "correct photographer in XML, $version-style");
+        like($xpc->findvalue('//nar:creator/@literal'), qr/dw.*dk.*wh/, "correct authors in XML, $version-style");
+                      },
+                      '2.12' => sub {
+                          my ($dom, $writer, $xpc, $version) = @_;
+                          picture_checks($dom, $xpc, $writer->g2_version);
+                          like($xpc->findvalue('//nar:creator/nar:name'), qr/dw.*dk.*wh/, 'correct authors in XML, 2.12-style');
+                          like($xpc->findvalue('//nar:creator/nar:name'), qr/Homer Simpson/, 'correct photographer in XML, 2.12-style');
+                      });
+
+    return $sm;
 }
 
 1;

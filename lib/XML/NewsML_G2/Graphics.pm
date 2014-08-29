@@ -1,4 +1,4 @@
-package XML::NewsML_G2::Picture;
+package XML::NewsML_G2::Graphics;
 
 # $Id$
 
@@ -6,17 +6,9 @@ use XML::NewsML_G2::Types;
 
 use Moose;
 use namespace::autoclean;
+use XML::NewsML_G2::Picture;
 
-has 'rendition', isa => 'Str', is => 'rw', required => 1;
-has 'mimetype', isa => 'Str', is => 'rw', required => 1;
-has 'size', isa => 'Int', is => 'rw';
-has 'width', isa => 'Int', is => 'rw';
-has 'height', isa => 'Int', is => 'rw';
-has 'orientation', isa => 'Int', is => 'rw', default => 1;
-has 'layout', isa => 'XML::NewsML_G2::Types::PictureLayout', is => 'rw',
-    default => 'unaligned';
-has 'colorspace', isa => 'Str', is => 'rw';
-has 'altId', isa => 'Str', is => 'rw';
+extends 'XML::NewsML_G2::Picture';
 
 __PACKAGE__->meta->make_immutable;
 
@@ -25,14 +17,15 @@ __END__
 
 =head1 NAME
 
-XML::NewsML_G2::Picture - a picture specification
+XML::NewsML_G2::Graphics - a graphics specification
 
 =head1 SYNOPSIS
 
-    my $pic = XML::NewsML_G2::Picture->new
+    my $pic = XML::NewsML_G2::Graphics->new
         (rendition => 'highRes',
          mimetype => 'image/jpg',
-         size => 21123
+         size => 21123,
+         altId => '1031-14-Wetter',
         );
 
 =head1 ATTRIBUTES
@@ -67,15 +60,11 @@ The layout of the picture (horizontal, vertical, square, unaligned)
 
 The colorspace used by this picture (e.g. AdobeRGB)
 
-= item altId
-
-Alternative identifiers. Optional.
-
 =back
 
 =head1 AUTHOR
 
-Christian Eder  C<< <christian.eder@apa.at> >>
+Mario Paumann  C<< <mario.paumann@apa.at> >>
 
 =head1 LICENCE AND COPYRIGHT
 

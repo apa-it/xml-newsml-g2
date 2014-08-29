@@ -43,6 +43,10 @@ sub _create_remote_content {
         $self->scheme_manager->build_qcode('colsp', $picture->colorspace);
     $root->setAttribute('colourspace', $colsp) if $colsp;
 
+    if (my $altId=$picture->altId) {
+        $root->appendChild($self->create_element('altId', _text => $altId));
+    }
+
     # XXX supported in version >= 2.14
     #my $layout =
     #    $self->scheme_manager->build_qcode('loutorient', $picture->layout);
