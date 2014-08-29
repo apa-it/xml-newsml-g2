@@ -27,11 +27,6 @@ before '_create_authors' => sub {
     return;
 };
 
-sub _set_item_class {
-    my ($self, $ic) = @_;
-    $self->scheme_manager->add_qcode($ic, 'ninat', 'picture');
-}
-
 sub _create_remote_content {
     my ($self, $root, $picture) = @_;
 

@@ -122,7 +122,7 @@ sub _create_item_meta {
 
     my $im = $self->create_element('itemMeta');
     $im->appendChild(my $ic = $self->create_element('itemClass'));
-    $self->_set_item_class($ic);
+    $self->scheme_manager->add_qcode($ic, 'ninat', $self->_root_item->nature);
 
     $im->appendChild(my $p = $self->create_element('provider', _name_text => $self->_root_item->provider));
     $self->scheme_manager->add_qcode_or_literal($p, 'nprov', $self->_root_item->provider->qcode);

@@ -7,6 +7,7 @@ use namespace::autoclean;
 
 extends 'XML::NewsML_G2::AnyItem';
 
+has '+nature', default => 'composite';
 has 'root_group', isa => 'XML::NewsML_G2::Group', is => 'ro', lazy => 1, builder => '_build_root_group';
 
 sub _build_sent {

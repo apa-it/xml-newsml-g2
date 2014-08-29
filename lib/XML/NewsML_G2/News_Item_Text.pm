@@ -7,6 +7,8 @@ use namespace::autoclean;
 
 extends 'XML::NewsML_G2::News_Item';
 
+has '+nature', default => 'text';
+
 1;
 __END__
 

@@ -5,8 +5,6 @@ package XML::NewsML_G2::Role::Writer;
 use Moose::Role;
 use namespace::autoclean;
 
-requires '_set_item_class';
-
 sub _create_remote_content {}
 
 1;

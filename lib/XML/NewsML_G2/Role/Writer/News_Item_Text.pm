@@ -7,11 +7,6 @@ use namespace::autoclean;
 
 with 'XML::NewsML_G2::Role::Writer';
 
-sub _set_item_class {
-    my ($self, $ic) = @_;
-    $self->scheme_manager->add_qcode($ic, 'ninat', 'text');
-};
-
 
 1;
 __END__

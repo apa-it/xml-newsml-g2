@@ -15,13 +15,6 @@ around '_build_g2_catalog_schemes' => sub {
 };
 
 
-sub _set_item_class {
-    my ($self, $ic) = @_;
-    $self->scheme_manager->add_qcode($ic, 'ninat', 'video');
-    
-}
-
-
 sub _create_remote_content {
     my ($self, $root, $video) = @_;
 

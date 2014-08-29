@@ -16,13 +16,15 @@ use XML::NewsML_G2;
 
 our @EXPORT_OK = qw(validate_g2 create_ni_text create_ni_picture create_ni_video);
 
-our %EXPORT_TAGS = (vars => [qw($guid $see_also_guid $embargo $apa_id
-    $title $subtitle $slugline $creditline $embargo_text $note $prov_apa
-    $svc_apa_bd $time1 $time2 @text @genres $org $desk @keywords)]);
+our %EXPORT_TAGS = (vars => [qw($guid_text $guid_picture
+    $see_also_guid $embargo $apa_id $title $subtitle $slugline
+    $creditline $embargo_text $note $prov_apa $svc_apa_bd $time1
+    $time2 @text @genres $org $desk @keywords)]);
 
 Exporter::export_ok_tags('vars');
 
-our $guid = 'urn:newsml:apa.at:20120315:APA0379';
+our $guid_text = 'urn:newsml:apa.at:20120315:APA0379';
+our $guid_picture = 'urn:newsml:apa.at:20120315:ABD0111';
 our $see_also_guid = 'urn:newsml:apa.at:20120315:APA0123';
 our $apa_id = 'APA0379';
 our $title = 'Saisonstart im Schweizerhaus: Run aufs Krügerl im Prater';
@@ -126,7 +128,7 @@ sub _create_ni {
     $hash->{service} = $svc_apa_bd unless ($opts{no_required_scheme});
 
     ok(my $ni = $ni_cls->new
-       (guid             => $guid,
+       (guid             => $guid_text, # overwrite in $hash
         see_also         => $see_also_guid,
         provider         => $prov_apa,
         usage_terms      => 'view only with a full beer',
@@ -187,7 +189,7 @@ sub create_ni_text {
 sub create_ni_picture {
     _create_ni(
         'XML::NewsML_G2::News_Item_Picture',
-        {photographer => 'Homer Simpson'}, @_
+        {photographer => 'Homer Simpson', guid => $guid_picture}, @_
         );
 }
 

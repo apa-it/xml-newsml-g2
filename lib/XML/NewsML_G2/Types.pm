@@ -8,6 +8,8 @@ use namespace::autoclean;
 
 enum 'XML::NewsML_G2::Types::PictureLayout', [qw(horizontal vertical square unaligned)];
 
+enum 'XML::NewsML_G2::Types::Nature', [qw(text picture video composite)];
+
 1;
 __END__
 

@@ -19,7 +19,6 @@ use XML::NewsML_G2;
 sub basic_checks {
     my ($dom, $xpc, $ic) = @_;
 
-    is($xpc->findvalue('nar:newsItem/@guid'), $guid, 'correct guid in XML');
     like($xpc->findvalue('//nar:copyrightHolder/nar:name'), qr/APA/, 'correct copyright in XML');
     like($xpc->findvalue('//nar:copyrightNotice'), qr/www.apa.at/, 'correct copyright notice in XML');
     like($xpc->findvalue('//nar:usageTerms'), qr/full beer/, 'correct usage terms in XML');
@@ -75,6 +74,7 @@ foreach my $ni (create_ni_text(), create_ni_picture()) {
     for my $t (@text) {
         $paragraphs->appendChild($writer->create_element('p', _ns => $writer->xhtml_ns, _text => $t));
     }
+    my $correct_guid = ($ni->nature eq 'picture' ? $guid_picture : $guid_text);
 
     ok($ni->paragraphs($paragraphs), 'set paragraphs');
 
@@ -84,6 +84,7 @@ foreach my $ni (create_ni_text(), create_ni_picture()) {
     $xpc->registerNs('nar', 'http://iptc.org/std/nar/2006-10-01/');
     $xpc->registerNs('xhtml', 'http://www.w3.org/1999/xhtml');
     basic_checks($dom, $xpc, lc $ic);
+    is($xpc->findvalue('nar:newsItem/@guid'), $correct_guid, 'correct guid in XML');
     like($xpc->findvalue('//nar:infoSource/@literal'), qr/DPA/, 'correct source in XML, 2.9-style');
     like($xpc->findvalue('//nar:creator/@literal'), qr/dw.*dk.*wh/, 'correct authors in XML, 2.9-style');
     validate_g2($dom, '2.9');
@@ -95,6 +96,7 @@ foreach my $ni (create_ni_text(), create_ni_picture()) {
     $xpc->registerNs('nar', 'http://iptc.org/std/nar/2006-10-01/');
     $xpc->registerNs('xhtml', 'http://www.w3.org/1999/xhtml');
     basic_checks($dom, $xpc, lc $ic);
+    is($xpc->findvalue('nar:newsItem/@guid'), $correct_guid, 'correct guid in XML');
     like($xpc->findvalue('//nar:infoSource/nar:name'), qr/DPA/, 'correct source in XML, 2.12-style');
     like($xpc->findvalue('//nar:creator/nar:name'), qr/dw.*dk.*wh/, 'correct authors in XML, 2.12-style');
     validate_g2($dom, '2.12');
