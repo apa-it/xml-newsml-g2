@@ -21,6 +21,14 @@ sub BUILD {
     die 'You need to register a scheme for groups' unless $test_group;
 }
 
+
+sub _create_item_meta_title {
+    my ($self, $im) = @_;
+    my $t = $self->package_item->title;
+    $im->appendChild($self->create_element('title', _text => $t)) if $t;
+    return;
+}
+
 sub _create_rights_info {
 }
 

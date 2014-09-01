@@ -58,6 +58,11 @@ L<XML::NewsML_G2::Scheme_Manager>.
 Reference to an array of items contained in this group. Each item must
 be a L<XML::NewsML_G2::News_Item> or a L<XML::NewsML_G2::Group>.
 
+=item mode
+
+A group can have one of the following modes: bag, sequential,
+alternative. Defaulto to "bag".
+
 =back
 
 =head1 METHODS

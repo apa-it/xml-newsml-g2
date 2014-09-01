@@ -9,6 +9,8 @@ use XML::NewsML_G2::Group;
 extends 'XML::NewsML_G2::AnyItem';
 
 has '+nature', default => 'composite';
+has 'title', isa => 'Str', is => 'ro';
+
 has 'root_group', isa => 'XML::NewsML_G2::Group', is => 'ro', lazy => 1,
     builder => '_build_root_group';
 
@@ -52,6 +54,9 @@ of L<XML::NewsML_G2::Group>.
 =head1 ATTRIBUTES
 
 =over 4
+
+=item title
+Optional title of the package.
 
 =item root_group
 

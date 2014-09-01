@@ -117,6 +117,9 @@ sub _create_catalogs {
     return;
 }
 
+sub _create_item_meta_title {
+}
+
 sub _create_item_meta {
     my ($self, $root) = @_;
 
@@ -141,6 +144,7 @@ sub _create_item_meta {
         $self->scheme_manager->add_qcode($svc, 'svc', $self->_root_item->service->qcode);
 
     }
+    $self->_create_item_meta_title($im);
 
     if ($self->_root_item->embargo_text) {
         $im->appendChild(my $e = $self->create_element('edNote', _text => $self->_root_item->embargo_text));
