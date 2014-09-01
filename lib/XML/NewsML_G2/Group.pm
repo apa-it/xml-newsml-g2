@@ -6,6 +6,8 @@ use Moose;
 use XML::NewsML_G2::News_Item;
 
 has 'role', isa => 'Str', is => 'ro', required => 1;
+has 'mode', isa => 'XML::NewsML_G2::Types::Group_Mode', is => 'rw', default => 'bag';
+
 has 'items', isa =>
     'ArrayRef[XML::NewsML_G2::News_Item|XML::NewsML_G2::Group]',
     is => 'ro', default => sub {[]},

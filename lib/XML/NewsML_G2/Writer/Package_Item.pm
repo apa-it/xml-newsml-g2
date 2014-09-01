@@ -32,8 +32,13 @@ sub _create_group {
 
     $parent->appendChild(
         my $result = $self->create_element('group', id => $id));
-
     $self->scheme_manager->add_role($result, 'group', $group->role);
+
+    if ($group->mode ne 'bag') {
+        my ($mode) = $group->mode =~ /^(...)/;
+        my $qcode = $self->scheme_manager->build_qcode('group_mode', $mode);
+        $result->setAttribute('mode', $qcode);
+    }
 
     foreach my $item (@{$group->items}) {
         if ($item->isa('XML::NewsML_G2::Group')) {
