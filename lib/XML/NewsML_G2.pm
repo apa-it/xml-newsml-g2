@@ -6,6 +6,7 @@ use XML::NewsML_G2::News_Item;
 use XML::NewsML_G2::News_Item_Text;
 use XML::NewsML_G2::News_Item_Picture;
 use XML::NewsML_G2::News_Item_Video;
+use XML::NewsML_G2::News_Message;
 use XML::NewsML_G2::Provider;
 use XML::NewsML_G2::Service;
 use XML::NewsML_G2::Genre;
@@ -24,6 +25,7 @@ use XML::NewsML_G2::Scheme_Manager;
 use XML::NewsML_G2::Scheme;
 use XML::NewsML_G2::Writer::News_Item;
 use XML::NewsML_G2::Writer::Package_Item;
+use XML::NewsML_G2::Writer::News_Message;
 
 use warnings;
 use strict;
