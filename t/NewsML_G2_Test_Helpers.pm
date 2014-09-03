@@ -200,7 +200,7 @@ sub create_ni_video {
     _create_ni('XML::NewsML_G2::News_Item_Video', @_);
 }
 
-sub picture_checks {
+sub _picture_checks {
     my ($dom, $xpc, $version) = @_;
 
     like($xpc->findvalue('//nar:contentSet/nar:remoteContent/@rendition'), qr|rnd:highRes|, 'correct rendition in XML');
@@ -216,7 +216,7 @@ sub picture_checks {
 sub test_ni_versions {
     my ($ni, $sm, %version_checks) = @_;
 
-    for my $version (qw/2.9 2.18/) {
+    for my $version (qw/2.9 2.12 2.18/) {
         ok(my $writer = XML::NewsML_G2::Writer::News_Item->new(news_item => $ni, scheme_manager => $sm, g2_version => $version), "creating $version writer");
         ok(my $dom = $writer->create_dom(), 'create DOM');
         ok(my $xpc = XML::LibXML::XPathContext->new($dom), 'create XPath context for DOM tree');
@@ -228,6 +228,21 @@ sub test_ni_versions {
         # diag($dom->serialize(1));
     }
 }
+
+sub _old_style_name_check {
+    my $xpc = shift;
+    like($xpc->findvalue('//nar:creator/@literal'), qr/Homer Simpson/, "correct photographer in XML, 2.9-style");
+    like($xpc->findvalue('//nar:creator/@literal'), qr/dw.*dk.*wh/, "correct authors in XML, 2.9-style");
+    return;
+}
+
+sub _new_style_name_check {
+    my $xpc = shift;
+    like($xpc->findvalue('//nar:creator/nar:name'), qr/dw.*dk.*wh/, 'correct authors in XML, 2.12+-style');
+    like($xpc->findvalue('//nar:creator/nar:name'), qr/Homer Simpson/, 'correct photographer in XML, 2.12+-style');
+    return;
+}
+
 
 sub test_ni_picture {
     my ($ni) = @_;
@@ -246,18 +261,22 @@ sub test_ni_picture {
     ok($ni->add_remote('file://tmp/files/123.jpg', $pic), 'Adding remote picture works');
     ok($ni->add_remote('file://tmp/files/123.thumb.jpg', $thumb), 'Adding remote thumbnail works');
 
-    test_ni_versions($ni,$sm, '2.9' => sub {
-        my ($dom, $writer, $xpc, $version) = @_;
-        picture_checks($dom, $xpc, $writer->g2_version);
-        like($xpc->findvalue('//nar:creator/@literal'), qr/Homer Simpson/, "correct photographer in XML, $version-style");
-        like($xpc->findvalue('//nar:creator/@literal'), qr/dw.*dk.*wh/, "correct authors in XML, $version-style");
-                      },
-                      '2.18' => sub {
-                          my ($dom, $writer, $xpc, $version) = @_;
-                          picture_checks($dom, $xpc, $writer->g2_version);
-                          like($xpc->findvalue('//nar:creator/nar:name'), qr/dw.*dk.*wh/, 'correct authors in XML, 2.12-style');
-                          like($xpc->findvalue('//nar:creator/nar:name'), qr/Homer Simpson/, 'correct photographer in XML, 2.12-style');
-                      });
+    test_ni_versions($ni, $sm, 
+                     '2.9' => sub {
+                         my ($dom, $writer, $xpc, $version) = @_;
+                         _picture_checks($dom, $xpc, $writer->g2_version);
+                         _old_style_name_check($xpc);
+                     },
+                     '2.12' => sub {
+                         my ($dom, $writer, $xpc, $version) = @_;
+                         _picture_checks($dom, $xpc, $writer->g2_version);
+                         _new_style_name_check($xpc);
+                     },
+                     '2.18' => sub {
+                         my ($dom, $writer, $xpc, $version) = @_;
+                         _picture_checks($dom, $xpc, $writer->g2_version);
+                         _new_style_name_check($xpc);
+                     });
 
     return $sm;
 }

@@ -65,7 +65,7 @@ To install this module, run the following commands:
 
     use XML::NewsML_G2;
     my $ni = XML::NewsML_G2::News_Item_Text->new(%args);
-    my $writer = XML::NewsML_G2::Writer_2_12(news_item => $ni);
+    my $writer = XML::NewsML_G2::Writer_2_18(news_item => $ni);
     my $dom = $writer->create_dom();
 
 
@@ -84,9 +84,9 @@ L<http://www.iptc.org/site/News_Exchange_Formats/NewsML-G2/>
 The implementation currently supports text, picture, video, audio,
 graphics, as well as multimedia packages.
 
-Version 2.9 of the standard is frozen, so the output should not change
-when you update this distribution. Version 2.18 however is not yet
-frozen, changes in the output are to be expected.
+Versions 2.9 and 2.12 of the standard are frozen, so the output should
+not change when you update this distribution. Version 2.18 however is
+not yet frozen, changes in the output are to be expected.
 
 =head1 SCHEMES AND CATALOGS
 
@@ -182,6 +182,8 @@ and the inline catalog will be replaced with a link:
 =item L<XML::NewsML_G2::Writer_2_9>
 
 =item L<XML::NewsML_G2::Writer_2_12>
+
+=item L<XML::NewsML_G2::Writer_2_18>
 
 =back
 
