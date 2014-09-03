@@ -1,4 +1,4 @@
-package XML::NewsML_G2::Video;
+package XML::NewsML_G2::Audio;
 
 # $Id$
 
@@ -8,10 +8,6 @@ use Moose;
 use namespace::autoclean;
 
 with 'XML::NewsML_G2::Role::RemoteAudible';
-with 'XML::NewsML_G2::Role::RemoteVisual';
-
-has 'videoframerate', isa => 'Int', is => 'rw';
-has 'videoavgbitrate', isa => 'Int', is => 'rw';
 
 __PACKAGE__->meta->make_immutable;
 
@@ -20,11 +16,11 @@ __END__
 
 =head1 NAME
 
-XML::NewsML_G2::Video - a video specification
+XML::NewsML_G2::Audio - a audio specification
 
 =head1 SYNOPSIS
 
-    my $pic = XML::NewsML_G2::Video->new
+    my $pic = XML::NewsML_G2::Audio->new
         (size => 2231259,
          width => 1280,
          height => 720,
@@ -37,27 +33,11 @@ XML::NewsML_G2::Video - a video specification
 
 =item size
 
-The size in bytes of the video file
-
-=item width
-
-The width in pixel of the video 
-
-=item height
-
-The height in pixel of the video
+The size in bytes of the audio file
 
 =item duration
 
-The playtime of the video in seconds
-
-=item videoframerate
-
-The frames/second of the video
-
-=item videoavgbitrage
-
-The bit rate of the video
+The playtime of the audio in seconds
 
 =item audiosamplerate
 
@@ -69,13 +49,13 @@ The number of audio channels (stereo, mono)
 
 =item mimetype
 
-The MIME type of the video file (e.g. image/jpg)
+The MIME type of the audio file (e.g. image/jpg)
 
 =back
 
 =head1 AUTHOR
 
-Stefan Hrdlicka  C<< <stefan.hrdlicka@apa.at> >>
+Mario Paumann  C<< <mario.paumann@apa.at> >>
 
 =head1 LICENCE AND COPYRIGHT
 

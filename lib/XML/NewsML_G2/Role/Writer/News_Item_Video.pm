@@ -21,7 +21,6 @@ sub _create_remote_content {
     foreach (qw/size width height duration videoframerate videoavgbitrate audiosamplerate/) {
         $root->setAttribute( $_, $video->$_ ) if defined $video->$_;
     }
-    $root->setAttribute('contenttype', $video->mimetype) if $video->mimetype;
     
     my $audiochannels = $self->scheme_manager->build_qcode('adc', $video->audiochannels);
     $root->setAttribute('audiochannels', $audiochannels) if $audiochannels;

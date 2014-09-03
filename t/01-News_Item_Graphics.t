@@ -11,8 +11,6 @@ use version;
 
 use lib 't';
 use NewsML_G2_Test_Helpers qw(create_ni_graphics test_ni_picture test_ni_versions :vars);
-use XML::NewsML_G2::Graphics;
-use XML::NewsML_G2::News_Item_Graphics;
 
 use warnings;
 use strict;

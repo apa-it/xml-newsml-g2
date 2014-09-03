@@ -7,11 +7,9 @@ use XML::NewsML_G2::Types;
 use Moose;
 use namespace::autoclean;
 
+with 'XML::NewsML_G2::Role::RemoteVisual';
+
 has 'rendition', isa => 'Str', is => 'rw', required => 1;
-has 'mimetype', isa => 'Str', is => 'rw', required => 1;
-has 'size', isa => 'Int', is => 'rw';
-has 'width', isa => 'Int', is => 'rw';
-has 'height', isa => 'Int', is => 'rw';
 has 'orientation', isa => 'Int', is => 'rw', default => 1;
 has 'colorspace', isa => 'Str', is => 'rw';
 

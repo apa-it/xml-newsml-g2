@@ -27,13 +27,12 @@ before '_create_authors' => sub {
     return;
 };
 
-sub _create_remote_content {
+after '_create_remote_content' => sub {
     my ($self, $root, $picture) = @_;
 
     foreach (qw/size width height orientation/) {
         $root->setAttribute( $_, $picture->$_ ) if defined $picture->$_;
     }
-    $root->setAttribute('contenttype', $picture->mimetype);
 
     my $rendition =
         $self->scheme_manager->build_qcode('rnd', $picture->rendition);
@@ -47,7 +46,7 @@ sub _create_remote_content {
         $root->appendChild($self->create_element('altId', _text => $altId));
     }
 
-}
+};
 
 1;
 __END__

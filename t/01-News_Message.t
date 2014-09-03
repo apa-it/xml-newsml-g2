@@ -66,7 +66,7 @@ ok(my $sm = XML::NewsML_G2::Scheme_Manager->new(%schemes), 'create Scheme Manage
 
 my $ni_video = create_ni_video();
 my $hd = XML::NewsML_G2::Video->new(width => 1920, height => 1080,
-    size => '23013531', duration => 30, audiochannels => 'stereo'
+    size => '23013531', duration => 30, audiochannels => 'stereo', mimetype => 'video/mp4'
 );
 $ni_video->add_remote('file://tmp/files/123.hd.mp4', $hd);
 my $ni_text = create_ni_text();

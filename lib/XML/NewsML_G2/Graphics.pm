@@ -23,7 +23,7 @@ XML::NewsML_G2::Graphics - a graphics specification
 
     my $pic = XML::NewsML_G2::Graphics->new
         (rendition => 'highRes',
-         mimetype => 'image/jpg',
+         mimetype => 'application/illustrator',
          size => 21123,
          altId => '1031-14-Wetter',
         );

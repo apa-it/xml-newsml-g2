@@ -5,7 +5,11 @@ package XML::NewsML_G2::Role::Writer;
 use Moose::Role;
 use namespace::autoclean;
 
-sub _create_remote_content {}
+sub _create_remote_content {
+    my ($self, $root, $remote) = @_;
+
+    $root->setAttribute('contenttype', $remote->mimetype) if ($remote->mimetype);
+}
 
 1;
 __END__

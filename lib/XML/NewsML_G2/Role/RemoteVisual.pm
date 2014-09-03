@@ -1,26 +1,23 @@
-package XML::NewsML_G2::Video;
+package XML::NewsML_G2::Role::RemoteVisual;
 
 # $Id$
 
 use XML::NewsML_G2::Types;
 
-use Moose;
+use Moose::Role;
 use namespace::autoclean;
 
-with 'XML::NewsML_G2::Role::RemoteAudible';
-with 'XML::NewsML_G2::Role::RemoteVisual';
+with 'XML::NewsML_G2::Role::Remote';
 
-has 'videoframerate', isa => 'Int', is => 'rw';
-has 'videoavgbitrate', isa => 'Int', is => 'rw';
-
-__PACKAGE__->meta->make_immutable;
+has 'width', isa => 'Int', is => 'rw';
+has 'height', isa => 'Int', is => 'rw';
 
 1;
 __END__
 
 =head1 NAME
 
-XML::NewsML_G2::Video - a video specification
+XML::NewsML_G2::Remote - Used by Picture, Graphics, Video
 
 =head1 SYNOPSIS
 
@@ -47,26 +44,6 @@ The width in pixel of the video
 
 The height in pixel of the video
 
-=item duration
-
-The playtime of the video in seconds
-
-=item videoframerate
-
-The frames/second of the video
-
-=item videoavgbitrage
-
-The bit rate of the video
-
-=item audiosamplerate
-
-The sample rate of the audio
-
-=item audiochannels
-
-The number of audio channels (stereo, mono)
-
 =item mimetype
 
 The MIME type of the video file (e.g. image/jpg)
@@ -75,7 +52,7 @@ The MIME type of the video file (e.g. image/jpg)
 
 =head1 AUTHOR
 
-Stefan Hrdlicka  C<< <stefan.hrdlicka@apa.at> >>
+Mario Paumann  C<< <mario.paumann@apa.at> >>
 
 =head1 LICENCE AND COPYRIGHT
 
