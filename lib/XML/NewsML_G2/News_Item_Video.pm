@@ -9,8 +9,9 @@ extends 'XML::NewsML_G2::News_Item';
 
 has '+nature', default => 'video';
 has '+remotes', isa => 'HashRef[XML::NewsML_G2::Video]';
-has 'icon', isa => 'ArrayRef[XML::NewsML_G2::Icon]', is => 'rw', default => sub { [] },
-    traits => ['Array'], handles => {add_icon => 'push', has_icon => 'count'};
+has 'icon', isa => 'ArrayRef[XML::NewsML_G2::Icon]', is => 'rw', 
+    default => sub { [] }, traits => ['Array'], 
+    handles => {add_icon => 'push', has_icon => 'count'};
 
 1;
 __END__
@@ -35,6 +36,13 @@ XML::NewsML_G2::News_Item_Video - a video news item (story)
 
     $ni->add_genre($genre1, $genre2);
     $ni->add_source('APA');
+    my $hd = XML::NewsML_G2::Video->new(
+        width => 1920, height => 1080,
+        size => '23013531', duration => 30, audiochannels => 'stereo'
+    );
+
+    $ni->add_remote('file:///tmp/files/123.hd.mp4', $hd);
+
 
 =head1 AUTHOR
 

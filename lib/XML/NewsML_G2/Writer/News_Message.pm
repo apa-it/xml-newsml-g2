@@ -6,7 +6,8 @@ use Moose;
 
 extends 'XML::NewsML_G2::Writer';
 
-has 'news_message', isa => 'XML::NewsML_G2::News_Message', is => 'ro', required => 1;
+has 'news_message', isa => 'XML::NewsML_G2::News_Message', is => 'ro',
+    required => 1;
 has '+_root_node_name', default => 'newsMessage';
 
 
@@ -30,7 +31,7 @@ sub _create_itemSet {
     my $item_set = $self->create_element('itemSet');
     
     my $writer;
-    for my $item (@{$self->news_message->anyItems}){
+    for my $item (@{$self->news_message->items}){
         if ($item->isa('XML::NewsML_G2::News_Item')) {
             $writer = XML::NewsML_G2::Writer::News_Item->new(
                 news_item => $item,

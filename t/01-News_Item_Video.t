@@ -19,13 +19,20 @@ use XML::NewsML_G2;
 sub remotes_checks {
     my ($dom, $xpc) = @_;
 
-    like($xpc->findvalue('//nar:contentSet/nar:remoteContent/@width'), qr|1920|, 'resolution in XML');
-    like($xpc->findvalue('//nar:contentSet/nar:remoteContent/@size'), qr|23013531|, 'correct size in XML');
-    like($xpc->findvalue('//nar:contentSet/nar:remoteContent/@href'), qr|file://tmp/files/123.*mp4|, 'correct href in XML');
-    like($xpc->findvalue('//nar:contentSet/nar:remoteContent/@audiochannels'), qr|apaadc:stereo|, 'correct audiochannel in XML');
-    like($xpc->findvalue('//nar:contentSet/nar:remoteContent/@duration'), qr/30/, 'correct duration in XML');
-    like($xpc->findvalue('//nar:contentMeta/nar:icon/@rendition'),qr/rnd:highRes/, 'rendition with qcode');
-    like($xpc->findvalue('//nar:contentMeta/nar:icon/@href'), qr/456.jpg/, 'correct filename');
+    like($xpc->findvalue('//nar:contentSet/nar:remoteContent/@width'),
+        qr|1920|, 'resolution in XML');
+    like($xpc->findvalue('//nar:contentSet/nar:remoteContent/@size'),
+        qr|23013531|, 'correct size in XML');
+    like($xpc->findvalue('//nar:contentSet/nar:remoteContent/@href'),
+        qr|file://tmp/files/123.*mp4|, 'correct href in XML');
+    like($xpc->findvalue('//nar:contentSet/nar:remoteContent/@audiochannels'),
+        qr|apaadc:stereo|, 'correct audiochannel in XML');
+    like($xpc->findvalue('//nar:contentSet/nar:remoteContent/@duration'),
+        qr/30/, 'correct duration in XML');
+    like($xpc->findvalue('//nar:contentMeta/nar:icon/@rendition'),
+        qr/rnd:highRes/, 'rendition with qcode');
+    like($xpc->findvalue('//nar:contentMeta/nar:icon/@href'),
+        qr/456.jpg/, 'correct filename');
 
     return;
 }
