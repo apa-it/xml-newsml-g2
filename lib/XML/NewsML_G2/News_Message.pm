@@ -47,6 +47,8 @@ Timestemp generated automatically
 
 A collection of news and/or package items
 
+=back
+
 =head1 AUTHOR
 
 Stefan Hrdlicka  C<< <stefan.hrdlicka@apa.at> >>
