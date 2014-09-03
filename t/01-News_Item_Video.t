@@ -23,7 +23,7 @@ sub remotes_checks {
     like($xpc->findvalue('//nar:contentSet/nar:remoteContent/@size'), qr|23013531|, 'correct size in XML');
     like($xpc->findvalue('//nar:contentSet/nar:remoteContent/@href'), qr|file://tmp/files/123.*mp4|, 'correct href in XML');
     like($xpc->findvalue('//nar:contentSet/nar:remoteContent/@audiochannels'), qr|apaadc:stereo|, 'correct audiochannel in XML');
-    like($xpc->findvalue('//nar:contentSet/nar:remoteContent/@duration'), qr/30/, 'correct layout in XML');
+    like($xpc->findvalue('//nar:contentSet/nar:remoteContent/@duration'), qr/30/, 'correct duration in XML');
     like($xpc->findvalue('//nar:contentMeta/nar:icon/@rendition'),qr/rnd:highRes/, 'rendition with qcode');
     like($xpc->findvalue('//nar:contentMeta/nar:icon/@href'), qr/456.jpg/, 'correct filename');
 
@@ -55,14 +55,14 @@ $xpc->registerNs('xhtml', 'http://www.w3.org/1999/xhtml');
 remotes_checks($dom, $xpc);
 validate_g2($dom, '2.9');
 
-# 2.12 checks
-ok($writer = XML::NewsML_G2::Writer::News_Item->new(news_item => $ni, scheme_manager => $sm, g2_version => 2.12), 'creating 2.12 writer');
-ok($dom = $writer->create_dom(), '2.12 writer creates DOM');
+# 2.18 checks
+ok($writer = XML::NewsML_G2::Writer::News_Item->new(news_item => $ni, scheme_manager => $sm, g2_version => 2.18), 'creating 2.18 writer');
+ok($dom = $writer->create_dom(), '2.18 writer creates DOM');
 ok($xpc = XML::LibXML::XPathContext->new($dom), 'create XPath context for DOM tree');
 $xpc->registerNs('nar', 'http://iptc.org/std/nar/2006-10-01/');
 $xpc->registerNs('xhtml', 'http://www.w3.org/1999/xhtml');
 remotes_checks($dom, $xpc);
-validate_g2($dom, '2.12');
+validate_g2($dom, '2.18');
 
 #diag($dom->serialize(1));
 

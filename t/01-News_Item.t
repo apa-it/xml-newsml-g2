@@ -89,17 +89,17 @@ foreach my $ni (create_ni_text(), create_ni_picture()) {
     like($xpc->findvalue('//nar:creator/@literal'), qr/dw.*dk.*wh/, 'correct authors in XML, 2.9-style');
     validate_g2($dom, '2.9');
 
-# 2.12 checks
-    ok($writer = XML::NewsML_G2::Writer::News_Item->new(news_item => $ni, scheme_manager => $sm, g2_version => 2.12), 'creating 2.12 writer');
-    ok($dom = $writer->create_dom(), '2.12 writer creates DOM');
+# 2.18 checks
+    ok($writer = XML::NewsML_G2::Writer::News_Item->new(news_item => $ni, scheme_manager => $sm, g2_version => 2.18), 'creating 2.18 writer');
+    ok($dom = $writer->create_dom(), '2.18 writer creates DOM');
     ok($xpc = XML::LibXML::XPathContext->new($dom), 'create XPath context for DOM tree');
     $xpc->registerNs('nar', 'http://iptc.org/std/nar/2006-10-01/');
     $xpc->registerNs('xhtml', 'http://www.w3.org/1999/xhtml');
     basic_checks($dom, $xpc, lc $ic);
     is($xpc->findvalue('nar:newsItem/@guid'), $correct_guid, 'correct guid in XML');
-    like($xpc->findvalue('//nar:infoSource/nar:name'), qr/DPA/, 'correct source in XML, 2.12-style');
-    like($xpc->findvalue('//nar:creator/nar:name'), qr/dw.*dk.*wh/, 'correct authors in XML, 2.12-style');
-    validate_g2($dom, '2.12');
+    like($xpc->findvalue('//nar:infoSource/nar:name'), qr/DPA/, 'correct source in XML, 2.18-style');
+    like($xpc->findvalue('//nar:creator/nar:name'), qr/dw.*dk.*wh/, 'correct authors in XML, 2.18-style');
+    validate_g2($dom, '2.18');
 
     #diag($dom->serialize(1));
 }

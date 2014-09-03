@@ -108,7 +108,6 @@ our @keywords = qw(beer vienna prater kolarik schweizerhaus);
 sub validate_g2 {
     my ($dom, $version) = @_;
 
-    $version =~ tr/./_/;
     my $xsd = catfile('t', 'xsds', "NewsML-G2_$version-spec-All-Power.xsd");
     ok(my $xmlschema = XML::LibXML::Schema->new(location => $xsd), "parsing $version XSD");
 
@@ -211,17 +210,13 @@ sub picture_checks {
     like($xpc->findvalue('//nar:description'), qr|ricebag.*over|, 'correct description');
     like($xpc->findvalue('//nar:description'), qr|ricebag.*over|, 'correct description');
 
-    if (version->parse("v$version") >= version->parse('v2.14')) {
-        like($xpc->findvalue('//nar:contentSet/nar:remoteContent/@layoutorientation'), qr/loutorient:unaligned/, 'correct layout in XML');
-    }
-
     return;
 }
 
 sub test_ni_versions {
     my ($ni, $sm, %version_checks) = @_;
 
-    for my $version (qw/2.9 2.12/) {
+    for my $version (qw/2.9 2.18/) {
         ok(my $writer = XML::NewsML_G2::Writer::News_Item->new(news_item => $ni, scheme_manager => $sm, g2_version => $version), "creating $version writer");
         ok(my $dom = $writer->create_dom(), 'create DOM');
         ok(my $xpc = XML::LibXML::XPathContext->new($dom), 'create XPath context for DOM tree');
@@ -245,7 +240,7 @@ sub test_ni_picture {
     ok(my $sm = XML::NewsML_G2::Scheme_Manager->new(%schemes), 'create Scheme Manager');
     $ni->caption('A ricebag is about to fall over');
 
-    my $pic = XML::NewsML_G2::Picture->new(mimetype => 'image/jpg', width => 1600, height => 1024, layout => 'vertical', rendition => 'highRes');
+    my $pic = XML::NewsML_G2::Picture->new(mimetype => 'image/jpg', width => 1600, height => 1024, rendition => 'highRes');
     my $thumb = XML::NewsML_G2::Picture->new(mimetype => 'image/jpg', width => 48, height => 32, rendition => 'thumb');
 
     ok($ni->add_remote('file://tmp/files/123.jpg', $pic), 'Adding remote picture works');
@@ -257,7 +252,7 @@ sub test_ni_picture {
         like($xpc->findvalue('//nar:creator/@literal'), qr/Homer Simpson/, "correct photographer in XML, $version-style");
         like($xpc->findvalue('//nar:creator/@literal'), qr/dw.*dk.*wh/, "correct authors in XML, $version-style");
                       },
-                      '2.12' => sub {
+                      '2.18' => sub {
                           my ($dom, $writer, $xpc, $version) = @_;
                           picture_checks($dom, $xpc, $writer->g2_version);
                           like($xpc->findvalue('//nar:creator/nar:name'), qr/dw.*dk.*wh/, 'correct authors in XML, 2.12-style');

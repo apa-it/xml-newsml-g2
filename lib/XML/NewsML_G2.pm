@@ -81,18 +81,18 @@ L<http://www.iptc.org/site/News_Exchange_Formats/NewsML-G2/>
 
 =head1 CURRENT STATUS
 
-The implementation currently support text items only - no support for
-images, videos, graphics or multimedia packages yet.
+The implementation currently supports text, picture, video, audio,
+graphics, as well as multimedia packages.
 
 Version 2.9 of the standard is frozen, so the output should not change
-when you update this distribution. Version 2.12 however is not yet
+when you update this distribution. Version 2.18 however is not yet
 frozen, changes in the output are to be expected.
 
 =head1 SCHEMES AND CATALOGS
 
 Before starting to use schemes or catalogs with this module, read the
 chapter 13 of the
-L<NewsML-G2 implementation guide|http://www.iptc.org/std/NewsML-G2/2.12/documentation/IPTC-G2-Implementation_Guide_5.0.pdf>.
+L<NewsML-G2 implementation guide|http://www.iptc.org/std/NewsML-G2/2.17/documentation/IPTC-G2-Implementation_Guide_6.1.pdf>.
 Go on, do it now. I'll wait.
 
 You don't need to use either schemes or catalogs in order to use this

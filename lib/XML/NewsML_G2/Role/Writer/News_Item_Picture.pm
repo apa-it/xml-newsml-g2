@@ -47,10 +47,6 @@ sub _create_remote_content {
         $root->appendChild($self->create_element('altId', _text => $altId));
     }
 
-    # XXX supported in version >= 2.14
-    #my $layout =
-    #    $self->scheme_manager->build_qcode('loutorient', $picture->layout);
-    #$root->setAttribute('layoutorientation', $layout) if $layout;
 }
 
 1;

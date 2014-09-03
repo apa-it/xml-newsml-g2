@@ -13,9 +13,9 @@ has 'size', isa => 'Int', is => 'rw';
 has 'width', isa => 'Int', is => 'rw';
 has 'height', isa => 'Int', is => 'rw';
 has 'orientation', isa => 'Int', is => 'rw', default => 1;
-has 'layout', isa => 'XML::NewsML_G2::Types::PictureLayout', is => 'rw',
-    default => 'unaligned';
 has 'colorspace', isa => 'Str', is => 'rw';
+
+### XXX move to News_Item, give role, scheme
 has 'altId', isa => 'Str', is => 'rw';
 
 __PACKAGE__->meta->make_immutable;
@@ -58,10 +58,6 @@ The height in pixel of the picture
 = item orientation
 
 The picture orientation (1 is 'upright')
-
-= item layout
-
-The layout of the picture (horizontal, vertical, square, unaligned)
 
 = item colorspace
 

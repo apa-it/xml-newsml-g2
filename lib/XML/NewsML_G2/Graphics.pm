@@ -52,10 +52,6 @@ The height in pixel of the picture
 
 The picture orientation (1 is 'upright')
 
-= item layout
-
-The layout of the picture (horizontal, vertical, square, unaligned)
-
 = item colorspace
 
 The colorspace used by this picture (e.g. AdobeRGB)

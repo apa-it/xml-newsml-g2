@@ -6,8 +6,6 @@ use Moose::Util::TypeConstraints;
 
 use namespace::autoclean;
 
-enum 'XML::NewsML_G2::Types::PictureLayout', [qw(horizontal vertical square unaligned)];
-
 enum 'XML::NewsML_G2::Types::Nature', [qw(text picture graphics video composite)];
 
 enum 'XML::NewsML_G2::Types::Group_Mode', [qw(bag sequential alternative)];

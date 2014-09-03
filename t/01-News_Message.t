@@ -37,7 +37,7 @@ $nm->add_anyItem($ni_video);
 $nm->add_anyItem($ni_text);
 
 
-my $writer = XML::NewsML_G2::Writer::News_Message->new(news_message => $nm, scheme_manager => $sm, g2_version => 2.12);
+my $writer = XML::NewsML_G2::Writer::News_Message->new(news_message => $nm, scheme_manager => $sm, g2_version => 2.18);
 ok(my $dom = $writer->create_dom(), 'create DOM');
 ok(my $xpc = XML::LibXML::XPathContext->new($dom), 'create XPath context for DOM tree');
 $xpc->registerNs('nar', 'http://iptc.org/std/nar/2006-10-01/');
@@ -47,7 +47,7 @@ $xpc->registerNs('xhtml', 'http://www.w3.org/1999/xhtml');
 #XXX Package Item Test
 
 #remotes_checks($dom, $xpc);
-validate_g2($dom, '2.12');
+validate_g2($dom, '2.18');
 
 done_testing();
 

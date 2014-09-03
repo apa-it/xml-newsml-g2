@@ -23,7 +23,7 @@ has '_formatter', is => 'ro', default => sub {DateTime::Format::XSD->new()};
 has 'g2_ns', isa => 'Str', is => 'ro', default => 'http://iptc.org/std/nar/2006-10-01/';
 has 'xhtml_ns', isa => 'Str', is => 'ro', default => 'http://www.w3.org/1999/xhtml';
 
-has 'g2_version', isa => 'Str', is => 'ro', default => '2.12';
+has 'g2_version', isa => 'Str', is => 'ro', default => '2.18';
 has '_root_node_name', isa => 'Str', is => 'ro', default => 'newsItem';
 
 # attributes set by version-specific role
@@ -240,7 +240,7 @@ conforming to NewsML-G2
 =head1 SYNOPSIS
 
     my $w = XML::NewsML_G2::Writer->new
-        (news_item => $ni, scheme_manager => $sm, g2_version => 2.12);
+        (news_item => $ni, scheme_manager => $sm, g2_version => 2.18);
 
     my $p = $w->create_element('p', class => 'main', _text => 'blah');
 
