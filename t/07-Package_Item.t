@@ -56,7 +56,9 @@ validate_g2($dom, '2.12');
 
 # for slideshows: create several news items + images, each pair in its own group
 
-ok($pi = XML::NewsML_G2::Package_Item->new(root_role => 'slideshow', %args), 'create Package_Item');
+my $title = 'Slideshow of the day';
+ok($pi = XML::NewsML_G2::Package_Item->new(
+       title => $title, root_role => 'slideshow', %args), 'create Package_Item');
 $pi->root_group->mode('sequential');
 for my $id (1 .. 4) {
     $text = create_ni_text(id => $id);
@@ -78,6 +80,7 @@ ok($writer = XML::NewsML_G2::Writer::Package_Item->new(package_item => $pi, sche
 ok($dom = $writer->create_dom(), 'package writer creates DOM');
 ok($xpc = XML::LibXML::XPathContext->new($dom), 'create XPath context for DOM tree');
 basic_checks($xpc);
+is($xpc->find('//nar:packageItem/nar:itemMeta/nar:title'), $title, 'package title correct');
 ok($xpc->find('//nar:group[@id="root_group"]/nar:groupRef'), 'slideshow has grouprefs');
 ok($xpc->find('//nar:group[@id="group_4"]/nar:groupRef'), 'last group has groupref');
 validate_g2($dom, '2.12');
