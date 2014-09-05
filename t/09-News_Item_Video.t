@@ -39,7 +39,11 @@ sub remotes_checks {
 
 my %schemes;
 foreach (qw(crel desk geo svc role ind org topic hltype adc)) {
-    $schemes{$_} = XML::NewsML_G2::Scheme->new(alias => "apa$_", uri => "http://cv.apa.at/$_/");
+    $schemes{$_} = XML::NewsML_G2::Scheme->new(
+        alias => "apa$_", 
+        uri => "http://cv.apa.at/$_/",
+        catalog => "http://www.apa-it.at/NewsML_G2/apa_it_catalog_4.xml"
+    );
 }
 
 ok(my $sm = XML::NewsML_G2::Scheme_Manager->new(%schemes), 'create Scheme Manager');
@@ -56,6 +60,7 @@ my $writer = XML::NewsML_G2::Writer::News_Item->new(news_item => $ni, scheme_man
 
 # 2.9 checks
 ok(my $dom = $writer->create_dom(), 'create DOM');
+diag($dom->serialize(1));
 ok(my $xpc = XML::LibXML::XPathContext->new($dom), 'create XPath context for DOM tree');
 $xpc->registerNs('nar', 'http://iptc.org/std/nar/2006-10-01/');
 $xpc->registerNs('xhtml', 'http://www.w3.org/1999/xhtml');
@@ -65,6 +70,7 @@ validate_g2($dom, '2.9');
 # 2.18 checks
 ok($writer = XML::NewsML_G2::Writer::News_Item->new(news_item => $ni, scheme_manager => $sm, g2_version => 2.18), 'creating 2.18 writer');
 ok($dom = $writer->create_dom(), '2.18 writer creates DOM');
+#diag($dom->serialize(1));
 ok($xpc = XML::LibXML::XPathContext->new($dom), 'create XPath context for DOM tree');
 $xpc->registerNs('nar', 'http://iptc.org/std/nar/2006-10-01/');
 $xpc->registerNs('xhtml', 'http://www.w3.org/1999/xhtml');
