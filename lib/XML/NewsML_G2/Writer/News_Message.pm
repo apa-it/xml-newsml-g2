@@ -18,10 +18,14 @@ sub _build__root_item {
 
 sub _create_header {
     my ($self, $root) = @_;
-   
+
     my $header = $self->create_element('header');
-    $header->appendChild($self->create_element('sent'
-        , _text => $self->news_message->sent));
+    $header->appendChild(
+        $self->create_element(
+            'sent'
+            , _text => $self->_formatter->format_datetime(
+                $self->news_message->sent)
+        ));
 
     $root->appendChild($header);
 }
@@ -29,7 +33,7 @@ sub _create_header {
 sub _create_itemSet {
     my ($self, $root) = @_;
     my $item_set = $self->create_element('itemSet');
-    
+
     my $writer;
     for my $item (@{$self->news_message->items}){
         if ($item->isa('XML::NewsML_G2::News_Item')) {
