@@ -38,7 +38,7 @@ $pi->add_to_root_group($text, $pic);
 
 cmp_ok(@{$pi->root_group->items}, '==', 2, 'root group has two items now');
 
-my %schemes = (group_mode => XML::NewsML_G2::Scheme->new(alias => 'pgrmod', catalog => 'http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_22.xml'));
+my %schemes = (pgrmod => XML::NewsML_G2::Scheme->new(alias => 'pgrmod', catalog => 'http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_22.xml'));
 foreach (qw(group)) {
     $schemes{$_} = XML::NewsML_G2::Scheme->new(alias => "apa$_", uri => "http://cv.apa.at/$_/");
 }
@@ -64,16 +64,16 @@ for my $id (1 .. 4) {
     $text = create_ni_text(id => $id);
     $pic = create_ni_picture(id => $id);
     my $g = XML::NewsML_G2::Group->new(role => 'slide');
-    $g->add($text, $pic);
+    $g->add_item($text, $pic);
     $pi->add_to_root_group($g);
 }
 
 # and add a final inner group, just for the kicks
 my $last_group = $pi->root_group->items->[-1];
-$last_group->add(my $inner_group = XML::NewsML_G2::Group->new(role => 'slide-in-a-slide'));
+$last_group->add_item(my $inner_group = XML::NewsML_G2::Group->new(role => 'slide-in-a-slide'));
 $text = create_ni_text(id => 42);
 $pic = create_ni_picture(id => 42);
-$inner_group->add($text, $pic);
+$inner_group->add_item($text, $pic);
 
 ok($writer = XML::NewsML_G2::Writer::Package_Item->new(package_item => $pi, scheme_manager => $sm), 'create package writer');
 
@@ -83,6 +83,9 @@ basic_checks($xpc);
 is($xpc->find('//nar:packageItem/nar:itemMeta/nar:title'), $title, 'package title correct');
 ok($xpc->find('//nar:group[@id="root_group"]/nar:groupRef'), 'slideshow has grouprefs');
 ok($xpc->find('//nar:group[@id="group_4"]/nar:groupRef'), 'last group has groupref');
+is($xpc->findvalue('//nar:group[@id="root_group"]/@role'), 'apagroup:slideshow', 'slideshow has correct role');
+is($xpc->findvalue('//nar:group[@id="root_group"]/@mode'), 'pgrmod:seq', 'slideshow has correct mode');
+
 validate_g2($dom, '2.18');
 #diag($dom->serialize(1));
 

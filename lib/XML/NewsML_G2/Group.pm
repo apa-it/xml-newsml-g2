@@ -11,7 +11,7 @@ has 'mode', isa => 'XML::NewsML_G2::Types::Group_Mode', is => 'rw', default => '
 has 'items', isa =>
     'ArrayRef[XML::NewsML_G2::News_Item|XML::NewsML_G2::Group]',
     is => 'ro', default => sub {[]},
-    traits => ['Array'], handles => {add => 'push'};
+    traits => ['Array'], handles => {add_item => 'push'};
 
 
 __PACKAGE__->meta->make_immutable;
@@ -30,8 +30,8 @@ XML::NewsML_G2::Group - a group of news items (or other groups)
 
     my $group = XML::NewsML_G2::Group->new(role => 'slide');
 
-    $group->add($news_item);
-    $group->add($news_item_for_picture);
+    $group->add_item($news_item);
+    $group->add_item($news_item_for_picture);
 
 =head1 DESCRIPTION
 
@@ -69,7 +69,7 @@ alternative. Defaulto to "bag".
 
 =over 4
 
-=item add
+=item add_item
 
 Takes one or more items to be added to this group.
 

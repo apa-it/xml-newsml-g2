@@ -8,7 +8,7 @@ use namespace::autoclean;
 
 my @attrs = (qw(desk hltype role ind geo org topic crel crol drol svc
 isbn ean isrol nprov ninat stat sig iso3166_1a2 genre isin medtop rnd
-colsp loutorient adc group group_mode));
+colsp loutorient adc group pgrmod));
 
 foreach (@attrs) {
     has $_, isa => 'XML::NewsML_G2::Scheme', is => 'rw';

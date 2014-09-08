@@ -28,7 +28,7 @@ sub _build_root_group {
 
 sub add_to_root_group {
     my ($self, @items) = @_;
-    return $self->root_group->add(@items);
+    return $self->root_group->add_item(@items);
 }
 
 __PACKAGE__->meta->make_immutable;

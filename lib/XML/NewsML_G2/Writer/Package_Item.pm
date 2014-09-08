@@ -44,8 +44,8 @@ sub _create_group {
 
     if ($group->mode ne 'bag') {
         my ($mode) = $group->mode =~ /^(...)/;
-        my $qcode = $self->scheme_manager->build_qcode('group_mode', $mode);
-        $result->setAttribute('mode', $qcode);
+        my $qcode = $self->scheme_manager->build_qcode('pgrmod', $mode);
+        $result->setAttribute('mode', $qcode) if $qcode;
     }
 
     foreach my $item (@{$group->items}) {

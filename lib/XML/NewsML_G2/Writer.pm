@@ -41,7 +41,8 @@ sub _build__root_item {
 sub _build_g2_catalog_schemes {
     {isrol => undef, nprov => undef, ninat => undef, stat => undef,
      sig => undef, genre => undef, isin => undef, medtop => undef,
-     crol => undef, drol => undef, iso3166_1a2 => 'iso3166-1a2'};
+     crol => undef, drol => undef, pgrmod => undef,
+     iso3166_1a2 => 'iso3166-1a2'};
 }
 
 sub _build_doc {
