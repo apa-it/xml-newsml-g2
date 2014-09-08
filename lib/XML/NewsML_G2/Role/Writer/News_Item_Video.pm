@@ -15,7 +15,7 @@ around '_build_g2_catalog_schemes' => sub {
 };
 
 
-sub _create_remote_content {
+after '_create_remote_content' => sub {
     my ($self, $root, $video) = @_;
 
     foreach (qw/size width height duration videoframerate videoavgbitrate audiosamplerate/) {
@@ -24,7 +24,7 @@ sub _create_remote_content {
     
     my $audiochannels = $self->scheme_manager->build_qcode('adc', $video->audiochannels);
     $root->setAttribute('audiochannels', $audiochannels) if $audiochannels;
-}
+};
 
 sub _create_icon {
     my ($self, $root) = @_;
