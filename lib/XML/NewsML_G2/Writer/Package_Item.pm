@@ -15,11 +15,11 @@ sub _build__root_item {
     return $self->package_item;
 }
 
-sub BUILD {
-    my $self = shift;
-    my $test_group = $self->scheme_manager->build_qcode('group', 'test');
-    die 'You need to register a scheme for groups' unless $test_group;
-}
+#sub BUILD {
+#    my $self = shift;
+#    my $test_group = $self->scheme_manager->build_qcode('group', 'test');
+#    die 'You need to register a scheme for groups' unless $test_group;
+#}
 
 
 sub _create_item_meta_title {
