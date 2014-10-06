@@ -11,3 +11,4 @@
 ^Build$
 ^_build/
 ^build.sh$
+\.bak$

@@ -1,3 +1,5 @@
 * when 2.9 is removed, remove _create_hierarchy
 
 * we always create sig:correction, never sig:update - make that configurable
+
+* when 2.18 is released, replace symlink from 2.17 XSD with real file
