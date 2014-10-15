@@ -79,7 +79,7 @@ my $writer = XML::NewsML_G2::Writer::News_Message->new(news_message => $nm,
     scheme_manager => $sm, g2_version => 2.12
 );
 ok(my $dom = $writer->create_dom(), 'create DOM');
-ok(my $xpc = XML::LibXML::XPathContext->new($dom), 
+ok(my $xpc = XML::LibXML::XPathContext->new($dom),
     'create XPath context for DOM tree');
 $xpc->registerNs('nar', 'http://iptc.org/std/nar/2006-10-01/');
 $xpc->registerNs('xhtml', 'http://www.w3.org/1999/xhtml');
@@ -126,5 +126,3 @@ news_message_package_check($xpc);
 validate_g2($dom, '2.12');
 
 done_testing();
-
-

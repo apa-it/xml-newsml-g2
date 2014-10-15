@@ -21,7 +21,7 @@ sub _create_remote_content {
     for (qw/size duration audiosamplerate/) {
         $root->setAttribute( $_, $audio->$_ ) if defined $audio->$_;
     }
-    
+
     my $audiochannels = $self->scheme_manager->build_qcode('adc', $audio->audiochannels);
     $root->setAttribute('audiochannels', $audiochannels) if $audiochannels;
 }

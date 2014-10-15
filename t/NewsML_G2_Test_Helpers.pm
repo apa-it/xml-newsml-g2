@@ -266,7 +266,7 @@ sub test_ni_picture {
     ok($ni->add_remote('file://tmp/files/123.jpg', $pic), 'Adding remote picture works');
     ok($ni->add_remote('file://tmp/files/123.thumb.jpg', $thumb), 'Adding remote thumbnail works');
 
-    test_ni_versions($ni, $sm, 
+    test_ni_versions($ni, $sm,
                      '2.9' => sub {
                          my ($dom, $writer, $xpc, $version) = @_;
                          _picture_checks($dom, $xpc, $writer->g2_version);

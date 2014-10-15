@@ -38,7 +38,7 @@ The size in bytes of the video file
 
 =item width
 
-The width in pixel of the video 
+The width in pixel of the video
 
 =item height
 

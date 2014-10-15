@@ -40,7 +40,7 @@ sub remotes_checks {
 my %schemes;
 foreach (qw(crel desk geo svc role ind org topic hltype adc)) {
     $schemes{$_} = XML::NewsML_G2::Scheme->new(
-        alias => "apa$_", 
+        alias => "apa$_",
         uri => "http://cv.apa.at/$_/",
         catalog => "http://www.apa-it.at/NewsML_G2/apa_it_catalog_4.xml"
     );
