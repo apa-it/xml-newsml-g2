@@ -16,12 +16,15 @@ sub _build__root_item {
 
 sub _create_rights_info {
     my ($self, $root) = @_;
+    return unless $self->news_item->copyright_holder;
+
     my $ri = $self->create_element('rightsInfo');
 
-    $ri->appendChild (my $crh = $self->create_element('copyrightHolder', _name_text => $self->news_item->provider));
-    $self->scheme_manager->add_qcode_or_literal($crh, 'nprov', $self->news_item->provider->qcode);
+    $ri->appendChild (my $crh = $self->create_element('copyrightHolder', _name_text => $self->news_item->copyright_holder));
+    $self->scheme_manager->add_qcode_or_literal($crh, 'em', $self->news_item->copyright_holder->qcode);
+    $crh->setAttribute('uri', $self->news_item->copyright_holder->uri) if $self->news_item->copyright_holder->uri;
 
-    my $notice = $self->news_item->provider->notice;
+    my $notice = $self->news_item->copyright_holder->notice;
     $ri->appendChild($self->create_element('copyrightNotice', _text => $notice)) if $notice;
     $ri->appendChild($self->create_element('usageTerms', _text => $self->news_item->usage_terms)) if $self->news_item->usage_terms;
 

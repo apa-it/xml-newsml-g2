@@ -57,6 +57,12 @@ ok(our $prov_apa = XML::NewsML_G2::Provider->new
     notice => '(c) 2014 http://www.apa.at'
    ), 'create Provider instance');
 
+ok(our $copy_hold = XML::NewsML_G2::Copyright_Holder->new
+    (qcode => '1235', name => 'Franklin D. Roosevelt',
+        notice => '(c) 2014 http://www.apa.at',
+        uri => 'http://www.apa.at'
+    ), 'create copyright holder instance');
+
 ok(our $svc_apa_bd = XML::NewsML_G2::Service->new
    (qcode => 'bd', name => 'Basisdienst'
    ), 'create Service instance');
@@ -128,6 +134,7 @@ sub _create_ni {
        (guid             => $guid_text, # overwrite in $hash
         see_also         => $see_also_guid,
         provider         => $prov_apa,
+        copyright_holder => $copy_hold,
         usage_terms      => 'view only with a full beer',
         message_id       => $apa_id,
         title            => ($opts{id} ? "$title $opts{id}" : $title),

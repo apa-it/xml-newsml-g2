@@ -10,6 +10,7 @@ use XML::NewsML_G2::News_Item_Graphics;
 use XML::NewsML_G2::News_Item_Audio;
 use XML::NewsML_G2::News_Message;
 use XML::NewsML_G2::Provider;
+use XML::NewsML_G2::Copyright_Holder;
 use XML::NewsML_G2::Service;
 use XML::NewsML_G2::Genre;
 use XML::NewsML_G2::Desk;

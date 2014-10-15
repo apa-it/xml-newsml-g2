@@ -19,7 +19,7 @@ use XML::NewsML_G2;
 sub basic_checks {
     my ($dom, $xpc, $ic) = @_;
 
-    like($xpc->findvalue('//nar:copyrightHolder/nar:name'), qr/APA/, 'correct copyright in XML');
+    like($xpc->findvalue('//nar:copyrightHolder/nar:name'), qr/Franklin D. Roosevelt/, 'correct copyright in XML');
     like($xpc->findvalue('//nar:copyrightNotice'), qr/www.apa.at/, 'correct copyright notice in XML');
     like($xpc->findvalue('//nar:usageTerms'), qr/full beer/, 'correct usage terms in XML');
     is($xpc->findvalue('//nar:provider/@qcode'), 'nprov:apa', 'correct provider in XML');
@@ -101,6 +101,7 @@ foreach my $ni (create_ni_text(), create_ni_picture()) {
         is($xpc->findvalue('nar:newsItem/@guid'), $correct_guid, 'correct guid in XML');
         like($xpc->findvalue('//nar:infoSource/nar:name'), qr/DPA/, "correct source in XML, $version-style");
         like($xpc->findvalue('//nar:creator/nar:name'), qr/dw.*dk.*wh/, "correct authors in XML, $version-style");
+        like($xpc->findvalue('//nar:copyrightHolder/@uri'),qr/http:\/\/www.apa.at/, 'correct uri in xml');
         validate_g2($dom, $version);
         #diag($dom->serialize(1));
     }

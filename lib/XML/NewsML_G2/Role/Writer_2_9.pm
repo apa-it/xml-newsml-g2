@@ -8,6 +8,24 @@ use Moose::Role;
 has 'schema_location', isa => 'Str', is => 'ro', default => 'http://iptc.org/std/nar/2006-10-01/ http://www.iptc.org/std/NewsML-G2/2.9/specification/NewsML-G2_2.9-spec-All-Power.xsd';
 has 'g2_catalog_url', isa => 'Str', is => 'ro', default => 'http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_18.xml';
 
+
+override '_create_rights_info' => sub {
+    my ($self, $root) = @_;
+    return unless $self->news_item->copyright_holder;
+
+    my $ri = $self->create_element('rightsInfo');
+
+    $ri->appendChild (my $crh = $self->create_element('copyrightHolder', _name_text => $self->news_item->copyright_holder));
+    $self->scheme_manager->add_qcode_or_literal($crh, 'em', $self->news_item->copyright_holder->qcode);
+
+    my $notice = $self->news_item->copyright_holder->notice;
+    $ri->appendChild($self->create_element('copyrightNotice', _text => $notice)) if $notice;
+    $ri->appendChild($self->create_element('usageTerms', _text => $self->news_item->usage_terms)) if $self->news_item->usage_terms;
+
+    $root->appendChild($ri);
+    return;
+};
+
 override '_create_catalogs' => sub {
     my ($self, $root) = @_;
     $root->appendChild($self->create_element('catalogRef', href => $self->g2_catalog_url));

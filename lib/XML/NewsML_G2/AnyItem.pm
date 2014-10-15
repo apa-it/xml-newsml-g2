@@ -13,6 +13,7 @@ has 'doc_version', isa => 'Int', is => 'ro', default => '1';
 has 'language', isa => 'Str', is => 'ro', required => 1;
 has 'nature', isa => 'XML::NewsML_G2::Types::Nature', is => 'ro', required => 1;
 has 'provider', isa => 'XML::NewsML_G2::Provider', is => 'ro', required => 1;
+has 'copyright_holder', isa => 'XML::NewsML_G2::Copyright_Holder', is => 'ro';
 has 'usage_terms', isa => 'Str', is => 'rw';
 
 has 'service', isa => 'XML::NewsML_G2::Service', is => 'ro', predicate => 'has_service';
