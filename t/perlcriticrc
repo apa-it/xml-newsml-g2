@@ -11,4 +11,7 @@ severity = 3
 short_subroutine_statements = 2
 
 [CodeLayout::ProhibitParensWithBuiltins]
-severity = 3
+severity = 2
+
+[RegularExpressions::RequireExtendedFormatting]
+severity = 2

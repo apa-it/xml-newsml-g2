@@ -9,6 +9,7 @@ sub _create_remote_content {
     my ($self, $root, $remote) = @_;
 
     $root->setAttribute('contenttype', $remote->mimetype) if ($remote->mimetype);
+    return;
 }
 
 1;

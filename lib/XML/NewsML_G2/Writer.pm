@@ -35,11 +35,11 @@ has 'g2_catalog_schemes', isa => 'HashRef', is => 'ro',
 # builders
 
 sub _build__root_item {
-    die "Override in subclass";
+    croak 'Override in subclass';
 }
 
 sub _build_g2_catalog_schemes {
-    {isrol => undef, nprov => undef, ninat => undef, stat => undef,
+    return {isrol => undef, nprov => undef, ninat => undef, stat => undef,
      sig => undef, genre => undef, isin => undef, medtop => undef,
      crol => undef, drol => undef, pgrmod => undef,
      iso3166_1a2 => 'iso3166-1a2'};

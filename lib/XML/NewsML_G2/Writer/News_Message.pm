@@ -28,6 +28,7 @@ sub _create_header {
         ));
 
     $root->appendChild($header);
+    return;
 }
 
 sub _create_itemSet {
@@ -51,6 +52,7 @@ sub _create_itemSet {
         $item_set->appendChild($writer->create_dom()->documentElement());
     }
     $root->appendChild($item_set);
+    return;
 }
 
 override '_create_root_element' => sub {

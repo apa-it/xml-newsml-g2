@@ -24,6 +24,7 @@ sub _create_remote_content {
 
     my $audiochannels = $self->scheme_manager->build_qcode('adc', $audio->audiochannels);
     $root->setAttribute('audiochannels', $audiochannels) if $audiochannels;
+    return;
 }
 
 1;

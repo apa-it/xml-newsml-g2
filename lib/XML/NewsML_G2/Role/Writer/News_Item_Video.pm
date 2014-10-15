@@ -42,6 +42,7 @@ sub _create_icon {
         }
         $root->appendChild($icon_element);
     }
+    return;
 }
 
 1;

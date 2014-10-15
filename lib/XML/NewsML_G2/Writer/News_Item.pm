@@ -168,6 +168,7 @@ sub _create_company_data {
     my $crel_alias = $self->scheme_manager->crel->alias;
     $root->appendChild($self->create_element('related', rel => "$crel_alias:index", _name_text => $_)) foreach (@{$org->indices});
     $root->appendChild($self->create_element('related', rel => "$crel_alias:exchange", _name_text => $_)) foreach (@{$org->stock_exchanges});
+    return;
 }
 
 sub _create_asserts_organisation {

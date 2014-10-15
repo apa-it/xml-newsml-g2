@@ -50,7 +50,7 @@ sub _create_group {
 
     foreach my $item (@{$group->items}) {
         if ($item->isa('XML::NewsML_G2::Group')) {
-            my $group_id = "group_" . $self->_next_group_id();
+            my $group_id = 'group_' . $self->_next_group_id();
 
             $result->appendChild(
                 my $child = $self->create_element(
@@ -68,6 +68,7 @@ sub _create_group {
             $child->appendChild($self->create_element('title', _text => $item->title));
         }
     }
+    return;
 }
 
 sub _create_content {
