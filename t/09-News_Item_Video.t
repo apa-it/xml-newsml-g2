@@ -60,7 +60,7 @@ my $writer = XML::NewsML_G2::Writer::News_Item->new(news_item => $ni, scheme_man
 
 # 2.9 checks
 ok(my $dom = $writer->create_dom(), 'create DOM');
-diag($dom->serialize(1));
+#diag($dom->serialize(1));
 ok(my $xpc = XML::LibXML::XPathContext->new($dom), 'create XPath context for DOM tree');
 $xpc->registerNs('nar', 'http://iptc.org/std/nar/2006-10-01/');
 $xpc->registerNs('xhtml', 'http://www.w3.org/1999/xhtml');
