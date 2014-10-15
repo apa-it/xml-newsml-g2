@@ -14,4 +14,4 @@ use Test::More;
 eval "use Test::EOL; 1;" or die $@;
 # ^^ hack to get around prereqscanner detection, remove someday
 
-all_perl_files_ok({ trailing_whitespace => 1 });
+all_perl_files_ok({ trailing_whitespace => 1 }, 'lib', 't');
