@@ -2,7 +2,7 @@ NAME
     XML::NewsML_G2 - generate NewsML-G2 news items
 
 VERSION
-    v0.1.2
+    v0.1_3
 
 INSTALLATION
     To install this module, run the following commands:
@@ -14,8 +14,8 @@ INSTALLATION
 
 SYNOPSIS
         use XML::NewsML_G2;
-        my $ni = XML::NewsML_G2::News_Item->new(%args);
-        my $writer = XML::NewsML_G2::Writer_2_12(news_item => $ni);
+        my $ni = XML::NewsML_G2::News_Item_Text->new(%args);
+        my $writer = XML::NewsML_G2::Writer_2_18(news_item => $ni);
         my $dom = $writer->create_dom();
 
 DESCRIPTION
@@ -28,12 +28,12 @@ DESCRIPTION
     http://www.iptc.org/site/News_Exchange_Formats/NewsML-G2/
 
 CURRENT STATUS
-    The implementation currently support text items only - no support for
-    images, videos, graphics or multimedia packages yet.
+    The implementation currently supports text, picture, video, audio,
+    graphics, as well as multimedia packages.
 
-    Version 2.9 of the standard is frozen, so the output should not change
-    when you update this distribution. Version 2.12 however is not yet
-    frozen, changes in the output are to be expected.
+    Versions 2.9 and 2.12 of the standard are frozen, so the output should
+    not change when you update this distribution. Version 2.18 however is
+    not yet frozen, changes in the output are to be expected.
 
 SCHEMES AND CATALOGS
     Before starting to use schemes or catalogs with this module, read the
@@ -108,6 +108,7 @@ API
     XML::NewsML_G2::Writer
     XML::NewsML_G2::Writer_2_9
     XML::NewsML_G2::Writer_2_12
+    XML::NewsML_G2::Writer_2_18
 
 DEPENDENCIES
     Moose, XML::LibXML, DateTime, DateTime::Format::XSD, UUID::Tiny

@@ -1,5 +1,8 @@
 Revision history for XML::NewsML_G2
 
+v0.1_3  Wed Oct 15 18:15:00 2014
+        preparing next public release: support for packages, images, audio, video and graphics. NewsML-G2 version 2.18 implemented.
+
 v0.1.2  Thu Jul  4 18:30:00 2013
         readme updated, documentation improved, tests added
 

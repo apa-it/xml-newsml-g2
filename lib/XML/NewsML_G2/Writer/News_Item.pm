@@ -324,3 +324,48 @@ sub _create_content {
 __PACKAGE__->meta->make_immutable;
 
 1;
+__END__
+
+=head1 NAME
+
+XML::NewsML_G2::Writer::News_Item - create DOM tree conforming to
+NewsML-G2 for News Items
+
+=for test_synopsis
+    my ($ni, $sm);
+
+=head1 SYNOPSIS
+
+    my $w = XML::NewsML_G2::Writer::News_Item->new
+        (news_item => $ni, scheme_manager => $sm, g2_version => 2.18);
+
+    my $p = $w->create_element('p', class => 'main', _text => 'blah');
+
+    my $dom = $w->create_dom();
+
+=head1 DESCRIPTION
+
+This module implements the creation of a DOM tree conforming to
+NewsML-G2 for News Items.  Depending on the version of the standard
+specified, a version-dependent role will be applied. For the API of
+this module, see the documentation of the superclass L<XML::NewsML_G2::Writer>.
+
+=head1 ATTRIBUTES
+
+=over 4
+
+=item news_item
+
+L<XML::NewsML_G2::News_Item> instance used to create the output document
+
+=back
+
+=head1 AUTHOR
+
+Philipp Gortan  C<< <philipp.gortan@apa.at> >>
+
+=head1 LICENCE AND COPYRIGHT
+
+Copyright (c) 2013-2014, APA-IT. All rights reserved.
+
+See L<XML::NewsML_G2> for the license.

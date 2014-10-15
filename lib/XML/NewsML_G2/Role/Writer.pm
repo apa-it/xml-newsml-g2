@@ -21,7 +21,9 @@ XML::NewsML_G2::Role::Writer - Base role for NewsML-G2 writer classes
 
 =head1 DESCRIPTION
 
-This module serves as a base role for all NewsML-G2 writer classes it defined the required functions that need to be provided by the specific writer roles for each news item type
+This module serves as a base role for all NewsML-G2 writer classes it
+defined the required functions that need to be provided by the
+specific writer roles for each news item type
 
 =head1 AUTHOR
 

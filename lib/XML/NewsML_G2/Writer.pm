@@ -231,14 +231,14 @@ __END__
 =head1 NAME
 
 XML::NewsML_G2::Writer - base class for XML DOM tree creation
-conforming to NewsML-G2
+conforming to NewsML-G2 News Items, Package Items and News Messages
 
 =for test_synopsis
     my ($ni, $sm);
 
 =head1 SYNOPSIS
 
-    my $w = XML::NewsML_G2::Writer->new
+    my $w = XML::NewsML_G2::Writer::News_Item->new
         (news_item => $ni, scheme_manager => $sm, g2_version => 2.18);
 
     my $p = $w->create_element('p', class => 'main', _text => 'blah');
@@ -247,8 +247,12 @@ conforming to NewsML-G2
 
 =head1 DESCRIPTION
 
-This module acts as a NewsML-G2 version-independent base
-class.
+This module acts as a NewsML-G2 version-independent base class for all
+writer classes. Depending on whether you want to create output for a
+News Item, Package Item or News Message, use one of the subclasses
+L<XML::NewsML_G2::Writer::News_Item>,
+L<XML::NewsML_G2::Writer::Package_Item> or
+L<XML::NewsML_G2::Writer::News_Message> instead.
 
 =head1 ATTRIBUTES
 
@@ -280,7 +284,9 @@ XML Namespace of XHTML
 
 =item g2_version
 
-Specified by subclass.
+Use this attribute to specify the NewsML-G2 version to be
+created. Defaults to 2.18, other valid options are: 2.9, 2.12. Be
+aware that only the latest version offers all features.
 
 =item schema_location
 
