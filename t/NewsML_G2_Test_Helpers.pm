@@ -107,6 +107,7 @@ our @keywords = qw(beer vienna prater kolarik schweizerhaus);
 
 sub validate_g2 {
     my ($dom, $version) = @_;
+    $version =~ s/\./_/;
 
     my $xsd = catfile('t', 'xsds', "NewsML-G2_$version-spec-All-Power.xsd");
     ok(my $xmlschema = XML::LibXML::Schema->new(location => $xsd), "parsing $version XSD");

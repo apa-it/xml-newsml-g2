@@ -25,13 +25,13 @@ XML::NewsML_G2::News_Message - a container that can hold multiple News
 or Package Items
 
 =for test_synopsis
-    my ($provider, $service, $genre1, $genre2);
+    my (%text_params, %pic_params);
 
 =head1 SYNOPSIS
 
     my $nm = XML::NewsML_G2::News_Message->new();
-    my $ni_text = XML::NewsML_G2::News_Item_Text->new(...);
-    my $ni_picture = XML::NewsML_G2::News_Item_Picture->new(...);
+    my $ni_text = XML::NewsML_G2::News_Item_Text->new(%text_params);
+    my $ni_picture = XML::NewsML_G2::News_Item_Picture->new(%pic_params);
     $nm->add_item($ni_text);
     $nm->add_item($ni_picture);
 

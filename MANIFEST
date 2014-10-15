@@ -84,9 +84,9 @@ t/release-portability.t
 t/release-synopsis.t
 t/release-unused-vars.t
 t/signature.t
-t/xsds/NewsML-G2_2.9-spec-All-Power.xsd
-t/xsds/NewsML-G2_2.12-spec-All-Power.xsd
-t/xsds/NewsML-G2_2.17-spec-All-Power.xsd
-t/xsds/NewsML-G2_2.18-spec-All-Power.xsd
+t/xsds/NewsML-G2_2_9-spec-All-Power.xsd
+t/xsds/NewsML-G2_2_12-spec-All-Power.xsd
+t/xsds/NewsML-G2_2_17-spec-All-Power.xsd
+t/xsds/NewsML-G2_2_18-spec-All-Power.xsd
 t/xsds/xml.xsd
 TODO

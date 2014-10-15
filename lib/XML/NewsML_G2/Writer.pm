@@ -59,9 +59,7 @@ sub _build_scheme_manager {
 sub BUILD {
     my $self = shift;
 
-    (my $my_cls) = reverse split ('::', $self->meta->name);
     (my $ni_cls) = reverse split ('::', $self->_root_item->meta->name);
-
     my $type_role = sprintf('XML::NewsML_G2::Role::Writer::%s', $ni_cls);
 
     my $g2_version = $self->g2_version;
@@ -204,7 +202,7 @@ sub create_element {
     if ($text) {
         $elem->appendChild($self->doc->createTextNode($text));
     } elsif ($name_text) {
-        $name_text = $name_text->name if $name_text->can("name");
+        $name_text = $name_text->name if $name_text->can('name');
         $elem->appendChild($self->create_element('name', _text => $name_text));
     }
     return $elem;

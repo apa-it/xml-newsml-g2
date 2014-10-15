@@ -4,10 +4,13 @@ use strict;
 use warnings;
 use Module::Build 0.4004;
 
+my @authors = map {(my $mail = lc) =~ tr/a-z/./cs; "$_ <$mail\@apa.at>" }
+('Philipp Gortan', 'Mario Paumann', 'Christian Eder', 'Stefan Hrdlicka');
+
 my $builder = Module::Build->new
   (module_name         => 'XML::NewsML_G2',
    license             => 'gpl',
-   dist_author         => 'Philipp Gortan <philipp.gortan@apa.at>',
+   dist_author         => \@authors,
    dist_abstract       => 'generate NewsML-G2 news items',
    dist_version_from   => 'lib/XML/NewsML_G2.pm',
    requires =>
