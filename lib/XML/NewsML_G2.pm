@@ -48,7 +48,7 @@ XML::NewsML_G2 - generate NewsML-G2 news items
 
 =head1 VERSION
 
-vvv0.1_3
+0.1_3
 
 =begin readme
 
