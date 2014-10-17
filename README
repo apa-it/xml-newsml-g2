@@ -2,7 +2,7 @@ NAME
     XML::NewsML_G2 - generate NewsML-G2 news items
 
 VERSION
-    0.1_3
+    0.1_4
 
 INSTALLATION
     To install this module, run the following commands:
@@ -94,22 +94,52 @@ SCHEMES AND CATALOGS
 
 API
     XML::NewsML_G2::News_Item
-    XML::NewsML_G2::Desk
-    XML::NewsML_G2::Genre
-    XML::NewsML_G2::Location
-    XML::NewsML_G2::Media_Topic
-    XML::NewsML_G2::Organisation
-    XML::NewsML_G2::Product
-    XML::NewsML_G2::Provider
-    XML::NewsML_G2::Service
-    XML::NewsML_G2::Topic
+    XML::NewsML_G2::News_Item_Text
+    XML::NewsML_G2::News_Item_Audio
+    XML::NewsML_G2::News_Item_Picture
+    XML::NewsML_G2::News_Item_Video
+    XML::NewsML_G2::News_Item_Graphics
+    XML::NewsML_G2::News_Message
+    XML::NewsML_G2::Package_Item
+    XML::NewsML_G2::AnyItem
     XML::NewsML_G2::Scheme
     XML::NewsML_G2::Scheme_Manager
+    XML::NewsML_G2::Service
+    XML::NewsML_G2::Video
+    XML::NewsML_G2::Media_Topic
+    XML::NewsML_G2::Topic
+    XML::NewsML_G2::Genre
+    XML::NewsML_G2::Provider
+    XML::NewsML_G2::Desk
+    XML::NewsML_G2::Group
+    XML::NewsML_G2::Picture
+    XML::NewsML_G2::Location
+    XML::NewsML_G2::Graphics
+    XML::NewsML_G2::Audio
+    XML::NewsML_G2::Copyright_Holder
+    XML::NewsML_G2::Organisation
+    XML::NewsML_G2::Product
+    XML::NewsML_G2::Icon
     XML::NewsML_G2::Writer
-    XML::NewsML_G2::Writer_2_9
-    XML::NewsML_G2::Writer_2_12
-    XML::NewsML_G2::Writer_2_18
-
+    XML::NewsML_G2::Writer::News_Item
+    XML::NewsML_G2::Writer::News_Message
+    XML::NewsML_G2::Writer::Package_Item
+    XML::NewsML_G2::Types
+    XML::NewsML_G2::Role::Writer
+    XML::NewsML_G2::Role::Writer_2_9
+    XML::NewsML_G2::Role::Writer_2_12
+    XML::NewsML_G2::Role::Writer_2_18
+    XML::NewsML_G2::Role::Writer::News_Item_Text
+    XML::NewsML_G2::Role::Writer::News_Item_Audio
+    XML::NewsML_G2::Role::Writer::News_Message
+    XML::NewsML_G2::Role::Writer::News_Item_Picture
+    XML::NewsML_G2::Role::Writer::Package_Item
+    XML::NewsML_G2::Role::Writer::News_Item_Video
+    XML::NewsML_G2::Role::Writer::News_Item_Graphics
+    XML::NewsML_G2::Role::HasQCode
+    XML::NewsML_G2::Role::Remote
+    XML::NewsML_G2::Role::RemoteVisual
+    XML::NewsML_G2::Role::RemoteAudible
 DEPENDENCIES
     Moose, XML::LibXML, DateTime, DateTime::Format::XSD, UUID::Tiny
 
@@ -128,6 +158,9 @@ SEE ALSO
 
 AUTHOR
     Philipp Gortan `<philipp.gortan@apa.at>'
+    Mario Paumann `<mario.paumann@apa.at>'
+    Christian Eder `<christian.eder@apa.at>'
+    Stefan Hrdlicka `<stefan.hrdlicka@apa.at>'
 
 LICENCE AND COPYRIGHT
     Copyright (c) 2013-2014, APA-IT. All rights reserved.
