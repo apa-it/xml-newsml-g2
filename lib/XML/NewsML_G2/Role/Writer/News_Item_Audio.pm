@@ -15,7 +15,7 @@ around '_build_g2_catalog_schemes' => sub {
 };
 
 
-sub _create_remote_content {
+after '_create_remote_content' => sub {
     my ($self, $root, $audio) = @_;
 
     for (qw/size duration audiosamplerate/) {
@@ -25,7 +25,7 @@ sub _create_remote_content {
     my $audiochannels = $self->scheme_manager->build_qcode('adc', $audio->audiochannels);
     $root->setAttribute('audiochannels', $audiochannels) if $audiochannels;
     return;
-}
+};
 
 1;
 __END__
