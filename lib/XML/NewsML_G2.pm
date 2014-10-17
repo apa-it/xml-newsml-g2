@@ -160,35 +160,105 @@ and the inline catalog will be replaced with a link:
 
 =item L<XML::NewsML_G2::News_Item>
 
-=item L<XML::NewsML_G2::Desk>
+=item L<XML::NewsML_G2::News_Item_Text>
 
-=item L<XML::NewsML_G2::Genre>
+=item L<XML::NewsML_G2::News_Item_Audio>
 
-=item L<XML::NewsML_G2::Location>
+=item L<XML::NewsML_G2::News_Item_Picture>
 
-=item L<XML::NewsML_G2::Media_Topic>
+=item L<XML::NewsML_G2::News_Item_Video>
 
-=item L<XML::NewsML_G2::Organisation>
+=item L<XML::NewsML_G2::News_Item_Graphics>
 
-=item L<XML::NewsML_G2::Product>
+=item L<XML::NewsML_G2::News_Message>
 
-=item L<XML::NewsML_G2::Provider>
+=item L<XML::NewsML_G2::Package_Item>
 
-=item L<XML::NewsML_G2::Service>
+=item L<XML::NewsML_G2::AnyItem>
 
-=item L<XML::NewsML_G2::Topic>
+
 
 =item L<XML::NewsML_G2::Scheme>
 
 =item L<XML::NewsML_G2::Scheme_Manager>
 
+
+=item L<XML::NewsML_G2::Service>
+
+=item L<XML::NewsML_G2::Video>
+
+=item L<XML::NewsML_G2::Media_Topic>
+
+=item L<XML::NewsML_G2::Topic>
+
+=item L<XML::NewsML_G2::Genre>
+
+=item L<XML::NewsML_G2::Provider>
+
+=item L<XML::NewsML_G2::Desk>
+
+=item L<XML::NewsML_G2::Group>
+
+=item L<XML::NewsML_G2::Picture>
+
+=item L<XML::NewsML_G2::Location>
+
+=item L<XML::NewsML_G2::Graphics>
+
+=item L<XML::NewsML_G2::Audio>
+
+=item L<XML::NewsML_G2::Copyright_Holder>
+
+=item L<XML::NewsML_G2::Organisation>
+
+=item L<XML::NewsML_G2::Product>
+
+=item L<XML::NewsML_G2::Icon>
+
+
 =item L<XML::NewsML_G2::Writer>
 
-=item L<XML::NewsML_G2::Writer_2_9>
+=item L<XML::NewsML_G2::Writer::News_Item>
 
-=item L<XML::NewsML_G2::Writer_2_12>
+=item L<XML::NewsML_G2::Writer::News_Message>
 
-=item L<XML::NewsML_G2::Writer_2_18>
+=item L<XML::NewsML_G2::Writer::Package_Item>
+
+
+=item L<XML::NewsML_G2::Types>
+
+
+
+=item L<XML::NewsML_G2::Role::Writer>
+
+=item L<XML::NewsML_G2::Role::Writer_2_9>
+
+=item L<XML::NewsML_G2::Role::Writer_2_12>
+
+=item L<XML::NewsML_G2::Role::Writer_2_18>
+
+=item L<XML::NewsML_G2::Role::Writer::News_Item_Text>
+
+=item L<XML::NewsML_G2::Role::Writer::News_Item_Audio>
+
+=item L<XML::NewsML_G2::Role::Writer::News_Message>
+
+=item L<XML::NewsML_G2::Role::Writer::News_Item_Picture>
+
+=item L<XML::NewsML_G2::Role::Writer::Package_Item>
+
+=item L<XML::NewsML_G2::Role::Writer::News_Item_Video>
+
+=item L<XML::NewsML_G2::Role::Writer::News_Item_Graphics>
+
+=item L<XML::NewsML_G2::Role::HasQCode>
+
+=item L<XML::NewsML_G2::Role::Remote>
+
+=item L<XML::NewsML_G2::Role::RemoteVisual>
+
+=item L<XML::NewsML_G2::Role::RemoteAudible>
+
 
 =back
 
@@ -217,8 +287,17 @@ upcoming release.
 
 =head1 AUTHOR
 
-Philipp Gortan  C<< <philipp.gortan@apa.at> >>
+=over 4
 
+=item Philipp Gortan  C<< <philipp.gortan@apa.at> >>
+
+=item Mario Paumann  C<< <mario.paumann@apa.at> >>
+
+=item Christian Eder  C<< <christian.eder@apa.at> >>
+
+=item Stefan Hrdlicka  C<< <stefan.hrdlicka@apa.at> >>
+
+=back
 
 =head1 LICENCE AND COPYRIGHT
 
