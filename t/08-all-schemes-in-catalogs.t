@@ -24,8 +24,8 @@ foreach (qw(crel desk geo svc role ind org topic hltype)) {
 
 ok(my $sm = XML::NewsML_G2::Scheme_Manager->new(%schemes), 'create Scheme Manager');
 
-ok(my $writer = XML::NewsML_G2::Writer::News_Item->new(news_item => $ni, scheme_manager => $sm), 'creating 2.18 writer');
-ok(my $dom = $writer->create_dom(), '2.18 writer creates DOM');
+ok(my $writer = XML::NewsML_G2::Writer::News_Item->new(news_item => $ni, scheme_manager => $sm), 'creating 2.15 writer');
+ok(my $dom = $writer->create_dom(), '2.15 writer creates DOM');
 
 ok(my $xpc = XML::LibXML::XPathContext->new($dom), 'create XPath context for DOM tree');
 $xpc->registerNs('nar', 'http://iptc.org/std/nar/2006-10-01/');
@@ -35,6 +35,6 @@ like($xpc->findvalue('//nar:catalogRef/@href'), qr/www.apa-it.at/, 'correct cata
 
 #diag($dom->serialize(1));
 
-validate_g2($dom, '2.18');
+validate_g2($dom, '2.15');
 
 done_testing;

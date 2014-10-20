@@ -98,7 +98,7 @@ NewsML-G2 for Package Items
 =head1 SYNOPSIS
 
     my $w = XML::NewsML_G2::Writer::Package_Item->new
-        (package_item => $pi, scheme_manager => $sm, g2_version => 2.18);
+        (package_item => $pi, scheme_manager => $sm, g2_version => 2.15);
 
     my $p = $w->create_element('p', class => 'main', _text => 'blah');
 

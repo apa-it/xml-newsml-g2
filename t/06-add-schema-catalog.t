@@ -44,7 +44,7 @@ sub create_ni_text  {
 
     ok(my $dom = $writer->create_dom(), 'create DOM');
     #diag($dom->serialize(1));
-    validate_g2($dom, '2.18');
+    validate_g2($dom, '2.15');
     return;
 }
 

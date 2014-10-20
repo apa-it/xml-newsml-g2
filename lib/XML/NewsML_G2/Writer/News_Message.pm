@@ -90,7 +90,7 @@ NewsML-G2 for News Messages
 =head1 SYNOPSIS
 
     my $w = XML::NewsML_G2::Writer::News_Message->new
-        (news_message => $nm, scheme_manager => $sm, g2_version => 2.18);
+        (news_message => $nm, scheme_manager => $sm, g2_version => 2.15);
 
     my $dom = $w->create_dom();
 

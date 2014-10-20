@@ -51,7 +51,7 @@ ok(my $dom = $writer->create_dom(), 'package writer creates DOM');
 ok(my $xpc = XML::LibXML::XPathContext->new($dom), 'create XPath context for DOM tree');
 
 basic_checks($xpc);
-validate_g2($dom, '2.18');
+validate_g2($dom, '2.15');
 #diag($dom->serialize(1));
 
 # for slideshows: create several news items + images, each pair in its own group
@@ -86,7 +86,7 @@ ok($xpc->find('//nar:group[@id="group_4"]/nar:groupRef'), 'last group has groupr
 is($xpc->findvalue('//nar:group[@id="root_group"]/@role'), 'apagroup:slideshow', 'slideshow has correct role');
 is($xpc->findvalue('//nar:group[@id="root_group"]/@mode'), 'pgrmod:seq', 'slideshow has correct mode');
 
-validate_g2($dom, '2.18');
+validate_g2($dom, '2.15');
 #diag($dom->serialize(1));
 
 

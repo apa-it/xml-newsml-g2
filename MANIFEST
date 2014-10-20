@@ -36,7 +36,8 @@ lib/XML/NewsML_G2/Role/Writer/News_Item_Video.pm
 lib/XML/NewsML_G2/Role/Writer/News_Message.pm
 lib/XML/NewsML_G2/Role/Writer/Package_Item.pm
 lib/XML/NewsML_G2/Role/Writer_2_12.pm
-lib/XML/NewsML_G2/Role/Writer_2_18.pm
+lib/XML/NewsML_G2/Role/Writer_2_15.pm
+lib/XML/NewsML_G2/Role/Writer_2_17.pm
 lib/XML/NewsML_G2/Role/Writer_2_9.pm
 lib/XML/NewsML_G2/Scheme.pm
 lib/XML/NewsML_G2/Scheme_Manager.pm
@@ -87,7 +88,7 @@ t/release-unused-vars.t
 t/signature.t
 t/xsds/NewsML-G2_2_9-spec-All-Power.xsd
 t/xsds/NewsML-G2_2_12-spec-All-Power.xsd
+t/xsds/NewsML-G2_2_15-spec-All-Power.xsd
 t/xsds/NewsML-G2_2_17-spec-All-Power.xsd
-t/xsds/NewsML-G2_2_18-spec-All-Power.xsd
 t/xsds/xml.xsd
 TODO

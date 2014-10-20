@@ -70,7 +70,7 @@ To install this module, run the following commands:
 
     use XML::NewsML_G2;
     my $ni = XML::NewsML_G2::News_Item_Text->new(%args);
-    my $writer = XML::NewsML_G2::Writer_2_18(news_item => $ni);
+    my $writer = XML::NewsML_G2::Writer_2_15(news_item => $ni);
     my $dom = $writer->create_dom();
 
 
@@ -91,11 +91,11 @@ Guides|http://www.iptc.org/download?g2quickstartguides>.
 The implementation currently supports text, picture, video, audio,
 graphics, as well as multimedia packages and slideshows.
 
-Versions 2.12 of the standard is frozen, so the output should not
-change when you update this distribution. Version 2.18 however is not
-yet frozen, changes in the output are to be expected. Version 2.9 is
-deprecated and support for it will be removed in the next major
-release.
+Version 2.15 is the latest version of the standard supported by this
+software, and should be your first choice. Using versions 2.9 and 2.12
+is deprecated, and support for it will beremoved in future
+releases. Draft version 2.17 is unsupported, but will evolve into 2.18
+when it is finalised.
 
 =head1 SCHEMES AND CATALOGS
 
@@ -187,6 +187,8 @@ and the inline catalog will be replaced with a link:
 
 =head2 Scheme Handling
 
+=over 4
+
 =item L<XML::NewsML_G2::Scheme>
 
 =item L<XML::NewsML_G2::Scheme_Manager>
@@ -195,6 +197,8 @@ and the inline catalog will be replaced with a link:
 
 
 =head2 Classes for Structured Data Attributes
+
+=over 4
 
 =item L<XML::NewsML_G2::Service>
 
@@ -233,6 +237,8 @@ and the inline catalog will be replaced with a link:
 
 =head2 Writer Classes and Roles
 
+=over 4
+
 =item L<XML::NewsML_G2::Writer>
 
 =item L<XML::NewsML_G2::Writer::News_Item>
@@ -247,7 +253,9 @@ and the inline catalog will be replaced with a link:
 
 =item L<XML::NewsML_G2::Role::Writer_2_12>
 
-=item L<XML::NewsML_G2::Role::Writer_2_18>
+=item L<XML::NewsML_G2::Role::Writer_2_15>
+
+=item L<XML::NewsML_G2::Role::Writer_2_17>
 
 =item L<XML::NewsML_G2::Role::Writer::News_Item_Text>
 
@@ -268,11 +276,16 @@ and the inline catalog will be replaced with a link:
 
 =head2 Type Definitions
 
+=over 4
+
 =item L<XML::NewsML_G2::Types>
 
 =back
 
+
 =head2 Utility Roles
+
+=over 4
 
 =item L<XML::NewsML_G2::Role::HasQCode>
 
