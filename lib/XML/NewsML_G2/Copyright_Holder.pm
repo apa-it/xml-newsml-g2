@@ -33,6 +33,12 @@ for an optional copyright notice
 
 =back
 
+=item uri
+
+optional uri to copyright holder
+
+=back
+
 =head1 AUTHOR
 
 Stefan Hrdlicka  C<< <stefan.hrdlicka@apa.at> >>
