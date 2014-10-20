@@ -25,7 +25,7 @@ ok($ni->add_remote('file://tmp/files/123.ai', $graphics), 'Adding remote graphic
 
 my $sm = test_ni_picture($ni);
 test_ni_versions($ni, $sm, '*' => sub {
-    my ($dom, $writer, $xpc, $version) = @_;
+    my ($dom, $xpc, $version) = @_;
     is($xpc->findvalue('//nar:contentSet/nar:remoteContent/nar:altId'), '1031-14-Wetter', 'correct Graphics altId in XML');
     like($xpc->findvalue('//nar:contentSet/nar:remoteContent/@contenttype'), qr|application/illustrator|, 'graphics mimetype in XML');
                  });

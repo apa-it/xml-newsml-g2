@@ -232,14 +232,17 @@ sub _picture_checks {
 sub test_ni_versions {
     my ($ni, $sm, %version_checks) = @_;
 
-    for my $version (qw/2.9 2.12 2.18/) {
+    if (my $h = delete $version_checks{'*'}) {
+        $version_checks{$_} = $h foreach (qw(2.12 2.15 2.18));
+    }
+
+    while (my ($version, $chkfn) = each %version_checks) {
         ok(my $writer = XML::NewsML_G2::Writer::News_Item->new(news_item => $ni, scheme_manager => $sm, g2_version => $version), "creating $version writer");
         ok(my $dom = $writer->create_dom(), 'create DOM');
         ok(my $xpc = XML::LibXML::XPathContext->new($dom), 'create XPath context for DOM tree');
         $xpc->registerNs('nar', 'http://iptc.org/std/nar/2006-10-01/');
         $xpc->registerNs('xhtml', 'http://www.w3.org/1999/xhtml');
-        my $version_check=$version_checks{$version} || $version_checks{'*'};
-        $version_check->($dom, $writer, $xpc, $version);
+        $chkfn->($dom, $xpc, $version);
         validate_g2($dom, $version);
         # diag($dom->serialize(1));
     }
@@ -259,6 +262,17 @@ sub _new_style_name_check {
     return;
 }
 
+sub _test_ni_version_pre_2_12 {
+    my ($dom, $xpc, $version) = @_;
+    _picture_checks($dom, $xpc, $version);
+    _old_style_name_check($xpc);
+}
+
+sub _test_ni_version {
+    my ($dom, $xpc, $version) = @_;
+    _picture_checks($dom, $xpc, $version);
+    _new_style_name_check($xpc);
+}
 
 sub test_ni_picture {
     my ($ni) = @_;
@@ -277,22 +291,10 @@ sub test_ni_picture {
     ok($ni->add_remote('file://tmp/files/123.jpg', $pic), 'Adding remote picture works');
     ok($ni->add_remote('file://tmp/files/123.thumb.jpg', $thumb), 'Adding remote thumbnail works');
 
-    test_ni_versions($ni, $sm,
-                     '2.9' => sub {
-                         my ($dom, $writer, $xpc, $version) = @_;
-                         _picture_checks($dom, $xpc, $writer->g2_version);
-                         _old_style_name_check($xpc);
-                     },
-                     '2.12' => sub {
-                         my ($dom, $writer, $xpc, $version) = @_;
-                         _picture_checks($dom, $xpc, $writer->g2_version);
-                         _new_style_name_check($xpc);
-                     },
-                     '2.18' => sub {
-                         my ($dom, $writer, $xpc, $version) = @_;
-                         _picture_checks($dom, $xpc, $writer->g2_version);
-                         _new_style_name_check($xpc);
-                     });
+    my %tests = ('2.9' => \&_test_ni_version_pre_2_12,
+                 '*' => \&_test_ni_version);
+
+    test_ni_versions($ni, $sm, %tests);
 
     return $sm;
 }

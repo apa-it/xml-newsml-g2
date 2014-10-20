@@ -75,17 +75,17 @@ my $nm = XML::NewsML_G2::News_Message->new();
 $nm->add_item($ni_video);
 $nm->add_item($ni_text);
 
-my $writer = XML::NewsML_G2::Writer::News_Message->new(news_message => $nm,
-    scheme_manager => $sm, g2_version => 2.12
-);
-ok(my $dom = $writer->create_dom(), 'create DOM');
-ok(my $xpc = XML::LibXML::XPathContext->new($dom),
-    'create XPath context for DOM tree');
-$xpc->registerNs('nar', 'http://iptc.org/std/nar/2006-10-01/');
-$xpc->registerNs('xhtml', 'http://www.w3.org/1999/xhtml');
-news_message_items_check($xpc);
-validate_g2($dom, '2.12');
-
+foreach my $version (qw(2.12 2.15 2.18)) {
+    my $writer = XML::NewsML_G2::Writer::News_Message->new
+        (news_message => $nm, scheme_manager => $sm, g2_version => $version);
+    ok(my $dom = $writer->create_dom(), "$version create DOM");
+    ok(my $xpc = XML::LibXML::XPathContext->new($dom),
+       'create XPath context for DOM tree');
+    $xpc->registerNs('nar', 'http://iptc.org/std/nar/2006-10-01/');
+    $xpc->registerNs('xhtml', 'http://www.w3.org/1999/xhtml');
+    news_message_items_check($xpc);
+    validate_g2($dom, $version);
+}
 
 #Package Item Test
 
@@ -115,14 +115,15 @@ $nm->add_item($pi);
 $nm->add_item($text);
 $nm->add_item($pic);
 
-$writer = XML::NewsML_G2::Writer::News_Message->new(news_message => $nm,
-    scheme_manager => $sm, g2_version => 2.12
-);
-ok($dom = $writer->create_dom(), 'package writer creates DOM');
-ok($xpc = XML::LibXML::XPathContext->new($dom), 'create XPath context for DOM tree');
-$xpc->registerNs('nar', 'http://iptc.org/std/nar/2006-10-01/');
-$xpc->registerNs('xhtml', 'http://www.w3.org/1999/xhtml');
-news_message_package_check($xpc);
-validate_g2($dom, '2.12');
+foreach my $version (qw(2.12 2.15 2.18)) {
+    my $writer = XML::NewsML_G2::Writer::News_Message->new
+        (news_message => $nm, scheme_manager => $sm, g2_version => $version);
+    ok(my $dom = $writer->create_dom(), "$version package writer creates DOM");
+    ok(my $xpc = XML::LibXML::XPathContext->new($dom), 'create XPath context for DOM tree');
+    $xpc->registerNs('nar', 'http://iptc.org/std/nar/2006-10-01/');
+    $xpc->registerNs('xhtml', 'http://www.w3.org/1999/xhtml');
+    news_message_package_check($xpc);
+    validate_g2($dom, $version);
+}
 
 done_testing();

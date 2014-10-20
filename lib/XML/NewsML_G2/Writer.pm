@@ -2,8 +2,6 @@ package XML::NewsML_G2::Writer;
 
 # $Id$
 
-use Module::Runtime 'use_module';
-
 use Carp;
 use Moose;
 use Moose::Util;
