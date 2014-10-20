@@ -2,7 +2,7 @@ NAME
     XML::NewsML_G2 - generate NewsML-G2 news items
 
 VERSION
-    0.1_4
+    0.2.0
 
 INSTALLATION
     To install this module, run the following commands:
@@ -15,25 +15,28 @@ INSTALLATION
 SYNOPSIS
         use XML::NewsML_G2;
         my $ni = XML::NewsML_G2::News_Item_Text->new(%args);
-        my $writer = XML::NewsML_G2::Writer_2_18(news_item => $ni);
+        my $writer = XML::NewsML_G2::Writer_2_15(news_item => $ni);
         my $dom = $writer->create_dom();
 
 DESCRIPTION
     This module tries to implement the creation of XML files conforming to
-    the NewsML-G2 specification as published by the IPTC. It does not aim in
-    implementing the complete standard, but in covering the most common use
-    cases.
+    the NewsML-G2 specification as published by the IPTC. It does not aim to
+    implement the complete standard, but to cover the most common use cases
+    in a best-practice manner.
 
     For the full specification of the format, visit
-    http://www.iptc.org/site/News_Exchange_Formats/NewsML-G2/
+    http://www.iptc.org/site/News_Exchange_Formats/NewsML-G2/. For a quick
+    introduction, you might prefer the Quick Start Guides.
 
 CURRENT STATUS
     The implementation currently supports text, picture, video, audio,
-    graphics, as well as multimedia packages.
+    graphics, as well as multimedia packages and slideshows.
 
-    Versions 2.9 and 2.12 of the standard are frozen, so the output should
-    not change when you update this distribution. Version 2.18 however is
-    not yet frozen, changes in the output are to be expected.
+    Version 2.15 is the latest version of the standard supported by this
+    software, and should be your first choice. Using versions 2.9 and 2.12
+    is deprecated, and support for it will beremoved in future releases.
+    Draft version 2.17 is unsupported, but will evolve into 2.18 when it is
+    finalised.
 
 SCHEMES AND CATALOGS
     Before starting to use schemes or catalogs with this module, read the
@@ -93,6 +96,7 @@ SCHEMES AND CATALOGS
         <catalogRef href="http://xyz.org/catalog_1.xml"/>
 
 API
+  Main Classes
     XML::NewsML_G2::News_Item
     XML::NewsML_G2::News_Item_Text
     XML::NewsML_G2::News_Item_Audio
@@ -102,8 +106,12 @@ API
     XML::NewsML_G2::News_Message
     XML::NewsML_G2::Package_Item
     XML::NewsML_G2::AnyItem
+
+  Scheme Handling
     XML::NewsML_G2::Scheme
     XML::NewsML_G2::Scheme_Manager
+
+  Classes for Structured Data Attributes
     XML::NewsML_G2::Service
     XML::NewsML_G2::Video
     XML::NewsML_G2::Media_Topic
@@ -111,24 +119,26 @@ API
     XML::NewsML_G2::Genre
     XML::NewsML_G2::Provider
     XML::NewsML_G2::Desk
+    XML::NewsML_G2::Location
+    XML::NewsML_G2::Organisation
+    XML::NewsML_G2::Product
     XML::NewsML_G2::Group
     XML::NewsML_G2::Picture
-    XML::NewsML_G2::Location
     XML::NewsML_G2::Graphics
     XML::NewsML_G2::Audio
     XML::NewsML_G2::Copyright_Holder
-    XML::NewsML_G2::Organisation
-    XML::NewsML_G2::Product
     XML::NewsML_G2::Icon
+
+  Writer Classes and Roles
     XML::NewsML_G2::Writer
     XML::NewsML_G2::Writer::News_Item
     XML::NewsML_G2::Writer::News_Message
     XML::NewsML_G2::Writer::Package_Item
-    XML::NewsML_G2::Types
     XML::NewsML_G2::Role::Writer
     XML::NewsML_G2::Role::Writer_2_9
     XML::NewsML_G2::Role::Writer_2_12
-    XML::NewsML_G2::Role::Writer_2_18
+    XML::NewsML_G2::Role::Writer_2_15
+    XML::NewsML_G2::Role::Writer_2_17
     XML::NewsML_G2::Role::Writer::News_Item_Text
     XML::NewsML_G2::Role::Writer::News_Item_Audio
     XML::NewsML_G2::Role::Writer::News_Message
@@ -136,19 +146,26 @@ API
     XML::NewsML_G2::Role::Writer::Package_Item
     XML::NewsML_G2::Role::Writer::News_Item_Video
     XML::NewsML_G2::Role::Writer::News_Item_Graphics
+
+  Type Definitions
+    XML::NewsML_G2::Types
+
+  Utility Roles
     XML::NewsML_G2::Role::HasQCode
     XML::NewsML_G2::Role::Remote
     XML::NewsML_G2::Role::RemoteVisual
     XML::NewsML_G2::Role::RemoteAudible
+
 DEPENDENCIES
-    Moose, XML::LibXML, DateTime, DateTime::Format::XSD, UUID::Tiny
+    Moose, XML::LibXML, DateTime, DateTime::Format::XSD, UUID::Tiny,
+    Module::Runtime
 
 BUGS AND LIMITATIONS
     No bugs have been reported.
 
     Please report any bugs or feature requests to
     `bug-xml-newsml_g2@rt.cpan.org', or through the web interface at
-    http://rt.cpan.org.
+    https://rt.cpan.org/Public/Dist/Display.html?Name=XML-NewsML_G2.
 
     Be aware that the API for this module *will* change with each upcoming
     release.
@@ -156,7 +173,7 @@ BUGS AND LIMITATIONS
 SEE ALSO
     XML::NewsML - Simple interface for creating NewsML documents
 
-AUTHOR
+AUTHORS
     Philipp Gortan `<philipp.gortan@apa.at>'
     Mario Paumann `<mario.paumann@apa.at>'
     Christian Eder `<christian.eder@apa.at>'
