@@ -9,7 +9,7 @@ my @authors = map {(my $mail = lc) =~ tr/a-z/./cs; "$_ <$mail\@apa.at>" }
 
 my $builder = Module::Build->new
   (module_name         => 'XML::NewsML_G2',
-   license             => 'gpl',
+   license             => 'gpl2',
    dist_author         => \@authors,
    dist_abstract       => 'generate NewsML-G2 news items',
    dist_version_from   => 'lib/XML/NewsML_G2.pm',
@@ -37,6 +37,11 @@ my $builder = Module::Build->new
    ],
    create_makefile_pl => 'traditional',
    sign => 1,
+   meta_merge => {
+       resources => {
+           bugtracker => 'https://rt.cpan.org/Public/Dist/Display.html?Name=XML-NewsML_G2'
+       }
+   },
   );
 
 $builder->create_build_script();
