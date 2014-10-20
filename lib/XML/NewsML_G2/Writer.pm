@@ -15,7 +15,7 @@ has '_root_item', is => 'ro', lazy => 1, builder => '_build__root_item';
 has 'encoding', isa => 'Str', is => 'ro', default => 'utf-8';
 
 has 'scheme_manager', isa => 'XML::NewsML_G2::Scheme_Manager', is => 'ro', lazy => 1, builder => '_build_scheme_manager';
-has 'doc', isa => 'XML::LibXML::Document', is => 'ro', lazy=> 1, builder => '_build_doc';
+has 'doc', isa => 'XML::LibXML::Document', is => 'ro', lazy => 1, builder => '_build_doc';
 has '_formatter', is => 'ro', default => sub {DateTime::Format::XSD->new()};
 
 has 'g2_ns', isa => 'Str', is => 'ro', default => 'http://iptc.org/std/nar/2006-10-01/';
@@ -23,6 +23,7 @@ has 'xhtml_ns', isa => 'Str', is => 'ro', default => 'http://www.w3.org/1999/xht
 
 has 'g2_version', isa => 'Str', is => 'ro', default => '2.15';
 has '_root_node_name', isa => 'Str', is => 'ro', default => 'newsItem';
+has 'generator_version', is => 'Str', is => 'ro', lazy => 1, builder => '_build_generator_version';
 
 # attributes set by version-specific role
 has 'schema_location', isa => 'Str', is => 'ro';
@@ -51,6 +52,10 @@ sub _build_doc {
 sub _build_scheme_manager {
     my $self = shift;
     return XML::NewsML_G2::Scheme_Manager->new();
+}
+
+sub _build_generator_version {
+    return XML::NewsML_G2->VERSION;
 }
 
 # Apply roles needed for writing
@@ -135,7 +140,7 @@ sub _create_item_meta {
 
     $im->appendChild(my $ps = $self->create_element('pubStatus'));
     $self->scheme_manager->add_qcode($ps, 'stat', $self->_root_item->doc_status);
-    $im->appendChild($self->create_element('generator', versioninfo => XML::NewsML_G2->VERSION, _text => 'XML::NewsML_G2'));
+    $im->appendChild($self->create_element('generator', versioninfo => $self->generator_version, _text => 'XML::NewsML_G2'));
     if ($self->_root_item->has_service) {
         $im->appendChild(my $svc = $self->create_element('service', _name_text => $self->_root_item->service));
         $self->scheme_manager->add_qcode($svc, 'svc', $self->_root_item->service->qcode);
@@ -298,6 +303,12 @@ URL of the G2 catalog, specified by subclass.
 
 Reference to a hash of schemes that are covered by the G2 catalog. If
 the value is undefined, it defaults to the name of the scheme.
+
+=item generator_version
+
+Version of the generating software, as written to the output. Defaults
+to the version of XML::NewsML_G2, but can be overwritten here (mainly
+to ease automated testing).
 
 =back
 
