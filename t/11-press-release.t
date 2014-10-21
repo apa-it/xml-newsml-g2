@@ -24,7 +24,8 @@ ok(my $svc = XML::NewsML_G2::Service->new
 ok(my $kolarik = XML::NewsML_G2::Copyright_Holder->new
 
    (qcode => '12345', name => "Karl Kolarik's Schweizerhaus GmbH",
-    notice => 'OTS-Originaltext Presseaussendung unter ausschliesslicher inhaltlicher Verantwortung des Aussenders'
+    notice => 'OTS-Originaltext Presseaussendung unter ausschliesslicher inhaltlicher Verantwortung des Aussenders',
+    uri => 'http://www.schweizerhaus.at/copyright.html'
    ), 'create copyright holder');
 
 ok(my $ni = XML::NewsML_G2::News_Item_Text->new
@@ -60,6 +61,8 @@ TODO: {
     is($xpc->findvalue('//nar:rightsInfo/nar:copyrightHolder/@qcode'),
        'apaotsem:12345', 'correct copyrightholder qcode in XML');
 }
+like($xpc->findvalue('//nar:rightsInfo/nar:copyrightHolder/@uri'),
+    qr/www\.schweizerhaus\.at/,'correct URI in XML of copyrightholder');
 like($xpc->findvalue('//nar:rightsInfo/nar:copyrightNotice'),
      qr/Aussender/, 'correct copyrightnotice in XML');
 
