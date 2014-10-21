@@ -31,8 +31,6 @@ XML::NewsML_G2::Copyright_Holder - the news provider (news agency)
 
 for an optional copyright notice
 
-=back
-
 =item uri
 
 optional uri to copyright holder

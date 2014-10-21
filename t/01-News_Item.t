@@ -19,7 +19,7 @@ use XML::NewsML_G2;
 sub basic_checks {
     my ($dom, $xpc, $ic) = @_;
 
-    like($xpc->findvalue('//nar:copyrightHolder/nar:name'), qr/Franklin D. Roosevelt/, 'correct copyright in XML');
+    like($xpc->findvalue('//nar:copyrightHolder/nar:name'), qr/APA/, 'correct copyright in XML');
     like($xpc->findvalue('//nar:copyrightNotice'), qr/www.apa.at/, 'correct copyright notice in XML');
     like($xpc->findvalue('//nar:usageTerms'), qr/full beer/, 'correct usage terms in XML');
     is($xpc->findvalue('//nar:provider/@qcode'), 'nprov:apa', 'correct provider in XML');

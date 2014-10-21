@@ -53,12 +53,11 @@ $mt20000553->add_translation('en', 'leisure venue');
 $mt20000553->parent($mt20000538);
 
 ok(our $prov_apa = XML::NewsML_G2::Provider->new
-   (qcode => 'apa', name => 'APA - Austria Presse Agentur',
-    notice => '(c) 2014 http://www.apa.at'
-   ), 'create Provider instance');
+   (qcode => 'apa', name => 'APA - Austria Presse Agentur',),
+    'create Provider instance');
 
 ok(our $copy_hold = XML::NewsML_G2::Copyright_Holder->new
-    (qcode => '1235', name => 'Franklin D. Roosevelt',
+    (qcode => 'apa', name => 'APA - Austria Presse Agentur',
         notice => '(c) 2014 http://www.apa.at',
         uri => 'http://www.apa.at'
     ), 'create copyright holder instance');
