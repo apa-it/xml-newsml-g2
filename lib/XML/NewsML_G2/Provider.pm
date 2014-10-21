@@ -21,16 +21,6 @@ XML::NewsML_G2::Provider - the news provider (news agency)
 
     my $apa = XML::NewsML_G2::Provider->new(name => 'APA', qcode => 'apa');
 
-=head1 ATTRIBUTES
-
-=over 4
-
-=item notice
-
-for an optional copyright notice
-
-=back
-
 =head1 AUTHOR
 
 Philipp Gortan  C<< <philipp.gortan@apa.at> >>

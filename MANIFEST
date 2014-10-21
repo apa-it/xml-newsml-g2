@@ -71,6 +71,7 @@ t/07-Package_Item.t
 t/08-all-schemes-in-catalogs.t
 t/09-News_Item_Video.t
 t/10-News_Message.t
+t/11-press-release.t
 t/author-test-eol.t
 t/NewsML_G2_Test_Helpers.pm
 t/perlcritic.t
