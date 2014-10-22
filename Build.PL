@@ -39,7 +39,8 @@ my $builder = Module::Build->new
    sign => 1,
    meta_merge => {
        resources => {
-           bugtracker => 'https://rt.cpan.org/Public/Dist/Display.html?Name=XML-NewsML_G2'
+           bugtracker => 'https://rt.cpan.org/Public/Dist/Display.html?Name=XML-NewsML_G2',
+           x_IRC => 'irc://irc.perl.org/#xml-newsml-g2',
        }
    },
   );
