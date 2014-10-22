@@ -70,7 +70,7 @@ To install this module, run the following commands:
 
     use XML::NewsML_G2;
     my $ni = XML::NewsML_G2::News_Item_Text->new(%args);
-    my $writer = XML::NewsML_G2::Writer_2_15(news_item => $ni);
+    my $writer = XML::NewsML_G2::Writer::News_Item->new(news_item => $ni);
     my $dom = $writer->create_dom();
 
 
@@ -82,8 +82,8 @@ to implement the complete standard, but to cover the most common use
 cases in a best-practice manner.
 
 For the full specification of the format, visit
-L<http://www.iptc.org/site/News_Exchange_Formats/NewsML-G2/>. For a
-quick introduction, you might prefer the L<Quick Start
+L<http://www.newsml-g2.org/>. For a quick introduction, you might
+prefer the L<Quick Start
 Guides|http://www.iptc.org/download?g2quickstartguides>.
 
 =head1 CURRENT STATUS
