@@ -75,7 +75,7 @@ my $nm = XML::NewsML_G2::News_Message->new();
 $nm->add_item($ni_video);
 $nm->add_item($ni_text);
 
-foreach my $version (qw(2.12 2.15 2.17)) {
+foreach my $version (qw(2.12 2.15 2.18)) {
     my $writer = XML::NewsML_G2::Writer::News_Message->new
         (news_message => $nm, scheme_manager => $sm, g2_version => $version);
     ok(my $dom = $writer->create_dom(), "$version create DOM");
@@ -115,7 +115,7 @@ $nm->add_item($pi);
 $nm->add_item($text);
 $nm->add_item($pic);
 
-foreach my $version (qw(2.12 2.15 2.17)) {
+foreach my $version (qw(2.12 2.15 2.18)) {
     my $writer = XML::NewsML_G2::Writer::News_Message->new
         (news_message => $nm, scheme_manager => $sm, g2_version => $version);
     ok(my $dom = $writer->create_dom(), "$version package writer creates DOM");

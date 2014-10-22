@@ -21,7 +21,7 @@ has '_formatter', is => 'ro', default => sub {DateTime::Format::XSD->new()};
 has 'g2_ns', isa => 'Str', is => 'ro', default => 'http://iptc.org/std/nar/2006-10-01/';
 has 'xhtml_ns', isa => 'Str', is => 'ro', default => 'http://www.w3.org/1999/xhtml';
 
-has 'g2_version', isa => 'Str', is => 'ro', default => '2.15';
+has 'g2_version', isa => 'Str', is => 'ro', default => '2.18';
 has '_root_node_name', isa => 'Str', is => 'ro', default => 'newsItem';
 has 'generator_version', is => 'Str', is => 'ro', lazy => 1, builder => '_build_generator_version';
 
@@ -242,7 +242,7 @@ conforming to NewsML-G2 News Items, Package Items and News Messages
 =head1 SYNOPSIS
 
     my $w = XML::NewsML_G2::Writer::News_Item->new
-        (news_item => $ni, scheme_manager => $sm, g2_version => 2.15);
+        (news_item => $ni, scheme_manager => $sm, g2_version => 2.18);
 
     my $p = $w->create_element('p', class => 'main', _text => 'blah');
 
@@ -288,8 +288,8 @@ XML Namespace of XHTML
 =item g2_version
 
 Use this attribute to specify the NewsML-G2 version to be
-created. Defaults to 2.15, other valid options are: 2.9, 2.12 and 2.17. Be
-aware that only the later versions offer all features.
+created. Defaults to 2.18, other valid options are: 2.9, 2.12 and
+2.15. Be aware that only the later versions offer all features.
 
 =item schema_location
 

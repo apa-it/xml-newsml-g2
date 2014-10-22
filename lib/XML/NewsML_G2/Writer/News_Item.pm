@@ -337,7 +337,7 @@ NewsML-G2 for News Items
 =head1 SYNOPSIS
 
     my $w = XML::NewsML_G2::Writer::News_Item->new
-        (news_item => $ni, scheme_manager => $sm, g2_version => 2.15);
+        (news_item => $ni, scheme_manager => $sm);
 
     my $p = $w->create_element('p', class => 'main', _text => 'blah');
 

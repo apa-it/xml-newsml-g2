@@ -25,6 +25,6 @@ ok(!$xpc->find('@qcode'), 'no qcode is created in XML');
 
 #diag($dom->serialize(1));
 
-validate_g2($dom, '2.15');
+validate_g2($dom);
 
 done_testing;

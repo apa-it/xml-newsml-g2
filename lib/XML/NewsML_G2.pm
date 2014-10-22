@@ -91,11 +91,10 @@ Guides|http://www.iptc.org/download?g2quickstartguides>.
 The implementation currently supports text, picture, video, audio,
 graphics, as well as multimedia packages and slideshows.
 
-Version 2.15 is the latest version of the standard supported by this
-software, and should be your first choice. Using versions 2.9 and 2.12
-is deprecated, and support for it will beremoved in future
-releases. Draft version 2.17 is unsupported, but will evolve into 2.18
-when it is finalised.
+Version 2.18 is the latest version of the standard supported by this
+software, and should be your first choice. Using versions 2.9, 2.12
+and 2.15 is deprecated, and support for it will beremoved in future
+releases.
 
 =head1 SCHEMES AND CATALOGS
 
@@ -255,7 +254,7 @@ and the inline catalog will be replaced with a link:
 
 =item L<XML::NewsML_G2::Role::Writer_2_15>
 
-=item L<XML::NewsML_G2::Role::Writer_2_17>
+=item L<XML::NewsML_G2::Role::Writer_2_18>
 
 =item L<XML::NewsML_G2::Role::Writer::News_Item_Text>
 

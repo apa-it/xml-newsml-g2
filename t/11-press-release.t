@@ -49,7 +49,7 @@ ok(my $sm = XML::NewsML_G2::Scheme_Manager->new(%schemes), 'create Scheme Manage
 my $writer = XML::NewsML_G2::Writer::News_Item->new(news_item => $ni, scheme_manager => $sm);
 ok(my $dom = $writer->create_dom(), 'create DOM');
 
-diag($dom->serialize(1));
+#diag($dom->serialize(1));
 
 ok(my $xpc = XML::LibXML::XPathContext->new($dom), 'create XPath context for DOM tree');
 $xpc->registerNs('nar', 'http://iptc.org/std/nar/2006-10-01/');
@@ -75,6 +75,6 @@ is($xpc->findvalue('//nar:service/@qcode'), 'apasvc:ots', 'correct service qcode
 like($xpc->findvalue('//nar:service/nar:name'),
      qr/APA-OTS/, 'correct service name in XML');
 
-validate_g2($dom, '2.15');
+validate_g2($dom);
 
 done_testing;

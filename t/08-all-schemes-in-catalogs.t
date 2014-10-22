@@ -35,6 +35,6 @@ like($xpc->findvalue('//nar:catalogRef/@href'), qr/www.apa-it.at/, 'correct cata
 
 #diag($dom->serialize(1));
 
-validate_g2($dom, '2.15');
+validate_g2($dom);
 
 done_testing;

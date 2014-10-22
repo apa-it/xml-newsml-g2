@@ -32,11 +32,10 @@ CURRENT STATUS
     The implementation currently supports text, picture, video, audio,
     graphics, as well as multimedia packages and slideshows.
 
-    Version 2.15 is the latest version of the standard supported by this
-    software, and should be your first choice. Using versions 2.9 and 2.12
-    is deprecated, and support for it will beremoved in future releases.
-    Draft version 2.17 is unsupported, but will evolve into 2.18 when it is
-    finalised.
+    Version 2.18 is the latest version of the standard supported by
+    this software, and should be your first choice. Using versions
+    2.9, 2.12 and 2.15 is deprecated, and support for it will
+    beremoved in future releases.
 
 SCHEMES AND CATALOGS
     Before starting to use schemes or catalogs with this module, read the
@@ -138,7 +137,7 @@ API
     XML::NewsML_G2::Role::Writer_2_9
     XML::NewsML_G2::Role::Writer_2_12
     XML::NewsML_G2::Role::Writer_2_15
-    XML::NewsML_G2::Role::Writer_2_17
+    XML::NewsML_G2::Role::Writer_2_18
     XML::NewsML_G2::Role::Writer::News_Item_Text
     XML::NewsML_G2::Role::Writer::News_Item_Audio
     XML::NewsML_G2::Role::Writer::News_Message
