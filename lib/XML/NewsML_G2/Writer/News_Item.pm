@@ -21,7 +21,7 @@ sub _create_rights_info {
     my $ri = $self->create_element('rightsInfo');
 
     $ri->appendChild (my $crh = $self->create_element('copyrightHolder', _name_text => $self->news_item->copyright_holder));
-    $self->scheme_manager->add_qcode_or_literal($crh, 'nprov', $self->news_item->copyright_holder->qcode);
+    $self->scheme_manager->add_qcode_or_literal($crh, 'copyright_holder', $self->news_item->copyright_holder->qcode);
     $crh->setAttribute('uri', $self->news_item->copyright_holder->uri) if $self->news_item->copyright_holder->uri;
 
     my $notice = $self->news_item->copyright_holder->notice;

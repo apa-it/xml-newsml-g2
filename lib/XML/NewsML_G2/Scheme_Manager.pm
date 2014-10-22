@@ -8,7 +8,7 @@ use namespace::autoclean;
 
 my @attrs = (qw(desk hltype role ind geo org topic crel crol drol svc
 isbn ean isrol nprov ninat stat sig iso3166_1a2 genre isin medtop rnd
-colsp loutorient adc group pgrmod));
+colsp adc group pgrmod copyright_holder));
 
 foreach (@attrs) {
     has $_, isa => 'XML::NewsML_G2::Scheme', is => 'rw';
@@ -134,24 +134,65 @@ Scheme for editorial service
 
 Scheme for topics
 
-
 =item isrol
+
+Scheme for info source role
 
 =item nprov
 
+Scheme for news provder
+
 =item ninat
+
+Scheme for news item nature
 
 =item stat
 
+Scheme for document state
+
 =item sig
+
+Scheme for signals
 
 =item iso3166_1a2
 
+Scheme for country codes
+
 =item genre
+
+Scheme for genres
 
 =item isin
 
+Scheme for ISIN codes
+
 =item medtop
+
+Scheme for media topics
+
+=item rnd
+
+Scheme for renditions
+
+=item colsp
+
+Scheme for colorspaces
+
+=item adc
+
+Scheme for audio channels
+
+=item group
+
+Scheme for groups within a package
+
+=item pgrmod
+
+Scheme for package group mode
+
+=item copyright_holder
+
+Scheme for copyright holder
 
 =back
 

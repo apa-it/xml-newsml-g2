@@ -12,7 +12,6 @@ around '_build_g2_catalog_schemes' => sub {
     my $result = $self->$orig(@args);
     $result->{rnd} = undef;
     $result->{colsp} = undef;
-    $result->{loutorient} = undef;
     return $result;
 };
 

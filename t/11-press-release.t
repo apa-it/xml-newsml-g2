@@ -42,6 +42,8 @@ my %schemes;
 foreach (qw(svc)) {
     $schemes{$_} = XML::NewsML_G2::Scheme->new(alias => "apa$_", uri => "http://cv.apa.at/$_/");
 }
+$schemes{copyright_holder} = XML::NewsML_G2::Scheme->new(alias => "apaotsem", uri => "http://cv.apa.at/apaotsem/");
+
 ok(my $sm = XML::NewsML_G2::Scheme_Manager->new(%schemes), 'create Scheme Manager');
 
 my $writer = XML::NewsML_G2::Writer::News_Item->new(news_item => $ni, scheme_manager => $sm);
@@ -56,11 +58,8 @@ $xpc->registerNs('xhtml', 'http://www.w3.org/1999/xhtml');
 # copyright holder
 like($xpc->findvalue('//nar:rightsInfo/nar:copyrightHolder/nar:name'),
      qr/Kolarik/, 'correct copyrightholder name in XML');
-TODO: {
-    local $TODO = 'emittent not yet implemented';
-    is($xpc->findvalue('//nar:rightsInfo/nar:copyrightHolder/@qcode'),
-       'apaotsem:12345', 'correct copyrightholder qcode in XML');
-}
+is($xpc->findvalue('//nar:rightsInfo/nar:copyrightHolder/@qcode'),
+   'apaotsem:12345', 'correct copyrightholder qcode in XML');
 like($xpc->findvalue('//nar:rightsInfo/nar:copyrightHolder/@uri'),
     qr/www\.schweizerhaus\.at/,'correct URI in XML of copyrightholder');
 like($xpc->findvalue('//nar:rightsInfo/nar:copyrightNotice'),
