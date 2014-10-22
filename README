@@ -2,7 +2,7 @@ NAME
     XML::NewsML_G2 - generate NewsML-G2 news items
 
 VERSION
-    0.2.0
+    0.2.1
 
 INSTALLATION
     To install this module, run the following commands:
@@ -15,7 +15,7 @@ INSTALLATION
 SYNOPSIS
         use XML::NewsML_G2;
         my $ni = XML::NewsML_G2::News_Item_Text->new(%args);
-        my $writer = XML::NewsML_G2::Writer_2_15(news_item => $ni);
+        my $writer = XML::NewsML_G2::Writer::News_Item->new(news_item => $ni);
         my $dom = $writer->create_dom();
 
 DESCRIPTION
@@ -25,17 +25,17 @@ DESCRIPTION
     in a best-practice manner.
 
     For the full specification of the format, visit
-    http://www.iptc.org/site/News_Exchange_Formats/NewsML-G2/. For a quick
-    introduction, you might prefer the Quick Start Guides.
+    http://www.newsml-g2.org/. For a quick introduction, you might prefer
+    the Quick Start Guides.
 
 CURRENT STATUS
     The implementation currently supports text, picture, video, audio,
     graphics, as well as multimedia packages and slideshows.
 
-    Version 2.18 is the latest version of the standard supported by
-    this software, and should be your first choice. Using versions
-    2.9, 2.12 and 2.15 is deprecated, and support for it will
-    beremoved in future releases.
+    Version 2.18 is the latest version of the standard supported by this
+    software, and should be your first choice. Using versions 2.9, 2.12 and
+    2.15 is deprecated, and support for it will beremoved in future
+    releases.
 
 SCHEMES AND CATALOGS
     Before starting to use schemes or catalogs with this module, read the
