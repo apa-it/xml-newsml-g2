@@ -1,5 +1,8 @@
 Revision history for XML::NewsML_G2
 
+v0.2.2  Wed Oct 22 16:15:00 2014
+        Getting started chapter added.
+
 v0.2.1  Wed Oct 22 12:00:00 2014
         Support for NewsML-G2 2.18 added, documentation improved.
 
