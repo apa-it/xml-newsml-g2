@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>XML::NewsML-G2 by apa-it</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>XML::NewsML-G2</h1>
+        <p>XML::NewsML_G2 - generate NewsML-G2 news items</p>
+        <p class="view"><a href="https://github.com/apa-it/xml-newsml-g2">View the Project on GitHub <small>apa-it/xml-newsml-g2</small></a></p>
+        <ul>
+          <li><a href="https://github.com/apa-it/xml-newsml-g2/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/apa-it/xml-newsml-g2/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/apa-it/xml-newsml-g2">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="xmlnewsml_g2---generate-newsml-g2-news-items" class="anchor" href="#xmlnewsml_g2---generate-newsml-g2-news-items" aria-hidden="true"><span class="octicon octicon-link"></span></a>XML::NewsML_G2 - generate NewsML-G2 news items</h1>
+
+<h2>
+<a id="description" class="anchor" href="#description" aria-hidden="true"><span class="octicon octicon-link"></span></a>DESCRIPTION</h2>
+
+<p>This module tries to implement the creation of XML files conforming to
+the NewsML-G2 specification as published by the IPTC. It does not aim to
+implement the complete standard, but to cover the most common use cases
+in a best-practice manner.</p>
+
+<p>For the full specification of the format, visit
+<a href="http://www.newsml-g2.org/">http://www.newsml-g2.org/</a>. For a quick introduction, you might prefer
+the Quick Start Guides.</p>
+
+<h2>
+<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>GETTING STARTED</h2>
+
+<p>To start, you need to create an instance of the item class of your
+choice, e.g. XML::NewsML_G2::NewsML_G2_Text for a text story, or
+XML::NewsML_G2::News_Item_Picture for an image. Each of these classes
+might have some required attributes (e.g. <code>title',</code>language',
+<code>provider'), which you will have to provide when creating the instance,
+as well as a number of optional ones (e.g.</code>note'). While for some
+attributes scalar values will do, others will require further instances
+of classes, e.g. for `provider' you will need an instance of
+XML::NewsML_G2::Provider. Please see each class' documentation for
+details.</p>
+
+<p>Once you're done setting up your data structure, you have to create a
+writer instance in order to retrieve your DOM. For simple news items
+like text or picture, XML::NewsML_G2::Writer::News_Item will be the
+writer class to use.</p>
+
+<h2>
+<a id="current-status" class="anchor" href="#current-status" aria-hidden="true"><span class="octicon octicon-link"></span></a>CURRENT STATUS</h2>
+
+<p>The implementation currently supports text, picture, video, audio,
+graphics, as well as multimedia packages and slideshows.</p>
+
+<p>Version 2.18 is the latest version of the standard supported by this
+software, and should be your first choice. Using versions 2.9, 2.12 and
+2.15 is deprecated, and support for it will beremoved in future
+releases.</p>
+
+<h2>
+<a id="authors" class="anchor" href="#authors" aria-hidden="true"><span class="octicon octicon-link"></span></a>AUTHORS</h2>
+
+<ul>
+<li>    Philipp Gortan `<a href="mailto:philipp.gortan@apa.at">philipp.gortan@apa.at</a>'</li>
+<li>    Mario Paumann `<a href="mailto:mario.paumann@apa.at">mario.paumann@apa.at</a>'</li>
+<li>    Christian Eder `<a href="mailto:christian.eder@apa.at">christian.eder@apa.at</a>'</li>
+<li>    Stefan Hrdlicka `<a href="mailto:stefan.hrdlicka@apa.at">stefan.hrdlicka@apa.at</a>'</li>
+</ul>
+
+<h2>
+<a id="licence-and-copyright" class="anchor" href="#licence-and-copyright" aria-hidden="true"><span class="octicon octicon-link"></span></a>LICENCE AND COPYRIGHT</h2>
+
+<p>Copyright (c) 2013-2014, APA-IT. All rights reserved.</p>
+
+<p>This module is free software; you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation; either version 2 of the License, or (at your
+option) any later version.</p>
+
+<p>This module is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License along
+with this module. If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/apa-it">apa-it</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
