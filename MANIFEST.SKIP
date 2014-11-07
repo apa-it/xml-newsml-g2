@@ -12,3 +12,5 @@
 ^_build/
 ^build.sh$
 \.bak$
+^\.git
+^\.travis

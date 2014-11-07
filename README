@@ -2,7 +2,7 @@ NAME
     XML::NewsML_G2 - generate NewsML-G2 news items
 
 VERSION
-    0.2.2
+    0.2_3
 
 INSTALLATION
     To install this module, run the following commands:
@@ -61,124 +61,6 @@ CURRENT STATUS
     software, and should be your first choice. Using versions 2.9, 2.12 and
     2.15 is deprecated, and support for it will beremoved in future
     releases.
-
-SCHEMES AND CATALOGS
-    Before starting to use schemes or catalogs with this module, read the
-    chapter 13 of the NewsML-G2 implementation guide. Go on, do it now. I'll
-    wait.
-
-    You don't need to use either schemes or catalogs in order to use this
-    module, unless you are required to do so by the NewsML-G2 standard (e.g.
-    the `service' attribute). If you specify a value for such an attribute
-    and don't add a corresponding scheme, creating the DOM tree will die.
-
-    For all attributes where a scheme is not required by the standard, you
-    can start without specifying anything. In that case, a `literal'
-    attribute will be created, with the value you specified in the `qcode'
-    attribute. For instance:
-
-        my $org = XML::NewsML_G2::Organisation->new(name => 'Google', qcode => 'gogl');
-        $ni->add_organisation($org);
-
-    will result in this output:
-
-        <subject type="cpnat:organisation" literal="org#gogl">
-          <name>Google</name>
-        </subject>
-
-    If the qcodes used in your organisation instances are part of a
-    controlled vocabulary, you can convey this information by creating a
-    XML::NewsML_G2::Scheme instance, specifying a custom, unique `uri' for
-    your vocabulary, and registering it with the
-    XML::NewsML_G2::Scheme_Manager:
-
-        my $os = XML::NewsML_G2::Scheme->new(alias => 'xyzorg',
-            uri => 'http://xyz.org/cv/org');
-        my $sm = XML::NewsML_G2::Scheme_Manager->new(org => $os);
-
-    The output will now contain an inline catalog with your scheme:
-
-        <catalog>
-          <scheme alias="xyzorg" uri="http://xyz.org/cv/org"/>
-        </catalog>
-
-    and the literal will be replaced by a qcode:
-
-        <subject type="cpnat:organisation" qcode="xyzorg:gogl">
-          <name>Google</name>
-        </subject>
-
-    If you have multiple schemes, you can package them together into a
-    single catalog, which you publish on your website. Simply specify the
-    URL of the catalog when creating the XML::NewsML_G2::Scheme instance:
-
-        my $os = XML::NewsML_G2::Scheme->new(alias => 'xyzorg',
-            catalog => 'http://xyz.org/catalog_1.xml');
-
-    and the inline catalog will be replaced with a link:
-
-        <catalogRef href="http://xyz.org/catalog_1.xml"/>
-
-API
-  Main Classes
-    XML::NewsML_G2::News_Item
-    XML::NewsML_G2::News_Item_Text
-    XML::NewsML_G2::News_Item_Audio
-    XML::NewsML_G2::News_Item_Picture
-    XML::NewsML_G2::News_Item_Video
-    XML::NewsML_G2::News_Item_Graphics
-    XML::NewsML_G2::News_Message
-    XML::NewsML_G2::Package_Item
-    XML::NewsML_G2::AnyItem
-
-  Scheme Handling
-    XML::NewsML_G2::Scheme
-    XML::NewsML_G2::Scheme_Manager
-
-  Classes for Structured Data Attributes
-    XML::NewsML_G2::Service
-    XML::NewsML_G2::Video
-    XML::NewsML_G2::Media_Topic
-    XML::NewsML_G2::Topic
-    XML::NewsML_G2::Genre
-    XML::NewsML_G2::Provider
-    XML::NewsML_G2::Desk
-    XML::NewsML_G2::Location
-    XML::NewsML_G2::Organisation
-    XML::NewsML_G2::Product
-    XML::NewsML_G2::Group
-    XML::NewsML_G2::Picture
-    XML::NewsML_G2::Graphics
-    XML::NewsML_G2::Audio
-    XML::NewsML_G2::Copyright_Holder
-    XML::NewsML_G2::Icon
-
-  Writer Classes and Roles
-    XML::NewsML_G2::Writer
-    XML::NewsML_G2::Writer::News_Item
-    XML::NewsML_G2::Writer::News_Message
-    XML::NewsML_G2::Writer::Package_Item
-    XML::NewsML_G2::Role::Writer
-    XML::NewsML_G2::Role::Writer_2_9
-    XML::NewsML_G2::Role::Writer_2_12
-    XML::NewsML_G2::Role::Writer_2_15
-    XML::NewsML_G2::Role::Writer_2_18
-    XML::NewsML_G2::Role::Writer::News_Item_Text
-    XML::NewsML_G2::Role::Writer::News_Item_Audio
-    XML::NewsML_G2::Role::Writer::News_Message
-    XML::NewsML_G2::Role::Writer::News_Item_Picture
-    XML::NewsML_G2::Role::Writer::Package_Item
-    XML::NewsML_G2::Role::Writer::News_Item_Video
-    XML::NewsML_G2::Role::Writer::News_Item_Graphics
-
-  Type Definitions
-    XML::NewsML_G2::Types
-
-  Utility Roles
-    XML::NewsML_G2::Role::HasQCode
-    XML::NewsML_G2::Role::Remote
-    XML::NewsML_G2::Role::RemoteVisual
-    XML::NewsML_G2::Role::RemoteAudible
 
 DEPENDENCIES
     Moose, XML::LibXML, DateTime, DateTime::Format::XSD, UUID::Tiny,

@@ -35,7 +35,7 @@ use XML::NewsML_G2::Writer::News_Message;
 use warnings;
 use strict;
 
-use version; our $VERSION = qv('0.2.2');
+use version; our $VERSION = qv('0.2_3');
 
 1;
 
@@ -48,7 +48,7 @@ XML::NewsML_G2 - generate NewsML-G2 news items
 
 =head1 VERSION
 
-0.2.2
+0.2_3
 
 =begin readme
 
@@ -119,6 +119,7 @@ software, and should be your first choice. Using versions 2.9, 2.12
 and 2.15 is deprecated, and support for it will beremoved in future
 releases.
 
+=for readme stop
 =head1 SCHEMES AND CATALOGS
 
 Before starting to use schemes or catalogs with this module, read the
@@ -318,6 +319,8 @@ and the inline catalog will be replaced with a link:
 =item L<XML::NewsML_G2::Role::RemoteAudible>
 
 =back
+
+=for readme continue
 
 
 =head1 DEPENDENCIES
