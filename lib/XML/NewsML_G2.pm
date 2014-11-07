@@ -118,6 +118,7 @@ and 2.15 is deprecated, and support for it will beremoved in future
 releases.
 
 =for readme stop
+
 =head1 SCHEMES AND CATALOGS
 
 Before starting to use schemes or catalogs with this module, read the
