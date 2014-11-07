@@ -1,5 +1,8 @@
 Revision history for XML::NewsML_G2
 
+v0.2.4  Fri Nov 07 18:15:00 2014
+        Added lost headline.
+
 v0.2.3  Fri Nov 07 18:00:00 2014
         Published repository on Github, fixed attribute order.
 
