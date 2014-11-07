@@ -1,7 +1,5 @@
 package XML::NewsML_G2::Group;
 
-# $Id$
-
 use Moose;
 use XML::NewsML_G2::News_Item;
 

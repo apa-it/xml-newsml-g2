@@ -1,7 +1,5 @@
 package XML::NewsML_G2::Role::Remote;
 
-# $Id$
-
 use XML::NewsML_G2::Types;
 
 use Moose::Role;

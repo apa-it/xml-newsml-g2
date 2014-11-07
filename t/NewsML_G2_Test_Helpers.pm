@@ -1,7 +1,5 @@
 package NewsML_G2_Test_Helpers;
 
-# $Id$
-
 use Exporter 'import';
 use File::Spec::Functions qw(catfile);
 use XML::LibXML;

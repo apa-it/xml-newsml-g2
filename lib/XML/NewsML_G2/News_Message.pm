@@ -1,7 +1,5 @@
 package XML::NewsML_G2::News_Message;
 
-# $Id$
-
 use Moose;
 use namespace::autoclean;
 

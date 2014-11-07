@@ -1,7 +1,5 @@
 #!/usr/bin/env perl
 
-# $Id$
-
 use utf8;
 use Test::More;
 use XML::LibXML;

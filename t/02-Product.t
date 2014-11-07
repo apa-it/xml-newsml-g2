@@ -1,7 +1,5 @@
 #!/usr/bin/env perl
 
-# $Id$
-
 use Test::More;
 use XML::NewsML_G2;
 

@@ -1,7 +1,5 @@
 package XML::NewsML_G2::Role::HasQCode;
 
-# $Id$
-
 use Moose::Role;
 use namespace::autoclean;
 
