@@ -1,7 +1,5 @@
 package XML::NewsML_G2::Scheme_Manager;
 
-# $Id$
-
 use Moose;
 use Carp;
 use namespace::autoclean;

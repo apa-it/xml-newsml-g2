@@ -1,7 +1,5 @@
 package XML::NewsML_G2;
 
-# $Id$
-
 use XML::NewsML_G2::News_Item;
 use XML::NewsML_G2::News_Item_Text;
 use XML::NewsML_G2::News_Item_Picture;

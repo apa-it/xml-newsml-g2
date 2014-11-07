@@ -1,7 +1,5 @@
 package XML::NewsML_G2::Icon;
 
-# $Id$
-
 use Moose;
 use namespace::autoclean;
 

@@ -1,7 +1,5 @@
 package XML::NewsML_G2::Writer;
 
-# $Id$
-
 use Carp;
 use Moose;
 use Moose::Util;

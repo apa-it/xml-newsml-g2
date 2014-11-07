@@ -1,7 +1,5 @@
 package XML::NewsML_G2::Role::Writer::News_Item_Audio;
 
-# $Id$
-
 use Moose::Role;
 use namespace::autoclean;
 

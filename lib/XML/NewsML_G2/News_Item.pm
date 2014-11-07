@@ -1,7 +1,5 @@
 package XML::NewsML_G2::News_Item;
 
-# $Id$
-
 use XML::LibXML qw();
 
 use Carp;

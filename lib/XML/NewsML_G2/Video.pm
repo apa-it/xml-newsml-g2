@@ -1,7 +1,5 @@
 package XML::NewsML_G2::Video;
 
-# $Id$
-
 use XML::NewsML_G2::Types;
 
 use Moose;
