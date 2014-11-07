@@ -1,7 +1,7 @@
 Revision history for XML::NewsML_G2
 
-v0.2_3  Fri Nov 07 10:00:00 2014
-        Publishing repository on Github
+v0.2.3  Fri Nov 07 18:00:00 2014
+        Published repository on Github, fixed attribute order.
 
 v0.2.2  Wed Oct 22 16:15:00 2014
         Getting started chapter added.

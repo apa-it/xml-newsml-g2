@@ -33,7 +33,7 @@ use XML::NewsML_G2::Writer::News_Message;
 use warnings;
 use strict;
 
-use version; our $VERSION = qv('0.2_3');
+use version; our $VERSION = qv('0.2.3');
 
 1;
 
@@ -46,7 +46,7 @@ XML::NewsML_G2 - generate NewsML-G2 news items
 
 =head1 VERSION
 
-0.2_3
+0.2.3
 
 =begin readme
 
@@ -330,9 +330,8 @@ Module::Runtime
 
 No bugs have been reported.
 
-Please report any bugs or feature requests to
-C<bug-xml-newsml_g2@rt.cpan.org>, or through the web interface at
-L<https://rt.cpan.org/Public/Dist/Display.html?Name=XML-NewsML_G2>.
+Please report any bugs or feature requests at
+L<https://github.com/apa-it/xml-newsml-g2/issues>.
 
 Be aware that the API for this module I<will> change with each
 upcoming release.
