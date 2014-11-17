@@ -46,7 +46,7 @@ sub _create_subjects_desk {
     my @res;
 
     push @res, $self->doc->createComment('desks') if $self->news_item->has_desks;
-    foreach (@{$self->news_item->desks}) {
+    foreach (sort {$a->qcode cmp $b->qcode} @{$self->news_item->desks}) {
         push @res, my $s = $self->create_element('subject', type => 'cpnat:abstract', _name_text => $_);
         $self->scheme_manager->add_qcode_or_literal($s, 'desk', $_->qcode);
     }
