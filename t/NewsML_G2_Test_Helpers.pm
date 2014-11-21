@@ -87,7 +87,8 @@ ok(our $desk = XML::NewsML_G2::Desk->new
    ), 'create Desk instance');
 
 ok(my $wien = XML::NewsML_G2::Location->new
-   (name => 'Wien', qcode => '1111', relevance => 100, direct => 1),
+   (name => 'Wien', qcode => '1111', relevance => 100, direct => 1,
+      latitude => 48.2000, longitude => 16.3667),
    'create Location Wien');
 
 my $aut = XML::NewsML_G2::Location->new(name => 'Österreich', iso_code => 'AT', qcode => '2222', relevance => 40);

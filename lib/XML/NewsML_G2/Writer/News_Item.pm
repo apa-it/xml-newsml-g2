@@ -193,11 +193,31 @@ sub _create_asserts_organisation {
     return @res;
 }
 
+sub _create_asserts_location {
+    my $self = shift;
+    my @res;
+
+    foreach my $loc_k (sort keys $self->news_item->locations) {
+        my $location = $self->news_item->locations->{$loc_k};
+        next unless (defined $location->longitude && defined $location->latitude);
+        push @res, my $l = $self->create_element('assert');
+        $self->scheme_manager->add_qcode_or_literal($l, 'geo', $location->qcode);
+
+        $l->appendChild(my $geo_area_details = $self->create_element('geoAreaDetails'));
+        $geo_area_details->appendChild(my $pos = $self->create_element('position'));
+
+        $pos->setAttribute($_, $location->$_) for qw/latitude longitude/;
+    }
+
+    return @res;
+}
+
 sub _create_asserts {
     my $self = shift;
     my @res;
 
     push @res, $self->_create_asserts_organisation();
+    push @res, $self->_create_asserts_location();
 
     return @res;
 }
