@@ -197,7 +197,7 @@ sub _create_asserts_location {
     my $self = shift;
     my @res;
 
-    foreach my $loc_k (sort keys $self->news_item->locations) {
+    foreach my $loc_k (sort keys %{$self->news_item->locations}) {
         my $location = $self->news_item->locations->{$loc_k};
         next unless (defined $location->longitude && defined $location->latitude);
         push @res, my $l = $self->create_element('assert');
