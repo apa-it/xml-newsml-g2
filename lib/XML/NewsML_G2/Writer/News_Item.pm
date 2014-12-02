@@ -318,15 +318,6 @@ sub _create_content_meta {
     return;
 }
 
-sub _create_teaser {
-     my ($self, $cm) = @_;
-
-     if ($self->news_item->teaser) {
-         $cm->appendChild(my $teaser = $self->create_element('description', _text => $self->news_item->teaser));
-         $self->scheme_manager->add_role($teaser, 'drol', 'teaser');
-     }
-     return;
-}
 
 sub _create_content {
     my ($self, $root) = @_;
