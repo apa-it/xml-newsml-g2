@@ -13,6 +13,8 @@ extends 'XML::NewsML_G2::AnyItem';
 has 'title', isa => 'Str', is => 'ro', required => 1;
 has 'subtitle', isa => 'Str', is => 'rw';
 has 'caption', isa => 'Str', is => 'rw';
+has 'teaser', isa => 'Str', is => 'rw';
+has 'summary', isa => 'Str', is => 'rw';
 has 'paragraphs', isa => 'XML::LibXML::Node', is => 'rw';
 has 'content_created', isa => 'DateTime', is => 'ro', lazy => 1, builder => '_build_content_created';
 has 'content_modified', isa => 'DateTime', is => 'ro';
@@ -247,6 +249,14 @@ List of strings containing story source names
 =item subtitle
 
 Subtitle string
+
+=item summary
+
+A short overview of all, or at least the most important, facets of the content of the item
+
+=item teaser
+
+A short description intended to attract the user to view the full content
 
 =item title
 
