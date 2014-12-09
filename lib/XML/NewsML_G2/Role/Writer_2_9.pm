@@ -73,6 +73,8 @@ override '_create_creator' => sub {
     return $self->create_element('creator', literal => $name);
 };
 
+override '_create_teaser' => sub {};
+
 1;
 __END__
 

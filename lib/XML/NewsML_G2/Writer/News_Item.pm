@@ -304,12 +304,20 @@ sub _create_content_meta {
         $self->scheme_manager->add_role($desc, 'drol', 'caption');
     }
 
+    if ($self->news_item->summary) {
+        $cm->appendChild(my $smry = $self->create_element('description', _text => $self->news_item->summary));
+        $self->scheme_manager->add_role($smry, 'drol', 'summary');
+    }
+
+    $self->_create_teaser($cm);
+
     $root->appendChild($cm);
 
     my @asserts = $self->_create_asserts();
     $root->appendChild($_) foreach @asserts;
     return;
 }
+
 
 sub _create_content {
     my ($self, $root) = @_;

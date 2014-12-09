@@ -5,6 +5,7 @@ use Moose::Role;
 has 'schema_location', isa => 'Str', is => 'ro', default => 'http://iptc.org/std/nar/2006-10-01/';
 has 'g2_catalog_url', isa => 'Str', is => 'ro', default => 'http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_22.xml';
 
+override '_create_teaser' => sub {};
 
 1;
 __END__
