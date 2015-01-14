@@ -5,8 +5,8 @@ use XML::NewsML_G2::Types;
 use Moose;
 use namespace::autoclean;
 
-with 'XML::NewsML_G2::Role::RemoteAudible';
-with 'XML::NewsML_G2::Role::RemoteVisual';
+with qw(XML::NewsML_G2::Role::RemoteAudible
+        XML::NewsML_G2::Role::RemoteVisual);
 
 has 'videoframerate', isa => 'Int', is => 'rw';
 has 'videoavgbitrate', isa => 'Int', is => 'rw';

@@ -1,6 +1,7 @@
 package XML::NewsML_G2::Writer::News_Message;
 
 use Moose;
+use namespace::autoclean;
 
 extends 'XML::NewsML_G2::Writer';
 

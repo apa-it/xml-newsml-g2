@@ -2,6 +2,7 @@ package XML::NewsML_G2::Writer::Package_Item;
 
 use Moose;
 use Carp;
+use namespace::autoclean;
 
 extends 'XML::NewsML_G2::Writer';
 

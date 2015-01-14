@@ -2,6 +2,7 @@ package XML::NewsML_G2::Group;
 
 use Moose;
 use XML::NewsML_G2::News_Item;
+use namespace::autoclean;
 
 has 'role', isa => 'Str', is => 'ro', required => 1;
 has 'mode', isa => 'XML::NewsML_G2::Types::Group_Mode', is => 'rw', default => 'bag';

@@ -11,6 +11,8 @@ has 'icon', isa => 'ArrayRef[XML::NewsML_G2::Icon]', is => 'rw',
     default => sub { [] }, traits => ['Array'],
     handles => {add_icon => 'push', has_icon => 'count'};
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 __END__
 

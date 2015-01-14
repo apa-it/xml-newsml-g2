@@ -10,6 +10,8 @@ has '+remotes', isa => 'HashRef[XML::NewsML_G2::Picture]';
 
 has 'photographer', isa => 'Str', is => 'rw';
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 __END__
 

@@ -7,6 +7,8 @@ extends 'XML::NewsML_G2::News_Item';
 
 has '+nature', default => 'text';
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 __END__
 

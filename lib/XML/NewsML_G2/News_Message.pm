@@ -14,6 +14,8 @@ sub _build_sent {
     return DateTime->now(time_zone => 'local');
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 __END__
 

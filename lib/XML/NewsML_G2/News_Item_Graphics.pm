@@ -7,6 +7,8 @@ extends 'XML::NewsML_G2::News_Item_Picture';
 
 has '+nature', default => 'graphics';
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 __END__
 

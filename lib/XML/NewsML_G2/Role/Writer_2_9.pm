@@ -1,7 +1,7 @@
 package XML::NewsML_G2::Role::Writer_2_9;
 
 use Moose::Role;
-
+use namespace::autoclean;
 
 has 'schema_location', isa => 'Str', is => 'ro', default => 'http://iptc.org/std/nar/2006-10-01/ http://www.iptc.org/std/NewsML-G2/2.9/specification/NewsML-G2_2.9-spec-All-Power.xsd';
 has 'g2_catalog_url', isa => 'Str', is => 'ro', default => 'http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_18.xml';
