@@ -215,7 +215,7 @@ sub create_element {
     if ($text) {
         $elem->appendChild($self->doc->createTextNode($text));
     } elsif ($name_text) {
-        $name_text = $name_text->name if $name_text->can('name');
+        $name_text = $name_text->name if (ref $name_text and $name_text->can('name'));
         $elem->appendChild($self->create_element('name', _text => $name_text));
     }
     return $elem;
