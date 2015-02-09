@@ -15,8 +15,8 @@ use XML::NewsML_G2;
 our @EXPORT_OK = qw(validate_g2 create_ni_text create_ni_picture create_ni_video create_ni_audio create_ni_graphics test_ni_picture test_ni_versions);
 
 our %EXPORT_TAGS = (vars => [qw($guid_text $guid_picture
-    $see_also_guid $embargo $apa_id $title $subtitle $slugline
-    $creditline $embargo_text $note $prov_apa $svc_apa_bd $time1
+    $see_also_guid $derived_from_guid $embargo $apa_id $title $subtitle
+    $slugline $creditline $embargo_text $note $prov_apa $svc_apa_bd $time1
     $time2 @text @genres $org $desk @keywords)]);
 
 Exporter::export_ok_tags('vars');
@@ -24,6 +24,7 @@ Exporter::export_ok_tags('vars');
 our $guid_text = 'urn:newsml:apa.at:20120315:APA0379';
 our $guid_picture = 'urn:newsml:apa.at:20120315:ABD0111';
 our $see_also_guid = 'urn:newsml:apa.at:20120315:APA0123';
+our $derived_from_guid = 'urn:newsml:apa.at:20120315:APA0120';
 our $apa_id = 'APA0379';
 our $title = 'Saisonstart im Schweizerhaus: Run aufs Krügerl im Prater';
 our $subtitle = 'Großer Andrang am Eröffnungstag - Auch der Rummelplatz startsete heute den Betrieb';
@@ -136,6 +137,8 @@ sub _create_ni {
     ok(my $ni = $ni_cls->new
        (guid             => $guid_text, # overwrite in $hash
         see_also         => $see_also_guid,
+        derived_from     => XML::NewsML_G2::Link->new(
+            residref => $derived_from_guid, version => 3),
         provider         => $prov_apa,
         copyright_holder => $copy_hold,
         usage_terms      => 'view only with a full beer',

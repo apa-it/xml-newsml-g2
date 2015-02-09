@@ -9,6 +9,7 @@ lib/XML/NewsML_G2/Genre.pm
 lib/XML/NewsML_G2/Graphics.pm
 lib/XML/NewsML_G2/Group.pm
 lib/XML/NewsML_G2/Icon.pm
+lib/XML/NewsML_G2/Link.pm
 lib/XML/NewsML_G2/Location.pm
 lib/XML/NewsML_G2/Media_Topic.pm
 lib/XML/NewsML_G2/News_Item.pm

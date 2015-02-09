@@ -146,6 +146,10 @@ Human readable credit line
 
 Human readable content description string
 
+=item derived_from
+
+Free-format string or XML::NewsML_G2::Link instance
+
 =item desks
 
 List of L<XML::NewsML_G2::Desk> instances
@@ -228,7 +232,7 @@ Hash mapping of hrefs to remote object (e.g. XML::NewsML_G2::Picture) instances
 
 =item see_also
 
-Free-format string
+Free-format string or XML::NewsML_G2::Link instance
 
 =item service
 
@@ -339,6 +343,6 @@ Philipp Gortan  C<< <philipp.gortan@apa.at> >>
 
 =head1 LICENCE AND COPYRIGHT
 
-Copyright (c) 2013-2014, APA-IT. All rights reserved.
+Copyright (c) 2013-2015, APA-IT. All rights reserved.
 
 See L<XML::NewsML_G2> for the license.

@@ -5,6 +5,7 @@ use namespace::autoclean;
 
 use UUID::Tiny ':std';
 use XML::NewsML_G2::Types;
+use XML::NewsML_G2::Link;
 
 has 'guid', isa => 'Str', is => 'ro', lazy => 1, builder => '_build_guid';
 has 'doc_version', isa => 'Int', is => 'ro', default => '1';
@@ -19,7 +20,8 @@ has 'doc_status', isa => 'Str', is => 'ro', default => 'usable';
 
 has 'note', isa => 'Str', is => 'ro';
 has 'closing', isa => 'Str', is => 'rw';
-has 'see_also', isa => 'Str', is => 'rw';
+has 'see_also', isa => 'Str|XML::NewsML_G2::Link', is => 'rw';
+has 'derived_from', isa => 'Str|XML::NewsML_G2::Link', is => 'rw';
 
 has 'embargo', isa => 'DateTime', is => 'rw';
 has 'embargo_text', isa => 'Str', is => 'rw';
@@ -52,6 +54,6 @@ Philipp Gortan  C<< <philipp.gortan@apa.at> >>
 
 =head1 LICENCE AND COPYRIGHT
 
-Copyright (c) 2014, APA-IT. All rights reserved.
+Copyright (c) 2014-2015, APA-IT. All rights reserved.
 
 See L<XML::NewsML_G2> for the license.

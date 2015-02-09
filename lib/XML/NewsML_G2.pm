@@ -22,6 +22,7 @@ use XML::NewsML_G2::Audio;
 use XML::NewsML_G2::Icon;
 use XML::NewsML_G2::Topic;
 use XML::NewsML_G2::Product;
+use XML::NewsML_G2::Link;
 use XML::NewsML_G2::Package_Item;
 use XML::NewsML_G2::Group;
 use XML::NewsML_G2::Scheme_Manager;

@@ -181,7 +181,24 @@ sub _create_item_meta {
         $self->scheme_manager->add_qcode($s, 'ind', lc);
     }
 
-    $im->appendChild($self->create_element('link', rel => 'irel:seeAlso', residref => $self->_root_item->see_also)) if ($self->_root_item->see_also);
+    foreach my $attr (qw(see_also derived_from)) {
+        if ($self->_root_item->$attr) {
+            my $v = $self->_root_item->$attr;
+            (my $rel = $attr) =~ s/_(\w)/uc $1/ge;
+            my $linkelem;
+            if (ref $v) {
+               $linkelem = $self->create_element(
+                   'link', rel => "irel:$rel", residref => $v->residref,
+                   version => $v->version
+                   );
+            } else {
+                $linkelem = $self->create_element(
+                    'link', rel => "irel:$rel", residref => $v
+                    );
+            }
+            $im->appendChild($linkelem);
+        }
+    }
 
     $root->appendChild($im);
     return;
