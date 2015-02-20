@@ -185,17 +185,12 @@ sub _create_item_meta {
         if ($self->_root_item->$attr) {
             my $v = $self->_root_item->$attr;
             (my $rel = $attr) =~ s/_(\w)/uc $1/ge;
-            my $linkelem;
-            if (ref $v) {
-               $linkelem = $self->create_element(
-                   'link', rel => "irel:$rel", residref => $v->residref,
-                   version => $v->version
-                   );
-            } else {
-                $linkelem = $self->create_element(
-                    'link', rel => "irel:$rel", residref => $v
-                    );
-            }
+            my $linkelem = $self->create_element(
+                'link',
+                rel => "irel:$rel",
+                residref => $v->residref,
+                version => $v->version
+                );
             $im->appendChild($linkelem);
         }
     }

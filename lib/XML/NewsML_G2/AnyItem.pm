@@ -20,8 +20,9 @@ has 'doc_status', isa => 'Str', is => 'ro', default => 'usable';
 
 has 'note', isa => 'Str', is => 'ro';
 has 'closing', isa => 'Str', is => 'rw';
-has 'see_also', isa => 'Str|XML::NewsML_G2::Link', is => 'rw';
-has 'derived_from', isa => 'Str|XML::NewsML_G2::Link', is => 'rw';
+
+has 'see_also', isa => 'XML::NewsML_G2::Link', is => 'rw', coerce => 1;
+has 'derived_from', isa => 'XML::NewsML_G2::Link', is => 'rw', coerce => 1;
 
 has 'embargo', isa => 'DateTime', is => 'rw';
 has 'embargo_text', isa => 'Str', is => 'rw';
