@@ -255,6 +255,8 @@ and the inline catalog will be replaced with a link:
 
 =item L<XML::NewsML_G2::Icon>
 
+=item L<XML::NewsML_G2::Link>
+
 =back
 
 
@@ -362,7 +364,7 @@ upcoming release.
 
 =head1 LICENCE AND COPYRIGHT
 
-Copyright (c) 2013-2014, APA-IT. All rights reserved.
+Copyright (c) 2013-2015, APA-IT. All rights reserved.
 
 This module is free software; you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the

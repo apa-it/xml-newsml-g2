@@ -1,5 +1,8 @@
 Revision history for XML::NewsML_G2
 
+v0.2.6  Tue Feb 25 17:00:00 2015
+        derived_from added, location now supports latitude/longitude
+
 v0.2.5  Tue Dec 02 15:00:00 2014
         Added 'summary' and 'teaser'
 
