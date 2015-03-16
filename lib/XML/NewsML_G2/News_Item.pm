@@ -51,6 +51,9 @@ has 'keywords', isa => 'ArrayRef[Str]', is => 'rw', default => sub { [] },
     handles => {add_keyword => 'push', has_keywords => 'count'};
 has 'remotes', isa => 'HashRef', is => 'rw', default => sub { {} },
     traits => ['Hash'], handles => {has_remotes => 'count'};
+has 'inlinedata', isa => 'ArrayRef[XML::NewsML_G2::Inline_Data]', is => 'rw',
+    default => sub { [] }, traits => ['Array'],
+    handles => {add_inlinedata => 'push', has_inlinedata => 'count'};
 
 sub _build_content_created {
     return DateTime->now(time_zone => 'local');

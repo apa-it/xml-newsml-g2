@@ -346,6 +346,12 @@ sub _create_content {
         $self->_create_remote_content($rc, $self->news_item->remotes->{$_});
         $cs->appendChild($rc);
     }
+    foreach (@{$self->news_item->inlinedata}) {
+        my %args = (_text => $_->data);
+        $args{contenttype} = $_->mimetype if $_->mimetype;
+        my $data = $self->create_element('inlineData', %args);
+        $cs->appendChild($data);
+    }
     return;
 }
 
