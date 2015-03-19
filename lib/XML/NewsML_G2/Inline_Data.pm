@@ -15,7 +15,7 @@ XML::NewsML_G2::Inline_Data - inline data specification
 
 =head1 SYNOPSIS
 
-    my $pic = XML::NewsML_G2::Inline_Data->new
+    my $data = XML::NewsML_G2::Inline_Data->new
         (mimetype => 'text/plain',
          data => 'Hello World'
         );
