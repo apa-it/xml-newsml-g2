@@ -79,13 +79,20 @@ sub _create_subjects_media_topic {
     return @res;
 }
 
+sub _sort_subjects_locations {
+    if (($b->relevance <=> $a->relevance) == 0) {
+            return $a->qcode <=> $b->qcode;
+    }
+    return $b->relevance <=> $a->relevance;
+}
+
 sub _create_subjects_location {
     my $self = shift;
     my @res;
 
     push @res, $self->doc->createComment('locations') if $self->news_item->has_locations;
 
-    foreach my $l (sort {$b->relevance <=> $a->relevance} values %{$self->news_item->locations}) {
+    foreach my $l (sort _sort_subjects_locations values %{$self->news_item->locations}) {
         my $why = $l->direct ? 'why:direct' : 'why:ancestor';
         push @res, my $s = $self->create_element('subject', type => 'cpnat:geoArea', relevance => $l->relevance, why => $why, _name_text => $l);
         $self->scheme_manager->add_qcode_or_literal($s, 'geo', $l->qcode);
