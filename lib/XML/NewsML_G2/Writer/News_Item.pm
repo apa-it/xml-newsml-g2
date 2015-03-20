@@ -80,10 +80,8 @@ sub _create_subjects_media_topic {
 }
 
 sub _sort_subjects_locations {
-    if (($b->relevance <=> $a->relevance) == 0) {
-            return $a->qcode <=> $b->qcode;
-    }
-    return $b->relevance <=> $a->relevance;
+    return $b->relevance <=> $a->relevance
+        || $a->qcode <=> $b->qcode;
 }
 
 sub _create_subjects_location {
