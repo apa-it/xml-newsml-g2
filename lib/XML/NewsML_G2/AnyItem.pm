@@ -3,7 +3,7 @@ package XML::NewsML_G2::AnyItem;
 use Moose;
 use namespace::autoclean;
 
-use UUID::Tiny ':std';
+use UUID::Tiny;
 use XML::NewsML_G2::Types;
 use XML::NewsML_G2::Link;
 
@@ -31,7 +31,7 @@ has 'indicators', isa => 'ArrayRef[Str]', is => 'rw', default => sub { [] },
   traits => ['Array'], handles => {add_indicator => 'push'};
 
 sub _build_guid {
-    return create_uuid_as_string();
+    return UUID::Tiny::create_uuid_as_string();
 }
 
 __PACKAGE__->meta->make_immutable;
