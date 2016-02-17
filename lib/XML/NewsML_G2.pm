@@ -94,7 +94,7 @@ Guides|http://www.iptc.org/download?g2quickstartguides>.
 =head1 GETTING STARTED
 
 To start, you need to create an instance of the item class of your
-choice, e.g. L<XML::NewsML_G2::NewsML_G2_Text> for a text story, or
+choice, e.g. L<XML::NewsML_G2::News_Item_Text> for a text story, or
 L<XML::NewsML_G2::News_Item_Picture> for an image. Each of these
 classes might have some required attributes (e.g. C<title>,
 C<language>, C<provider>), which you will have to provide when
