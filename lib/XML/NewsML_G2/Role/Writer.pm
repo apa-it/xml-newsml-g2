@@ -4,9 +4,10 @@ use Moose::Role;
 use namespace::autoclean;
 
 sub _create_remote_content {
-    my ($self, $root, $remote) = @_;
+    my ( $self, $root, $remote ) = @_;
 
-    $root->setAttribute('contenttype', $remote->mimetype) if ($remote->mimetype);
+    $root->setAttribute( 'contenttype', $remote->mimetype )
+        if ( $remote->mimetype );
     return;
 }
 

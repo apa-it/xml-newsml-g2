@@ -7,13 +7,14 @@ use namespace::autoclean;
 use warnings;
 use strict;
 
-enum 'XML::NewsML_G2::Types::Nature', [qw(text picture graphics audio video composite)];
+enum 'XML::NewsML_G2::Types::Nature',
+    [qw(text picture graphics audio video composite)];
 
 enum 'XML::NewsML_G2::Types::Group_Mode', [qw(bag sequential alternative)];
 
 class_type 'XML::NewsML_G2::Link';
 coerce 'XML::NewsML_G2::Link', from 'Str',
-    via {use_module('XML::NewsML_G2::Link')->new(residref => $_)};
+    via { use_module('XML::NewsML_G2::Link')->new( residref => $_ ) };
 
 1;
 __END__

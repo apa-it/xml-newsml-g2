@@ -6,7 +6,7 @@ use namespace::autoclean;
 with 'XML::NewsML_G2::Role::HasQCode';
 
 has 'notice', isa => 'Str', is => 'ro';
-has 'uri', isa => 'Str', is => 'ro';
+has 'uri',    isa => 'Str', is => 'ro';
 has '+qcode', required => 0;
 
 __PACKAGE__->meta->make_immutable;

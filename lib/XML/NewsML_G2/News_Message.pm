@@ -4,14 +4,22 @@ use Moose;
 use namespace::autoclean;
 
 # header elements
-has 'sent', isa => 'DateTime', is => 'ro', lazy => 1, builder => '_build_sent';
+has 'sent',
+    isa     => 'DateTime',
+    is      => 'ro',
+    lazy    => 1,
+    builder => '_build_sent';
+
 #news/package items
-has 'items', isa => 'ArrayRef[XML::NewsML_G2::AnyItem]', is => 'rw',
-    default => sub { [] }, traits => ['Array'],
-    handles => {add_item => 'push'};
+has 'items',
+    isa     => 'ArrayRef[XML::NewsML_G2::AnyItem]',
+    is      => 'rw',
+    default => sub { [] },
+    traits  => ['Array'],
+    handles => { add_item => 'push' };
 
 sub _build_sent {
-    return DateTime->now(time_zone => 'local');
+    return DateTime->now( time_zone => 'local' );
 }
 
 __PACKAGE__->meta->make_immutable;

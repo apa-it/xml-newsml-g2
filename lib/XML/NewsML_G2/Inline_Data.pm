@@ -3,8 +3,8 @@ package XML::NewsML_G2::Inline_Data;
 use Moose;
 use namespace::autoclean;
 
-has 'data', isa => 'Str', is => 'rw', required => 1;
-has 'mimetype', isa => 'Str', is => 'rw', default => 'text/plain';
+has 'data',     isa => 'Str', is => 'rw', required => 1;
+has 'mimetype', isa => 'Str', is => 'rw', default  => 'text/plain';
 
 __PACKAGE__->meta->make_immutable;
 
