@@ -265,15 +265,17 @@ sub _create_item_meta {
 
     foreach my $attr (qw(see_also derived_from)) {
         if ( $self->_root_item->$attr ) {
-            my $v = $self->_root_item->$attr;
-            ( my $rel = $attr ) =~ s/_(\w)/uc $1/ge;
-            my $linkelem = $self->create_element(
-                'link',
-                rel      => "irel:$rel",
-                residref => $v->residref,
-                version  => $v->version
-            );
-            $im->appendChild($linkelem);
+            my $arrayref = $self->_root_item->$attr;
+            for my $v (@$arrayref) {
+                ( my $rel = $attr ) =~ s/_(\w)/uc $1/ge;
+                my $linkelem = $self->create_element(
+                    'link',
+                    rel      => "irel:$rel",
+                    residref => $v->residref,
+                    version  => $v->version
+                );
+                $im->appendChild($linkelem);
+            }
         }
     }
 

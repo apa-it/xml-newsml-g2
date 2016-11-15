@@ -193,19 +193,14 @@ sub _create_ni {
     $hash->{service} = $svc_apa_bd unless ( $opts{no_required_scheme} );
 
     ok( my $ni = $ni_cls->new(
-            guid         => $guid_text,                  # overwrite in $hash
-            see_also     => $see_also_guid,
-            derived_from => XML::NewsML_G2::Link->new(
-                residref => $derived_from_guid,
-                version  => 3
-            ),
+            guid             => $guid_text,    # overwrite in $hash
             provider         => $prov_apa,
             copyright_holder => $copy_hold,
-            usage_terms      => 'view only with a full beer',
-            message_id       => $apa_id,
-            title            => ( $opts{id} ? "$title $opts{id}" : $title ),
-            subtitle         => $subtitle,
-            slugline         => $slugline,
+            usage_terms  => 'view only with a full beer',
+            message_id   => $apa_id,
+            title        => ( $opts{id} ? "$title $opts{id}" : $title ),
+            subtitle     => $subtitle,
+            slugline     => $slugline,
             embargo      => DateTime::Format::XSD->parse_datetime($embargo),
             embargo_text => $embargo_text,
             language     => 'de',
@@ -219,6 +214,23 @@ sub _create_ni {
         'create News Item instance'
     );
 
+    ok( $ni->add_derived_from(
+            XML::NewsML_G2::Link->new(
+                residref => $derived_from_guid,
+                version  => 3
+            )
+        ),
+        'add_drived_from works'
+    );
+    ok( $ni->add_see_also_str($see_also_guid), 'add_see_also works' );
+    ok( $ni->add_see_also(
+            XML::NewsML_G2::Link->new(
+                residref => 'https://www.youtube.com/watch?v=dQw4w9WgXcQa',
+                version  => 9001
+            )
+        ),
+        'add_see_also works'
+    );
     ok( $ni->add_genre(@genres),     'add_genre works' );
     ok( $ni->add_organisation($org), 'add_organisation works' );
     ok( $ni->add_source( 'APA', 'DPA' ), 'add_source works' );

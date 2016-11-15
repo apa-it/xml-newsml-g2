@@ -27,8 +27,18 @@ has 'doc_status', isa => 'Str', is => 'ro', default => 'usable';
 has 'note',    isa => 'Str', is => 'ro';
 has 'closing', isa => 'Str', is => 'rw';
 
-has 'see_also',     isa => 'XML::NewsML_G2::Link', is => 'rw', coerce => 1;
-has 'derived_from', isa => 'XML::NewsML_G2::Link', is => 'rw', coerce => 1;
+has 'see_also',
+    isa     => 'ArrayRef[XML::NewsML_G2::Link]',
+    is      => 'rw',
+    default => sub { [] },
+    traits  => ['Array'],
+    handles => { add_see_also => 'push' };
+has 'derived_from',
+    isa     => 'ArrayRef[XML::NewsML_G2::Link]',
+    is      => 'rw',
+    default => sub { [] },
+    traits  => ['Array'],
+    handles => { add_derived_from => 'push' };
 
 has 'embargo',      isa => 'DateTime', is => 'rw';
 has 'embargo_text', isa => 'Str',      is => 'rw';
@@ -42,6 +52,20 @@ has 'indicators',
 
 sub _build_guid {
     return UUID::Tiny::create_uuid_as_string();
+}
+
+sub add_see_also_str {
+    my ( $self, $str ) = @_;
+    return unless $str;
+    $self->add_see_also( XML::NewsML_G2::Link->new( residref => $str ) );
+    return 1;
+}
+
+sub add_derived_from_str {
+    my ( $self, $str ) = @_;
+    return unless $str;
+    $self->add_derived_from( XML::NewsML_G2::Link->new( residref => $str ) );
+    return 1;
 }
 
 __PACKAGE__->meta->make_immutable;
