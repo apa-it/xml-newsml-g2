@@ -83,6 +83,22 @@ This module acts as a base class for NewsML-G2 news items and package
 items. For a documentation of the attributes it provides, please see
 L<XML::NewsML_G2::News_Item>.
 
+=head1 METHODS
+
+=over 4
+
+=item add_see_also_str
+
+adds a new Link element of type 'see also' with a given string
+
+=item  add_derived_from_str
+
+adds a new Link element of type 'derived from' with a given string
+
+=back
+
+Add a string to the authors
+
 =head1 AUTHOR
 
 Philipp Gortan  C<< <philipp.gortan@apa.at> >>
