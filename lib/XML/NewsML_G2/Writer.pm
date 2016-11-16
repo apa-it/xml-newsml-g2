@@ -271,9 +271,13 @@ sub _create_item_meta {
                 my $linkelem = $self->create_element(
                     'link',
                     rel      => "irel:$rel",
-                    residref => $v->residref,
                     version  => $v->version
                 );
+                for my $attribute (qw/residref href/) {
+                    next unless $v->$attribute;
+                    $linkelem->setAttribute($attribute => $v->$attribute)
+                }
+
                 $im->appendChild($linkelem);
             }
         }

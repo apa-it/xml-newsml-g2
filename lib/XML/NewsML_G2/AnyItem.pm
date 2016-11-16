@@ -54,17 +54,17 @@ sub _build_guid {
     return UUID::Tiny::create_uuid_as_string();
 }
 
-sub add_see_also_str {
-    my ( $self, $str ) = @_;
-    return unless $str;
-    $self->add_see_also( XML::NewsML_G2::Link->new( residref => $str ) );
+sub add_see_also_hash {
+    my ( $self, %args ) = @_;
+    return unless keys %args;
+    $self->add_see_also( XML::NewsML_G2::Link->new(%args));
     return 1;
 }
 
-sub add_derived_from_str {
-    my ( $self, $str ) = @_;
-    return unless $str;
-    $self->add_derived_from( XML::NewsML_G2::Link->new( residref => $str ) );
+sub add_derived_from_hash {
+    my ( $self, %args ) = @_;
+    return unless keys %args;
+    $self->add_derived_from( XML::NewsML_G2::Link->new(%args));
     return 1;
 }
 
@@ -87,13 +87,16 @@ L<XML::NewsML_G2::News_Item>.
 
 =over 4
 
-=item add_see_also_str
+=item add_see_also_hash
 
-adds a new Link element of type 'see also' with a given string
+adds a new Link element of type 'see also' with a given hash, see
+L<XML::NewsML_G2::Link> for values
 
-=item  add_derived_from_str
+=item  add_derived_from_hash
 
-adds a new Link element of type 'derived from' with a given string
+adds a new Link element of type 'derived from' with a given hash, see
+L<XML::NewsML_G2::Link> for values
+
 
 =back
 

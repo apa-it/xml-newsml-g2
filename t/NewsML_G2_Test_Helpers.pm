@@ -222,10 +222,10 @@ sub _create_ni {
         ),
         'add_drived_from works'
     );
-    ok( $ni->add_see_also_str($see_also_guid), 'add_see_also works' );
+    ok( $ni->add_see_also_hash(residref => $see_also_guid), 'add_see_also works' );
     ok( $ni->add_see_also(
             XML::NewsML_G2::Link->new(
-                residref => 'https://www.youtube.com/watch?v=dQw4w9WgXcQa',
+                href => 'https://www.youtube.com/watch?v=dQw4w9WgXcQa',
                 version  => 9001
             )
         ),
