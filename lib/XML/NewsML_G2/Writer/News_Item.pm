@@ -34,6 +34,8 @@ sub _create_rights_info {
             'copyright_holder', $qcode );
     }
 
+    $self->_create_copyright_holder_remoteinfo($crh);
+
     my $notice = $self->news_item->copyright_holder->notice;
     $ri->appendChild(
         $self->create_element( 'copyrightNotice', _text => $notice ) )

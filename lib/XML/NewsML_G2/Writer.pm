@@ -159,6 +159,11 @@ sub _create_catalogs {
     return;
 }
 
+sub _create_copyright_holder_remoteinfo {
+
+    # moved to Writer_2_18
+}
+
 sub _create_item_meta_title {
 }
 
@@ -270,12 +275,12 @@ sub _create_item_meta {
                 ( my $rel = $attr ) =~ s/_(\w)/uc $1/ge;
                 my $linkelem = $self->create_element(
                     'link',
-                    rel      => "irel:$rel",
-                    version  => $v->version
+                    rel     => "irel:$rel",
+                    version => $v->version
                 );
                 for my $attribute (qw/residref href/) {
                     next unless $v->$attribute;
-                    $linkelem->setAttribute($attribute => $v->$attribute)
+                    $linkelem->setAttribute( $attribute => $v->$attribute );
                 }
 
                 $im->appendChild($linkelem);

@@ -72,12 +72,19 @@ ok( our $prov_apa = XML::NewsML_G2::Provider->new(
     ),
     'create Provider instance'
 );
+ok( our $remote_info = XML::NewsML_G2::Remote_Info->new(
+        reluri => 'http://www.iana.org/assignments/relation/icon',
+        href   => 'http://test.com/123.jpg'
+    ),
+    'create remote info for copyright holder'
+);
 
 ok( our $copy_hold = XML::NewsML_G2::Copyright_Holder->new(
-        qcode  => 'apa',
-        name   => 'APA - Austria Presse Agentur',
-        notice => '(c) 2014 http://www.apa.at',
-        uri    => 'http://www.apa.at'
+        qcode       => 'apa',
+        name        => 'APA - Austria Presse Agentur',
+        notice      => '(c) 2014 http://www.apa.at',
+        uri         => 'http://www.apa.at',
+        remote_info => $remote_info
     ),
     'create copyright holder instance'
 );
@@ -222,11 +229,12 @@ sub _create_ni {
         ),
         'add_drived_from works'
     );
-    ok( $ni->add_see_also_hash(residref => $see_also_guid), 'add_see_also works' );
+    ok( $ni->add_see_also_hash( residref => $see_also_guid ),
+        'add_see_also works' );
     ok( $ni->add_see_also(
             XML::NewsML_G2::Link->new(
-                href => 'https://www.youtube.com/watch?v=dQw4w9WgXcQa',
-                version  => 9001
+                href    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQa',
+                version => 9001
             )
         ),
         'add_see_also works'
