@@ -9,6 +9,12 @@ has 'sent',
     is      => 'ro',
     lazy    => 1,
     builder => '_build_sent';
+has 'destination',
+    isa     => 'ArrayRef[Str]',
+    is      => 'ro',
+    default => sub { [] },
+    traits  => ['Array'],
+    handles => { add_destination => 'push' };
 
 #news/package items
 has 'items',
@@ -50,6 +56,10 @@ or Package Items
 =item sent
 
 Timestemp generated automatically
+
+=item destination
+
+Intended target for news message
 
 =item items
 

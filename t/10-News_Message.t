@@ -145,7 +145,7 @@ foreach (qw(group svc ind)) {
 ok( $sm = XML::NewsML_G2::Scheme_Manager->new(%schemes),
     'create Scheme Manager' );
 
-$nm = XML::NewsML_G2::News_Message->new();
+$nm = XML::NewsML_G2::News_Message->new( destination => ['MARS'] );
 $nm->add_item($pi);
 $nm->add_item($text);
 $nm->add_item($pic);

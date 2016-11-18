@@ -1,6 +1,7 @@
 package XML::NewsML_G2::Writer::News_Message;
 
 use Moose;
+use List::MoreUtils qw(uniq);
 use namespace::autoclean;
 
 extends 'XML::NewsML_G2::Writer';
@@ -28,6 +29,11 @@ sub _create_header {
             )
         )
     );
+    for my $dest ( uniq @{ $self->news_message->destination } ) {
+        next unless $dest;
+        $header->appendChild(
+            $self->create_element( 'destination', '_text' => $dest ) );
+    }
 
     $root->appendChild($header);
     return;
