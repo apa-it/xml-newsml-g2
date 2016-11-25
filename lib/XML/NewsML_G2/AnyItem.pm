@@ -102,16 +102,3 @@ Philipp Gortan  C<< <philipp.gortan@apa.at> >>
 Copyright (c) 2014-2015, APA-IT. All rights reserved.
 
 See L<XML::NewsML_G2> for the license.
-
-
-=for pod-coverage
-
-documented in NewsItem:
-
-=over 4
-
-=item see_also
-
-=item derived_from
-
-=back
