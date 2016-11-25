@@ -209,7 +209,7 @@ Deprecated - use derived_froms and add_derived_from instead!
 
 =item derived_froms
 
-List of free-format strings or XML::NewsML_G2::Link instances.
+List of  XML::NewsML_G2::Link instances
 
 =item desks
 
@@ -297,7 +297,7 @@ Deprecated - use see_alsos and add_see_also instead!
 
 =item see_alsos
 
-List of free-format strings or XML::NewsML_G2::Link instances
+List of XML::NewsML_G2::Link instances
 
 =item service
 
@@ -355,8 +355,8 @@ Add a string to the cities
 
 =item add_derived_from
 
-Add a new "derived from" link - either a string, of a
-XML::NewsML_G2::Link instance, of a hashref
+Add a new "derived from" link - either a string, or a
+XML::NewsML_G2::Link instance
 
 =item add_desk
 
@@ -399,8 +399,8 @@ Add a new remote instance (e.g. XML::NewsML_G2::Picture) with a given href
 
 =item add_see_also
 
-Add a new "see also" link - either a string, of a XML::NewsML_G2::Link
-instance, of a hashref
+Add a new "see also" link - either a string, or a XML::NewsML_G2::Link
+instance
 
 =item add_source
 

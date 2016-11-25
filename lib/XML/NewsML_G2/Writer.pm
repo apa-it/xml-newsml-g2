@@ -273,6 +273,7 @@ sub _create_item_meta {
             my $arrayref = $self->_root_item->$attr;
             for my $v (@$arrayref) {
                 ( my $rel = $attr ) =~ s/_(\w)/uc $1/ge;
+                $rel =~ s/s$//;
                 my $linkelem = $self->create_element(
                     'link',
                     rel     => "irel:$rel",

@@ -234,8 +234,7 @@ sub _create_ni {
         ),
         'add_drived_from works'
     );
-    ok( $ni->add_see_also( residref => $see_also_guid ),
-        'add_see_also works for hashes' );
+    ok( $ni->add_see_also($see_also_guid), 'add_see_also works for text' );
     ok( $ni->add_see_also(
             XML::NewsML_G2::Link->new(
                 href    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQa',
