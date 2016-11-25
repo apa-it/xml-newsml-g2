@@ -108,6 +108,10 @@ See L<XML::NewsML_G2> for the license.
 
 documented in NewsItem:
 
+=over 4
+
 =item see_also
 
 =item derived_from
+
+=back
