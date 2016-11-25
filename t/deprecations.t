@@ -14,19 +14,32 @@ my $ni =
     XML::NewsML_G2::News_Item_Text->new( %NewsML_G2_Test_Helpers::ni_std_opts,
     title => 'blah' );
 
-like(
-    warning { $ni->see_also("something") },
-    qr/see_also is deprecated/,
-    'using see_also as setter emits warning'
-);
+sub _test_deprecated_attribute_now_arrayref {
+    my ($name) = @_;
 
-my $sa;
-like(
-    warning { $sa = $ni->see_also->residref },
-    qr/see_also is deprecated/,
-    'using see_also as getter emits warning'
-);
+    like(
+        warning { $ni->$name("something") },
+        qr/$name is deprecated/,
+        "using $name as setter emits warning"
+    );
 
-is( $sa, "something", 'see_also still works' );
+    my $sa;
+    like(
+        warning { $sa = $ni->$name->residref },
+        qr/$name is deprecated/,
+        "using $name as getter emits warning"
+    );
+
+    is( $sa, "something", "$name still works" );
+
+}
+
+subtest 'see_also is deprecated' => sub {
+    _test_deprecated_attribute_now_arrayref('see_also');
+};
+
+subtest 'derived_from is deprecated' => sub {
+    _test_deprecated_attribute_now_arrayref('derived_from');
+};
 
 done_testing;

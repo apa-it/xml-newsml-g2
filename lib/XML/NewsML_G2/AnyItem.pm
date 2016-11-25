@@ -56,17 +56,30 @@ sub _build_guid {
     return UUID::Tiny::create_uuid_as_string();
 }
 
-sub see_also {
-    my ( $self, $value ) = @_;
+sub _attr_zombie_lifter {
+    my ( $self, $attr, $value ) = @_;
+
+    my $adder  = "add_$attr";
+    my $getter = $attr . 's';
     warnings::warnif( 'deprecated',
-        'see_also is deprecated - use add_see_also / see_alsos instead' );
+        "$attr is deprecated - use $adder / $getter instead" );
 
     if ( defined $value ) {
-        $self->add_see_also($value);
+        $self->$adder($value);
     }
     else {
-        return $self->see_alsos->[0];
+        return $self->$getter->[0];
     }
+}
+
+sub see_also {
+    my ( $self, $value ) = @_;
+    return $self->_attr_zombie_lifter( 'see_also', $value );
+}
+
+sub derived_from {
+    my ( $self, $value ) = @_;
+    return $self->_attr_zombie_lifter( 'derived_from', $value );
 }
 
 __PACKAGE__->meta->make_immutable;

@@ -203,6 +203,10 @@ Human readable credit line
 
 Human readable content description string
 
+=item derived_from
+
+Deprecated - use derived_froms and add_derived_from instead!
+
 =item derived_froms
 
 List of free-format strings or XML::NewsML_G2::Link instances.
