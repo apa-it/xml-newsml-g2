@@ -27,16 +27,18 @@ has 'doc_status', isa => 'Str', is => 'ro', default => 'usable';
 has 'note',    isa => 'Str', is => 'ro';
 has 'closing', isa => 'Str', is => 'rw';
 
-has 'see_also',
-    isa     => 'ArrayRef[XML::NewsML_G2::Link]',
+has 'see_alsos',
+    isa     => 'XML::NewsML_G2::ArrayRefOfLinks',
     is      => 'rw',
     default => sub { [] },
+    coerce  => 1,
     traits  => ['Array'],
     handles => { add_see_also => 'push' };
-has 'derived_from',
-    isa     => 'ArrayRef[XML::NewsML_G2::Link]',
+has 'derived_froms',
+    isa     => 'XML::NewsML_G2::ArrayRefOfLinks',
     is      => 'rw',
     default => sub { [] },
+    coerce  => 1,
     traits  => ['Array'],
     handles => { add_derived_from => 'push' };
 
@@ -54,18 +56,17 @@ sub _build_guid {
     return UUID::Tiny::create_uuid_as_string();
 }
 
-sub add_see_also_hash {
-    my ( $self, %args ) = @_;
-    return unless keys %args;
-    $self->add_see_also( XML::NewsML_G2::Link->new(%args));
-    return 1;
-}
+sub see_also {
+    my ( $self, $value ) = @_;
+    warnings::warnif( 'deprecated',
+        'see_also is deprecated - use add_see_also / see_alsos instead' );
 
-sub add_derived_from_hash {
-    my ( $self, %args ) = @_;
-    return unless keys %args;
-    $self->add_derived_from( XML::NewsML_G2::Link->new(%args));
-    return 1;
+    if ( defined $value ) {
+        $self->add_see_also($value);
+    }
+    else {
+        return $self->see_alsos->[0];
+    }
 }
 
 __PACKAGE__->meta->make_immutable;
@@ -83,24 +84,6 @@ This module acts as a base class for NewsML-G2 news items and package
 items. For a documentation of the attributes it provides, please see
 L<XML::NewsML_G2::News_Item>.
 
-=head1 METHODS
-
-=over 4
-
-=item add_see_also_hash
-
-adds a new Link element of type 'see also' with a given hash, see
-L<XML::NewsML_G2::Link> for values
-
-=item  add_derived_from_hash
-
-adds a new Link element of type 'derived from' with a given hash, see
-L<XML::NewsML_G2::Link> for values
-
-
-=back
-
-Add a string to the authors
 
 =head1 AUTHOR
 

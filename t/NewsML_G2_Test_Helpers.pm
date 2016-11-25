@@ -167,6 +167,25 @@ our @keywords = qw(beer vienna prater kolarik schweizerhaus);
     our @text = split /\n\n+/, <DATA>;
 }
 
+our %ni_std_opts = (
+    guid             => $guid_text,                     # overwrite in $hash
+    provider         => $prov_apa,
+    copyright_holder => $copy_hold,
+    usage_terms      => 'view only with a full beer',
+    message_id       => $apa_id,
+    subtitle         => $subtitle,
+    slugline         => $slugline,
+    embargo          => DateTime::Format::XSD->parse_datetime($embargo),
+    embargo_text     => $embargo_text,
+    language         => 'de',
+    note             => $note,
+    closing          => 'Schluss',
+    credit           => $creditline,
+    content_created  => DateTime::Format::XSD->parse_datetime($time1),
+    content_modified => DateTime::Format::XSD->parse_datetime($time2),
+
+);
+
 sub validate_g2 {
     my ( $dom, $version ) = @_;
     $version ||=
@@ -200,22 +219,8 @@ sub _create_ni {
     $hash->{service} = $svc_apa_bd unless ( $opts{no_required_scheme} );
 
     ok( my $ni = $ni_cls->new(
-            guid             => $guid_text,    # overwrite in $hash
-            provider         => $prov_apa,
-            copyright_holder => $copy_hold,
-            usage_terms  => 'view only with a full beer',
-            message_id   => $apa_id,
-            title        => ( $opts{id} ? "$title $opts{id}" : $title ),
-            subtitle     => $subtitle,
-            slugline     => $slugline,
-            embargo      => DateTime::Format::XSD->parse_datetime($embargo),
-            embargo_text => $embargo_text,
-            language     => 'de',
-            note         => $note,
-            closing      => 'Schluss',
-            credit       => $creditline,
-            content_created  => DateTime::Format::XSD->parse_datetime($time1),
-            content_modified => DateTime::Format::XSD->parse_datetime($time2),
+            %ni_std_opts,
+            title => ( $opts{id} ? "$title $opts{id}" : $title ),
             %$hash
         ),
         'create News Item instance'
@@ -229,15 +234,15 @@ sub _create_ni {
         ),
         'add_drived_from works'
     );
-    ok( $ni->add_see_also_hash( residref => $see_also_guid ),
-        'add_see_also works' );
+    ok( $ni->add_see_also( residref => $see_also_guid ),
+        'add_see_also works for hashes' );
     ok( $ni->add_see_also(
             XML::NewsML_G2::Link->new(
                 href    => 'https://www.youtube.com/watch?v=dQw4w9WgXcQa',
                 version => 9001
             )
         ),
-        'add_see_also works'
+        'add_see_also works for instances'
     );
     ok( $ni->add_genre(@genres),     'add_genre works' );
     ok( $ni->add_organisation($org), 'add_organisation works' );

@@ -25,6 +25,7 @@ lib/XML/NewsML_G2/Package_Item.pm
 lib/XML/NewsML_G2/Picture.pm
 lib/XML/NewsML_G2/Product.pm
 lib/XML/NewsML_G2/Provider.pm
+lib/XML/NewsML_G2/Remote_Info.pm
 lib/XML/NewsML_G2/Role/HasQCode.pm
 lib/XML/NewsML_G2/Role/Remote.pm
 lib/XML/NewsML_G2/Role/RemoteAudible.pm
@@ -75,6 +76,7 @@ t/09-News_Item_Video.t
 t/10-News_Message.t
 t/11-press-release.t
 t/author-test-eol.t
+t/deprecations.t
 t/NewsML_G2_Test_Helpers.pm
 t/perlcritic.t
 t/perlcriticrc
@@ -89,9 +91,9 @@ t/release-portability.t
 t/release-synopsis.t
 t/release-unused-vars.t
 t/signature.t
-t/xsds/NewsML-G2_2_9-spec-All-Power.xsd
 t/xsds/NewsML-G2_2_12-spec-All-Power.xsd
 t/xsds/NewsML-G2_2_15-spec-All-Power.xsd
 t/xsds/NewsML-G2_2_18-spec-All-Power.xsd
+t/xsds/NewsML-G2_2_9-spec-All-Power.xsd
 t/xsds/xml.xsd
 TODO

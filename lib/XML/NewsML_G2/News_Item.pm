@@ -203,9 +203,9 @@ Human readable credit line
 
 Human readable content description string
 
-=item derived_from
+=item derived_froms
 
-Free-format string or XML::NewsML_G2::Link instance
+List of free-format strings or XML::NewsML_G2::Link instances.
 
 =item desks
 
@@ -289,7 +289,11 @@ Hash mapping of hrefs to remote object (e.g. XML::NewsML_G2::Picture) instances
 
 =item see_also
 
-Free-format string or XML::NewsML_G2::Link instance
+Deprecated - use see_alsos and add_see_also instead!
+
+=item see_alsos
+
+List of free-format strings or XML::NewsML_G2::Link instances
 
 =item service
 
@@ -345,6 +349,11 @@ Add a string to the authors
 
 Add a string to the cities
 
+=item add_derived_from
+
+Add a new "derived from" link - either a string, of a
+XML::NewsML_G2::Link instance, of a hashref
+
 =item add_desk
 
 Add a L<XML::NewsML_G2::Desk> instance
@@ -383,6 +392,11 @@ Add a new L<XML::NewsML_G2::Product> instance
 =item add_remote
 
 Add a new remote instance (e.g. XML::NewsML_G2::Picture) with a given href
+
+=item add_see_also
+
+Add a new "see also" link - either a string, of a XML::NewsML_G2::Link
+instance, of a hashref
 
 =item add_source
 
