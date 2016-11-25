@@ -64,12 +64,7 @@ sub _attr_zombie_lifter {
     warnings::warnif( 'deprecated',
         "$attr is deprecated - use $adder / $getter instead" );
 
-    if ( defined $value ) {
-        $self->$adder($value);
-    }
-    else {
-        return $self->$getter->[0];
-    }
+    return defined $value ? $self->$adder($value) : $self->$getter->[0];
 }
 
 sub see_also {
@@ -107,3 +102,12 @@ Philipp Gortan  C<< <philipp.gortan@apa.at> >>
 Copyright (c) 2014-2015, APA-IT. All rights reserved.
 
 See L<XML::NewsML_G2> for the license.
+
+
+=for pod-coverage
+
+documented in NewsItem:
+
+=item see_also
+
+=item derived_from
