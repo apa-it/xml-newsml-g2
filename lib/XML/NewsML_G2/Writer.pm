@@ -168,6 +168,7 @@ sub _create_copyright_holder_remoteinfo {
         $crh->appendChild( $self->create_element( 'remoteInfo', %args ) )
             if keys %args;
     }
+    return;
 }
 
 sub _create_item_meta_title {
