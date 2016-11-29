@@ -160,8 +160,14 @@ sub _create_catalogs {
 }
 
 sub _create_copyright_holder_remoteinfo {
-
-    # moved to Writer_2_18
+    my ( $self, $crh ) = @_;
+    if ( my $remote_info = $self->news_item->copyright_holder->remote_info ) {
+        my %args;
+        $args{reluri} = $remote_info->reluri if $remote_info->reluri;
+        $args{href}   = $remote_info->href   if $remote_info->href;
+        $crh->appendChild( $self->create_element( 'remoteInfo', %args ) )
+            if keys %args;
+    }
 }
 
 sub _create_item_meta_title {
