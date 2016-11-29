@@ -3,8 +3,8 @@ package XML::NewsML_G2::Remote_Info;
 use Moose;
 use namespace::autoclean;
 
-has 'reluri', isa => 'Str', is => 'ro', required => 1;
-has 'href',   isa => 'Str', is => 'ro', required => 1;
+has 'reluri', isa => 'Str', is => 'ro';
+has 'href',   isa => 'Str', is => 'ro';
 
 __PACKAGE__->meta->make_immutable;
 

@@ -117,7 +117,8 @@ override '_create_creator' => sub {
     return $self->create_element( 'creator', literal => $name );
 };
 
-override '_create_teaser' => sub { };
+override '_create_teaser'                      => sub { };
+override '_create_copyright_holder_remoteinfo' => sub { };
 
 1;
 __END__

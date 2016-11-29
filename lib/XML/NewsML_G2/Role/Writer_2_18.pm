@@ -13,17 +13,6 @@ has 'g2_catalog_url',
     default =>
     'http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_24.xml';
 
-override '_create_copyright_holder_remoteinfo' => sub {
-    my ( $self, $crh ) = @_;
-    if ( my $remote_info = $self->news_item->copyright_holder->remote_info ) {
-        my %args;
-        $args{reluri} = $remote_info->reluri if $remote_info->reluri;
-        $args{href}   = $remote_info->href   if $remote_info->href;
-        $crh->appendChild( $self->create_element( 'remoteInfo', %args ) )
-            if keys %args;
-    }
-};
-
 1;
 __END__
 

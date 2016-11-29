@@ -13,7 +13,8 @@ has 'g2_catalog_url',
     default =>
     'http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_22.xml';
 
-override '_create_teaser' => sub { };
+override '_create_teaser'                      => sub { };
+override '_create_copyright_holder_remoteinfo' => sub { };
 
 1;
 __END__
