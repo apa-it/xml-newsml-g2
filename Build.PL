@@ -9,7 +9,28 @@ my @authors =
     ( 'Philipp Gortan', 'Mario Paumann', 'Christian Eder',
     'Stefan Hrdlicka' );
 
-my $builder = Module::Build->new(
+my $class = Module::Build->subclass(
+    class => 'My::Builder',
+    code  => q{
+        sub ACTION_docs {
+            use Pod::Readme;
+            use Pod::Select;
+
+            my $self = shift;
+
+            podselect({ -output => 'README.pod' },
+                'lib/XML/NewsML_G2.pm');
+
+            my $parser = Pod::Readme->new();
+            $parser->parse_from_file('README.pod', 'README');
+            unlink 'README.pod';
+
+            return $self->SUPER::ACTION_docs;
+        }
+    }
+);
+
+my $builder = $class->new(
     module_name       => 'XML::NewsML_G2',
     license           => 'gpl2',
     dist_author       => \@authors,
@@ -28,7 +49,13 @@ my $builder = Module::Build->new(
         'UUID::Tiny'            => '1.02',
     },
     configure_requires => {
-        'Module::Build' => 0.4004    # support for test_requires
+        'Module::Build' => 0.4004,    # support for test_requires
+        'Pod::Readme'   => 0,
+        'Pod::Select'   => 0,
+    },
+    build_requires => {
+        'Pod::Readme' => 0,
+        'Pod::Select' => 0,
     },
     test_requires => {
         'Test::More'      => 0,
