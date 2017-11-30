@@ -117,7 +117,7 @@ graphics, as well as multimedia packages and slideshows.
 
 Version 2.18 is the latest version of the standard supported by this
 software, and should be your first choice. Using versions 2.9, 2.12
-and 2.15 is deprecated, and support for it will be removed in future
+and 2.15 is deprecated, and support for it will beremoved in future
 releases.
 
 =for readme stop
