@@ -16,6 +16,10 @@ class_type 'XML::NewsML_G2::Link';
 coerce 'XML::NewsML_G2::Link', from 'Str',
     via { use_module('XML::NewsML_G2::Link')->new( residref => $_ ) };
 
+class_type 'XML::NewsML_G2::Destination';
+coerce 'XML::NewsML_G2::Destination', from 'Str',
+    via { use_module('XML::NewsML_G2::Destination')->new( name => $_ ) };
+
 subtype 'XML::NewsML_G2::ArrayRefOfLinks',
     as 'ArrayRef[XML::NewsML_G2::Link]';
 coerce 'XML::NewsML_G2::ArrayRefOfLinks', from 'ArrayRef[HashRef]', via {

@@ -9,8 +9,9 @@ has 'sent',
     is      => 'ro',
     lazy    => 1,
     builder => '_build_sent';
+
 has 'destination',
-    isa     => 'ArrayRef[Str]',
+    isa     => 'ArrayRef[XML::NewsML_G2::Destination]',
     is      => 'ro',
     default => sub { [] },
     traits  => ['Array'],

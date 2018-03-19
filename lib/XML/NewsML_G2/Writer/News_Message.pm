@@ -29,10 +29,11 @@ sub _create_header {
             )
         )
     );
-    for my $dest ( uniq @{ $self->news_message->destination } ) {
+    for my $dest ( @{ $self->news_message->destination } ) {
         next unless $dest;
-        $header->appendChild(
-            $self->create_element( 'destination', '_text' => $dest ) );
+        my %attr = ( '_text' => $dest->name );
+        $attr{role} = $dest->role if $dest->role;
+        $header->appendChild( $self->create_element( 'destination', %attr ) );
     }
 
     $root->appendChild($header);

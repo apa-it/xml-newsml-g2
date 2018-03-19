@@ -9,6 +9,7 @@ use XML::NewsML_G2::Group;
 use XML::NewsML_G2::Icon;
 use XML::NewsML_G2::Inline_Data;
 use XML::NewsML_G2::Link;
+use XML::NewsML_G2::Destination;
 use XML::NewsML_G2::Location;
 use XML::NewsML_G2::Media_Topic;
 use XML::NewsML_G2::News_Item;
