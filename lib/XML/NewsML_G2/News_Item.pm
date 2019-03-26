@@ -279,6 +279,10 @@ control of the output.
 
 Numeric message priority, defaults to 5
 
+=item processed_froms
+
+List of XML::NewsML_G2::Link instances
+
 =item products
 
 List of L<XML::NewsML_G2::Product> instances

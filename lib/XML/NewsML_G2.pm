@@ -37,7 +37,7 @@ use XML::NewsML_G2::Writer::Package_Item;
 use warnings;
 use strict;
 
-use version; our $VERSION = qv('0.2.7');
+use version; our $VERSION = qv('0.2.8');
 
 1;
 
@@ -50,7 +50,7 @@ XML::NewsML_G2 - generate NewsML-G2 news items
 
 =head1 VERSION
 
-0.2.7
+0.2.8
 
 =begin readme
 

@@ -275,7 +275,7 @@ sub _create_item_meta {
         $self->scheme_manager->add_qcode( $s, 'ind', lc );
     }
 
-    foreach my $attr (qw(see_alsos derived_froms)) {
+    foreach my $attr (qw(see_alsos derived_froms processed_froms)) {
         if ( $self->_root_item->$attr ) {
             my $arrayref = $self->_root_item->$attr;
             for my $v (@$arrayref) {
