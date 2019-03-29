@@ -1,6 +1,7 @@
 package XML::NewsML_G2;
 
 use XML::NewsML_G2::Audio;
+use XML::NewsML_G2::Binary;
 use XML::NewsML_G2::Copyright_Holder;
 use XML::NewsML_G2::Desk;
 use XML::NewsML_G2::Genre;

@@ -8,6 +8,10 @@ sub _create_remote_content {
 
     $root->setAttribute( 'contenttype', $remote->mimetype )
         if ( $remote->mimetype );
+
+    $root->setAttribute( 'size', $remote->size )
+        if ( defined $remote->size );
+
     return;
 }
 

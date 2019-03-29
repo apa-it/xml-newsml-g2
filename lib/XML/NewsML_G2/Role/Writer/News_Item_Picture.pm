@@ -27,7 +27,9 @@ before '_create_authors' => sub {
 after '_create_remote_content' => sub {
     my ( $self, $root, $picture ) = @_;
 
-    foreach (qw/size width height orientation/) {
+    return unless $picture->isa('XML::NewsML_G2::Picture');
+
+    foreach (qw/width height orientation/) {
         $root->setAttribute( $_, $picture->$_ ) if defined $picture->$_;
     }
 
@@ -43,7 +45,7 @@ after '_create_remote_content' => sub {
         $root->appendChild(
             $self->create_element( 'altId', _text => $altId ) );
     }
-
+    return;
 };
 
 1;
