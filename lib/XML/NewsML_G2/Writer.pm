@@ -324,6 +324,7 @@ sub _import_iptc_catalog {
 sub create_element {
     my ( $self, $name, %attrs ) = @_;
     my $text      = delete $attrs{_text};
+    my $cdata     = delete $attrs{_cdata};
     my $name_text = delete $attrs{_name_text};
     my $ns        = delete $attrs{_ns} || $self->g2_ns;
     my $elem      = $self->doc->createElementNS( $ns, $name );
@@ -332,6 +333,9 @@ sub create_element {
     }
     if ($text) {
         $elem->appendChild( $self->doc->createTextNode($text) );
+    }
+    elsif ($cdata) {
+        $elem->appendChild( $self->doc->createCDATASection($cdata) );
     }
     elsif ($name_text) {
         $name_text = $name_text->name

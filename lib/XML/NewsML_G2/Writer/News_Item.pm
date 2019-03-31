@@ -134,7 +134,7 @@ sub _create_subjects_location {
 
     foreach my $l (
         sort _sort_subjects_locations values %{ $self->news_item->locations }
-        ) {
+    ) {
         my $why = $l->direct ? 'why:direct' : 'why:ancestor';
         push @res,
             my $s = $self->create_element(
@@ -520,7 +520,13 @@ sub _create_content {
         $cs->appendChild($rc);
     }
     foreach ( @{ $self->news_item->inlinedata } ) {
-        my %args = ( _text => $_->data );
+        my %args;
+        if ( $_->isa('XML::NewsML_G2::Inline_CData') ) {
+            $args{_cdata} = $_->data;
+        }
+        else {
+            $args{_text} = $_->data;
+        }
         $args{contenttype} = $_->mimetype if $_->mimetype;
         my $data = $self->create_element( 'inlineData', %args );
         $cs->appendChild($data);

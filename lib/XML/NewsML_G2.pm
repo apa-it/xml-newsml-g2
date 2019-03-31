@@ -8,6 +8,7 @@ use XML::NewsML_G2::Genre;
 use XML::NewsML_G2::Graphics;
 use XML::NewsML_G2::Group;
 use XML::NewsML_G2::Icon;
+use XML::NewsML_G2::Inline_CData;
 use XML::NewsML_G2::Inline_Data;
 use XML::NewsML_G2::Link;
 use XML::NewsML_G2::Destination;
@@ -38,7 +39,7 @@ use XML::NewsML_G2::Writer::Package_Item;
 use warnings;
 use strict;
 
-use version; our $VERSION = qv('0.2.8');
+use version; our $VERSION = qv('0.2.9');
 
 1;
 
@@ -51,7 +52,7 @@ XML::NewsML_G2 - generate NewsML-G2 news items
 
 =head1 VERSION
 
-0.2.8
+0.2.9
 
 =begin readme
 
