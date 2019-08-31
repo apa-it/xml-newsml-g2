@@ -89,7 +89,7 @@ sub _create_subjects_media_topic {
     push @res, $self->doc->createComment('media topics')
         if $self->news_item->has_media_topics;
     foreach my $mt_qcode ( sort keys %{ $self->news_item->media_topics } ) {
-        my $mt = $self->news_item->media_topics->{$mt_qcode};
+        my $mt  = $self->news_item->media_topics->{$mt_qcode};
         my $why = $mt->direct ? 'why:direct' : 'why:ancestor';
         push @res,
             my $s = $self->create_element(
@@ -375,8 +375,27 @@ sub _create_content_meta {
     }
 
     foreach ( @{ $self->news_item->cities } ) {
-        $cm->appendChild( my $loc =
-                $self->create_element( 'located', _name_text => $_ ) );
+        $cm->appendChild(
+            $self->create_element( 'located', _name_text => $_ ) );
+    }
+
+    if ( my $electiondistrict = $self->news_item->electiondistrict ) {
+        $cm->appendChild(
+            my $ed = $self->create_element(
+                'located', _text => $electiondistrict->name
+            )
+        );
+        $self->scheme_manager->add_qcode( $ed, 'electiondistrict',
+            $electiondistrict->qcode );
+
+        if ( my $electionprovince = $electiondistrict->province ) {
+            my $ep = $self->create_element( 'located',
+                _text => $electionprovince->name );
+            $self->scheme_manager->add_qcode( $ep, 'electionprovince',
+                $electionprovince->qcode );
+
+            $ed->appendChild($ep);
+        }
     }
 
     $self->_create_infosources($cm);

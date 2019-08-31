@@ -27,6 +27,7 @@ has 'priority',     isa => 'Int', is => 'ro', default => 5;
 has 'message_id',   isa => 'Str', is => 'ro';
 has 'slugline',     isa => 'Str', is => 'ro';
 has 'slugline_sep', isa => 'Str', is => 'ro', default => '/';
+has 'electiondistrict', isa => 'XML::NewsML_G2::ElectionDistrict', is => 'rw';
 
 has 'sources',
     isa     => 'ArrayRef[Str]',
@@ -138,7 +139,7 @@ sub add_paragraph {
                 XML::LibXML->createDocument()->createElement('paragraphs') );
     }
     my $doc = $paras->getOwnerDocument;
-    my $p = $doc->createElementNS( 'http://www.w3.org/1999/xhtml', 'p' );
+    my $p   = $doc->createElementNS( 'http://www.w3.org/1999/xhtml', 'p' );
     $p->appendChild( $doc->createTextNode($text) );
     $paras->appendChild($p);
     return 1;
