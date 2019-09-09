@@ -316,6 +316,10 @@ String containing the slugline
 
 Slugline separator, defaults to "/"
 
+=item election_district
+
+L<XML::NewsML_G2::ElectionDistrict> instance
+
 =item sources
 
 List of strings containing story source names
