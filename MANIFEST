@@ -95,7 +95,6 @@ t/release-pod-syntax.t
 t/release-portability.t
 t/release-synopsis.t
 t/release-unused-vars.t
-t/signature.t
 t/xsds/NewsML-G2_2_12-spec-All-Power.xsd
 t/xsds/NewsML-G2_2_15-spec-All-Power.xsd
 t/xsds/NewsML-G2_2_18-spec-All-Power.xsd

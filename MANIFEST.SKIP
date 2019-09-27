@@ -1,16 +1,43 @@
-^MANIFEST.SKIP
-^MYMETA\.yml
-^MYMETA\.json
-~$
+# Avoid version control files.
+\bRCS\b
+\bCVS\b
+,v$
+\B\.svn\b
+^\.git
+\.cvsignore
+\.svnignore
+
+# Avoid Makemaker generated and utility files.
+^Makefile$
+\bblib
+\bMakeMaker-\d
+\bpm_to_blib$
+\bblibdirs$
+^MANIFEST\.(SKIP|bak)$
+
+# Avoid Module::Build generated and utility files.
+\bBuild$
+\b_build
+\bcover_db
+
+# Avoid packaging files
 ^.shipit
 ^.prove
-^.svn
-^run_.*\.sh$
-^Makefile$
-.old$
-^Build$
-^_build/
-^build.sh$
-\.bak$
-^\.git
 ^\.travis
+^build.sh$
+
+# Avoid temp and backup files.
+~$
+\.tmp$
+\.old$
+\.bak$
+\#$
+\b\.#
+
+^tmp/
+.*\.tar\.gz
+^MYMETA.yml$
+^MYMETA\.json$
+
+^XML-NewsML_G2-
+

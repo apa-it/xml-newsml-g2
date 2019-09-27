@@ -7,3 +7,6 @@ MYMETA.yml
 _build
 blib
 Makefile
+MANIFEST.bak
+XML-NewsML_G2-*
+

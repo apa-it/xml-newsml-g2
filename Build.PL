@@ -7,7 +7,7 @@ use Module::Build 0.4004;
 my @authors =
     map { ( my $mail = lc ) =~ tr/a-z/./cs; "$_ <$mail\@apa.at>" }
     ( 'Philipp Gortan', 'Mario Paumann', 'Christian Eder',
-    'Stefan Hrdlicka' );
+    'Stefan Hrdlicka', 'Jozef Kutej' );
 
 my $builder = Module::Build->new(
     module_name       => 'XML::NewsML_G2',
@@ -34,10 +34,10 @@ my $builder = Module::Build->new(
         'Test::More'      => 0,
         'Test::Exception' => 0,
         'Test::Warnings'  => 0,
+        'Test::EOL'       => 0,
     },
     add_to_cleanup     => [ 'XML-NewsML_G2-*', ],
     create_makefile_pl => 'traditional',
-    sign               => 1,
     meta_merge         => {
         resources => {
             repository => 'https://github.com/apa-it/xml-newsml-g2',
