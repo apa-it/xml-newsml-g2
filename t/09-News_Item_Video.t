@@ -102,8 +102,8 @@ $xpc->registerNs( 'xhtml', 'http://www.w3.org/1999/xhtml' );
 remotes_checks( $dom, $xpc );
 validate_g2( $dom, '2.9', 'NewsItemVideo_2.9' );
 
-# 2.12, 2.15, 2.18 checks
-foreach my $version (qw(2.12 2.15 2.18)) {
+# 2.12, 2.15, 2.18, 2.28 checks
+foreach my $version (qw(2.12 2.15 2.18 2.28)) {
     ok( $writer = XML::NewsML_G2::Writer::News_Item->new(
             news_item      => $ni,
             scheme_manager => $sm,

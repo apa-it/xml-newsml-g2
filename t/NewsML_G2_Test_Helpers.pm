@@ -345,7 +345,7 @@ sub test_ni_versions {
     my ( $ni, $sm, $testname, %version_checks ) = @_;
 
     if ( my $h = delete $version_checks{'*'} ) {
-        $version_checks{$_} = $h foreach (qw(2.12 2.15 2.18));
+        $version_checks{$_} = $h foreach (qw(2.12 2.15 2.18 2.28));
     }
 
     for my $version ( sort keys %version_checks ) {

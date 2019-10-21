@@ -145,8 +145,8 @@ foreach my $ni ( create_ni_text(), create_ni_picture() ) {
         qr/dw.*dk.*wh/, 'correct authors in XML, 2.9-style' );
     validate_g2( $dom, '2.9', "NewsItem_${ic}_2.9" );
 
-    # 2.12, 2.15 2.18 checks
-    for my $version (qw(2.12 2.15 2.18)) {
+    # 2.12, 2.15, 2.18, 2.28 checks
+    for my $version (qw(2.12 2.15 2.18 2.28)) {
         ok( $writer = XML::NewsML_G2::Writer::News_Item->new(
                 news_item      => $ni,
                 scheme_manager => $sm,
