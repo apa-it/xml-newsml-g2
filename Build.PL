@@ -37,7 +37,6 @@ my $builder = Module::Build->new(
         'Test::EOL'       => 0,
     },
     add_to_cleanup     => [ 'XML-NewsML_G2-*', ],
-    create_makefile_pl => 'traditional',
     meta_merge         => {
         resources => {
             repository => 'https://github.com/apa-it/xml-newsml-g2',
