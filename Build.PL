@@ -1,13 +1,16 @@
-# $Id$
 
 use strict;
 use warnings;
 use Module::Build 0.4004;
 
 my @authors =
-    map { ( my $mail = lc ) =~ tr/a-z/./cs; "$_ <$mail\@apa.at>" }
-    ( 'Philipp Gortan', 'Mario Paumann', 'Christian Eder',
-    'Stefan Hrdlicka', 'Jozef Kutej' );
+    map { ( my $mail = lc ) =~ tr/a-z/./cs; "$_ <$mail\@apa.at>" } (
+    'Philipp Gortan',
+    'Mario Paumann',
+    'Christian Eder',
+    'Stefan Hrdlicka',
+    'Jozef Kutej'
+    );
 
 my $builder = Module::Build->new(
     module_name       => 'XML::NewsML_G2',
@@ -31,13 +34,18 @@ my $builder = Module::Build->new(
         'Module::Build' => 0.4004    # support for test_requires
     },
     test_requires => {
-        'Test::More'      => 0,
-        'Test::Exception' => 0,
-        'Test::Warnings'  => 0,
-        'Test::EOL'       => 0,
+        'FindBin'               => 0,
+        'File::Copy'            => 0,
+        'File::Spec::Functions' => 0,
+        'Test::More'            => 0,
+        'Test::Exception'       => 0,
+        'Test::Warnings'        => 0,
+        'Test::EOL'             => 0,
+        'Test::File::Contents'  => 0,
+        'Test::MockTime'        => 0,
     },
-    add_to_cleanup     => [ 'XML-NewsML_G2-*', ],
-    meta_merge         => {
+    add_to_cleanup => [ 'XML-NewsML_G2-*', ],
+    meta_merge     => {
         resources => {
             repository => 'https://github.com/apa-it/xml-newsml-g2',
             bugtracker => 'https://github.com/apa-it/xml-newsml-g2/issues',

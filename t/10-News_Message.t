@@ -1,5 +1,11 @@
 #!/usr/bin/env perl
 
+use Test::MockTime 'set_fixed_time';
+
+BEGIN {
+    set_fixed_time('2012-01-01T13:00:00Z');
+}
+
 use utf8;
 use Test::More;
 use DateTime::Format::XSD;
@@ -109,12 +115,12 @@ foreach my $version (qw(2.12 2.15 2.18)) {
     $xpc->registerNs( 'nar',   'http://iptc.org/std/nar/2006-10-01/' );
     $xpc->registerNs( 'xhtml', 'http://www.w3.org/1999/xhtml' );
     news_message_items_check($xpc);
-    validate_g2( $dom, $version );
+    validate_g2( $dom, $version, "NewsMessage_$version" );
 }
 
 #Package Item Test
 
-my %args = ( language => 'de', provider => $prov_apa );
+my %args = ( language => 'de', provider => $prov_apa, guid => $guid_pkg );
 
 ok( my $pi = XML::NewsML_G2::Package_Item->new(%args),
     'create Package_Item' );
@@ -172,7 +178,7 @@ foreach my $version (qw(2.12 2.15 2.18)) {
     $xpc->registerNs( 'nar',   'http://iptc.org/std/nar/2006-10-01/' );
     $xpc->registerNs( 'xhtml', 'http://www.w3.org/1999/xhtml' );
     news_message_package_check($xpc);
-    validate_g2( $dom, $version );
+    validate_g2( $dom, $version, "NewsMessagePackageItem_$version" );
 }
 
 done_testing();
