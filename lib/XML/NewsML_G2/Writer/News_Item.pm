@@ -154,9 +154,10 @@ sub _create_subjects_concepts {
         );
         foreach my $facet_qcode ( sort keys %{ $concept->facets } ) {
             my $facet = $concept->facets->{$facet_qcode};
+            my ($facet_cls) = reverse split '::', $facet->meta->name;
             $s->appendChild(
                 $self->_create_subject_concept(
-                    'facetConcept', $facet, 'facet'
+                    'facetConcept', $facet, lc $facet_cls
                 )
             );
         }

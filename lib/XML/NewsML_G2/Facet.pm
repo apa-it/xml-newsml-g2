@@ -19,8 +19,8 @@ news item, taken from a standardized controlled vocabulary
 =head1 SYNOPSIS
 
     my $facet = XML::NewsML_G2::Facet->new
-        (name => 'alpine skiing slalom',
-         qcode => 'aspfacetvalue:slalom-alpineskiing'
+        (name => 'some aspect of the topic',
+         qcode => 'something'
         );
 
 =head1 AUTHOR

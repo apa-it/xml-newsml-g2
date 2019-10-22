@@ -34,6 +34,7 @@ use XML::NewsML_G2::Remote_Info;
 use XML::NewsML_G2::Scheme;
 use XML::NewsML_G2::Scheme_Manager;
 use XML::NewsML_G2::Service;
+use XML::NewsML_G2::SportFacet;
 use XML::NewsML_G2::Topic;
 use XML::NewsML_G2::Video;
 use XML::NewsML_G2::Writer::News_Item;

@@ -34,19 +34,29 @@ my $mt = XML::NewsML_G2::Media_Topic->new(
     qcode => 20001057
 );
 
-my $facet = XML::NewsML_G2::Facet->new(
-    name  => 'alpine skiing slalom',
-    qcode => 'denhangrunter'
-);
-
 my $concept = XML::NewsML_G2::Concept->new( main => $mt );
-$concept->add_facet($facet);
+$concept->add_facet(
+    XML::NewsML_G2::Facet->new(
+        name  => 'some variant of this',
+        qcode => 'something'
+    )
+);
+$concept->add_facet(
+    XML::NewsML_G2::SportFacet->new(
+        name  => 'alpine skiing slalom',
+        qcode => 'slalom-alpineskiing'
+    )
+);
 $ni->add_concept($concept);
 
 my %schemes = (
     'facet' => XML::NewsML_G2::Scheme->new(
-        alias => 'myfacet',
-        uri   => 'http://facets.salzamt.at/myfacet/'
+        alias => 'myfacetvalue',
+        uri   => 'http://facets.salzamt.at/myfacetvalue/'
+    ),
+    'sportfacet' => XML::NewsML_G2::Scheme->new(
+        alias => 'asportfacetvalue',
+        uri   => 'http://cv.iptc.org/newscodes/asportfacetvalue/'
     )
 );
 my $sm = XML::NewsML_G2::Scheme_Manager->new(%schemes);
@@ -69,7 +79,5 @@ foreach (qw/2.9 2.12 2.15 2.18/) {
     throws_ok( sub { $writer->create_dom() },
         qr/Unimplemented/, "No concept suppport for version $_" );
 }
-
-### XXX Test Sport Facets from Catalog
 
 done_testing;
