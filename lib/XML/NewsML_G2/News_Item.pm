@@ -84,6 +84,12 @@ has 'media_topics',
     default => sub { {} },
     traits  => ['Hash'],
     handles => { has_media_topics => 'count' };
+has 'concepts',
+    isa     => 'HashRef[XML::NewsML_G2::Concept]',
+    is      => 'rw',
+    default => sub { {} },
+    traits  => ['Hash'],
+    handles => { has_concepts => 'count' };
 has 'locations',
     isa     => 'HashRef[XML::NewsML_G2::Location]',
     is      => 'rw',
@@ -123,6 +129,13 @@ sub add_media_topic {
     return 1;
 }
 
+sub add_concept {
+    my ( $self, $concept ) = @_;
+    return if exists $self->concepts->{ $concept->uid };
+    $self->concepts->{ $concept->uid } = $concept;
+    return 1;
+}
+
 sub add_location {
     my ( $self, $l ) = @_;
     return if exists $self->locations->{ $l->qcode };
@@ -139,7 +152,7 @@ sub add_paragraph {
                 XML::LibXML->createDocument()->createElement('paragraphs') );
     }
     my $doc = $paras->getOwnerDocument;
-    my $p   = $doc->createElementNS( 'http://www.w3.org/1999/xhtml', 'p' );
+    my $p = $doc->createElementNS( 'http://www.w3.org/1999/xhtml', 'p' );
     $p->appendChild( $doc->createTextNode($text) );
     $paras->appendChild($p);
     return 1;
@@ -256,6 +269,10 @@ Hash mapping qcodes to L<XML::NewsML_G2::Location> instances
 =item media_topics
 
 Hash mapping qcodes to L<XML::NewsML_G2::Media_Topic> instances
+
+=item concepts
+
+Hash mapping generated uids to L<XML::NewsML_G2::Concept> instances
 
 =item message_id
 
@@ -386,6 +403,10 @@ Add a new L<XML::NewsML_G2::Location> instance
 =item add_media_topic
 
 Add a new L<XML::NewsML_G2::MediaTopic> instance
+
+=item add_concept
+
+Add a new L<XML::NewsML_G2::Concept> instance
 
 =item add_organisation
 

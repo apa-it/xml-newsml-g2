@@ -120,6 +120,8 @@ override '_create_creator' => sub {
 override '_create_teaser'                      => sub { };
 override '_create_copyright_holder_remoteinfo' => sub { };
 
+sub _create_subjects_concepts {...}
+
 1;
 __END__
 

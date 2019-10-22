@@ -24,7 +24,7 @@ our %EXPORT_TAGS = (
         qw($guid_text $guid_picture $guid_ots $guid_pkg
             $see_also_guid $derived_from_guid $embargo $apa_id $title $subtitle
             $slugline $creditline $embargo_text $note $prov_apa $svc_apa_bd $time1
-            $time2 @text @genres $org $desk @keywords)
+            $time2 @text @genres $org $desk @keywords %ni_std_opts)
     ]
 );
 

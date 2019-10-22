@@ -2,10 +2,12 @@ package XML::NewsML_G2;
 
 use XML::NewsML_G2::Audio;
 use XML::NewsML_G2::Binary;
+use XML::NewsML_G2::Concept;
 use XML::NewsML_G2::Copyright_Holder;
 use XML::NewsML_G2::Desk;
 use XML::NewsML_G2::ElectionDistrict;
 use XML::NewsML_G2::ElectionProvince;
+use XML::NewsML_G2::Facet;
 use XML::NewsML_G2::Genre;
 use XML::NewsML_G2::Graphics;
 use XML::NewsML_G2::Group;

@@ -13,6 +13,8 @@ has 'g2_catalog_url',
     default =>
     'http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_24.xml';
 
+sub _create_subjects_concepts {...}
+
 1;
 __END__
 
