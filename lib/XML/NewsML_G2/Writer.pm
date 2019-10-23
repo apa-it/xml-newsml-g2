@@ -5,6 +5,7 @@ use Moose;
 use Moose::Util;
 use DateTime;
 use DateTime::Format::XSD;
+use XML::NewsML_G2::Scheme;
 use XML::NewsML_G2::Scheme_Manager;
 use namespace::autoclean;
 
