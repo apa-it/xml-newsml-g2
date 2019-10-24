@@ -80,16 +80,16 @@
       <broader qcode="medtop:20000538"/>
     </subject>
     <!--locations-->
-    <subject relevance="100" type="cpnat:geoArea" why="why:direct" qcode="apageo:1111">
+    <subject type="cpnat:geoArea" why="why:direct" relevance="100" qcode="apageo:1111">
       <name>Wien</name>
       <broader qcode="apageo:2222"/>
     </subject>
-    <subject relevance="40" type="cpnat:geoArea" why="why:ancestor" qcode="apageo:2222">
+    <subject type="cpnat:geoArea" why="why:ancestor" relevance="40" qcode="apageo:2222">
       <name>Österreich</name>
       <sameAs qcode="iso3166-1a2:AT"/>
       <broader qcode="apageo:3333"/>
     </subject>
-    <subject relevance="30" type="cpnat:geoArea" why="why:ancestor" qcode="apageo:3333">
+    <subject type="cpnat:geoArea" why="why:ancestor" relevance="30" qcode="apageo:3333">
       <name>Europe</name>
     </subject>
     <!--organisations-->

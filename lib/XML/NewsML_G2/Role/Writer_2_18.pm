@@ -1,3 +1,4 @@
+## no critic (ControlStructures::ProhibitYadaOperator)
 package XML::NewsML_G2::Role::Writer_2_18;
 
 use Moose::Role;
@@ -33,3 +34,4 @@ Philipp Gortan  C<< <philipp.gortan@apa.at> >>
 Copyright (c) 2013-2014, APA-IT. All rights reserved.
 
 See L<XML::NewsML_G2> for the license.
+qw

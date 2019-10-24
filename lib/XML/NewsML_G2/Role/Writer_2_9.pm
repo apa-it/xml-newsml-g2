@@ -1,3 +1,4 @@
+## no critic (ControlStructures::ProhibitYadaOperator)
 package XML::NewsML_G2::Role::Writer_2_9;
 
 use Moose::Role;

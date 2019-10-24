@@ -3,8 +3,10 @@ package XML::NewsML_G2::Facet;
 use Moose;
 use namespace::autoclean;
 
-with 'XML::NewsML_G2::Role::HasQCode';
-with 'XML::NewsML_G2::Role::HasTranslations';
+with(
+    'XML::NewsML_G2::Role::HasQCode',
+    'XML::NewsML_G2::Role::HasTranslations'
+);
 
 __PACKAGE__->meta->make_immutable;
 

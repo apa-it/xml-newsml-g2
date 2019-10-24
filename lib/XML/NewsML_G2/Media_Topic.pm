@@ -3,8 +3,10 @@ package XML::NewsML_G2::Media_Topic;
 use Moose;
 use namespace::autoclean;
 
-with 'XML::NewsML_G2::Role::HasQCode';
-with 'XML::NewsML_G2::Role::HasTranslations';
+with(
+    'XML::NewsML_G2::Role::HasQCode',
+    'XML::NewsML_G2::Role::HasTranslations'
+);
 
 has 'parent', isa => __PACKAGE__, is => 'rw';
 has 'direct', isa => 'Bool', is => 'rw', default => '';

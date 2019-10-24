@@ -1,5 +1,6 @@
 package XML::NewsML_G2::Writer::News_Item;
 
+use Scalar::Util qw(looks_like_number);
 use Moose;
 use namespace::autoclean;
 
@@ -167,8 +168,14 @@ sub _create_subjects_concepts {
 }
 
 sub _sort_subjects_locations {
-    return $b->relevance <=> $a->relevance
-        || $a->qcode <=> $b->qcode;
+    if ( looks_like_number($a) && looks_like_number($b) ) {
+        return ( $b->relevance // 0 ) <=> ( $a->relevance // 0 )
+            || $a->qcode <=> $b->qcode;
+    }
+    else {
+        return ( $b->relevance // 0 ) <=> ( $a->relevance // 0 )
+            || $a->qcode cmp $b->qcode;
+    }
 }
 
 sub _create_subjects_location {
@@ -186,10 +193,11 @@ sub _create_subjects_location {
             my $s = $self->create_element(
             'subject',
             type       => 'cpnat:geoArea',
-            relevance  => $l->relevance,
             why        => $why,
             _name_text => $l
             );
+        $s->setAttribute( 'relevance', $l->relevance )
+            if defined $l->relevance;
         $self->scheme_manager->add_qcode_or_literal( $s, 'geo', $l->qcode );
         if ( $l->iso_code ) {
             $s->appendChild( my $sa = $self->create_element('sameAs') );
@@ -474,13 +482,14 @@ sub _create_content_meta {
     $cm->appendChild($_) foreach (@subjects);
 
     if ( $self->news_item->slugline ) {
-        $cm->appendChild(
-            $self->create_element(
-                'slugline',
-                separator => $self->news_item->slugline_sep,
-                _text     => $self->news_item->slugline
-            )
-        );
+        my $slug =
+            $self->create_element( 'slugline',
+            _text => $self->news_item->slugline );
+        if ( $self->news_item->slugline_sep ) {
+            $slug->setAttribute( 'separator',
+                $self->news_item->slugline_sep );
+        }
+        $cm->appendChild($slug);
     }
 
     $cm->appendChild(

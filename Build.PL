@@ -19,7 +19,7 @@ my $builder = Module::Build->new(
     dist_abstract     => 'generate NewsML-G2 news items',
     dist_version_from => 'lib/XML/NewsML_G2.pm',
     requires          => {
-        'perl'                  => '5.8.0',
+        'perl'                  => '5.12.0',
         'version'               => '0.77',
         'Moose'                 => '0.64',
         'Moose::Util'           => '0.64',
@@ -29,6 +29,7 @@ my $builder = Module::Build->new(
         'DateTime::Format::XSD' => 0,
         'Module::Runtime'       => 0,
         'UUID::Tiny'            => '1.02',
+        'Scalar::Util'          => 0,
     },
     configure_requires => {
         'Module::Build' => 0.4004    # support for test_requires
