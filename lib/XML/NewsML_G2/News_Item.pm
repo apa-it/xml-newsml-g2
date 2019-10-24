@@ -14,6 +14,7 @@ has 'subtitle',   isa => 'Str',               is => 'rw';
 has 'caption',    isa => 'Str',               is => 'rw';
 has 'teaser',     isa => 'Str',               is => 'rw';
 has 'summary',    isa => 'Str',               is => 'rw';
+has 'byline',     isa => 'Str',               is => 'rw';
 has 'paragraphs', isa => 'XML::LibXML::Node', is => 'rw';
 has 'content_created',
     isa     => 'DateTime',
@@ -54,6 +55,12 @@ has 'genres',
     default => sub { [] },
     traits  => ['Array'],
     handles => { add_genre => 'push' };
+has 'storytypes',
+    isa     => 'ArrayRef[XML::NewsML_G2::StoryType]',
+    is      => 'rw',
+    default => sub { [] },
+    traits  => ['Array'],
+    handles => { add_storytype => 'push' };
 has 'organisations',
     isa     => 'ArrayRef[XML::NewsML_G2::Organisation]',
     is      => 'rw',
@@ -341,6 +348,10 @@ L<XML::NewsML_G2::ElectionDistrict> instance
 
 List of strings containing story source names
 
+=item storytypes
+
+List of L<XML::NewsML_G2::StoryType> instances
+
 =item subtitle
 
 Subtitle string
@@ -348,6 +359,10 @@ Subtitle string
 =item summary
 
 A short overview of all, or at least the most important, facets of the content of the item
+
+=item byline
+
+A free-text expression of the person or organisation that created the content
 
 =item teaser
 

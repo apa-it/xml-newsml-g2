@@ -83,6 +83,27 @@ sub _create_subjects_desk {
     return @res;
 }
 
+sub _create_subjects_storytypes {
+    my $self = shift;
+    my @res;
+
+    push @res, $self->doc->createComment('storytypes')
+        if ( @{ $self->news_item->storytypes } );
+
+    foreach ( sort { $a->qcode cmp $b->qcode }
+        @{ $self->news_item->storytypes } ) {
+        push @res,
+            my $s = $self->create_element(
+            'subject',
+            type       => 'cpnat:abstract',
+            _name_text => $_
+            );
+        $self->scheme_manager->add_qcode_or_literal( $s, 'storytype',
+            $_->qcode );
+    }
+    return @res;
+}
+
 sub _create_subjects_media_topic {
     my $self = shift;
     my @res;
@@ -285,6 +306,7 @@ sub _create_subjects {
     my $self = shift;
     my @res;
 
+    push @res, $self->_create_subjects_storytypes();
     push @res, $self->_create_subjects_desk();
     push @res, $self->_create_subjects_media_topic();
     push @res, $self->_create_subjects_concepts()
@@ -456,6 +478,12 @@ sub _create_content_meta {
 
     $self->_create_infosources($cm);
     $self->_create_authors($cm);
+
+    if ( $self->news_item->byline ) {
+        $cm->appendChild(
+            $self->create_element( 'by', _text => $self->news_item->byline )
+        );
+    }
 
     if ( $self->news_item->message_id ) {
         $cm->appendChild(
