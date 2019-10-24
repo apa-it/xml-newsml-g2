@@ -15,6 +15,7 @@ has 'caption',    isa => 'Str',               is => 'rw';
 has 'teaser',     isa => 'Str',               is => 'rw';
 has 'summary',    isa => 'Str',               is => 'rw';
 has 'byline',     isa => 'Str',               is => 'rw';
+has 'dateline',   isa => 'Str',               is => 'rw';
 has 'paragraphs', isa => 'XML::LibXML::Node', is => 'rw';
 has 'content_created',
     isa     => 'DateTime',
@@ -224,6 +225,11 @@ Human readable credit line
 
 Human readable content description string
 
+=item dateline
+
+Natural language information indicating the place and time that the content
+was created
+
 =item derived_from
 
 Deprecated - use derived_froms and add_derived_from instead!
@@ -251,6 +257,10 @@ DateTime instance
 =item embargo_text
 
 additional text for specifying details on the embargo
+
+=item evolved_froms
+
+List of  XML::NewsML_G2::Link instances
 
 =item genres
 

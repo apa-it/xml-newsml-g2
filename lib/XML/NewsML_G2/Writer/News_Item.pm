@@ -485,6 +485,14 @@ sub _create_content_meta {
         );
     }
 
+    if ( $self->news_item->dateline ) {
+        $cm->appendChild(
+            $self->create_element(
+                'dateline', _text => $self->news_item->dateline
+            )
+        );
+    }
+
     if ( $self->news_item->message_id ) {
         $cm->appendChild(
             $self->create_element(
