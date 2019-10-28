@@ -1,4 +1,3 @@
-## no critic (ControlStructures::ProhibitYadaOperator)
 package XML::NewsML_G2::Role::Writer_2_18;
 
 use Moose::Role;
@@ -14,6 +13,7 @@ has 'g2_catalog_url',
     default =>
     'http://www.iptc.org/std/catalog/catalog.IPTC-G2-Standards_24.xml';
 
+## no critic (ControlStructures::ProhibitYadaOperator Subroutines::RequireFinalReturn)
 sub _create_subjects_concepts {...}
 
 1;
