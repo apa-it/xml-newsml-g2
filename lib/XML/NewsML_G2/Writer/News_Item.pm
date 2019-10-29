@@ -479,6 +479,14 @@ sub _create_content_meta {
     $self->_create_infosources($cm);
     $self->_create_authors($cm);
 
+    if ( $self->news_item->message_id ) {
+        $cm->appendChild(
+            $self->create_element(
+                'altId', _text => $self->news_item->message_id
+            )
+        );
+    }
+
     if ( $self->news_item->byline ) {
         $cm->appendChild(
             $self->create_element( 'by', _text => $self->news_item->byline )
@@ -489,14 +497,6 @@ sub _create_content_meta {
         $cm->appendChild(
             $self->create_element(
                 'dateline', _text => $self->news_item->dateline
-            )
-        );
-    }
-
-    if ( $self->news_item->message_id ) {
-        $cm->appendChild(
-            $self->create_element(
-                'altId', _text => $self->news_item->message_id
             )
         );
     }
