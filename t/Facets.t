@@ -43,6 +43,12 @@ $concept->add_facet(
 );
 $concept->add_facet(
     XML::NewsML_G2::SportFacet->new(
+        name  => 'alpine skiing type',
+        qcode => 'alpineskiingtype'
+    )
+);
+$concept->add_facet(
+    XML::NewsML_G2::SportFacetValue->new(
         name  => 'alpine skiing slalom',
         qcode => 'slalom-alpineskiing'
     )
@@ -55,6 +61,10 @@ my %schemes = (
         uri   => 'http://facets.salzamt.at/myfacetvalue/'
     ),
     'sportfacet' => XML::NewsML_G2::Scheme->new(
+        alias => 'asportfacet',
+        uri   => 'http://cv.iptc.org/newscodes/asportfacet/'
+    ),
+    'sportfacetvalue' => XML::NewsML_G2::Scheme->new(
         alias => 'asportfacetvalue',
         uri   => 'http://cv.iptc.org/newscodes/asportfacetvalue/'
     )

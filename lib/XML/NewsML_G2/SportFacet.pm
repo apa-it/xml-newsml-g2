@@ -14,13 +14,13 @@ __END__
 
 XML::NewsML_G2::SportFacet - a sport facet to be used in a facetted concept
 of the news item, taken from a standardized controlled vocabulary at
-http://cv.iptc.org/newscodes/asportfacetvalue
+http://cv.iptc.org/newscodes/asportfacet
 
 =head1 SYNOPSIS
 
     my $facet = XML::NewsML_G2::SportFacet->new
-        (name => 'alpine skiing slalom',
-         qcode => 'slalom-alpineskiing'
+        (name => 'alpine skiing type',
+         qcode => 'alpineskiingtype'
         );
 
 =head1 AUTHOR

@@ -35,6 +35,7 @@ use XML::NewsML_G2::Scheme;
 use XML::NewsML_G2::Scheme_Manager;
 use XML::NewsML_G2::Service;
 use XML::NewsML_G2::SportFacet;
+use XML::NewsML_G2::SportFacetValue;
 use XML::NewsML_G2::StoryType;
 use XML::NewsML_G2::Topic;
 use XML::NewsML_G2::Video;
