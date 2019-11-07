@@ -18,14 +18,14 @@ INSTALLATION
 SYNOPSIS
 
         use XML::NewsML_G2;
-
+    
         my $provider = XML::NewsML_G2::Provider->new
             (qcode => 'nsa', name => 'News Somewhere Agency');
-
+    
         my $ni = XML::NewsML_G2::News_Item_Text->new
             (title => 'My first NewsML-G2 news item',
              language => 'en', provider => $provider);
-
+    
         my $writer = XML::NewsML_G2::Writer::News_Item->new(news_item => $ni);
         my $dom = $writer->create_dom();
         print $dom->serialize(1);
@@ -114,3 +114,4 @@ LICENCE AND COPYRIGHT
 
     You should have received a copy of the GNU General Public License along
     with this module. If not, see http://www.gnu.org/licenses/.
+
