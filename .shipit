@@ -1,4 +1,4 @@
-steps = FindVersion, ChangeVersion, ChangePodVersion, Readme, CheckChangeLog, CheckVersionsMatch, DistTest, Commit, Tag, MakeDist, UploadCPAN
+steps = FindVersion, ChangeVersion, ChangePodVersion, Readme, CheckChangeLog, CheckVersionsMatch, DistTest, Commit, MakeDist, UploadCPAN
 
 git.tagpattern = NewsML-G2-%v
 
