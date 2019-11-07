@@ -8,5 +8,6 @@ _build
 blib
 Makefile
 MANIFEST.bak
+cover_db/
 XML-NewsML_G2-*
 *~
