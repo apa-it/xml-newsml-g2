@@ -16,4 +16,4 @@ perl -I "$JENKINSPERLINC" Build.PL
 
 ./Build test merge=1 tap_harness_args=formatter_class=TAP::Formatter::JUnit > test_results.xml
 
-DEVEL_COVER_OPTIONS=-ignore,t/ ./Build testcover
+cover -test
