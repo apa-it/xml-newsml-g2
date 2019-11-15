@@ -27,8 +27,8 @@ has 'content_modified', isa => 'DateTime', is => 'ro';
 has 'credit',       isa => 'Str', is => 'rw';
 has 'priority',     isa => 'Int', is => 'ro', default => 5;
 has 'message_id',   isa => 'Str', is => 'ro';
-has 'slugline',     isa => 'Str', is => 'ro';
-has 'slugline_sep', isa => 'Str', is => 'ro', default => '/';
+has 'slugline',     isa => 'Str', is => 'rw';
+has 'slugline_sep', isa => 'Str', is => 'rw', default => '/';
 has 'electiondistrict', isa => 'XML::NewsML_G2::ElectionDistrict', is => 'rw';
 
 has 'sources',
