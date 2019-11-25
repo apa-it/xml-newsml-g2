@@ -56,7 +56,7 @@ or Package Items
 
 =item sent
 
-Timestemp generated automatically
+Timestamp generated automatically
 
 =item destination
 

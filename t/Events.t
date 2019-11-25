@@ -31,6 +31,13 @@ my $ev_ref = XML::NewsML_G2::Event_Ref->new(
     name     => 'Bierverkostung November 2019'
 );
 $ni->add_event_reference($ev_ref);
+
+#my $event = XML::NewsML_G2::Event_Item->new();
+my $nm = XML::NewsML_G2::News_Message->new();
+
+#$nm->add_item($event);
+$nm->add_item($ni);
+
 my %schemes = (
     'eventid' => XML::NewsML_G2::Scheme->new(
         alias => 'myeventid',
@@ -39,14 +46,14 @@ my %schemes = (
 );
 my $sm = XML::NewsML_G2::Scheme_Manager->new(%schemes);
 
-foreach (qw/2.9 2.12 2.15 2.18 2.28/) {
-    my $writer = XML::NewsML_G2::Writer::News_Item->new(
-        news_item      => $ni,
+foreach (qw/2.18 2.28/) {
+    my $writer = XML::NewsML_G2::Writer::News_Message->new(
+        news_message   => $nm,
         scheme_manager => $sm,
         g2_version     => $_
     );
     ok( my $dom = $writer->create_dom(), "V $_ DOM created" );
-    validate_g2( $dom, $_, "NewsItem_withEventRefs_$_" );
+    validate_g2( $dom, $_, "NewsMsg_withEvents_$_" );
 }
 
 done_testing;
