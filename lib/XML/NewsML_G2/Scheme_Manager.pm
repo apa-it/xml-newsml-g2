@@ -8,7 +8,7 @@ my @attrs = (
     qw(desk hltype role ind geo org topic crel crol drol svc
         isbn ean isrol nprov ninat stat sig iso3166_1a2 genre isin medtop
         rnd vidrnd colsp adc group pgrmod copyright_holder electiondistrict
-        electionprovince facet sportfacet sportfacetvalue storytype gyibt)
+        electionprovince facet sportfacet sportfacetvalue storytype gyibt eventid)
 );
 
 foreach (@attrs) {
@@ -225,6 +225,10 @@ Scheme for storytypes
 =item gyibt
 
 Scheme for creator kinds
+
+=item eventid
+
+Scheme for events
 
 =back
 

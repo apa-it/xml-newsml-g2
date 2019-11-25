@@ -11,6 +11,7 @@ lib/XML/NewsML_G2/Desk.pm
 lib/XML/NewsML_G2/Destination.pm
 lib/XML/NewsML_G2/ElectionDistrict.pm
 lib/XML/NewsML_G2/ElectionProvince.pm
+lib/XML/NewsML_G2/Event_Ref.pm
 lib/XML/NewsML_G2/Facet.pm
 lib/XML/NewsML_G2/Genre.pm
 lib/XML/NewsML_G2/Graphics.pm
@@ -89,6 +90,7 @@ t/10-News_Message.t
 t/11-press-release.t
 t/author-test-eol.t
 t/deprecations.t
+t/Events.t
 t/expected/all_schemes_in_catalogs.xml
 t/expected/minimal.xml
 t/expected/NewsItem_2.12.xml

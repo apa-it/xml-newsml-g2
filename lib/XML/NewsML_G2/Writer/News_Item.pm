@@ -302,12 +302,34 @@ sub _create_subjects_product {
     return @res;
 }
 
+sub _create_subjects_event_refs {
+    my $self = shift;
+
+    my @res;
+
+    push @res, $self->doc->createComment('events')
+        if $self->news_item->has_event_references;
+
+    foreach my $event_ref ( @{ $self->news_item->event_references } ) {
+        push @res,
+            my $p = $self->create_element(
+            'subject',
+            type       => 'cpnat:event',
+            _name_text => $event_ref->name
+            );
+        $self->scheme_manager->add_qcode_or_literal( $p, 'eventid',
+            $event_ref->event_id );
+    }
+    return @res;
+}
+
 sub _create_subjects {
     my $self = shift;
     my @res;
 
     push @res, $self->_create_subjects_storytypes();
     push @res, $self->_create_subjects_desk();
+    push @res, $self->_create_subjects_event_refs();
     push @res, $self->_create_subjects_media_topic();
     push @res, $self->_create_subjects_concepts()
         if $self->news_item->has_concepts;

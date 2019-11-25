@@ -31,6 +31,13 @@ has 'slugline',     isa => 'Str', is => 'rw';
 has 'slugline_sep', isa => 'Str', is => 'rw', default => '/';
 has 'electiondistrict', isa => 'XML::NewsML_G2::ElectionDistrict', is => 'rw';
 
+has 'event_references',
+    isa     => 'ArrayRef[XML::NewsML_G2::Event_Ref]',
+    is      => 'rw',
+    default => sub { [] },
+    traits  => ['Array'],
+    handles =>
+    { add_event_reference => 'push', has_event_references => 'count' };
 has 'sources',
     isa     => 'ArrayRef[Str]',
     is      => 'rw',
@@ -264,6 +271,10 @@ DateTime instance
 
 additional text for specifying details on the embargo
 
+=item event_references
+
+List of XML::NewsML_G2::Event_Ref instances
+
 =item evolved_froms
 
 List of  XML::NewsML_G2::Link instances
@@ -418,6 +429,10 @@ XML::NewsML_G2::Link instance
 =item add_desk
 
 Add a L<XML::NewsML_G2::Desk> instance
+
+=item add_event_reference
+
+Add a L<XML::NewsML_G2::Event_Ref> instance
 
 =item add_genre
 
