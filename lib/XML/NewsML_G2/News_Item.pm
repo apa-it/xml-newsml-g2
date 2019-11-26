@@ -7,13 +7,10 @@ use Moose;
 use namespace::autoclean;
 
 # document properties
-extends 'XML::NewsML_G2::AnyItem';
+extends 'XML::NewsML_G2::Substancial_Item';
 
-has 'title', isa => 'Str', is => 'ro', required => 1;
-has 'subtitle',   isa => 'Str',               is => 'rw';
 has 'caption',    isa => 'Str',               is => 'rw';
 has 'teaser',     isa => 'Str',               is => 'rw';
-has 'summary',    isa => 'Str',               is => 'rw';
 has 'byline',     isa => 'Str',               is => 'rw';
 has 'dateline',   isa => 'Str',               is => 'rw';
 has 'paragraphs', isa => 'XML::LibXML::Node', is => 'rw';
@@ -94,18 +91,6 @@ has 'desks',
     default => sub { [] },
     traits  => ['Array'],
     handles => { add_desk => 'push', has_desks => 'count' };
-has 'media_topics',
-    isa     => 'HashRef[XML::NewsML_G2::Media_Topic]',
-    is      => 'rw',
-    default => sub { {} },
-    traits  => ['Hash'],
-    handles => { has_media_topics => 'count' };
-has 'concepts',
-    isa     => 'HashRef[XML::NewsML_G2::Concept]',
-    is      => 'rw',
-    default => sub { {} },
-    traits  => ['Hash'],
-    handles => { has_concepts => 'count' };
 has 'locations',
     isa     => 'HashRef[XML::NewsML_G2::Location]',
     is      => 'rw',
@@ -136,21 +121,6 @@ sub _build_content_created {
 }
 
 # public methods
-
-sub add_media_topic {
-    my ( $self, $mt ) = @_;
-    return if exists $self->media_topics->{ $mt->qcode };
-    $self->media_topics->{ $mt->qcode } = $mt;
-    $self->add_media_topic( $mt->parent ) if ( $mt->parent );
-    return 1;
-}
-
-sub add_concept {
-    my ( $self, $concept ) = @_;
-    return if exists $self->concepts->{ $concept->uid };
-    $self->concepts->{ $concept->uid } = $concept;
-    return 1;
-}
 
 sub add_location {
     my ( $self, $l ) = @_;

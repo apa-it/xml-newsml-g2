@@ -4,7 +4,7 @@ use Scalar::Util qw(looks_like_number);
 use Moose;
 use namespace::autoclean;
 
-extends 'XML::NewsML_G2::Writer';
+extends 'XML::NewsML_G2::Writer::Substancial_Item';
 
 has 'news_item',
     isa      => 'XML::NewsML_G2::News_Item',

@@ -8,7 +8,7 @@ use warnings;
 use strict;
 
 enum 'XML::NewsML_G2::Types::Nature',
-    [qw(text picture graphics audio video composite)];
+    [qw(text picture graphics audio video composite concept)];
 
 enum 'XML::NewsML_G2::Types::Group_Mode', [qw(bag sequential alternative)];
 

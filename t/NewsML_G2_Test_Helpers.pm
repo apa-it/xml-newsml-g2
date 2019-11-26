@@ -21,7 +21,7 @@ our @EXPORT_OK =
 
 our %EXPORT_TAGS = (
     vars => [
-        qw($guid_text $guid_picture $guid_ots $guid_pkg
+        qw($guid_text $guid_picture $guid_ots $guid_pkg $guid_event_prefix
             $see_also_guid $derived_from_guid $embargo $apa_id $title $subtitle
             $slugline $creditline $embargo_text $note $prov_apa $svc_apa_bd $time1
             $time2 @text @genres $org $desk @keywords %ni_std_opts)
@@ -34,6 +34,7 @@ our $guid_pkg          = 'urn:newsml:apa.at:20120315:BUNDLE42';
 our $guid_ots          = 'urn:newsml:apa.at:20120315:OTS0049';
 our $guid_text         = 'urn:newsml:apa.at:20120315:APA0379';
 our $guid_picture      = 'urn:newsml:apa.at:20120315:ABD0111';
+our $guid_event_prefix = 'urn:newsml:apa.at:event:';
 our $see_also_guid     = 'urn:newsml:apa.at:20120315:APA0123';
 our $derived_from_guid = 'urn:newsml:apa.at:20120315:APA0120';
 our $apa_id            = 'APA0379';

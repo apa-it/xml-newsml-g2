@@ -3,15 +3,16 @@ package XML::NewsML_G2::Event_Item;
 use Moose;
 use namespace::autoclean;
 
+extends 'XML::NewsML_G2::Concept_Item';
+
 ### XXX t.b.i:
-### XXX eventid
-### XXX title, description
-### XXX mediatopics
+### XXX concepts, mediatopics, ...
 ### XXX date/time, series
 ### XXX coverage
 ### XXX location
-### XXX language, translations
-### XXX usable/canceled
+### XXX translations
+
+has 'event_id', is => 'ro', isa => 'Str', required => 1;
 
 __PACKAGE__->meta->make_immutable;
 
@@ -36,11 +37,47 @@ that can be published standalone
 
 =over 4
 
+=item event_id
+
+The unique id of the event
+
+=item language
+
+language of the event, required. E.g. "en", "de", ...
+
+=item subtitle
+
+A short description of the event
+
+=item summary
+
+A more detailed description of the event
+
+=item title
+
+The title of the referenced event
+
+=item media_topics
+
+Hash mapping qcodes to L<XML::NewsML_G2::Media_Topic> instances
+
+=item concepts
+
+Hash mapping generated uids to L<XML::NewsML_G2::Concept> instances
+
 =back
 
 =head1 METHODS
 
 =over 4
+
+=item add_media_topic
+
+Add a new L<XML::NewsML_G2::MediaTopic> instance
+
+=item add_concept
+
+Add a new L<XML::NewsML_G2::Concept> instance
 
 =back
 
