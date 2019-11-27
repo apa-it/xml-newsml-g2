@@ -108,7 +108,7 @@ sub _create_multilang_elements {
 
 sub _create_inner_content {
     my ( $self, $parent ) = @_;
-
+    $parent->appendChild( $self->doc->createComment('event information') );
     $parent->appendChild($_)
         foreach $self->_create_multilang_elements( 'name',
         $self->event_item->title );
@@ -125,9 +125,13 @@ sub _create_inner_content {
     }
     $parent->appendChild( my $details =
             $self->create_element('eventDetails') );
+    $details->appendChild( $self->doc->createComment('dates') );
     $details->appendChild( $self->_create_dates() );
-    $details->appendChild( $self->_create_coverage() )
-        if ( $self->event_item->has_coverage );
+    if ( $self->event_item->has_coverage ) {
+        $details->appendChild( $self->doc->createComment('coverage') );
+        $details->appendChild( $self->_create_coverage() );
+    }
+    $details->appendChild( $self->doc->createComment('location') );
     $details->appendChild( $self->_create_location() );
 
     return;

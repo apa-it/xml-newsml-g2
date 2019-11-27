@@ -38,6 +38,7 @@
       <concept>
         <conceptId qcode="myeventid:0815"/>
         <type qcode="cpnat:event"/>
+        <!--event information-->
         <name>Bierverkostung November 2019</name>
         <name xml:lang="en">Beer tasting november 2019</name>
         <definition role="definitionrole:short">Monatliches Treffen von gutgelaunten und schönen Menschen, mit dem Ziel der Trunksucht zu fröhnen</definition>
@@ -45,13 +46,16 @@
         <definition role="definitionrole:long">Die diesmonatige Verkostung findet im Lokal "Hannes" in der Pressgasse (1040 Wien) statt
 Nach ein paar Begrüßungsworten durch den Vorsitzenden startet unmgehend das Trinkgelage</definition>
         <eventDetails>
+          <!--dates-->
           <dates>
             <start>2019-11-30T18:00:00+00:00</start>
             <end>2019-11-30T23:00:00+00:00</end>
           </dates>
+          <!--coverage-->
           <newsCoverageStatus qcode="ncostat:int">
             <name>Text/Bild</name>
           </newsCoverageStatus>
+          <!--location-->
           <location>
             <name>"Der Hannes", Pressgasse 29, 1040 Wien, Austria</name>
             <POIDetails>
@@ -81,12 +85,15 @@ Nach ein paar Begrüßungsworten durch den Vorsitzenden startet unmgehend das Tr
       <concept>
         <conceptId qcode="myeventid:0816"/>
         <type qcode="cpnat:event"/>
+        <!--event information-->
         <name>Teeverkostung November 2019</name>
         <eventDetails>
+          <!--dates-->
           <dates>
             <start>2019-11-30T18:00:00+00:00</start>
             <end>2019-11-30T23:00:00+00:00</end>
           </dates>
+          <!--location-->
           <location>
             <name>"Der Hannes", Pressgasse 29, 1040 Wien, Austria</name>
             <POIDetails>
