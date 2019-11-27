@@ -12,6 +12,14 @@ has '+_nature_qcode_prefix', default => 'cinat';
 sub _create_rights_info {
 }
 
+sub _create_subjects {
+    my $self = shift;
+    my @res;
+    push @res, $self->_create_subjects_media_topic();
+    push @res, $self->_create_subjects_concepts();
+    return @res;
+}
+
 sub _create_content_meta {
     my ( $self, $root ) = @_;
 

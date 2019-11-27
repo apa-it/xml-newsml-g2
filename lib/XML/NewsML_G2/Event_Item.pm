@@ -6,13 +6,13 @@ use namespace::autoclean;
 extends 'XML::NewsML_G2::Concept_Item';
 
 ### XXX t.b.i:
-### XXX concepts, mediatopics, ...
-### XXX date/time, series
 ### XXX coverage
-### XXX location
 ### XXX translations
 
-has 'event_id', is => 'ro', isa => 'Str', required => 1;
+has 'event_id', is => 'ro', isa => 'Str',                      required => 1;
+has 'location', is => 'ro', isa => 'XML::NewsML_G2::Location', required => 1;
+has 'start',    is => 'ro', isa => 'DateTime',                 required => 1;
+has 'end',      is => 'ro', isa => 'DateTime',                 required => 1;
 
 __PACKAGE__->meta->make_immutable;
 
@@ -37,6 +37,10 @@ that can be published standalone
 
 =over 4
 
+=item end
+
+The end date and time of the event
+
 =item event_id
 
 The unique id of the event
@@ -44,6 +48,14 @@ The unique id of the event
 =item language
 
 language of the event, required. E.g. "en", "de", ...
+
+=item location
+
+The location of the event
+
+=item start
+
+The start date and time of the event
 
 =item subtitle
 

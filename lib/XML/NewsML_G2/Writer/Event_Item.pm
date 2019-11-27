@@ -32,6 +32,50 @@ sub _create_type_element {
     return $result;
 }
 
+sub _create_location {
+    my ($self) = @_;
+
+    my $loc    = $self->event_item->location;
+    my $result = $self->create_element('location');
+    $result->appendChild(
+        $self->create_element( 'name', _text => $loc->name ) );
+    if ( $loc->latitude && $loc->longitude ) {
+        $result->appendChild( my $details =
+                $self->create_element('POIDetails') );
+        $details->appendChild(
+            $self->create_element(
+                'position',
+                latitude  => $loc->latitude,
+                longitude => $loc->longitude
+            )
+        );
+    }
+
+    return $result;
+}
+
+sub _create_dates {
+    my ($self) = @_;
+
+    my $result = $self->create_element('dates');
+    $result->appendChild(
+        $self->create_element(
+            'start',
+            _text => $self->_formatter->format_datetime(
+                $self->event_item->start
+            )
+        )
+    );
+    $result->appendChild(
+        $self->create_element(
+            'end',
+            _text =>
+                $self->_formatter->format_datetime( $self->event_item->end )
+        )
+    );
+    return $result;
+}
+
 sub _create_inner_content {
     my ( $self, $parent ) = @_;
 
@@ -55,6 +99,10 @@ sub _create_inner_content {
             )
         );
     }
+    $parent->appendChild( my $details =
+            $self->create_element('eventDetails') );
+    $details->appendChild( $self->_create_dates() );
+    $details->appendChild( $self->_create_location() );
     return;
 }
 
