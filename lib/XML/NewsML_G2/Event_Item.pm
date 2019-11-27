@@ -5,14 +5,24 @@ use namespace::autoclean;
 
 extends 'XML::NewsML_G2::Concept_Item';
 
-### XXX t.b.i:
-### XXX coverage
-### XXX translations
+has '+title',    isa => 'XML::NewsML_G2::Translatable_Text', coerce => 1;
+has '+subtitle', isa => 'XML::NewsML_G2::Translatable_Text', coerce => 1;
+has '+summary',  isa => 'XML::NewsML_G2::Translatable_Text', coerce => 1;
 
 has 'event_id', is => 'ro', isa => 'Str',                      required => 1;
 has 'location', is => 'ro', isa => 'XML::NewsML_G2::Location', required => 1;
 has 'start',    is => 'ro', isa => 'DateTime',                 required => 1;
 has 'end',      is => 'ro', isa => 'DateTime',                 required => 1;
+has 'coverages',
+    is      => 'ro',
+    isa     => 'ArrayRef[Str]',
+    default => sub { [] },
+    traits  => [qw/Array/],
+    handles => {
+    add_coverage => 'push',
+    has_coverage => 'count',
+    all_coverage => 'elements'
+    };
 
 __PACKAGE__->meta->make_immutable;
 
@@ -36,6 +46,10 @@ that can be published standalone
 =head1 ATTRIBUTES
 
 =over 4
+
+=item coverages
+
+Freetext list of intented coverages (e.g. 'Text', 'Photo', ...)
 
 =item end
 

@@ -43,6 +43,7 @@ use XML::NewsML_G2::SportFacetValue;
 use XML::NewsML_G2::StoryType;
 use XML::NewsML_G2::Substancial_Item;
 use XML::NewsML_G2::Topic;
+use XML::NewsML_G2::Translatable_Text;
 use XML::NewsML_G2::Video;
 use XML::NewsML_G2::Writer::Concept_Item;
 use XML::NewsML_G2::Writer::Event_Item;

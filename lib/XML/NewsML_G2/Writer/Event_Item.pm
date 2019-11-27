@@ -76,33 +76,60 @@ sub _create_dates {
     return $result;
 }
 
+sub _create_coverage {
+    my ($self) = @_;
+
+    my $result = $self->create_element('newsCoverageStatus');
+    $self->scheme_manager->add_qcode( $result, 'ncostat', 'int' );
+    my $coverage = join '/', $self->event_item->all_coverage;
+    $result->appendChild(
+        $self->create_element( 'name', _text => $coverage ) );
+    return $result;
+}
+
+sub _create_multilang_elements {
+    my ( $self, $name, $text, %attrs ) = @_;
+    my @result;
+    push @result,
+        $self->create_element( $name, _text => $text->text, %attrs );
+    foreach my $lang ( $text->languages ) {
+        my $trans = $text->get_translation($lang);
+        push @result,
+            $self->create_element(
+            $name,
+            _text      => $trans,
+            'xml:lang' => $lang,
+            %attrs
+            );
+    }
+
+    return @result;
+}
+
 sub _create_inner_content {
     my ( $self, $parent ) = @_;
 
-    $parent->appendChild(
-        $self->create_element( 'name', _text => $self->event_item->title ) );
-    if ( $self->event_item->subtitle ) {
-        $parent->appendChild(
-            $self->create_element(
-                'definition',
-                role  => 'definitionrole:short',
-                _text => $self->event_item->subtitle
-            )
-        );
+    $parent->appendChild($_)
+        foreach $self->_create_multilang_elements( 'name',
+        $self->event_item->title );
+
+    if ( my $subtitle = $self->event_item->subtitle ) {
+        $parent->appendChild($_)
+            foreach $self->_create_multilang_elements( 'definition',
+            $subtitle, role => 'definitionrole:short' );
     }
-    if ( $self->event_item->summary ) {
-        $parent->appendChild(
-            $self->create_element(
-                'definition',
-                role  => 'definitionrole:long',
-                _text => $self->event_item->summary
-            )
-        );
+    if ( my $summary = $self->event_item->summary ) {
+        $parent->appendChild($_)
+            foreach $self->_create_multilang_elements( 'definition',
+            $summary, role => 'definitionrole:long' );
     }
     $parent->appendChild( my $details =
             $self->create_element('eventDetails') );
     $details->appendChild( $self->_create_dates() );
+    $details->appendChild( $self->_create_coverage() )
+        if ( $self->event_item->has_coverage );
     $details->appendChild( $self->_create_location() );
+
     return;
 }
 

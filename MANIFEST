@@ -64,6 +64,7 @@ lib/XML/NewsML_G2/SportFacetValue.pm
 lib/XML/NewsML_G2/StoryType.pm
 lib/XML/NewsML_G2/Substancial_Item.pm
 lib/XML/NewsML_G2/Topic.pm
+lib/XML/NewsML_G2/Translatable_Text.pm
 lib/XML/NewsML_G2/Types.pm
 lib/XML/NewsML_G2/Video.pm
 lib/XML/NewsML_G2/Writer.pm

@@ -64,6 +64,9 @@ my $event = XML::NewsML_G2::Event_Item->new(
     start    => $start,
     end      => $end
 );
+$event->title->add_translation( 'en', 'Beer tasting november 2019' );
+$event->subtitle->add_translation( 'en',
+    'Monthly come-together of friendly and beautiful guys for drinking' );
 $event->add_media_topic($mt);
 
 my $concept = XML::NewsML_G2::Concept->new( main => $mt );
@@ -74,6 +77,7 @@ $concept->add_facet(
     )
 );
 $event->add_concept($concept);
+$event->add_coverage( 'Text', 'Bild' );
 
 my $event2 = XML::NewsML_G2::Event_Item->new(
     guid       => $guid_event_prefix . '0816',
@@ -100,6 +104,10 @@ my %schemes = (
     'facet' => XML::NewsML_G2::Scheme->new(
         alias => 'myfacet',
         uri   => 'http://facets.salzamt.at/myfacets/'
+    ),
+    'ncostat' => XML::NewsML_G2::Scheme->new(
+        alias => 'ncostat',
+        uri   => 'http://cv.iptc.org/newscodes/newscoveragestatus/'
     ),
 );
 my $sm = XML::NewsML_G2::Scheme_Manager->new(%schemes);

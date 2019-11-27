@@ -52,6 +52,34 @@ XML::NewsML_G2::Substancial_Item - base class for substancial item types
 This module acts as an abstract base class for substancial NewsML-G2 item types
 as there are News_Items and Concept_Items. Instead of using this class, use the most appropriate subclass.
 
+=head1 ATTRIBUTES
+
+=over 4
+
+=item media_topics
+
+Hash mapping qcodes to L<XML::NewsML_G2::Media_Topic> instances
+
+=item concepts
+
+Hash mapping generated uids to L<XML::NewsML_G2::Concept> instances
+
+=back
+
+=head1 METHODS
+
+=over 4
+
+=item add_media_topic
+
+Add a new L<XML::NewsML_G2::MediaTopic> instance
+
+=item add_concept
+
+Add a new L<XML::NewsML_G2::Concept> instance
+
+=back
+
 =head1 AUTHOR
 
 Christian Eder  C<< <christian.eder@apa.at> >>
