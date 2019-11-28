@@ -144,12 +144,11 @@ t/expected/NewsMessage_2.12.xml
 t/expected/NewsMessage_2.15.xml
 t/expected/NewsMessage_2.18.xml
 t/expected/NewsMessage_2.28.xml
-t/expected/NewsMessage_withEvents_2.18.xml
-t/expected/NewsMessage_withEvents_2.28.xml
 t/expected/NewsMessagePackageItem_2.12.xml
 t/expected/NewsMessagePackageItem_2.15.xml
 t/expected/NewsMessagePackageItem_2.18.xml
 t/expected/NewsMessagePackageItem_2.28.xml
+t/expected/NewsMsg_withEvents_2.28.xml
 t/expected/no_catalog.xml
 t/expected/PackageItem.xml
 t/expected/PackageItemSlideshow.xml
