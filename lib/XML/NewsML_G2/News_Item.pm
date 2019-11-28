@@ -117,7 +117,8 @@ has 'inlinedata',
     handles => { add_inlinedata => 'push', has_inlinedata => 'count' };
 
 sub _build_content_created {
-    return DateTime->now( time_zone => 'local' );
+    my ($self) = @_;
+    return DateTime->now( time_zone => $self->timezone );
 }
 
 # public methods

@@ -243,6 +243,7 @@ sub _create_ni {
     ok( my $ni = $ni_cls->new(
             %ni_std_opts,
             title => ( $opts{id} ? "$title $opts{id}" : $title ),
+            timezone => 'UTC',
             %$hash
         ),
         'create News Item instance'
@@ -360,7 +361,7 @@ sub test_ni_versions {
         ok( my $writer = XML::NewsML_G2::Writer::News_Item->new(
                 news_item      => $ni,
                 scheme_manager => $sm,
-                g2_version     => $version
+                g2_version     => $version,
             ),
             "creating $version writer"
         );

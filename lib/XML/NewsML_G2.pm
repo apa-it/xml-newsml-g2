@@ -55,7 +55,7 @@ use XML::NewsML_G2::Writer::Substancial_Item;
 use warnings;
 use strict;
 
-use version; our $VERSION = qv('0.3.3');
+use version; our $VERSION = qv('0.3.4');
 
 1;
 

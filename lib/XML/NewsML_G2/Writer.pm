@@ -222,7 +222,7 @@ sub _create_item_meta {
         $self->create_element(
             'versionCreated',
             _text => $self->_formatter->format_datetime(
-                DateTime->now( time_zone => 'local' )
+                DateTime->now( time_zone => $self->_root_item->timezone )
             )
         )
     );

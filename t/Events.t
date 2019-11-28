@@ -24,7 +24,8 @@ my $ni = XML::NewsML_G2::News_Item_Text->new(
     message_id      => $apa_id,
     language        => 'de',
     title           => 'Event Ref Test',
-    content_created => DateTime->now()
+    content_created => DateTime->now(),
+    timezone        => 'UTC'
 );
 
 my $ev_ref = XML::NewsML_G2::Event_Ref->new(
@@ -62,7 +63,8 @@ my $event = XML::NewsML_G2::Event_Item->new(
     ),
     location => $loc,
     start    => $start,
-    end      => $end
+    end      => $end,
+    timezone => 'UTC'
 );
 $event->title->add_translation( 'en', 'Beer tasting november 2019' );
 $event->subtitle->add_translation( 'en',
@@ -88,9 +90,10 @@ my $event2 = XML::NewsML_G2::Event_Item->new(
     doc_status => 'canceled',
     location   => $loc,
     start      => $start,
-    end        => $end
+    end        => $end,
+    timezone   => 'UTC'
 );
-my $nm = XML::NewsML_G2::News_Message->new();
+my $nm = XML::NewsML_G2::News_Message->new( timezone => 'UTC' );
 
 $nm->add_item($event);
 $nm->add_item($event2);
@@ -116,7 +119,7 @@ foreach (qw/2.28/) {
     my $writer = XML::NewsML_G2::Writer::News_Message->new(
         news_message   => $nm,
         scheme_manager => $sm,
-        g2_version     => $_
+        g2_version     => $_,
     );
     ok( my $dom = $writer->create_dom(), "V $_ DOM created" );
     validate_g2( $dom, $_, "NewsMsg_withEvents_$_" );
