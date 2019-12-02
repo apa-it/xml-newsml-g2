@@ -22,6 +22,12 @@ has 'concepts',
     default => sub { {} },
     traits  => ['Hash'],
     handles => { has_concepts => 'count' };
+has 'keywords',
+    isa     => 'ArrayRef[Str]',
+    is      => 'rw',
+    default => sub { [] },
+    traits  => ['Array'],
+    handles => { add_keyword => 'push', has_keywords => 'count' };
 
 sub add_media_topic {
     my ( $self, $mt ) = @_;

@@ -26,6 +26,9 @@ sub _create_content_meta {
     $root->appendChild( my $cm = $self->create_element('contentMeta') );
     my @subjects = $self->_create_subjects();
     $cm->appendChild($_) foreach (@subjects);
+    foreach ( @{ $self->_root_item->keywords } ) {
+        $cm->appendChild( $self->create_element( 'keyword', _text => $_ ) );
+    }
     return;
 }
 

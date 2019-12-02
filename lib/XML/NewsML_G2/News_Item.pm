@@ -97,12 +97,6 @@ has 'locations',
     default => sub { {} },
     traits  => ['Hash'],
     handles => { has_locations => 'count' };
-has 'keywords',
-    isa     => 'ArrayRef[Str]',
-    is      => 'rw',
-    default => sub { [] },
-    traits  => ['Array'],
-    handles => { add_keyword => 'push', has_keywords => 'count' };
 has 'remotes',
     isa     => 'HashRef',
     is      => 'rw',

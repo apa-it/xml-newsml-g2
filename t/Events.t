@@ -80,6 +80,8 @@ $concept->add_facet(
 );
 $event->add_concept($concept);
 $event->add_coverage( 'Text', 'Bild' );
+$event->add_keyword('Bier');
+$event->add_keyword('Hannes');
 
 my $event2 = XML::NewsML_G2::Event_Item->new(
     guid       => $guid_event_prefix . '0816',

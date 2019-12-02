@@ -18,14 +18,14 @@ INSTALLATION
 SYNOPSIS
 
         use XML::NewsML_G2;
-    
+
         my $provider = XML::NewsML_G2::Provider->new
             (qcode => 'nsa', name => 'News Somewhere Agency');
-    
+
         my $ni = XML::NewsML_G2::News_Item_Text->new
             (title => 'My first NewsML-G2 news item',
              language => 'en', provider => $provider);
-    
+
         my $writer = XML::NewsML_G2::Writer::News_Item->new(news_item => $ni);
         my $dom = $writer->create_dom();
         print $dom->serialize(1);
@@ -62,11 +62,11 @@ GETTING STARTED
 CURRENT STATUS
 
     The implementation currently supports text, picture, video, audio,
-    graphics, as well as multimedia packages and slideshows.
+    graphics, as well as multimedia packages, slideshows and events.
 
-    Version 2.18 is the latest version of the standard supported by this
-    software, and should be your first choice. Using versions 2.9, 2.12 and
-    2.15 is deprecated, and support for it will beremoved in future
+    Version 2.28 is the latest version of the standard supported by this
+    software, and should be your first choice. Using versions 2.9, 2.12
+    2.15 and 2.18 is deprecated, and support for it will beremoved in future
     releases.
 
 DEPENDENCIES
@@ -98,9 +98,11 @@ AUTHORS
 
     Stefan Hrdlicka <stefan.hrdlicka@apa.at>
 
+    Jozef Kutej <jozef.kutej@apa.at>
+
 LICENCE AND COPYRIGHT
 
-    Copyright (c) 2013-2015, APA-IT. All rights reserved.
+    Copyright (c) 2013-2019, APA-IT. All rights reserved.
 
     This module is free software; you can redistribute it and/or modify it
     under the terms of the GNU General Public License as published by the
@@ -114,4 +116,3 @@ LICENCE AND COPYRIGHT
 
     You should have received a copy of the GNU General Public License along
     with this module. If not, see http://www.gnu.org/licenses/.
-
