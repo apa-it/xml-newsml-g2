@@ -133,7 +133,8 @@ sub _create_root_element {
     $root->setAttribute( 'standard',        'NewsML-G2' );
     $root->setAttribute( 'standardversion', $self->g2_version );
     $root->setAttribute( 'conformance',     'power' );
-    $root->setAttribute( 'xml:lang',        $self->_root_item->language );
+    $root->setAttribute( 'xml:lang',        $self->_root_item->language )
+        if ( $self->_root_item->language );
 
     $root->setAttribute( 'guid',    $self->_root_item->guid );
     $root->setAttribute( 'version', $self->_root_item->doc_version );

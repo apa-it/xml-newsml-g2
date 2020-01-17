@@ -5,7 +5,7 @@ use namespace::autoclean;
 
 with 'XML::NewsML_G2::Role::HasTranslations';
 
-has 'text', is => 'ro', isa => 'Str', required => 1;
+has 'text', is => 'ro', isa => 'Str';
 
 __PACKAGE__->meta->make_immutable;
 

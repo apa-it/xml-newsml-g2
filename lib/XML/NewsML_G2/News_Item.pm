@@ -9,11 +9,12 @@ use namespace::autoclean;
 # document properties
 extends 'XML::NewsML_G2::Substancial_Item';
 
-has 'caption',    isa => 'Str',               is => 'rw';
-has 'teaser',     isa => 'Str',               is => 'rw';
-has 'byline',     isa => 'Str',               is => 'rw';
-has 'dateline',   isa => 'Str',               is => 'rw';
-has 'paragraphs', isa => 'XML::LibXML::Node', is => 'rw';
+has '+language',  required => 1;
+has 'caption',    isa      => 'Str', is => 'rw';
+has 'teaser',     isa      => 'Str', is => 'rw';
+has 'byline',     isa      => 'Str', is => 'rw';
+has 'dateline',   isa      => 'Str', is => 'rw';
+has 'paragraphs', isa      => 'XML::LibXML::Node', is => 'rw';
 has 'content_created',
     isa     => 'DateTime',
     is      => 'ro',

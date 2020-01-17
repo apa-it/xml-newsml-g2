@@ -55,7 +55,8 @@ Nach ein paar Begrüßungsworten durch den Vorsitzenden startet unmgehend das Tr
           </dates>
           <!--coverage-->
           <newsCoverageStatus qcode="ncostat:int">
-            <name>Text/Bild</name>
+            <name>Text</name>
+            <name>Bild</name>
           </newsCoverageStatus>
           <!--location-->
           <location>

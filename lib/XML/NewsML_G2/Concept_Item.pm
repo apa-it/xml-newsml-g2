@@ -6,7 +6,6 @@ use namespace::autoclean;
 extends 'XML::NewsML_G2::Substancial_Item';
 
 has '+nature', default => 'concept';
-
 __PACKAGE__->meta->make_immutable;
 
 1;

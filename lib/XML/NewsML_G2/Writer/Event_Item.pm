@@ -81,18 +81,18 @@ sub _create_coverage {
 
     my $result = $self->create_element('newsCoverageStatus');
     $self->scheme_manager->add_qcode( $result, 'ncostat', 'int' );
-    my $coverage = join '/', $self->event_item->all_coverage;
-    $result->appendChild(
-        $self->create_element( 'name', _text => $coverage ) );
+    foreach ( $self->event_item->all_coverage ) {
+        $result->appendChild( $self->create_element( 'name', _text => $_ ) );
+    }
     return $result;
 }
 
 sub _create_multilang_elements {
     my ( $self, $name, $text, %attrs ) = @_;
     my @result;
-    push @result,
-        $self->create_element( $name, _text => $text->text, %attrs );
-    foreach my $lang ( $text->languages ) {
+    push @result, $self->create_element( $name, _text => $text->text, %attrs )
+        if $text->text;
+    foreach my $lang ( sort $text->languages ) {
         my $trans = $text->get_translation($lang);
         push @result,
             $self->create_element(

@@ -8,8 +8,8 @@ use XML::NewsML_G2::Types;
 use XML::NewsML_G2::Link;
 
 has 'guid', isa => 'Str', is => 'ro', lazy => 1, builder => '_build_guid';
-has 'doc_version', isa => 'Int', is => 'ro', default  => '1';
-has 'language',    isa => 'Str', is => 'ro', required => 1;
+has 'doc_version', isa => 'Int', is => 'ro', default => '1';
+has 'language', isa => 'Str', is => 'ro';
 has 'nature',
     isa      => 'XML::NewsML_G2::Types::Nature',
     is       => 'ro',
