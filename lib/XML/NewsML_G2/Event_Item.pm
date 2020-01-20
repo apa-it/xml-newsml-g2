@@ -9,10 +9,15 @@ has '+title',    isa => 'XML::NewsML_G2::Translatable_Text', coerce => 1;
 has '+subtitle', isa => 'XML::NewsML_G2::Translatable_Text', coerce => 1;
 has '+summary',  isa => 'XML::NewsML_G2::Translatable_Text', coerce => 1;
 
-has 'event_id', is => 'ro', isa => 'Str',                      required => 1;
-has 'location', is => 'ro', isa => 'XML::NewsML_G2::Location', required => 1;
-has 'start',    is => 'ro', isa => 'DateTime',                 required => 1;
-has 'end',      is => 'ro', isa => 'DateTime',                 required => 1;
+has 'event_id', is => 'ro', isa => 'Str', required => 1;
+has 'locations',
+    is      => 'ro',
+    isa     => 'ArrayRef[XML::NewsML_G2::Location]',
+    default => sub { [] },
+    traits  => [qw/Array/],
+    handles => { add_location => 'push', all_locations => 'elements' };
+has 'start', is => 'ro', isa => 'DateTime', required => 1;
+has 'end',   is => 'ro', isa => 'DateTime', required => 1;
 has 'coverages',
     is      => 'ro',
     isa     => 'ArrayRef[Str]',
@@ -63,9 +68,9 @@ The unique id of the event
 
 language of the event, required. E.g. "en", "de", ...
 
-=item location
+=item locations
 
-The location of the event
+The location(s) of the event
 
 =item start
 
@@ -104,6 +109,10 @@ Add a new L<XML::NewsML_G2::MediaTopic> instance
 =item add_concept
 
 Add a new L<XML::NewsML_G2::Concept> instance
+
+=item add_location
+
+Add a new L<XML::NewsML_G2::Location> instance
 
 =back
 

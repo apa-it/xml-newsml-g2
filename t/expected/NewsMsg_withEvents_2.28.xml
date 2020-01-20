@@ -65,6 +65,13 @@ Nach ein paar Begrüßungsworten durch den Vorsitzenden startet unmgehend das Tr
               <position latitude="48.1963122" longitude="16.3619024"/>
             </POIDetails>
           </location>
+          <location>
+            <name>Gastgarten vom Hannes, Pressgasse 29, 1040 Wien, Austria</name>
+            <name xml:lang="en">Hannes, Outdoor Area, Pressgasse 29, 1040 Wien, Austria</name>
+            <POIDetails>
+              <position latitude="48.1963122" longitude="16.3619024"/>
+            </POIDetails>
+          </location>
         </eventDetails>
       </concept>
     </conceptItem>

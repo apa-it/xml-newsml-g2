@@ -131,7 +131,7 @@ sub _create_subjects_location {
             'subject',
             type       => 'cpnat:geoArea',
             why        => $why,
-            _name_text => $l
+            _name_text => $l->name->text
             );
         $s->setAttribute( 'relevance', $l->relevance )
             if defined $l->relevance;

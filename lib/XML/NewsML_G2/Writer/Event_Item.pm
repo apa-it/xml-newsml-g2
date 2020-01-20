@@ -33,12 +33,11 @@ sub _create_type_element {
 }
 
 sub _create_location {
-    my ($self) = @_;
+    my ( $self, $loc ) = @_;
 
-    my $loc    = $self->event_item->location;
     my $result = $self->create_element('location');
-    $result->appendChild(
-        $self->create_element( 'name', _text => $loc->name ) );
+    $result->appendChild($_)
+        foreach ( $self->_create_multilang_elements( 'name', $loc->name ) );
     if ( $loc->latitude && $loc->longitude ) {
         $result->appendChild( my $details =
                 $self->create_element('POIDetails') );
@@ -132,7 +131,8 @@ sub _create_inner_content {
         $details->appendChild( $self->_create_coverage() );
     }
     $details->appendChild( $self->doc->createComment('location') );
-    $details->appendChild( $self->_create_location() );
+    $details->appendChild( $self->_create_location($_) )
+        foreach ( $self->event_item->all_locations );
 
     return;
 }

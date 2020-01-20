@@ -45,7 +45,12 @@ my $loc = XML::NewsML_G2::Location->new(
     longitude => 16.3619024,
     qcode     => ''
 );
-
+my $loc2 = XML::NewsML_G2::Location->new(
+    name      => 'Gastgarten vom Hannes, Pressgasse 29, 1040 Wien, Austria',
+    latitude  => 48.1963122,
+    longitude => 16.3619024,
+    qcode     => ''
+);
 my $start = DateTime->from_epoch( epoch => 1575136800 );
 my $end = $start->clone->add( hours => 5 );
 my $event = XML::NewsML_G2::Event_Item->new(
@@ -61,11 +66,13 @@ my $event = XML::NewsML_G2::Event_Item->new(
         'Die diesmonatige Verkostung findet im Lokal "Hannes" in der Pressgasse (1040 Wien) statt',
         'Nach ein paar Begrüßungsworten durch den Vorsitzenden startet unmgehend das Trinkgelage',
     ),
-    location => $loc,
     start    => $start,
     end      => $end,
     timezone => 'UTC'
 );
+$loc2->name->add_translation( 'en',
+    'Hannes, Outdoor Area, Pressgasse 29, 1040 Wien, Austria' );
+$event->add_location( $loc, $loc2 );
 $event->title->add_translation( 'en', 'Beer tasting november 2019' );
 $event->subtitle->add_translation( 'en',
     'Monthly come-together of friendly and beautiful guys for drinking' );
@@ -90,11 +97,11 @@ my $event2 = XML::NewsML_G2::Event_Item->new(
     event_id   => '0816',
     title      => 'Teeverkostung November 2019',
     doc_status => 'canceled',
-    location   => $loc,
     start      => $start,
     end        => $end,
     timezone   => 'UTC'
 );
+$event2->add_location($loc);
 my $nm = XML::NewsML_G2::News_Message->new( timezone => 'UTC' );
 
 $nm->add_item($event);
