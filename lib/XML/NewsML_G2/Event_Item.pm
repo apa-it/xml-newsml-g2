@@ -17,7 +17,7 @@ has 'locations',
     traits  => [qw/Array/],
     handles => { add_location => 'push', all_locations => 'elements' };
 has 'start', is => 'ro', isa => 'DateTime', required => 1;
-has 'end',   is => 'ro', isa => 'DateTime', required => 1;
+has 'end', is => 'ro', isa => 'DateTime';
 has 'coverages',
     is      => 'ro',
     isa     => 'ArrayRef[Str]',
@@ -58,7 +58,7 @@ Freetext list of intented coverages (e.g. 'Text', 'Photo', ...)
 
 =item end
 
-The end date and time of the event
+The end date (and maybe time) of the event
 
 =item event_id
 
@@ -74,7 +74,7 @@ The location(s) of the event
 
 =item start
 
-The start date and time of the event
+The start date (and maybe time)  of the event
 
 =item subtitle
 

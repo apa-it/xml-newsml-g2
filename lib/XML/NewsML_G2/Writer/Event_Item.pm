@@ -71,7 +71,7 @@ sub _create_dates {
             _text =>
                 $self->_formatter->format_datetime( $self->event_item->end )
         )
-    );
+    ) if ( $self->event_item->end );
     return $result;
 }
 
