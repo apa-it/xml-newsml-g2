@@ -53,25 +53,28 @@ sub _create_location {
     return $result;
 }
 
+sub _format_dt {
+    my ( $self, $field ) = @_;
+
+    if ( $self->event_item->allday ) {
+        return $self->event_item->$field->ymd('-');
+    }
+    else {
+        return $self->_formatter->format_datetime(
+            $self->event_item->$field );
+    }
+}
+
 sub _create_dates {
     my ($self) = @_;
 
     my $result = $self->create_element('dates');
     $result->appendChild(
-        $self->create_element(
-            'start',
-            _text => $self->_formatter->format_datetime(
-                $self->event_item->start
-            )
-        )
+        $self->create_element( 'start', _text => $self->_format_dt('start') )
     );
     $result->appendChild(
-        $self->create_element(
-            'end',
-            _text =>
-                $self->_formatter->format_datetime( $self->event_item->end )
-        )
-    ) if ( $self->event_item->end );
+        $self->create_element( 'end', _text => $self->_format_dt('end') ) )
+        if ( $self->event_item->end );
     return $result;
 }
 

@@ -16,8 +16,9 @@ has 'locations',
     default => sub { [] },
     traits  => [qw/Array/],
     handles => { add_location => 'push', all_locations => 'elements' };
-has 'start', is => 'ro', isa => 'DateTime', required => 1;
-has 'end', is => 'ro', isa => 'DateTime';
+has 'start',  is => 'ro', isa => 'DateTime', required => 1;
+has 'end',    is => 'ro', isa => 'DateTime';
+has 'allday', is => 'ro', isa => 'Bool',     default  => 0;
 has 'coverages',
     is      => 'ro',
     isa     => 'ArrayRef[Str]',
@@ -51,6 +52,10 @@ that can be published standalone
 =head1 ATTRIBUTES
 
 =over 4
+
+=item allday
+
+Indicates whether this is an all-day event (no time is specified). Default: 0
 
 =item coverages
 
