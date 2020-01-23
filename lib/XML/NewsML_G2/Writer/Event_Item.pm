@@ -125,6 +125,11 @@ sub _create_inner_content {
             foreach $self->_create_multilang_elements( 'definition',
             $summary, role => 'definitionrole:long' );
     }
+    if ( my $note = $self->event_item->event_note ) {
+        $parent->appendChild($_)
+            foreach $self->_create_multilang_elements( 'note',
+            $note, role => 'noterole:general' );
+    }
     $parent->appendChild( my $details =
             $self->create_element('eventDetails') );
     $details->appendChild( $self->doc->createComment('dates') );
