@@ -281,10 +281,8 @@ sub _create_item_meta {
         $self->scheme_manager->add_role( $e, 'role', 'note' );
     }
 
-    if ( $self->_root_item->doc_version > 1 ) {
-        $im->appendChild( my $s = $self->create_element('signal') );
-        $self->scheme_manager->add_qcode( $s, 'sig', 'correction' );
-    }
+    my $cor = $self->_create_correction;
+    $im->appendChild($cor) if $cor;
 
     foreach ( @{ $self->_root_item->indicators } ) {
         $im->appendChild( my $s = $self->create_element('signal') );
@@ -315,6 +313,17 @@ sub _create_item_meta {
 
     $root->appendChild($im);
     return;
+}
+
+sub _create_correction {
+    my ($self) = @_;
+
+    my $result;
+    if ( $self->_root_item->doc_version > 1 ) {
+        $result = $self->create_element('signal');
+        $self->scheme_manager->add_qcode( $result, 'sig', 'correction' );
+    }
+    return $result;
 }
 
 sub _import_iptc_catalog {

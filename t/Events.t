@@ -79,6 +79,10 @@ $event->subtitle->add_translation( 'en',
     'Monthly come-together of friendly and beautiful guys for drinking' );
 $event->event_note->add_translation( 'en', 'Cheers' );
 $event->add_media_topic($mt);
+$event->add_language(
+    XML::NewsML_G2::Language->new( code => 'en', name => 'English' ) );
+$event->add_language(
+    XML::NewsML_G2::Language->new( code => 'de', name => 'German' ) );
 
 my $concept = XML::NewsML_G2::Concept->new( main => $mt );
 $concept->add_facet(

@@ -22,6 +22,7 @@ lib/XML/NewsML_G2/Icon.pm
 lib/XML/NewsML_G2/Inline_CData.pm
 lib/XML/NewsML_G2/Inline_Data.pm
 lib/XML/NewsML_G2/Link.pm
+lib/XML/NewsML_G2/Language.pm
 lib/XML/NewsML_G2/Location.pm
 lib/XML/NewsML_G2/Media_Topic.pm
 lib/XML/NewsML_G2/News_Item.pm

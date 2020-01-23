@@ -39,6 +39,8 @@ class_type 'XML::NewsML_G2::Translatable_Text';
 coerce 'XML::NewsML_G2::Translatable_Text', from 'Str',
     via { use_module('XML::NewsML_G2::Translatable_Text')->new( text => $_ ) };
 
+subtype 'XML::NewsML_G2::LanguageCode', as 'Str', where {/^[a-z]{2}$/};
+
 1;
 __END__
 

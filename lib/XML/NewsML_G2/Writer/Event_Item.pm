@@ -53,6 +53,17 @@ sub _create_location {
     return $result;
 }
 
+sub _create_language {
+    my ( $self, $lang ) = @_;
+
+    my $result = $self->create_element('language');
+    $result->setAttribute( 'tag', $lang->code ) if ( $lang->code );
+    $result->appendChild(
+        $self->create_element( 'name', _text => $lang->name ) );
+
+    return $result;
+}
+
 sub _format_dt {
     my ( $self, $field ) = @_;
 
@@ -141,6 +152,10 @@ sub _create_inner_content {
     $details->appendChild( $self->doc->createComment('location') );
     $details->appendChild( $self->_create_location($_) )
         foreach ( $self->event_item->all_locations );
+
+    $details->appendChild( $self->doc->createComment('language') );
+    $details->appendChild( $self->_create_language($_) )
+        foreach ( $self->event_item->all_languages );
 
     return;
 }

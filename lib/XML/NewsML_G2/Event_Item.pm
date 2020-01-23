@@ -23,7 +23,13 @@ has 'locations',
 has 'start',  is => 'ro', isa => 'DateTime', required => 1;
 has 'end',    is => 'ro', isa => 'DateTime';
 has 'allday', is => 'ro', isa => 'Bool',     default  => 0;
-
+has 'languages',
+    is      => 'ro',
+    is      => 'ro',
+    isa     => 'ArrayRef[XML::NewsML_G2::Language]',
+    default => sub { [] },
+    traits  => [qw/Array/],
+    handles => { add_language => 'push', all_languages => 'elements' };
 has 'coverages',
     is      => 'ro',
     isa     => 'ArrayRef[Str]',
@@ -78,9 +84,9 @@ The unique id of the event
 
 An optional note about the event
 
-=item language
+=item languages
 
-language of the event, required. E.g. "en", "de", ...
+languages of the event
 
 =item locations
 
@@ -123,6 +129,10 @@ Add a new L<XML::NewsML_G2::MediaTopic> instance
 =item add_concept
 
 Add a new L<XML::NewsML_G2::Concept> instance
+
+=item add_language
+
+Add a new L<XML::NewsML_G2::Language> instance
 
 =item add_location
 

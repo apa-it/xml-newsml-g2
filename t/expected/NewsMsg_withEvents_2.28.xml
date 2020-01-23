@@ -74,6 +74,13 @@ Nach ein paar Begrüßungsworten durch den Vorsitzenden startet unmgehend das Tr
               <position latitude="48.1963122" longitude="16.3619024"/>
             </POIDetails>
           </location>
+          <!--language-->
+          <language tag="en">
+            <name>English</name>
+          </language>
+          <language tag="de">
+            <name>German</name>
+          </language>
         </eventDetails>
       </concept>
     </conceptItem>
@@ -112,6 +119,7 @@ Nach ein paar Begrüßungsworten durch den Vorsitzenden startet unmgehend das Tr
               <position latitude="48.1963122" longitude="16.3619024"/>
             </POIDetails>
           </location>
+          <!--language-->
         </eventDetails>
       </concept>
     </conceptItem>
