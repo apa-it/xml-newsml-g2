@@ -66,18 +66,19 @@ my $event = XML::NewsML_G2::Event_Item->new(
         'Die diesmonatige Verkostung findet im Lokal "Hannes" in der Pressgasse (1040 Wien) statt',
         'Nach ein paar Begrüßungsworten durch den Vorsitzenden startet unmgehend das Trinkgelage'
     ),
-    event_note => 'Prost',
-    start      => $start,
-    end        => $end,
-    timezone   => 'UTC'
+    start    => $start,
+    end      => $end,
+    timezone => 'UTC'
 );
+my $note = XML::NewsML_G2::Event_Note->new( text => 'Prost' );
+$note->add_translation( 'en', 'Cheers' );
 $loc2->name->add_translation( 'en',
     'Hannes, Outdoor Area, Pressgasse 29, 1040 Wien, Austria' );
 $event->add_location( $loc, $loc2 );
 $event->title->add_translation( 'en', 'Beer tasting november 2019' );
 $event->subtitle->add_translation( 'en',
     'Monthly come-together of friendly and beautiful guys for drinking' );
-$event->event_note->add_translation( 'en', 'Cheers' );
+$event->add_note($note);
 $event->add_media_topic($mt);
 $event->add_language(
     XML::NewsML_G2::Language->new( code => 'en', name => 'English' ) );

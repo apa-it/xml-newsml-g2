@@ -10,10 +10,12 @@ has '+subtitle', isa => 'XML::NewsML_G2::Translatable_Text', coerce => 1;
 has '+summary',  isa => 'XML::NewsML_G2::Translatable_Text', coerce => 1;
 
 has 'event_id', is => 'ro', isa => 'Str', required => 1;
-has 'event_note',
-    is     => 'ro',
-    isa    => 'XML::NewsML_G2::Translatable_Text',
-    coerce => 1;
+has 'event_notes',
+    is      => 'ro',
+    isa     => 'ArrayRef[XML::NewsML_G2::Event_Note]',
+    default => sub { [] },
+    traits  => [qw/Array/],
+    handles => { add_note => 'push', all_notes => 'elements' };
 has 'locations',
     is      => 'ro',
     isa     => 'ArrayRef[XML::NewsML_G2::Location]',
@@ -80,9 +82,9 @@ The end date (and maybe time) of the event
 
 The unique id of the event
 
-=item event_note
+=item event_notes
 
-An optional note about the event
+An optional array of L<XML::NewsML_G2::Event_Note>s about the event
 
 =item languages
 
@@ -137,6 +139,10 @@ Add a new L<XML::NewsML_G2::Language> instance
 =item add_location
 
 Add a new L<XML::NewsML_G2::Location> instance
+
+=item add_note
+
+Add a new L<XML::NewsML_G2::Event_Note> instance
 
 =back
 

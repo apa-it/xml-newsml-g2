@@ -136,10 +136,10 @@ sub _create_inner_content {
             foreach $self->_create_multilang_elements( 'definition',
             $summary, role => 'definitionrole:long' );
     }
-    if ( my $note = $self->event_item->event_note ) {
+    foreach my $note ( $self->event_item->all_notes ) {
         $parent->appendChild($_)
             foreach $self->_create_multilang_elements( 'note',
-            $note, role => 'noterole:general' );
+            $note->text, role => $note->role );
     }
     $parent->appendChild( my $details =
             $self->create_element('eventDetails') );

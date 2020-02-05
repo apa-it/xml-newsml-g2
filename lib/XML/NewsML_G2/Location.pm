@@ -34,6 +34,10 @@ XML::NewsML_G2::Location - a location (city, region, country, ...)
 
 =over 4
 
+=item name
+
+A human-readable (optionally multi-lingual) description of the location
+
 =item relevance
 
 Value (0..100) specifying how relevant the location is for the news item

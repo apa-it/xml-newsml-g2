@@ -41,7 +41,8 @@ coerce 'XML::NewsML_G2::Translatable_Text', from 'Str',
 
 subtype 'XML::NewsML_G2::LanguageCode', as 'Str', where {/^[a-z]{2}$/};
 
-1;
+subtype 'XML::NewsML_G2::QCodeStr', as 'Str', where {/^[a-z]+:[\w]+$/};
+
 __END__
 
 =head1 NAME

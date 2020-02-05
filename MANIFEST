@@ -13,6 +13,7 @@ lib/XML/NewsML_G2/Destination.pm
 lib/XML/NewsML_G2/ElectionDistrict.pm
 lib/XML/NewsML_G2/ElectionProvince.pm
 lib/XML/NewsML_G2/Event_Item.pm
+lib/XML/NewsML_G2/Event_Note.pm
 lib/XML/NewsML_G2/Event_Ref.pm
 lib/XML/NewsML_G2/Facet.pm
 lib/XML/NewsML_G2/Genre.pm

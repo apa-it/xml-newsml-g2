@@ -10,6 +10,7 @@ use XML::NewsML_G2::Desk;
 use XML::NewsML_G2::ElectionDistrict;
 use XML::NewsML_G2::ElectionProvince;
 use XML::NewsML_G2::Event_Item;
+use XML::NewsML_G2::Event_Note;
 use XML::NewsML_G2::Event_Ref;
 use XML::NewsML_G2::Facet;
 use XML::NewsML_G2::Genre;
