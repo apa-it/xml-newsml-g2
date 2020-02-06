@@ -43,6 +43,8 @@ subtype 'XML::NewsML_G2::LanguageCode', as 'Str', where {/^[a-z]{2}$/};
 
 subtype 'XML::NewsML_G2::QCodeStr', as 'Str', where {/^[a-z]+:[\w]+$/};
 
+1;
+
 __END__
 
 =head1 NAME
