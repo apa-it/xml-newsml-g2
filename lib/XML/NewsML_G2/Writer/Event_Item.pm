@@ -100,6 +100,15 @@ sub _create_coverage {
     return $result;
 }
 
+sub _create_occurence_status {
+    my ($self) = @_;
+
+    my $result = $self->create_element('occurStatus');
+    $self->scheme_manager->add_qcode( $result, 'eventoccurstatus',
+        $self->event_item->occurence_status );
+    return $result;
+}
+
 sub _create_multilang_elements {
     my ( $self, $name, $text, %attrs ) = @_;
     my @result;
@@ -148,6 +157,11 @@ sub _create_inner_content {
     if ( $self->event_item->has_coverage ) {
         $details->appendChild( $self->doc->createComment('coverage') );
         $details->appendChild( $self->_create_coverage() );
+    }
+    if ( $self->event_item->occurence_status ) {
+        $details->appendChild(
+            $self->doc->createComment('occurence status') );
+        $details->appendChild( $self->_create_occurence_status() );
     }
     $details->appendChild( $self->doc->createComment('location') );
     $details->appendChild( $self->_create_location($_) )

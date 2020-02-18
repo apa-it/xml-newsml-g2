@@ -42,6 +42,9 @@ has 'coverages',
     has_coverage => 'count',
     all_coverage => 'elements'
     };
+has 'occurence_status',
+    is  => 'rw',
+    isa => 'XML::NewsML_G2::OccurenceStatus';
 
 __PACKAGE__->meta->make_immutable;
 
@@ -93,6 +96,11 @@ languages of the event
 =item locations
 
 The location(s) of the event
+
+= item
+
+The occurence status of the event as eos0..eos6 code
+(see http://cv.iptc.org/newscodes/eventoccurstatus/)
 
 =item start
 

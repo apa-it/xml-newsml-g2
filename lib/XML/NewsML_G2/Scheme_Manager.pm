@@ -8,7 +8,7 @@ my @attrs = (
     qw(desk hltype role ind geo org topic crel crol drol svc
         isbn ean isrol nprov cinat ninat stat sig iso3166_1a2 genre isin medtop
         rnd vidrnd colsp adc group pgrmod copyright_holder electiondistrict
-        electionprovince facet sportfacet sportfacetvalue storytype gyibt eventid ncostat)
+        electionprovince facet sportfacet sportfacetvalue storytype gyibt eventid ncostat eventoccurstatus)
 );
 
 foreach (@attrs) {

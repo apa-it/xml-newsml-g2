@@ -98,15 +98,16 @@ $event->add_keyword('Bier');
 $event->add_keyword('Hannes');
 
 my $event2 = XML::NewsML_G2::Event_Item->new(
-    guid       => $guid_event_prefix . '0816',
-    provider   => $prov_apa,
-    language   => 'de',
-    event_id   => '0816',
-    title      => 'Teeverkostung November 2019',
-    doc_status => 'canceled',
-    start      => $start,
-    end        => $end,
-    timezone   => 'UTC'
+    guid             => $guid_event_prefix . '0816',
+    provider         => $prov_apa,
+    language         => 'de',
+    event_id         => '0816',
+    title            => 'Teeverkostung November 2019',
+    doc_status       => 'canceled',
+    start            => $start,
+    end              => $end,
+    timezone         => 'UTC',
+    occurence_status => 'eos6'
 );
 $event2->add_location($loc);
 my $nm = XML::NewsML_G2::News_Message->new( timezone => 'UTC' );
@@ -128,6 +129,10 @@ my %schemes = (
         alias => 'ncostat',
         uri   => 'http://cv.iptc.org/newscodes/newscoveragestatus/'
     ),
+    'eventoccurstatus' => XML::NewsML_G2::Scheme->new(
+        alias => 'eventoccurstatus',
+        uri   => 'http://cv.iptc.org/newscodes/eventoccurstatus'
+    )
 );
 my $sm = XML::NewsML_G2::Scheme_Manager->new(%schemes);
 
