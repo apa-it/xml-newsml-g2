@@ -54,13 +54,16 @@ foreach (qw(crel desk geo svc role ind org topic hltype adc gyibt)) {
 ok( my $sm = XML::NewsML_G2::Scheme_Manager->new(%schemes),
     'create Scheme Manager' );
 my $ni = create_ni_video();
+$ni->add_keyword(
+    XML::NewsML_G2::Keyword->new( text => 'test', role => 'keyrole:blah' ) );
 my $hd = XML::NewsML_G2::Video->new(
     width         => 1920,
     height        => 1080,
     size          => '23013531',
     duration      => 30,
     audiochannels => 'stereo',
-    mimetype      => 'video/mp4'
+    mimetype      => 'video/mp4',
+
 );
 my $sd = XML::NewsML_G2::Video->new(
     width    => 720,

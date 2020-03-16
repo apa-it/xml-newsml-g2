@@ -109,25 +109,6 @@ sub _create_occurence_status {
     return $result;
 }
 
-sub _create_multilang_elements {
-    my ( $self, $name, $text, %attrs ) = @_;
-    my @result;
-    push @result, $self->create_element( $name, _text => $text->text, %attrs )
-        if $text->text;
-    foreach my $lang ( sort $text->languages ) {
-        my $trans = $text->get_translation($lang);
-        push @result,
-            $self->create_element(
-            $name,
-            _text      => $trans,
-            'xml:lang' => $lang,
-            %attrs
-            );
-    }
-
-    return @result;
-}
-
 sub _create_inner_content {
     my ( $self, $parent ) = @_;
     $parent->appendChild( $self->doc->createComment('event information') );

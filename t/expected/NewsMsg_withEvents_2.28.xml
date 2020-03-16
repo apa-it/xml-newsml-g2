@@ -35,7 +35,8 @@
             <name>Alkohol</name>
           </facetConcept>
         </subject>
-        <keyword>Bier</keyword>
+        <keyword role="keyrole:main">Bier</keyword>
+        <keyword role="keyrole:main" xml:lang="en">Beer</keyword>
         <keyword>Hannes</keyword>
       </contentMeta>
       <concept>

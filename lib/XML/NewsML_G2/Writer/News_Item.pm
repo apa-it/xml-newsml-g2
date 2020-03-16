@@ -491,7 +491,15 @@ sub _create_content_meta {
     }
 
     foreach ( @{ $self->news_item->keywords } ) {
-        $cm->appendChild( $self->create_element( 'keyword', _text => $_ ) );
+        my %args;
+        $args{role} = $_->role if $_->role;
+        $cm->appendChild(
+            $self->create_element(
+                'keyword',
+                _text => $_->text->text,
+                %args
+            )
+        );
     }
 
     if ( $self->news_item->caption ) {

@@ -117,6 +117,7 @@
     <keyword>prater</keyword>
     <keyword>kolarik</keyword>
     <keyword>schweizerhaus</keyword>
+    <keyword role="keyrole:blah">test</keyword>
   </contentMeta>
   <!--organisations-->
   <assert qcode="apaorg:161616">

@@ -30,7 +30,11 @@ sub _create_content_meta {
     my @subjects = $self->_create_subjects();
     $cm->appendChild($_) foreach (@subjects);
     foreach ( @{ $self->_root_item->keywords } ) {
-        $cm->appendChild( $self->create_element( 'keyword', _text => $_ ) );
+        my %args;
+        $args{role} = $_->role if $_->role;
+        $cm->appendChild($_)
+            foreach $self->_create_multilang_elements( 'keyword', $_->text,
+            %args );
     }
     return;
 }
@@ -44,6 +48,25 @@ sub _create_content {
     $self->_create_inner_content($concept);
 
     return;
+}
+
+sub _create_multilang_elements {
+    my ( $self, $name, $text, %attrs ) = @_;
+    my @result;
+    push @result, $self->create_element( $name, _text => $text->text, %attrs )
+        if $text->text;
+    foreach my $lang ( sort $text->languages ) {
+        my $trans = $text->get_translation($lang);
+        push @result,
+            $self->create_element(
+            $name,
+            _text      => $trans,
+            'xml:lang' => $lang,
+            %attrs
+            );
+    }
+
+    return @result;
 }
 
 __PACKAGE__->meta->make_immutable;

@@ -1,5 +1,7 @@
 package XML::NewsML_G2::Substancial_Item;
 
+use XML::NewsML_G2::Types;
+
 use Moose;
 use namespace::autoclean;
 
@@ -23,8 +25,9 @@ has 'concepts',
     traits  => ['Hash'],
     handles => { has_concepts => 'count' };
 has 'keywords',
-    isa     => 'ArrayRef[Str]',
+    isa     => 'XML::NewsML_G2::ArrayRefOfKeywords',
     is      => 'rw',
+    coerce  => 1,
     default => sub { [] },
     traits  => ['Array'],
     handles => { add_keyword => 'push', has_keywords => 'count' };

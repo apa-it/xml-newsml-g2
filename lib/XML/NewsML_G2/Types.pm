@@ -41,6 +41,15 @@ class_type 'XML::NewsML_G2::Translatable_Text';
 coerce 'XML::NewsML_G2::Translatable_Text', from 'Str',
     via { use_module('XML::NewsML_G2::Translatable_Text')->new( text => $_ ) };
 
+class_type 'XML::NewsML_G2::Keyword';
+coerce 'XML::NewsML_G2::Keyword', from 'Str',
+    via { use_module('XML::NewsML_G2::Keyword')->new( text => $_ ) };
+subtype 'XML::NewsML_G2::ArrayRefOfKeywords',
+    as 'ArrayRef[XML::NewsML_G2::Keyword]';
+coerce 'XML::NewsML_G2::ArrayRefOfKeywords', from 'ArrayRef[Str]', via {
+    [ map { XML::NewsML_G2::Keyword->new( text => $_ ) } @$_ ]
+};
+
 subtype 'XML::NewsML_G2::LanguageCode', as 'Str', where {/^[a-z]{2}$/};
 
 subtype 'XML::NewsML_G2::QCodeStr', as 'Str', where {/^[a-z]+:[\w]+$/};

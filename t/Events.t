@@ -94,7 +94,10 @@ $concept->add_facet(
 );
 $event->add_concept($concept);
 $event->add_coverage( 'Text', 'Bild' );
-$event->add_keyword('Bier');
+my $kw =
+    XML::NewsML_G2::Keyword->new( text => 'Bier', role => 'keyrole:main' );
+$kw->add_translation( 'en', 'Beer' );
+$event->add_keyword($kw);
 $event->add_keyword('Hannes');
 
 my $event2 = XML::NewsML_G2::Event_Item->new(
