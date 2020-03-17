@@ -360,6 +360,7 @@ sub _create_authors {
     return;
 }
 
+## no critic (Subroutines::ProhibitExcessComplexity)
 sub _create_content_meta {
     my ( $self, $root ) = @_;
 
