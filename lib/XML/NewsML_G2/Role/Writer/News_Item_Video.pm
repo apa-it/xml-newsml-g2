@@ -15,8 +15,8 @@ around '_build_g2_catalog_schemes' => sub {
 after '_create_remote_content' => sub {
     my ( $self, $root, $video ) = @_;
 
-    foreach (
-        qw/size width height duration videoframerate videoavgbitrate audiosamplerate/
+    for (
+        qw(size width height duration videoframerate videoavgbitrate audiosamplerate)
     ) {
         $root->setAttribute( $_, $video->$_ ) if defined $video->$_;
     }
@@ -33,15 +33,15 @@ after '_create_remote_content' => sub {
 sub _create_icon {
     my ( $self, $root ) = @_;
 
-    for my $icon ( @{ $self->news_item->icon } ) {
+    for my $icon ( sort { $a->href cmp $b->href }
+        $self->news_item->all_icons ) {
         my $rendition =
             $self->scheme_manager->build_qcode( 'rnd', $icon->rendition );
         my $icon_element =
             $self->create_element( 'icon', rendition => $rendition, );
 
-        foreach (qw/href width height/) {
-            next unless $icon->$_;
-            $icon_element->setAttribute( $_, $icon->$_ );
+        for (qw(href width height)) {
+            $icon_element->setAttribute( $_, $icon->$_ ) if $icon->$_;
         }
         $root->appendChild($icon_element);
     }

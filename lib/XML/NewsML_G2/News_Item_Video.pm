@@ -7,12 +7,20 @@ extends 'XML::NewsML_G2::News_Item';
 
 has '+nature',  default => 'video';
 has '+remotes', isa     => 'HashRef[XML::NewsML_G2::Video]';
-has 'icon',
-    isa     => 'ArrayRef[XML::NewsML_G2::Icon]',
+has 'icons',
+    isa     => 'HashRef[XML::NewsML_G2::Icon]',
     is      => 'rw',
-    default => sub { [] },
-    traits  => ['Array'],
-    handles => { add_icon => 'push', has_icon => 'count' };
+    default => sub { {} },
+    traits  => ['Hash'],
+    handles => { 'set_icon' => 'set', 'all_icons' => 'values' };
+
+sub add_icon {
+    my ( $self, $icon ) = @_;
+
+    $self->set_icon( $icon->href, $icon );
+
+    return;
+}
 
 __PACKAGE__->meta->make_immutable;
 
