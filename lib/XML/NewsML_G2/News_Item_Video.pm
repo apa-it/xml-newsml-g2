@@ -54,6 +54,25 @@ XML::NewsML_G2::News_Item_Video - a video news item (story)
 
     $ni->add_remote('file:///tmp/files/123.hd.mp4', $hd);
 
+=head1 ATTRIBUTES
+
+=over 4
+
+=item icons
+
+Hash of Preview Items XML::NewsML_G2::Icon. href is used to avoid duplicates.
+
+=back
+
+=head1 METHODS
+
+=over 4
+
+=item add_icon
+
+Add some Preview to the icons hash
+
+=back
 
 =head1 AUTHOR
 
