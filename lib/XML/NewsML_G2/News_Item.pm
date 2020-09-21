@@ -27,7 +27,15 @@ has 'priority',     isa => 'Int', is => 'ro', default => 5;
 has 'message_id',   isa => 'Str', is => 'ro';
 has 'slugline',     isa => 'Str', is => 'rw';
 has 'slugline_sep', isa => 'Str', is => 'rw', default => '/';
-has 'electiondistrict', isa => 'XML::NewsML_G2::ElectionDistrict', is => 'rw';
+has 'electiondistrict',
+    isa => 'XML::NewsML_G2::ElectionDistrict',
+    is  => 'rw';
+has 'electionmunicipialhousing',
+    isa => 'XML::NewsML_G2::ElectionMunicipialHousing',
+    is  => 'rw';
+has 'electionneighbourhood',
+    isa => 'XML::NewsML_G2::ElectionNeighbourhood',
+    is  => 'rw';
 
 has 'event_references',
     isa     => 'ArrayRef[XML::NewsML_G2::Event_Ref]',
@@ -333,9 +341,17 @@ String containing the slugline
 
 Slugline separator, defaults to "/"
 
-=item election_district
+=item electiondistrict
 
 L<XML::NewsML_G2::ElectionDistrict> instance
+
+=item electionmunicipialhousing
+
+L<XML::NewsML_G2::ElectionMunicipialHousing> instance
+
+=item electionneighbourhood
+
+L<XML::NewsML_G2::ElectionNeighbourhood> instance
 
 =item sources
 

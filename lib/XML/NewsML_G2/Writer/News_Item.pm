@@ -396,16 +396,14 @@ sub _create_content_meta {
             $self->create_element( 'located', _name_text => $_ ) );
     }
 
-    if ( my $electiondistrict = $self->news_item->electiondistrict ) {
-        $cm->appendChild(
-            my $ed = $self->create_element(
-                'located', _text => $electiondistrict->name
-            )
-        );
-        $self->scheme_manager->add_qcode( $ed, 'electiondistrict',
-            $electiondistrict->qcode );
+    for my $t ( map { 'election' . $_ }
+        qw(district municipialhousing neighbourhood) ) {
+        my $ei = $self->news_item->$t or next;
+        $cm->appendChild( my $ed =
+                $self->create_element( 'located', _text => $ei->name ) );
+        $self->scheme_manager->add_qcode( $ed, $t, $ei->qcode );
 
-        if ( my $electionprovince = $electiondistrict->province ) {
+        if ( my $electionprovince = $ei->province ) {
             my $ep = $self->create_element( 'located',
                 _text => $electionprovince->name );
             $self->scheme_manager->add_qcode( $ep, 'electionprovince',
@@ -414,7 +412,6 @@ sub _create_content_meta {
             $ed->appendChild($ep);
         }
     }
-
     $self->_create_infosources($cm);
     $self->_create_authors($cm);
 

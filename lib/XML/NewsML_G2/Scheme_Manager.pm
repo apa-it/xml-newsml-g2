@@ -8,7 +8,8 @@ my @attrs = (
     qw(desk hltype role ind geo org topic crel crol drol svc
         isbn ean isrol nprov cinat ninat stat sig iso3166_1a2 genre isin medtop
         rnd vidrnd colsp adc group pgrmod copyright_holder electiondistrict
-        electionprovince facet sportfacet sportfacetvalue storytype gyibt eventid ncostat eventoccurstatus)
+        electionprovince electionmunicipialhousing electionneighbourhood facet
+        sportfacet sportfacetvalue storytype gyibt eventid ncostat eventoccurstatus)
 );
 
 foreach (@attrs) {
@@ -205,6 +206,14 @@ Scheme for election districts
 =item electionprovince
 
 Scheme for election provinces
+
+=item electionmunicipialhousing
+
+Scheme for election municipial housings
+
+=item electionneighbourhood
+
+Scheme for election neighbourhoods
 
 =item facet
 
