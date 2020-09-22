@@ -81,6 +81,8 @@ lib/XML/NewsML_G2/Writer/Package_Item.pm
 lib/XML/NewsML_G2/Writer/Substancial_Item.pm
 LICENSE
 MANIFEST			This list of files
+META.json
+META.yml
 README
 t/00-compile.t
 t/00-load.t
