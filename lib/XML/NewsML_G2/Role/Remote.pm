@@ -7,6 +7,7 @@ use namespace::autoclean;
 
 has 'size',     isa => 'Int', is => 'rw';
 has 'mimetype', isa => 'Str', is => 'rw';
+has 'residref', isa => 'Str', is => 'rw';
 
 1;
 __END__
@@ -35,6 +36,10 @@ The size in bytes of the video file
 =item mimetype
 
 The MIME type of the video file (e.g. image/jpg)
+
+=item residref
+
+A provider-specific ressource identifier reference string
 
 =back
 

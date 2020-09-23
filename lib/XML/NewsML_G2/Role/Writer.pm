@@ -12,6 +12,9 @@ sub _create_remote_content {
     $root->setAttribute( 'size', $remote->size )
         if ( defined $remote->size );
 
+    $root->setAttribute( 'residref', $remote->residref )
+        if ( defined $remote->residref );
+
     return;
 }
 
