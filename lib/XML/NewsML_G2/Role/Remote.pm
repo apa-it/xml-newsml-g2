@@ -8,6 +8,8 @@ use namespace::autoclean;
 has 'size',     isa => 'Int', is => 'rw';
 has 'mimetype', isa => 'Str', is => 'rw';
 has 'residref', isa => 'Str', is => 'rw';
+has 'href',     isa => 'Str', is => 'rw';
+
 
 1;
 __END__
@@ -40,6 +42,10 @@ The MIME type of the video file (e.g. image/jpg)
 =item residref
 
 A provider-specific ressource identifier reference string
+
+=item href
+
+The url of the remote resouce
 
 =back
 
