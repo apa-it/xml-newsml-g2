@@ -15,9 +15,6 @@ sub _create_remote_content {
     $root->setAttribute( 'residref', $remote->residref )
         if ( defined $remote->residref );
 
-    $root->setAttribute( 'href', $remote->href )
-        if ( defined $remote->href );
-
     return;
 }
 
