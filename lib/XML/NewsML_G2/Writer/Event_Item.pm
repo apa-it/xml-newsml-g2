@@ -147,9 +147,30 @@ sub _create_dates {
     $result->appendChild(
         $self->create_element( 'start', _text => $self->_format_dt('start') )
     );
-    $result->appendChild(
-        $self->create_element( 'end', _text => $self->_format_dt('end') ) )
-        if ( $self->event_item->end );
+    if ( $self->event_item->end ) {
+        if ( $self->event_item->allday ) {
+            my $d0 =
+                $self->event_item->start->clone()->set_hour(0)->set_minute(0)
+                ->set_second(0);
+            my $d1 =
+                $self->event_item->end->clone()->set_hour(0)->set_minute(0)
+                ->set_second(0);
+            my $days = ( $d1 - $d0 )->days;
+
+            $result->appendChild(
+                $self->create_element(
+                    'duration', _text => ( 'P' . $days . 'D' )
+                )
+            );
+        }
+        else {
+            $result->appendChild(
+                $self->create_element(
+                    'end', _text => $self->_format_dt('end')
+                )
+            );
+        }
+    }
     return $result;
 }
 

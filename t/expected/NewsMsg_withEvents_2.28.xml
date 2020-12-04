@@ -84,7 +84,7 @@ Nach ein paar Begrüßungsworten durch den Vorsitzenden startet unmgehend das Tr
                   <name>Wien</name>
                   <name xml:lang="en">Vienna</name>
                 </area>
-                <country>
+                <country qcode="iso3166-1a2:AT">
                   <name>Österreich</name>
                   <name xml:lang="en">Austria</name>
                 </country>
