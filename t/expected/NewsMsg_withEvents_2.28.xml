@@ -64,16 +64,32 @@ Nach ein paar Begrüßungsworten durch den Vorsitzenden startet unmgehend das Tr
           </newsCoverageStatus>
           <!--location-->
           <location>
-            <name>"Der Hannes", Pressgasse 29, 1040 Wien, Austria</name>
+            <name>"Der Hannes", Pressgasse 29, 1040 Wien, Österreich</name>
             <POIDetails>
               <position latitude="48.1963122" longitude="16.3619024"/>
             </POIDetails>
           </location>
           <location>
-            <name>Gastgarten vom Hannes, Pressgasse 29, 1040 Wien, Austria</name>
+            <name>Gastgarten vom Hannes, Pressgasse 29, 1040 Wien, Österreich</name>
             <name xml:lang="en">Hannes, Outdoor Area, Pressgasse 29, 1040 Wien, Austria</name>
             <POIDetails>
               <position latitude="48.1963122" longitude="16.3619024"/>
+              <address>
+                <line>Pressgasse 29</line>
+                <locality>
+                  <name>Vierter Bezirk</name>
+                  <name xml:lang="en">Fourth district</name>
+                </locality>
+                <area>
+                  <name>Wien</name>
+                  <name xml:lang="en">Vienna</name>
+                </area>
+                <country>
+                  <name>Österreich</name>
+                  <name xml:lang="en">Austria</name>
+                </country>
+                <postalCode>A-1040</postalCode>
+              </address>
             </POIDetails>
           </location>
           <!--language-->
@@ -119,7 +135,7 @@ Nach ein paar Begrüßungsworten durch den Vorsitzenden startet unmgehend das Tr
           <occurStatus qcode="eventoccurstatus:eos6"/>
           <!--location-->
           <location>
-            <name>"Der Hannes", Pressgasse 29, 1040 Wien, Austria</name>
+            <name>"Der Hannes", Pressgasse 29, 1040 Wien, Österreich</name>
             <POIDetails>
               <position latitude="48.1963122" longitude="16.3619024"/>
             </POIDetails>

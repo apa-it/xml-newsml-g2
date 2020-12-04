@@ -38,16 +38,80 @@ sub _create_location {
     my $result = $self->create_element('location');
     $result->appendChild($_)
         foreach ( $self->_create_multilang_elements( 'name', $loc->name ) );
-    if ( $loc->latitude && $loc->longitude ) {
+    if ( $loc->has_address_details || $loc->has_position ) {
         $result->appendChild( my $details =
                 $self->create_element('POIDetails') );
-        $details->appendChild(
-            $self->create_element(
-                'position',
-                latitude  => $loc->latitude,
-                longitude => $loc->longitude
-            )
-        );
+        if ( $loc->has_position ) {
+            $details->appendChild(
+                $self->create_element(
+                    'position',
+                    latitude  => $loc->latitude,
+                    longitude => $loc->longitude
+                )
+            );
+        }
+        if ( $loc->has_address_details ) {
+            $details->appendChild( my $address =
+                    $self->create_element('address') );
+
+            if ( $loc->address_line ) {
+                $address->appendChild($_) foreach (
+                    $self->_create_multilang_elements(
+                        'line', $loc->address_line
+                    )
+                );
+            }
+
+            if ( $loc->locality ) {
+                $address->appendChild( my $locality =
+                        $self->create_element('locality') );
+                $locality->appendChild($_) foreach (
+                    $self->_create_multilang_elements(
+                        'name', $loc->locality
+                    )
+                );
+            }
+
+            if ( $loc->area ) {
+                $address->appendChild( my $area =
+                        $self->create_element('area') );
+                $area->appendChild($_)
+                    foreach (
+                    $self->_create_multilang_elements( 'name', $loc->area ) );
+            }
+
+            if ( $loc->country ) {
+                my $qcode;
+                if ( my $c = $loc->iso_code ) {
+                    if ( length $c == 2 ) {
+                        $qcode = 'iso3166-1a2:' . $c;
+                    }
+                    elsif ( length $c == 3 ) {
+                        $qcode = 'iso3166-1a3:' . $c;
+                    }
+                }
+                $address->appendChild( my $country =
+                        $self->create_element('country') );
+
+                foreach (
+                    $self->_create_multilang_elements(
+                        'name', $loc->country
+                    )
+                ) {
+                    $_->setAttribute( 'qcode', $qcode ) if $qcode;
+                    $country->appendChild($_);
+                }
+            }
+
+            if ( $loc->postal_code ) {
+                $address->appendChild(
+                    $self->create_element(
+                        'postalCode', _text => $loc->postal_code
+                    )
+                );
+
+            }
+        }
     }
 
     return $result;

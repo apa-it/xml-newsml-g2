@@ -40,16 +40,21 @@ my $mt = XML::NewsML_G2::Media_Topic->new(
 );
 
 my $loc = XML::NewsML_G2::Location->new(
-    name      => '"Der Hannes", Pressgasse 29, 1040 Wien, Austria',
+    name      => '"Der Hannes", Pressgasse 29, 1040 Wien, Österreich',
     latitude  => 48.1963122,
     longitude => 16.3619024,
     qcode     => ''
 );
 my $loc2 = XML::NewsML_G2::Location->new(
-    name      => 'Gastgarten vom Hannes, Pressgasse 29, 1040 Wien, Austria',
-    latitude  => 48.1963122,
-    longitude => 16.3619024,
-    qcode     => ''
+    name    => 'Gastgarten vom Hannes, Pressgasse 29, 1040 Wien, Österreich',
+    country => 'Österreich',
+    area    => 'Wien',
+    locality     => 'Vierter Bezirk',
+    address_line => 'Pressgasse 29',
+    postal_code  => 'A-1040',
+    latitude     => 48.1963122,
+    longitude    => 16.3619024,
+    qcode        => ''
 );
 my $start = DateTime->from_epoch( epoch => 1575136800 );
 my $end = $start->clone->add( hours => 5 );
@@ -74,6 +79,9 @@ my $note = XML::NewsML_G2::Event_Note->new( text => 'Prost' );
 $note->add_translation( 'en', 'Cheers' );
 $loc2->name->add_translation( 'en',
     'Hannes, Outdoor Area, Pressgasse 29, 1040 Wien, Austria' );
+$loc2->country->add_translation( 'en', 'Austria' );
+$loc2->area->add_translation( 'en', 'Vienna' );
+$loc2->locality->add_translation( 'en', 'Fourth district' );
 $event->add_location( $loc, $loc2 );
 $event->title->add_translation( 'en', 'Beer tasting november 2019' );
 $event->subtitle->add_translation( 'en',
