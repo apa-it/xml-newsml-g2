@@ -11,23 +11,23 @@ has '+name', isa => 'XML::NewsML_G2::Translatable_Text', coerce => 1;
 
 has 'country',
     isa    => 'XML::NewsML_G2::Translatable_Text',
-    is     => 'ro',
+    is     => 'rw',
     coerce => 1;
 has 'area',
     isa    => 'XML::NewsML_G2::Translatable_Text',
-    is     => 'ro',
+    is     => 'rw',
     coerce => 1;
 has 'locality',
     isa    => 'XML::NewsML_G2::Translatable_Text',
-    is     => 'ro',
+    is     => 'rw',
     coerce => 1;
 has 'address_line',
     isa    => 'XML::NewsML_G2::Translatable_Text',
-    is     => 'ro',
+    is     => 'rw',
     coerce => 1;
 has 'postal_code',
     isa => 'Str',
-    is  => 'ro';
+    is  => 'rw';
 has 'relevance', isa => 'Int', is => 'ro';
 has 'parent', isa => __PACKAGE__, is => 'rw';
 has 'direct', isa => 'Bool', is => 'rw', default => '';
