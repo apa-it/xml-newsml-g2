@@ -49,6 +49,7 @@ my $loc2 = XML::NewsML_G2::Location->new(
     name    => 'Gastgarten vom Hannes, Pressgasse 29, 1040 Wien, Österreich',
     country => 'Österreich',
     area    => 'Wien',
+    iso_code     => 'AT',
     locality     => 'Vierter Bezirk',
     address_line => 'Pressgasse 29',
     postal_code  => 'A-1040',

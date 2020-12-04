@@ -92,13 +92,13 @@ sub _create_location {
                 }
                 $address->appendChild( my $country =
                         $self->create_element('country') );
+                $country->setAttribute( 'qcode', $qcode ) if $qcode;
 
                 foreach (
                     $self->_create_multilang_elements(
                         'name', $loc->country
                     )
                 ) {
-                    $_->setAttribute( 'qcode', $qcode ) if $qcode;
                     $country->appendChild($_);
                 }
             }
