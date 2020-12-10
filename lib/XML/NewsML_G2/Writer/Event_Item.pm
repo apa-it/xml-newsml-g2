@@ -73,8 +73,13 @@ sub _create_location {
             }
 
             if ( $loc->area ) {
+                my $qcode;
+                if ( my $c = $loc->iso_code_region ) {
+                    $qcode = 'iso3166-2:' . $c;
+                }
                 $address->appendChild( my $area =
                         $self->create_element('area') );
+                $area->setAttribute( 'qcode', $qcode ) if $qcode;
                 $area->appendChild($_)
                     foreach (
                     $self->_create_multilang_elements( 'name', $loc->area ) );

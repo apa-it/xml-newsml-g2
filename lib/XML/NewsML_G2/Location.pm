@@ -31,9 +31,10 @@ has 'postal_code',
 has 'relevance', isa => 'Int', is => 'ro';
 has 'parent', isa => __PACKAGE__, is => 'rw';
 has 'direct', isa => 'Bool', is => 'rw', default => '';
-has 'iso_code',  isa => 'XML::NewsML_G2::CountryCode', is => 'rw';
-has 'longitude', isa => 'Num',                         is => 'rw';
-has 'latitude',  isa => 'Num',                         is => 'rw';
+has 'iso_code',        isa => 'XML::NewsML_G2::CountryCode', is => 'rw';
+has 'iso_code_region', isa => 'XML::NewsML_G2::RegionCode',  is => 'rw';
+has 'longitude',       isa => 'Num',                         is => 'rw';
+has 'latitude',        isa => 'Num',                         is => 'rw';
 
 sub has_address_details {
     my ($self) = @_;
