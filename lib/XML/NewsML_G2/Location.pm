@@ -116,6 +116,27 @@ for countries, the code in the ISO 3166-1a2 vocabulary - see
 L<http://www.iso.org/iso/home/standards/country_codes/country_names_and_code_elements.htm>
 for a reference
 
+=item iso_code_region
+
+for regions, the code in the ISO 3166-2 vocabulary - see https://www.iso.org/standard/72483.html
+
+for a reference
+
+=back
+
+=head1 METHODS
+
+=over 4
+
+=item has_address_details
+
+Returns wheter this location object has detailed address info set (i.e. more than
+just latitude and longitude)
+
+=item has_position
+
+Returns wheter this location object has both latitude and longitude set
+
 =back
 
 =head1 AUTHOR
