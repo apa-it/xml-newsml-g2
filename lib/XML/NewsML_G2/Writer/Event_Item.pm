@@ -32,7 +32,8 @@ sub _create_type_element {
     return $result;
 }
 
-sub _create_location {
+# TODO [Subroutines::ProhibitExcessComplexity] Subroutine "_create_location" with high complexity score (21)
+sub _create_location {      ## no critic (ProhibitExcessComplexity)
     my ( $self, $loc ) = @_;
 
     my $result = $self->create_element('location');
