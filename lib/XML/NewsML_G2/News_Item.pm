@@ -212,6 +212,10 @@ Human readable credit line
 
 Human readable content description string
 
+=item correction_note
+
+Note regarding update or correction
+
 =item dateline
 
 Natural language information indicating the place and time that the content

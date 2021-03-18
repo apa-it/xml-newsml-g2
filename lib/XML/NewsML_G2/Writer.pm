@@ -280,6 +280,14 @@ sub _create_item_meta {
         );
         $self->scheme_manager->add_role( $e, 'role', 'note' );
     }
+    if ( $self->_root_item->correction_note ) {
+        $im->appendChild(
+            my $e = $self->create_element(
+                'edNote', _text => $self->_root_item->correction_note
+            )
+        );
+        $self->scheme_manager->add_role( $e, 'role', 'correctionnote' );
+    }
 
     my $cor = $self->_create_correction;
     $im->appendChild($cor) if $cor;

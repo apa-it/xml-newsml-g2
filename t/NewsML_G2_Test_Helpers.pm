@@ -48,6 +48,8 @@ our $embargo      = '2012-03-15T12:00:00+01:00';
 our $embargo_text = 'frei für Dienstagsausgaben';
 our $note =
     'Bilder zum Schweizerhaus sind im AOM, z.B. ABD0019 vom 23. März 2006, abrufbar';
+our $correction_note =
+    'Neu: Zusammenfassung mit mehr Details zu Werdegang und Politik des Verstorbenen';
 our $time1 = '2012-03-15T09:09:00+01:00';
 our $time2 = '2012-03-15T10:10:00+01:00';
 
@@ -186,6 +188,7 @@ our %ni_std_opts = (
     embargo_text     => $embargo_text,
     language         => 'de',
     note             => $note,
+    correction_note  => $correction_note,
     closing          => 'Schluss',
     credit           => $creditline,
     content_created  => DateTime::Format::XSD->parse_datetime($time1),
@@ -194,7 +197,7 @@ our %ni_std_opts = (
 );
 
 our $expected_dir = catdir( $FindBin::Bin, 'expected' );
-our $tmpdir = tempdir();
+our $tmpdir       = tempdir();
 
 sub validate_g2 {
     my ( $dom, $version, $testname ) = @_;
@@ -242,7 +245,7 @@ sub _create_ni {
 
     ok( my $ni = $ni_cls->new(
             %ni_std_opts,
-            title => ( $opts{id} ? "$title $opts{id}" : $title ),
+            title    => ( $opts{id} ? "$title $opts{id}" : $title ),
             timezone => 'UTC',
             %$hash
         ),

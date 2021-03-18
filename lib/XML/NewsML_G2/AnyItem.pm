@@ -24,8 +24,9 @@ has 'service',
     predicate => 'has_service';
 has 'doc_status', isa => 'Str', is => 'ro', default => 'usable';
 
-has 'note',    isa => 'Str', is => 'rw';
-has 'closing', isa => 'Str', is => 'rw';
+has 'note',            isa => 'Str', is => 'rw';
+has 'closing',         isa => 'Str', is => 'rw';
+has 'correction_note', isa => 'Str', is => 'rw';
 
 has 'see_alsos',
     isa     => 'XML::NewsML_G2::ArrayRefOfLinks',

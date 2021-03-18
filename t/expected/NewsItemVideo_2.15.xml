@@ -25,6 +25,7 @@
     <edNote role="aparole:embargotext">frei für Dienstagsausgaben</edNote>
     <edNote role="aparole:closing">Schluss</edNote>
     <edNote role="aparole:note">Bilder zum Schweizerhaus sind im AOM, z.B. ABD0019 vom 23. März 2006, abrufbar</edNote>
+    <edNote role="aparole:correctionnote">Neu: Zusammenfassung mit mehr Details zu Werdegang und Politik des Verstorbenen</edNote>
     <signal qcode="apaind:bild"/>
     <signal qcode="apaind:video"/>
     <link rel="irel:seeAlso" version="1" residref="urn:newsml:apa.at:20120315:APA0123"/>
