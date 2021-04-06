@@ -329,7 +329,8 @@ sub _create_correction {
     my $result;
     if ( $self->_root_item->doc_version > 1 ) {
         $result = $self->create_element('signal');
-        $self->scheme_manager->add_qcode( $result, 'sig', 'correction' );
+        $self->scheme_manager->add_qcode( $result, 'sig',
+            $self->_root_item->signaltype );
     }
     return $result;
 }

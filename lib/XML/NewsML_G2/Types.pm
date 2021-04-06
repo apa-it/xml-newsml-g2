@@ -14,6 +14,8 @@ enum 'XML::NewsML_G2::Types::Group_Mode', [qw(bag sequential alternative)];
 
 enum 'XML::NewsML_G2::OccurenceStatus', [ map {"eos$_"} ( 0 .. 6 ) ];
 
+enum 'XML::NewsML_G2::SignalTypes', [qw(update correction)];
+
 class_type 'XML::NewsML_G2::Link';
 coerce 'XML::NewsML_G2::Link', from 'Str',
     via { use_module('XML::NewsML_G2::Link')->new( residref => $_ ) };
