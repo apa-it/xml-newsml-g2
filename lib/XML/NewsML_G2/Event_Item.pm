@@ -34,7 +34,7 @@ has 'languages',
     handles => { add_language => 'push', all_languages => 'elements' };
 has 'coverages',
     is      => 'ro',
-    isa     => 'ArrayRef[Str]',
+    isa     => 'ArrayRef[XML::NewsML_G2::Translatable_Text]',
     default => sub { [] },
     traits  => [qw/Array/],
     handles => {

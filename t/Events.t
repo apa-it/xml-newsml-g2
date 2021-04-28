@@ -102,7 +102,11 @@ $concept->add_facet(
     )
 );
 $event->add_concept($concept);
-$event->add_coverage( 'Text', 'Bild' );
+$event->add_coverage(
+    map { XML::NewsML_G2::Translatable_Text->new( text => $_ ) }
+        qw/Text Bild/ );
+$event->coverages->[1]->add_translation( 'en', 'Picture' );
+
 my $kw =
     XML::NewsML_G2::Keyword->new( text => 'Bier', role => 'keyrole:main' );
 $kw->add_translation( 'en', 'Beer' );

@@ -33,7 +33,7 @@ sub _create_type_element {
 }
 
 # TODO [Subroutines::ProhibitExcessComplexity] Subroutine "_create_location" with high complexity score (21)
-sub _create_location {      ## no critic (ProhibitExcessComplexity)
+sub _create_location {    ## no critic (ProhibitExcessComplexity)
     my ( $self, $loc ) = @_;
 
     my $result = $self->create_element('location');
@@ -185,8 +185,9 @@ sub _create_coverage {
 
     my $result = $self->create_element('newsCoverageStatus');
     $self->scheme_manager->add_qcode( $result, 'ncostat', 'int' );
-    foreach ( $self->event_item->all_coverage ) {
-        $result->appendChild( $self->create_element( 'name', _text => $_ ) );
+    foreach my $cov ( $self->event_item->all_coverage ) {
+        $result->appendChild($_)
+            foreach $self->_create_multilang_elements( 'name', $cov );
     }
     return $result;
 }

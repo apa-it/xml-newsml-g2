@@ -61,6 +61,7 @@ Nach ein paar Begrüßungsworten durch den Vorsitzenden startet unmgehend das Tr
           <newsCoverageStatus qcode="ncostat:int">
             <name>Text</name>
             <name>Bild</name>
+            <name xml:lang="en">Picture</name>
           </newsCoverageStatus>
           <!--location-->
           <location>

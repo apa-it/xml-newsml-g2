@@ -42,7 +42,6 @@ coerce 'XML::NewsML_G2::ArrayRefOfCreators', from 'ArrayRef[Str]', via {
 class_type 'XML::NewsML_G2::Translatable_Text';
 coerce 'XML::NewsML_G2::Translatable_Text', from 'Str',
     via { use_module('XML::NewsML_G2::Translatable_Text')->new( text => $_ ) };
-
 class_type 'XML::NewsML_G2::Keyword';
 coerce 'XML::NewsML_G2::Keyword', from 'Str',
     via { use_module('XML::NewsML_G2::Keyword')->new( text => $_ ) };
