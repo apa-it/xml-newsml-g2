@@ -15,6 +15,12 @@ sub _create_remote_content {
     $root->setAttribute( 'residref', $remote->residref )
         if ( defined $remote->residref );
 
+    if ( $remote->isa('XML::NewsML_G2::Picture') ) {
+        for (qw/width height orientation/) {
+            $root->setAttribute( $_, $remote->$_ ) if defined $remote->$_;
+        }
+    }
+
     return;
 }
 

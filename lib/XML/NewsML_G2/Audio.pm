@@ -20,8 +20,6 @@ XML::NewsML_G2::Audio - a audio specification
 
     my $pic = XML::NewsML_G2::Audio->new
         (size => 2231259,
-         width => 1280,
-         height => 720,
          duration => 220,
         );
 

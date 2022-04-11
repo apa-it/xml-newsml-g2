@@ -22,14 +22,12 @@ __END__
 
 =head1 NAME
 
-XML::NewsML_G2::Remote - Used by Picture, Graphics, Video
+XML::NewsML_G2::RemoteAudible - Used by Audio
 
 =head1 SYNOPSIS
 
-    my $pic = XML::NewsML_G2::Video->new
+    my $pic = XML::NewsML_G2::Audio->new
         (size => 2231259,
-         width => 1280,
-         height => 720,
          duration => 220,
         );
 
@@ -51,7 +49,7 @@ The number of audio channels (stereo, mono)
 
 =item mimetype
 
-The MIME type of the video file (e.g. image/jpg)
+The MIME type of the audio file (e.g. image/jpg)
 
 =back
 

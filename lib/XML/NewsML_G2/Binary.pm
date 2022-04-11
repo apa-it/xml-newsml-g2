@@ -29,7 +29,7 @@ XML::NewsML_G2::Binary - an arbitrary binary specification
 
 =item size
 
-The size in bytes of the audio file
+The size in bytes of the binary file
 
 =item mimetype
 

@@ -29,10 +29,6 @@ after '_create_remote_content' => sub {
 
     return unless $picture->isa('XML::NewsML_G2::Picture');
 
-    foreach (qw/width height orientation/) {
-        $root->setAttribute( $_, $picture->$_ ) if defined $picture->$_;
-    }
-
     my $rendition =
         $self->scheme_manager->build_qcode( 'rnd', $picture->rendition );
     $root->setAttribute( 'rendition', $rendition ) if $rendition;

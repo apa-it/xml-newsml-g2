@@ -20,8 +20,6 @@ XML::NewsML_G2::Remote - Used by Picture, Graphics, Audio, Video
 
     my $pic = XML::NewsML_G2::Video->new
         (size => 2231259,
-         width => 1280,
-         height => 720,
          duration => 220,
         );
 

@@ -156,7 +156,7 @@
     <remoteContent href="file://tmp/files/123.ai" contenttype="application/illustrator" orientation="1" rendition="rnd:print">
       <altId>1031-14-Wetter</altId>
     </remoteContent>
-    <remoteContent href="file://tmp/files/123.jpg" contenttype="image/jpg" width="1600" height="1024" orientation="1" rendition="rnd:highRes"/>
-    <remoteContent href="file://tmp/files/123.thumb.jpg" contenttype="image/jpg" width="48" height="32" orientation="1" rendition="rnd:thumb"/>
+    <remoteContent href="file://tmp/files/123.jpg" contenttype="image/jpg" width="1600" height="1024" orientation="0" rendition="rnd:highRes"/>
+    <remoteContent href="file://tmp/files/123.thumb.jpg" contenttype="image/jpg" width="48" height="32" orientation="0" rendition="rnd:thumb"/>
   </contentSet>
 </newsItem>

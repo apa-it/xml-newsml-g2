@@ -7,11 +7,25 @@ use namespace::autoclean;
 
 with 'XML::NewsML_G2::Role::RemoteVisual';
 
-has 'orientation', isa => 'Int', is => 'rw', default => 1;
+has 'orientation',
+    isa     => 'Int',
+    is      => 'rw',
+    lazy    => 1,
+    builder => '_build_orientation';
 has 'colorspace', isa => 'Str', is => 'rw';
 
 ### XXX move to News_Item, give role, scheme
 has 'altId', isa => 'Str', is => 'rw';
+
+sub _build_orientation {
+    my ($self) = @_;
+
+    if ( $self->width and $self->height ) {
+        return $self->width < $self->height ? 1 : 0;
+    }
+
+    return 1;
+}
 
 __PACKAGE__->meta->make_immutable;
 
