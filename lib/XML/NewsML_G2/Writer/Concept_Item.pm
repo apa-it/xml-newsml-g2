@@ -50,25 +50,6 @@ sub _create_content {
     return;
 }
 
-sub _create_multilang_elements {
-    my ( $self, $name, $text, %attrs ) = @_;
-    my @result;
-    push @result, $self->create_element( $name, _text => $text->text, %attrs )
-        if $text->text;
-    foreach my $lang ( sort $text->languages ) {
-        my $trans = $text->get_translation($lang);
-        push @result,
-            $self->create_element(
-            $name,
-            _text      => $trans,
-            'xml:lang' => $lang,
-            %attrs
-            );
-    }
-
-    return @result;
-}
-
 __PACKAGE__->meta->make_immutable;
 
 1;

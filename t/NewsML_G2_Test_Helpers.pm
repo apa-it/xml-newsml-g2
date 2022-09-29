@@ -197,7 +197,7 @@ our %ni_std_opts = (
 );
 
 our $expected_dir = catdir( $FindBin::Bin, 'expected' );
-our $tmpdir       = tempdir();
+our $tmpdir = tempdir();
 
 sub validate_g2 {
     my ( $dom, $version, $testname ) = @_;
@@ -245,7 +245,7 @@ sub _create_ni {
 
     ok( my $ni = $ni_cls->new(
             %ni_std_opts,
-            title    => ( $opts{id} ? "$title $opts{id}" : $title ),
+            title => ( $opts{id} ? "$title $opts{id}" : $title ),
             timezone => 'UTC',
             %$hash
         ),

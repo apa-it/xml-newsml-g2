@@ -360,6 +360,19 @@ sub _create_authors {
     return;
 }
 
+sub _create_locations {
+    my ( $self, $root ) = @_;
+    foreach my $l (
+        sort _sort_subjects_locations values %{ $self->news_item->locations }
+    ) {
+        next unless $l->has_address_details;
+        my $loc = $self->create_element('located');
+        $root->appendChild($loc);
+        $self->_create_poi_details( $l, $loc );
+    }
+    return;
+}
+
 ## no critic (Subroutines::ProhibitExcessComplexity)
 sub _create_content_meta {
     my ( $self, $root ) = @_;
@@ -414,6 +427,7 @@ sub _create_content_meta {
     }
     $self->_create_infosources($cm);
     $self->_create_authors($cm);
+    $self->_create_locations($cm);
 
     if ( $self->news_item->message_id ) {
         $cm->appendChild(
