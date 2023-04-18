@@ -10,10 +10,10 @@ use namespace::autoclean;
 extends 'XML::NewsML_G2::Substancial_Item';
 
 has '+language',  required => 1;
-has 'caption',    isa      => 'Str', is => 'rw';
-has 'teaser',     isa      => 'Str', is => 'rw';
-has 'byline',     isa      => 'Str', is => 'rw';
-has 'dateline',   isa      => 'Str', is => 'rw';
+has 'caption',    isa      => 'Str',               is => 'rw';
+has 'teaser',     isa      => 'Str',               is => 'rw';
+has 'byline',     isa      => 'Str',               is => 'rw';
+has 'dateline',   isa      => 'Str',               is => 'rw';
 has 'paragraphs', isa      => 'XML::LibXML::Node', is => 'rw';
 has 'content_created',
     isa     => 'DateTime',
@@ -118,6 +118,11 @@ has 'inlinedata',
     default => sub { [] },
     traits  => ['Array'],
     handles => { add_inlinedata => 'push', has_inlinedata => 'count' };
+has 'TransLang',
+    is            => 'rw',
+    isa           => 'XML::NewsML_G2::TransLang',
+    documentation =>
+    'html lang Google Markup for Autotranslated Text as described in https://cloud.google.com/translate/markup?hl=de#for_short_snippets_or_sections_within_a_html_document';
 
 sub _build_content_created {
     my ($self) = @_;

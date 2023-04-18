@@ -52,6 +52,8 @@ coerce 'XML::NewsML_G2::ArrayRefOfKeywords', from 'ArrayRef[Str]', via {
 };
 
 subtype 'XML::NewsML_G2::LanguageCode', as 'Str', where {/^[a-z]{2}$/};
+subtype 'XML::NewsML_G2::TransLang', as 'Str',
+    where {/^([a-z]{2}|und)-x-mtfrom-([a-z]{2}|und)$/};
 
 subtype 'XML::NewsML_G2::CountryCode', as 'Str', where {/^[A-Z]{2,3}$/};
 subtype 'XML::NewsML_G2::RegionCode',  as 'Str', where {/^[-A-Z]{2,7}$/};
