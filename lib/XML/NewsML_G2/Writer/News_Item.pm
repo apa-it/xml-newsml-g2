@@ -548,8 +548,8 @@ sub _create_content {
     my $inlinexml = $self->create_element( 'inlineXML',
         contenttype => 'application/xhtml+xml' );
     my $html = $self->create_element( 'html', _ns => $self->xhtml_ns );
-    if ( my $TransLang = $self->news_item->TransLang ) {
-        $html->setAttribute( 'lang', $TransLang );
+    if ( my $translang = $self->news_item->translang ) {
+        $html->setAttribute( 'lang', $translang );
     }
     $html->appendChild( my $head =
             $self->create_element( 'head', _ns => $self->xhtml_ns ) );

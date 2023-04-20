@@ -118,7 +118,7 @@ has 'inlinedata',
     default => sub { [] },
     traits  => ['Array'],
     handles => { add_inlinedata => 'push', has_inlinedata => 'count' };
-has 'TransLang',
+has 'translang',
     is            => 'rw',
     isa           => 'XML::NewsML_G2::TransLang',
     documentation =>
